@@ -19,6 +19,12 @@ export const collections = {
     source: 'index.yml',
     type: 'page',
     schema: z.object({
+      title: z.string().nonempty(),
+      description: z.string().nonempty(),
+      seo: z.object({
+        title: z.string().nonempty(),
+        description: z.string().nonempty()
+      }).optional(),
       hero: z.object({
         headline: z.string().optional(),
         links: z.array(createLinkSchema())
@@ -30,11 +36,11 @@ export const collections = {
             style: z.string()
           }))
         }))
-      }),
+      }).optional(),
       logos: z.object({
         title: z.string().nonempty(),
         items: z.array(z.string())
-      }),
+      }).optional(),
       features: z.object({
         headline: z.string().optional(),
         title: z.string().nonempty(),

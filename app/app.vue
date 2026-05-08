@@ -1,7 +1,8 @@
 <script setup lang="ts">
 const colorMode = useColorMode()
+colorMode.preference = 'dark'
 
-const color = computed(() => colorMode.value === 'dark' ? '#09090b' : 'white')
+const color = computed(() => '#080C16')
 
 useHead({
   meta: [
@@ -9,16 +10,24 @@ useHead({
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
-    { rel: 'icon', href: '/favicon.ico' }
+    { rel: 'icon', href: '/favicon.ico' },
+    { rel: 'preload', href: '/fonts/Fractul-Thin.ttf', as: 'font', type: 'font/ttf', crossorigin: '' },
+    { rel: 'preload', href: '/fonts/Fractul-Regular.ttf', as: 'font', type: 'font/ttf', crossorigin: '' },
+    { rel: 'preload', href: '/fonts/Fractul-Black.ttf', as: 'font', type: 'font/ttf', crossorigin: '' },
+    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap' }
   ],
   htmlAttrs: {
-    lang: 'en'
+    lang: 'es'
   }
 })
 
 useSeoMeta({
-  ogImage: 'https://ui.nuxt.com/assets/templates/nuxt/landing-light.png',
-  twitterCard: 'summary_large_image'
+  ogImage: '/logo-innotec-blanco.png',
+  twitterCard: 'summary_large_image',
+  title: 'INNOTEC 2026 — Congreso de Tecnología e Innovación',
+  description: 'El congreso anual de innovación y tecnología organizado por estudiantes de la Facultad de Ciencias y Tecnología de la Universidad Católica del Paraguay.'
 })
 </script>
 
