@@ -3,10 +3,99 @@ definePageMeta({
   colorMode: 'dark'
 })
 
-const { data: page } = await useAsyncData('index', () => queryCollection('content').first())
-if (!page.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
-}
+const fallbackPage = {
+  seo: {
+    title: 'INNOTEC 2026 - Congreso de Tecnologia e Innovacion',
+    description: 'El congreso anual de innovacion y tecnologia organizado por estudiantes de la Facultad de Ciencias y Tecnologia de la Universidad Catolica del Paraguay. 20 de agosto de 2026.'
+  },
+  title: 'Innovar para transformar:\ndel conocimiento a la accion',
+  description: 'INNOTEC es el congreso anual de tecnologia e innovacion organizado por estudiantes de la Facultad de Ciencias y Tecnologia de la Universidad Catolica del Paraguay. Un espacio para aprender, colaborar y liderar el cambio.',
+  hero: {
+    headline: '20 de agosto, 2026 - Asuncion, Paraguay',
+    links: [
+      {
+        label: 'Inscribete ahora',
+        color: 'primary',
+        size: 'xl',
+        to: '#inscripcion'
+      },
+      {
+        label: 'Conoce mas',
+        size: 'xl',
+        color: 'neutral',
+        variant: 'soft',
+        to: '#acerca'
+      }
+    ]
+  },
+  features: {
+    headline: 'Actividades',
+    title: 'Tres experiencias, un solo evento.',
+    description: 'INNOTEC 2026 te ofrece diferentes formatos para aprender, conectar y crecer en las areas de Tecnologia, Ingenieria, Arquitectura y Diseno.',
+    items: [
+      {
+        icon: 'i-lucide-mic-2',
+        title: 'Charlas con Nuevas Propuestas',
+        description: 'Expertos nacionales e internacionales comparten sus conocimientos y visiones sobre las ultimas tendencias en tecnologia e innovacion.'
+      },
+      {
+        icon: 'i-lucide-wrench',
+        title: 'Talleres Interactivos',
+        description: 'Sesiones practicas donde aprenderas herramientas y tecnicas aplicadas directamente en proyectos reales.'
+      },
+      {
+        icon: 'i-lucide-building-2',
+        title: 'Visitas Tecnicas',
+        description: 'Recorridos a instalaciones y empresas referentes del sector tecnologico para conocer de cerca como se aplica la innovacion.'
+      }
+    ]
+  },
+  metrics: {
+    headline: 'INNOTEC en cifras',
+    title: 'Un congreso disenado para inspirar.',
+    description: 'Cada edicion de INNOTEC conecta a estudiantes, profesionales y expertos en un espacio de aprendizaje y colaboracion unico en Paraguay.',
+    items: [
+      {
+        value: '2026',
+        label: 'Edicion anual',
+        class: 'text-primary'
+      },
+      {
+        value: '3',
+        label: 'Actividades principales',
+        class: 'text-info'
+      },
+      {
+        value: '100%',
+        label: 'Organizado por estudiantes',
+        class: 'text-success'
+      },
+      {
+        value: '1 dia',
+        label: 'Intenso de aprendizaje',
+        class: 'text-warning'
+      }
+    ]
+  },
+  cta: {
+    title: '¿Listo para ser parte?',
+    description: 'Unete al congreso de tecnologia e innovacion mas importante del Paraguay estudiantil. Inscripcion abierta para estudiantes y profesionales.',
+    command: '20 de agosto - Asuncion, Paraguay',
+    links: [
+      {
+        label: 'Inscribete al INNOTEC 2026',
+        color: 'primary',
+        to: '#inscripcion'
+      }
+    ]
+  }
+} as const
+
+const { data: page } = await useAsyncData('index', async () => {
+  return await queryCollection('content').first() ?? fallbackPage
+}, {
+  default: () => fallbackPage
+})
 
 const title = page.value?.seo?.title || page.value?.title
 const description = page.value?.seo?.description || page.value?.description
@@ -91,151 +180,7 @@ function staggerMotion(index: number = 0) {
       <div class="hero-bg-grid" />
       <div class="hero-bg-glow hero-bg-glow--center" />
       <div class="hero-bg-glow hero-bg-glow--left" />
-
-      <!-- Neon chevron lines (brand identity) -->
-      <div class="neon-chevrons">
-        <div class="neon-chevron neon-chevron--1">
-          <svg
-            viewBox="0 0 1200 200"
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0 20 L600 180 L1200 20"
-              fill="none"
-              stroke="url(#neonGrad1)"
-              stroke-width="2"
-            />
-            <defs>
-              <linearGradient
-                id="neonGrad1"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="0%"
-              >
-                <stop
-                  offset="0%"
-                  stop-color="transparent"
-                />
-                <stop
-                  offset="30%"
-                  stop-color="#1944F0"
-                  stop-opacity="0.9"
-                />
-                <stop
-                  offset="50%"
-                  stop-color="#7B8AF7"
-                  stop-opacity="1"
-                />
-                <stop
-                  offset="70%"
-                  stop-color="#1944F0"
-                  stop-opacity="0.9"
-                />
-                <stop
-                  offset="100%"
-                  stop-color="transparent"
-                />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-        <div class="neon-chevron neon-chevron--2">
-          <svg
-            viewBox="0 0 1200 200"
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0 36 L600 166 L1200 36"
-              fill="none"
-              stroke="url(#neonGrad2)"
-              stroke-width="1.5"
-            />
-            <defs>
-              <linearGradient
-                id="neonGrad2"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="0%"
-              >
-                <stop
-                  offset="0%"
-                  stop-color="transparent"
-                />
-                <stop
-                  offset="25%"
-                  stop-color="#0A1A6E"
-                  stop-opacity="0.6"
-                />
-                <stop
-                  offset="50%"
-                  stop-color="#1944F0"
-                  stop-opacity="0.8"
-                />
-                <stop
-                  offset="75%"
-                  stop-color="#0A1A6E"
-                  stop-opacity="0.6"
-                />
-                <stop
-                  offset="100%"
-                  stop-color="transparent"
-                />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-        <div class="neon-chevron neon-chevron--3">
-          <svg
-            viewBox="0 0 1200 200"
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0 52 L600 152 L1200 52"
-              fill="none"
-              stroke="url(#neonGrad3)"
-              stroke-width="1"
-            />
-            <defs>
-              <linearGradient
-                id="neonGrad3"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="0%"
-              >
-                <stop
-                  offset="0%"
-                  stop-color="transparent"
-                />
-                <stop
-                  offset="35%"
-                  stop-color="#1944F0"
-                  stop-opacity="0.4"
-                />
-                <stop
-                  offset="50%"
-                  stop-color="#7B8AF7"
-                  stop-opacity="0.6"
-                />
-                <stop
-                  offset="65%"
-                  stop-color="#1944F0"
-                  stop-opacity="0.4"
-                />
-                <stop
-                  offset="100%"
-                  stop-color="transparent"
-                />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-      </div>
+      <WaveBackground class="hero-wave-background" />
 
       <!-- Neon floating particles -->
       <div class="neon-particle neon-particle--1" />
@@ -247,16 +192,13 @@ function staggerMotion(index: number = 0) {
 
       <div class="hero-container">
         <!-- Main logo -->
-        <Motion
-          v-bind="enterMotion(0.1)"
-          class="hero-logo-wrapper"
-        >
+        <div class="hero-logo-wrapper">
           <img
             src="/logo-innotec-blanco.png"
             alt="INNOTEC"
             class="hero-logo"
           >
-        </Motion>
+        </div>
 
         <!-- Title -->
         <Motion
@@ -300,15 +242,24 @@ function staggerMotion(index: number = 0) {
       id="acerca"
       class="innotec-section intro-section"
     >
-      <!-- Neon accent lines -->
-      <div class="neon-accent neon-accent--left" />
-      <div class="neon-accent neon-accent--right" />
       <div class="section-container">
         <Motion
           v-bind="scrollMotion()"
           class="intro-content"
         >
           <div class="intro-heading-panel">
+            <div
+              class="intro-bulb"
+              aria-hidden="true"
+            >
+              <img
+                src="/foquito.png"
+                alt=""
+                class="intro-bulb-image"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
             <h2 class="section-title">
               ¿Qué es Innotec?
             </h2>
@@ -317,54 +268,29 @@ function staggerMotion(index: number = 0) {
               aria-label="Conceptos clave de Innotec"
             >
               <div class="intro-concept">
-                <span class="intro-concept-key">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ><path d="M15 14c.2-1 .7-1.7 1.5-2.5a4.9 4.9 0 1 0-6.9 0c.7.8 1.2 1.5 1.4 2.5" /><path d="M9 18h6" /><path d="M10 22h4" /></svg>
+                <span
+                  class="intro-concept-key"
+                  aria-hidden="true"
+                >
+                  I
                 </span>
                 <span>Innovación</span>
               </div>
               <div class="intro-concept">
-                <span class="intro-concept-key">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ><path d="M16 7a4 4 0 0 1 0 8" /><path d="M8 7a4 4 0 0 0 0 8" /><circle
-                    cx="12"
-                    cy="12"
-                    r="3"
-                  /><path d="M12 5v2" /><path d="M12 17v2" /></svg>
+                <span
+                  class="intro-concept-key"
+                  aria-hidden="true"
+                >
+                  C
                 </span>
                 <span>Colaboración</span>
               </div>
               <div class="intro-concept">
-                <span class="intro-concept-key">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ><path d="m4 21 8-18 8 18" /><path d="M8 13h8" /></svg>
+                <span
+                  class="intro-concept-key"
+                  aria-hidden="true"
+                >
+                  A
                 </span>
                 <span>Liderazgo</span>
               </div>
@@ -408,7 +334,7 @@ function staggerMotion(index: number = 0) {
           class="objectives-list"
         >
           <p class="objectives-kicker">
-            Con la Innotec se busca:
+            Con el Innotec se busca:
           </p>
           <ul class="objectives-ul">
             <li>
@@ -611,8 +537,9 @@ function staggerMotion(index: number = 0) {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
   padding: 7rem 1.5rem 2.75rem;
+  isolation: isolate;
 }
 
 .hero-section::after {
@@ -620,25 +547,26 @@ function staggerMotion(index: number = 0) {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -1px;
-  z-index: 3;
-  height: clamp(10rem, 22vw, 18rem);
+  bottom: clamp(-22rem, -23vw, -14rem);
+  z-index: 1;
+  height: clamp(26rem, 42vw, 38rem);
   background:
-    linear-gradient(180deg, rgba(8, 12, 22, 0), rgba(7, 13, 29, 0.18) 58%, rgba(7, 13, 29, 0)),
-    radial-gradient(ellipse at 50% 100%, rgba(25, 68, 240, 0.14), transparent 62%);
+    radial-gradient(ellipse 82% 66% at 44% 54%, rgba(31, 82, 255, 0.17), rgba(25, 68, 240, 0.1) 42%, rgba(25, 68, 240, 0.045) 68%, transparent 92%),
+    radial-gradient(ellipse 58% 58% at 68% 56%, rgba(25, 68, 240, 0.1), rgba(25, 68, 240, 0.04) 56%, transparent 88%);
+  filter: blur(38px);
   pointer-events: none;
 }
 
 /* Background grid */
 .hero-bg-grid {
   position: absolute;
-  inset: 0;
+  inset: 0 0 -18rem;
   background-image:
     linear-gradient(rgba(25, 68, 240, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(25, 68, 240, 0.03) 1px, transparent 1px);
   background-size: 72px 72px;
   mask-image:
-    linear-gradient(180deg, black 0%, rgba(0, 0, 0, 0.74) 58%, transparent 100%),
+    linear-gradient(180deg, black 0%, rgba(0, 0, 0, 0.86) 58%, rgba(0, 0, 0, 0.46) 82%, transparent 100%),
     radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
 }
 
@@ -668,66 +596,15 @@ function staggerMotion(index: number = 0) {
   background: rgba(123, 138, 247, 0.08);
 }
 
+.hero-wave-background {
+  z-index: 1;
+  opacity: 0.92;
+  mix-blend-mode: screen;
+}
+
 @keyframes glow-breathe {
   0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
   50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
-}
-
-/* ===== NEON CHEVRON LINES ===== */
-.neon-chevrons {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.neon-chevron {
-  position: absolute;
-  width: 100%;
-  pointer-events: none;
-}
-
-.neon-chevron svg {
-  width: 100%;
-  height: 100%;
-}
-
-.neon-chevron--1 {
-  top: -4%;
-  height: 310px;
-  animation: chevron-breathe-1 5s ease-in-out infinite;
-  filter: drop-shadow(0 0 12px rgba(25, 68, 240, 0.8)) drop-shadow(0 0 40px rgba(25, 68, 240, 0.4));
-}
-
-.neon-chevron--2 {
-  top: -1%;
-  height: 330px;
-  animation: chevron-breathe-2 7s ease-in-out infinite;
-  filter: drop-shadow(0 0 8px rgba(25, 68, 240, 0.5)) drop-shadow(0 0 25px rgba(25, 68, 240, 0.25));
-  opacity: 0.7;
-}
-
-.neon-chevron--3 {
-  top: 2%;
-  height: 350px;
-  animation: chevron-breathe-3 9s ease-in-out infinite;
-  filter: drop-shadow(0 0 6px rgba(123, 138, 247, 0.4)) drop-shadow(0 0 20px rgba(25, 68, 240, 0.2));
-  opacity: 0.5;
-}
-
-@keyframes chevron-breathe-1 {
-  0%, 100% { opacity: 0.8; transform: translateY(0); }
-  50% { opacity: 1; transform: translateY(-8px); }
-}
-
-@keyframes chevron-breathe-2 {
-  0%, 100% { opacity: 0.5; transform: translateY(0); }
-  50% { opacity: 0.8; transform: translateY(-5px); }
-}
-
-@keyframes chevron-breathe-3 {
-  0%, 100% { opacity: 0.3; transform: translateY(0); }
-  50% { opacity: 0.6; transform: translateY(-3px); }
 }
 
 /* ===== NEON FLOATING PARTICLES ===== */
@@ -920,12 +797,6 @@ function staggerMotion(index: number = 0) {
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 0 20px rgba(25, 68, 240, 0.5));
-  animation: logo-float 6s ease-in-out infinite;
-}
-
-@keyframes logo-float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
 }
 
 @media (min-width: 768px) {
@@ -1303,35 +1174,41 @@ function staggerMotion(index: number = 0) {
   display: flex;
   align-items: center;
   padding-inline: 1.5rem;
-  background:
-    radial-gradient(ellipse at 2% 52%, rgba(25, 68, 240, 0.32), transparent 44%),
-    radial-gradient(ellipse at 96% 52%, rgba(25, 68, 240, 0.18), transparent 48%);
+  background: transparent;
+  isolation: isolate;
 }
 
 .intro-section::before {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
+  left: -6vw;
+  right: -6vw;
+  top: clamp(-16rem, -18vw, -8rem);
   z-index: 0;
-  height: clamp(11rem, 24vw, 20rem);
+  height: calc(100% + clamp(30rem, 42vw, 44rem));
   background:
-    radial-gradient(ellipse at 50% 0%, rgba(25, 68, 240, 0.12), transparent 68%);
+    radial-gradient(ellipse 86% 42% at 50% 32%, rgba(25, 68, 240, 0.18), rgba(25, 68, 240, 0.1) 42%, rgba(25, 68, 240, 0.04) 66%, transparent 90%),
+    radial-gradient(ellipse 72% 48% at 50% 38%, rgba(31, 82, 255, 0.12), rgba(25, 68, 240, 0.06) 42%, transparent 78%),
+    radial-gradient(ellipse 48% 58% at 24% 48%, rgba(31, 82, 255, 0.22), rgba(18, 51, 162, 0.1) 34%, transparent 72%),
+    radial-gradient(ellipse 68% 52% at 50% 44%, rgba(25, 68, 240, 0.1), rgba(25, 68, 240, 0.04) 42%, transparent 80%),
+    radial-gradient(ellipse 52% 58% at 62% 76%, rgba(25, 68, 240, 0.08), transparent 74%);
+  filter: blur(42px);
+  opacity: 0.86;
   pointer-events: none;
 }
 
 .intro-section::after {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1px;
+  left: -6vw;
+  right: -6vw;
+  bottom: clamp(-22rem, -24vw, -12rem);
   z-index: 0;
-  height: clamp(10rem, 20vw, 17rem);
+  height: clamp(28rem, 44vw, 42rem);
   background:
-    radial-gradient(ellipse at 28% 100%, rgba(25, 68, 240, 0.13), transparent 66%),
-    radial-gradient(ellipse at 78% 100%, rgba(25, 68, 240, 0.08), transparent 62%);
+    radial-gradient(ellipse 48% 58% at 22% 36%, rgba(31, 82, 255, 0.1), transparent 70%),
+    radial-gradient(ellipse 64% 58% at 54% 46%, rgba(25, 68, 240, 0.09), rgba(8, 17, 45, 0.03) 48%, transparent 78%);
+  filter: blur(32px);
   pointer-events: none;
 }
 
@@ -1373,6 +1250,66 @@ function staggerMotion(index: number = 0) {
   isolation: isolate;
 }
 
+.intro-bulb {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: clamp(-32rem, -36vw, -20rem);
+  width: clamp(45rem, 70vw, 64rem);
+  height: clamp(50rem, 75vw, 69rem);
+  transform: translateY(-52%);
+  pointer-events: none;
+  opacity: 0.8;
+  mix-blend-mode: screen;
+}
+
+.intro-bulb::before,
+.intro-bulb::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+.intro-bulb::before {
+  inset: 2% -1% 7%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 49% 45%, rgba(49, 107, 255, 0.3), rgba(49, 107, 255, 0.13) 36%, transparent 72%);
+  filter: blur(54px);
+  opacity: 0.62;
+  mix-blend-mode: screen;
+}
+
+.intro-bulb::after {
+  inset: auto 4% 2%;
+  height: 42%;
+  background:
+    linear-gradient(180deg, rgba(8, 12, 22, 0), rgba(8, 12, 22, 0.26) 58%, rgba(8, 12, 22, 0.78));
+  filter: blur(18px);
+  opacity: 0.9;
+}
+
+.intro-bulb-image {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 51%;
+  transform: scale(1.2) translateY(2%);
+  opacity: 0.46;
+  filter:
+    blur(3px)
+    brightness(1.28)
+    saturate(1.28)
+    drop-shadow(0 0 38px rgba(49, 107, 255, 0.36))
+    drop-shadow(0 0 96px rgba(49, 107, 255, 0.22));
+  mix-blend-mode: screen;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 52%, black 0%, black 52%, rgba(0, 0, 0, 0.55) 68%, transparent 86%);
+  mask-image: radial-gradient(ellipse at 50% 52%, black 0%, black 52%, rgba(0, 0, 0, 0.55) 68%, transparent 86%);
+}
+
 .intro-content .section-title {
   position: relative;
   z-index: 2;
@@ -1396,34 +1333,37 @@ function staggerMotion(index: number = 0) {
 .intro-concept {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  min-height: 54px;
-  padding: 0.68rem 0.95rem;
+  gap: 1.15rem;
+  min-height: 64px;
+  padding: 0.82rem 1rem;
   font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.98rem;
+  font-size: 1.08rem;
   font-weight: 900;
   color: #F3F6FE;
   background:
-    linear-gradient(90deg, rgba(8, 52, 54, 0.5), rgba(9, 20, 48, 0.48)),
-    rgba(7, 12, 28, 0.44);
-  border: 1px solid rgba(16, 185, 129, 0.34);
+    linear-gradient(90deg, rgba(16, 45, 122, 0.48), rgba(8, 20, 54, 0.54)),
+    rgba(7, 12, 28, 0.5);
+  border: 1px solid rgba(38, 117, 255, 0.72);
   border-radius: 8px;
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.12), inset 0 1px 0 rgba(243, 246, 254, 0.08);
-  backdrop-filter: blur(12px);
+  box-shadow: 0 0 24px rgba(25, 68, 240, 0.22), inset 0 1px 0 rgba(243, 246, 254, 0.08);
+  backdrop-filter: blur(14px);
 }
 
 .intro-concept-key {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: 2.45rem;
+  height: 2.45rem;
   flex-shrink: 0;
-  color: #34D399;
-  border: 1px solid rgba(16, 185, 129, 0.52);
+  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: 1.18rem;
+  font-weight: 900;
+  color: #67A4FF;
+  border: 1px solid rgba(38, 117, 255, 0.78);
   border-radius: 8px;
-  background: rgba(16, 185, 129, 0.08);
-  box-shadow: 0 0 16px rgba(16, 185, 129, 0.16);
+  background: rgba(23, 79, 191, 0.2);
+  box-shadow: 0 0 18px rgba(38, 117, 255, 0.22), inset 0 1px 0 rgba(243, 246, 254, 0.06);
 }
 
 .intro-text {
@@ -1748,24 +1688,59 @@ function staggerMotion(index: number = 0) {
 .cta-section {
   position: relative;
   overflow: hidden;
+  isolation: isolate;
+  min-height: clamp(30rem, 66vh, 42rem);
+  display: flex;
+  align-items: flex-start;
+  background: #050811;
+}
+
+.cta-section::before,
+.cta-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.cta-section::before {
+  z-index: -2;
+  background-image: url('/vista_tierra.png');
+  background-size: cover;
+  background-position: center bottom;
+  filter: saturate(1.08) contrast(1.05);
+  transform: scale(1.01);
+}
+
+.cta-section::after {
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(8, 12, 22, 0.98) 0%, rgba(8, 12, 22, 0.76) 8%, rgba(8, 12, 22, 0.28) 28%, rgba(5, 8, 17, 0.18) 56%, rgba(5, 8, 17, 0.76) 100%),
+    radial-gradient(ellipse at 50% 38%, rgba(47, 180, 255, 0.24), transparent 36%),
+    radial-gradient(ellipse at 50% 68%, rgba(3, 7, 18, 0), rgba(3, 7, 18, 0.48) 78%);
 }
 
 .cta-bg-glow {
   position: absolute;
-  bottom: -100px;
+  z-index: 0;
+  bottom: 16%;
   left: 50%;
   transform: translateX(-50%);
-  width: 600px;
-  height: 400px;
+  width: min(52rem, 80vw);
+  height: min(24rem, 38vw);
   border-radius: 50%;
-  background: rgba(25, 68, 240, 0.1);
-  filter: blur(100px);
+  background: rgba(31, 183, 255, 0.16);
+  filter: blur(90px);
   pointer-events: none;
 }
 
 .cta-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
   display: flex;
   justify-content: center;
+  padding-top: clamp(4.5rem, 8vw, 7rem);
 }
 
 .cta-content {
@@ -1775,6 +1750,7 @@ function staggerMotion(index: number = 0) {
   flex-direction: column;
   align-items: center;
   gap: 1.25rem;
+  text-shadow: 0 0 22px rgba(2, 7, 18, 0.72);
 }
 
 .cta-title {
@@ -1786,6 +1762,7 @@ function staggerMotion(index: number = 0) {
   line-height: 1.1;
   margin: 0;
   white-space: pre-line;
+  text-shadow: 0 0 24px rgba(2, 7, 18, 0.84), 0 0 48px rgba(2, 7, 18, 0.6);
 }
 
 @media (min-width: 768px) {
@@ -1799,9 +1776,10 @@ function staggerMotion(index: number = 0) {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.7;
-  color: rgba(203, 209, 251, 0.65);
+  color: rgba(238, 244, 255, 0.82);
   max-width: 420px;
   margin: 0;
+  text-shadow: 0 0 18px rgba(2, 7, 18, 0.82), 0 0 34px rgba(2, 7, 18, 0.62);
 }
 
 .cta-date-chip {
@@ -1811,17 +1789,21 @@ function staggerMotion(index: number = 0) {
   padding: 0.5rem 1.125rem;
   font-size: 0.875rem;
   font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-weight: 400;
-  color: rgba(203, 209, 251, 0.75);
-  background: rgba(25, 68, 240, 0.1);
-  border: 1px solid rgba(25, 68, 240, 0.25);
+  font-weight: 700;
+  color: #061954;
+  background: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 100px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 10px 28px rgba(1, 8, 32, 0.22);
+  backdrop-filter: blur(10px) saturate(1.08);
 }
 
 .chip-icon {
   width: 14px;
   height: 14px;
-  color: rgba(25, 68, 240, 0.9);
+  color: #061954;
 }
 
 .cta-actions {
@@ -1863,9 +1845,8 @@ function staggerMotion(index: number = 0) {
 /* ===== RESPONSIVE ABOUT FLOW ALIGNMENT ===== */
 .intro-section,
 .objectives-section {
-  overflow: hidden;
+  overflow: visible;
   padding-inline: clamp(1.25rem, 4vw, 3rem);
-  background: transparent;
 }
 
 .intro-section {
@@ -1877,7 +1858,7 @@ function staggerMotion(index: number = 0) {
 
 .objectives-section {
   padding-top: clamp(2.75rem, 5vw, 4.5rem);
-  padding-bottom: clamp(4rem, 7vw, 6rem);
+  padding-bottom: clamp(1.5rem, 3vw, 2.75rem);
 }
 
 .objectives-section::before,
@@ -1891,17 +1872,28 @@ function staggerMotion(index: number = 0) {
 }
 
 .objectives-section::before {
-  top: -1px;
-  height: clamp(10rem, 20vw, 17rem);
+  left: -6vw;
+  right: -6vw;
+  top: clamp(-20rem, -23vw, -11rem);
+  height: clamp(26rem, 42vw, 40rem);
   background:
-    radial-gradient(ellipse at 32% 0%, rgba(25, 68, 240, 0.12), transparent 66%),
-    radial-gradient(ellipse at 72% 0%, rgba(25, 68, 240, 0.08), transparent 62%);
+    radial-gradient(ellipse 46% 58% at 23% 18%, rgba(31, 82, 255, 0.1), transparent 72%),
+    radial-gradient(ellipse 58% 54% at 58% 16%, rgba(25, 68, 240, 0.08), transparent 76%),
+    radial-gradient(ellipse 42% 52% at 74% 34%, rgba(25, 68, 240, 0.04), transparent 74%);
+  filter: blur(32px);
+  opacity: 0.9;
 }
 
 .objectives-section::after {
-  bottom: -1px;
-  height: clamp(5.5rem, 11vw, 8.5rem);
-  background: linear-gradient(180deg, rgba(7, 13, 29, 0), rgba(8, 12, 22, 0.92));
+  left: -6vw;
+  right: -6vw;
+  bottom: clamp(-10rem, -12vw, -5rem);
+  height: clamp(16rem, 28vw, 26rem);
+  background:
+    radial-gradient(ellipse 58% 56% at 46% 58%, rgba(25, 68, 240, 0.06), transparent 76%),
+    radial-gradient(ellipse 42% 54% at 18% 40%, rgba(31, 82, 255, 0.05), transparent 74%);
+  filter: blur(28px);
+  opacity: 0.86;
 }
 
 .intro-section .section-container,
@@ -2020,6 +2012,13 @@ function staggerMotion(index: number = 0) {
     column-gap: clamp(2.5rem, 6vw, 4rem);
   }
 
+  .objectives-list {
+    --objectives-list-shift: clamp(2rem, 3vw, 3rem);
+
+    width: calc(100% - var(--objectives-list-shift));
+    margin-left: var(--objectives-list-shift);
+  }
+
   .intro-content .section-title,
   .objectives-content .section-title {
     font-size: clamp(3.4rem, 5.7vw, 4.8rem);
@@ -2048,6 +2047,25 @@ function staggerMotion(index: number = 0) {
 }
 
 @media (max-width: 759px) {
+  .intro-bulb {
+    top: 32%;
+    left: -20rem;
+    width: 42rem;
+    height: 47rem;
+    opacity: 0.4;
+  }
+
+  .intro-concept {
+    min-height: 58px;
+    font-size: 1rem;
+  }
+
+  .intro-concept-key {
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 1.05rem;
+  }
+
   .objectives-content .section-header::before {
     top: auto;
     bottom: -0.6rem;
