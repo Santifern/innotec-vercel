@@ -21,6 +21,7 @@ interface _GlobalComponents {
   GradientGlow: typeof import("../../app/components/GradientGlow.vue")['default']
   HeroShaders: typeof import("../../app/components/HeroShaders.client.vue")['default']
   HeroTerminal: typeof import("../../app/components/HeroTerminal.vue")['default']
+  SponsorMarquee: typeof import("../../app/components/SponsorMarquee.vue")['default']
   TemplateMenu: typeof import("../../app/components/TemplateMenu.vue")['default']
   WaveBackground: typeof import("../../app/components/WaveBackground.vue")['default']
   ProseA: typeof import("../../node_modules/@nuxt/ui/dist/runtime/components/prose/A.vue")['default']
@@ -249,6 +250,7 @@ interface _GlobalComponents {
   LazyGradientGlow: LazyComponent<typeof import("../../app/components/GradientGlow.vue")['default']>
   LazyHeroShaders: LazyComponent<typeof import("../../app/components/HeroShaders.client.vue")['default']>
   LazyHeroTerminal: LazyComponent<typeof import("../../app/components/HeroTerminal.vue")['default']>
+  LazySponsorMarquee: LazyComponent<typeof import("../../app/components/SponsorMarquee.vue")['default']>
   LazyTemplateMenu: LazyComponent<typeof import("../../app/components/TemplateMenu.vue")['default']>
   LazyWaveBackground: LazyComponent<typeof import("../../app/components/WaveBackground.vue")['default']>
   LazyProseA: LazyComponent<typeof import("../../node_modules/@nuxt/ui/dist/runtime/components/prose/A.vue")['default']>

@@ -21,6 +21,7 @@ export const CountdownTimer: typeof import("../app/components/CountdownTimer.vue
 export const GradientGlow: typeof import("../app/components/GradientGlow.vue")['default']
 export const HeroShaders: typeof import("../app/components/HeroShaders.client.vue")['default']
 export const HeroTerminal: typeof import("../app/components/HeroTerminal.vue")['default']
+export const SponsorMarquee: typeof import("../app/components/SponsorMarquee.vue")['default']
 export const TemplateMenu: typeof import("../app/components/TemplateMenu.vue")['default']
 export const WaveBackground: typeof import("../app/components/WaveBackground.vue")['default']
 export const ProseA: typeof import("../node_modules/@nuxt/ui/dist/runtime/components/prose/A.vue")['default']
@@ -249,6 +250,7 @@ export const LazyCountdownTimer: LazyComponent<typeof import("../app/components/
 export const LazyGradientGlow: LazyComponent<typeof import("../app/components/GradientGlow.vue")['default']>
 export const LazyHeroShaders: LazyComponent<typeof import("../app/components/HeroShaders.client.vue")['default']>
 export const LazyHeroTerminal: LazyComponent<typeof import("../app/components/HeroTerminal.vue")['default']>
+export const LazySponsorMarquee: LazyComponent<typeof import("../app/components/SponsorMarquee.vue")['default']>
 export const LazyTemplateMenu: LazyComponent<typeof import("../app/components/TemplateMenu.vue")['default']>
 export const LazyWaveBackground: LazyComponent<typeof import("../app/components/WaveBackground.vue")['default']>
 export const LazyProseA: LazyComponent<typeof import("../node_modules/@nuxt/ui/dist/runtime/components/prose/A.vue")['default']>
