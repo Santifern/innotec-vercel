@@ -312,6 +312,6 @@ if (import.meta.dev && !import.meta.nitro && import.meta.hot) {
 }
 /** client-end **/
 
-import cfg0 from "C:/Users/Elias Román/Desktop/Innotec Web/innotec-2026-landing/app/app.config.ts"
+import cfg0 from "C:/Users/eduar/OneDrive/Documentos/innotec-2026-landing/app/app.config.ts"
 
 export default /*@__PURE__*/ defuFn(cfg0, inlineConfig)

@@ -105,7 +105,7 @@ const sponsorLogos = [
               v-for="logo in sponsorLogos"
               :key="`${loopIndex}-${logo.name}`"
               href="#"
-              class="group flex h-16 min-w-36 items-center justify-center"
+              class="group flex h-24 min-w-44 items-center justify-center sm:h-28 sm:min-w-52 lg:h-32 lg:min-w-60"
               :aria-label="logo.name"
             >
               <img
@@ -113,7 +113,7 @@ const sponsorLogos = [
                 :alt="logo.name"
                 :width="logo.width"
                 :height="logo.height"
-                class="h-auto max-h-12 w-auto max-w-40 object-contain grayscale opacity-50 transition-[filter,opacity] duration-200 group-hover:grayscale-0 group-hover:opacity-100 sm:max-h-14 sm:max-w-48"
+                class="h-auto max-h-[4.5rem] w-auto max-w-[13rem] object-contain grayscale opacity-70 transition-[filter,opacity] duration-200 group-hover:grayscale-0 group-hover:opacity-100 sm:max-h-20 sm:max-w-[16rem] lg:max-h-24 lg:max-w-[19rem]"
                 :loading="loopIndex === 1 ? 'eager' : 'lazy'"
                 decoding="async"
               >

@@ -1694,7 +1694,7 @@ function staggerMotion(index: number = 0) {
   min-height: clamp(30rem, 66vh, 42rem);
   display: flex;
   align-items: flex-start;
-  background: #050811;
+  background: #080C16;
 }
 
 .cta-section::before,
@@ -1712,12 +1712,15 @@ function staggerMotion(index: number = 0) {
   background-position: center bottom;
   filter: saturate(1.08) contrast(1.05);
   transform: scale(1.01);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.08) 14%, rgba(0, 0, 0, 0.48) 34%, black 54%, black 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.08) 14%, rgba(0, 0, 0, 0.48) 34%, black 54%, black 100%);
 }
 
 .cta-section::after {
   z-index: -1;
   background:
-    linear-gradient(180deg, rgba(8, 12, 22, 0.98) 0%, rgba(8, 12, 22, 0.76) 8%, rgba(8, 12, 22, 0.28) 28%, rgba(5, 8, 17, 0.18) 56%, rgba(5, 8, 17, 0.76) 100%),
+    linear-gradient(180deg, #080C16 0%, rgba(8, 12, 22, 0.98) 16%, rgba(8, 12, 22, 0.82) 31%, rgba(8, 12, 22, 0.42) 50%, rgba(5, 8, 17, 0.16) 68%, rgba(5, 8, 17, 0.76) 100%),
+    radial-gradient(ellipse 76% 34% at 50% 18%, rgba(49, 107, 255, 0.1), transparent 78%),
     radial-gradient(ellipse at 50% 38%, rgba(47, 180, 255, 0.24), transparent 36%),
     radial-gradient(ellipse at 50% 68%, rgba(3, 7, 18, 0), rgba(3, 7, 18, 0.48) 78%);
 }
