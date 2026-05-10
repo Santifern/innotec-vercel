@@ -4,56 +4,74 @@ const scrollInViewOptions = { once: true, amount: 0.3, margin: '0px 0px -12% 0px
 
 function scrollMotion(delay: number = 0) {
   return {
-    initial: { opacity: 0, y: 34, filter: 'blur(8px)' },
-    whileInView: { opacity: 1, y: 0, filter: 'blur(0px)' },
+    initial: { opacity: 0, y: 18 },
+    whileInView: { opacity: 1, y: 0 },
     inViewOptions: scrollInViewOptions,
-    transition: { duration: 0.82, delay, ease: smoothEase }
+    transition: { duration: 0.48, delay, ease: smoothEase }
   }
 }
 
 const sponsorLogos = [
   {
     name: 'Itaú',
-    src: '/sponsor-logos/itau.svg'
+    src: '/logos/itau.svg',
+    width: 300,
+    height: 304
   },
   {
     name: 'Sudameris',
-    src: '/sponsor-logos/sudameris.svg'
+    src: '/logos/sudameris.svg',
+    width: 253,
+    height: 36
   },
   {
     name: 'VMA',
-    src: '/sponsor-logos/vma.svg'
+    src: '/logos/vma.svg',
+    width: 369,
+    height: 55
   },
   {
     name: 'Ferropar',
-    src: '/sponsor-logos/ferropar.svg'
+    src: '/logos/ferropar.png',
+    width: 608,
+    height: 121
   },
   {
     name: 'Tecinci',
-    src: '/sponsor-logos/tecinci.svg'
+    src: '/logos/tecinci.svg',
+    width: 200,
+    height: 64
   },
   {
     name: 'L\'Acerie',
-    src: '/sponsor-logos/lacerie.svg'
+    src: '/logos/lacerie.png',
+    width: 258,
+    height: 72
   },
   {
     name: 'SODEP',
-    src: '/sponsor-logos/sodep.svg'
+    src: '/logos/sodep.png',
+    width: 450,
+    height: 108
   },
   {
     name: 'Fabripar',
-    src: '/sponsor-logos/fabripar.svg'
+    src: '/logos/fabripar.svg',
+    width: 355,
+    height: 94
   },
   {
     name: 'Galvamax',
-    src: '/sponsor-logos/galvamax.svg'
+    src: '/logos/galvamax.png',
+    width: 828,
+    height: 190
   }
 ]
 </script>
 
 <template>
   <section
-    class="sponsor-marquee py-24 md:py-32"
+    class="sponsor-marquee pb-6 pt-24 md:pb-8 md:pt-32"
     aria-labelledby="sponsor-marquee-title"
   >
     <div class="mx-auto w-full max-w-7xl px-5 sm:px-8">
@@ -63,14 +81,14 @@ const sponsorLogos = [
       >
         <h2
           id="sponsor-marquee-title"
-          class="sponsor-marquee__title text-center text-4xl font-extrabold text-[#F3F6FE] md:text-5xl"
+          class="text-center text-4xl font-extrabold text-[#F3F6FE] md:text-5xl"
         >
           Empresas que confían en nosotros
         </h2>
       </Motion>
 
       <Motion
-        v-bind="scrollMotion(0.16)"
+        v-bind="scrollMotion(0.08)"
         class="sponsor-marquee__viewport relative overflow-hidden"
       >
         <div class="sponsor-marquee__fade sponsor-marquee__fade--left" />
@@ -93,8 +111,10 @@ const sponsorLogos = [
               <img
                 :src="logo.src"
                 :alt="logo.name"
-                class="max-h-12 max-w-40 object-contain grayscale opacity-50 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100 sm:max-h-14 sm:max-w-48"
-                loading="lazy"
+                :width="logo.width"
+                :height="logo.height"
+                class="h-auto max-h-12 w-auto max-w-40 object-contain grayscale opacity-50 transition-[filter,opacity] duration-200 group-hover:grayscale-0 group-hover:opacity-100 sm:max-h-14 sm:max-w-48"
+                :loading="loopIndex === 1 ? 'eager' : 'lazy'"
                 decoding="async"
               >
             </a>
@@ -110,14 +130,6 @@ const sponsorLogos = [
   position: relative;
   z-index: 2;
   background: transparent;
-}
-
-.sponsor-marquee__title {
-  text-shadow:
-    0 0 18px rgba(25, 68, 240, 0.72),
-    0 0 38px rgba(25, 68, 240, 0.42),
-    0 0 72px rgba(123, 138, 247, 0.22);
-  filter: drop-shadow(0 0 18px rgba(25, 68, 240, 0.36));
 }
 
 .sponsor-marquee__viewport {

@@ -1189,13 +1189,13 @@ function staggerMotion(index: number = 0) {
   z-index: 0;
   height: calc(100% + clamp(30rem, 42vw, 44rem));
   background:
-    radial-gradient(ellipse 86% 42% at 50% 32%, rgba(25, 68, 240, 0.18), rgba(25, 68, 240, 0.1) 42%, rgba(25, 68, 240, 0.04) 66%, transparent 90%),
-    radial-gradient(ellipse 72% 48% at 50% 38%, rgba(31, 82, 255, 0.12), rgba(25, 68, 240, 0.06) 42%, transparent 78%),
-    radial-gradient(ellipse 48% 58% at 24% 48%, rgba(31, 82, 255, 0.22), rgba(18, 51, 162, 0.1) 34%, transparent 72%),
-    radial-gradient(ellipse 68% 52% at 50% 44%, rgba(25, 68, 240, 0.1), rgba(25, 68, 240, 0.04) 42%, transparent 80%),
-    radial-gradient(ellipse 52% 58% at 62% 76%, rgba(25, 68, 240, 0.08), transparent 74%);
+    radial-gradient(ellipse 86% 42% at 50% 32%, rgba(25, 68, 240, 0.13), rgba(25, 68, 240, 0.072) 42%, rgba(25, 68, 240, 0.028) 66%, transparent 90%),
+    radial-gradient(ellipse 72% 48% at 50% 38%, rgba(31, 82, 255, 0.085), rgba(25, 68, 240, 0.042) 42%, transparent 78%),
+    radial-gradient(ellipse 48% 58% at 24% 48%, rgba(31, 82, 255, 0.16), rgba(18, 51, 162, 0.072) 34%, transparent 72%),
+    radial-gradient(ellipse 68% 52% at 50% 44%, rgba(25, 68, 240, 0.072), rgba(25, 68, 240, 0.028) 42%, transparent 80%),
+    radial-gradient(ellipse 52% 58% at 62% 76%, rgba(25, 68, 240, 0.056), transparent 74%);
   filter: blur(42px);
-  opacity: 0.86;
+  opacity: 0.58;
   pointer-events: none;
 }
 

@@ -52,7 +52,10 @@ onUnmounted(() => {
     </p>
 
     <!-- Countdown grid -->
-    <div v-if="!isExpired" class="countdown-grid">
+    <div
+      v-if="!isExpired"
+      class="countdown-grid"
+    >
       <!-- Days -->
       <div class="countdown-unit">
         <div class="countdown-card">
@@ -62,7 +65,9 @@ onUnmounted(() => {
         <span class="countdown-unit-label">Días</span>
       </div>
 
-      <div class="countdown-separator">:</div>
+      <div class="countdown-separator">
+        :
+      </div>
 
       <!-- Hours -->
       <div class="countdown-unit">
@@ -73,7 +78,9 @@ onUnmounted(() => {
         <span class="countdown-unit-label">Horas</span>
       </div>
 
-      <div class="countdown-separator">:</div>
+      <div class="countdown-separator">
+        :
+      </div>
 
       <!-- Minutes -->
       <div class="countdown-unit">
@@ -84,7 +91,9 @@ onUnmounted(() => {
         <span class="countdown-unit-label">Minutos</span>
       </div>
 
-      <div class="countdown-separator">:</div>
+      <div class="countdown-separator">
+        :
+      </div>
 
       <!-- Seconds -->
       <div class="countdown-unit">
@@ -97,14 +106,26 @@ onUnmounted(() => {
     </div>
 
     <!-- Event started message -->
-    <div v-else class="countdown-started">
+    <div
+      v-else
+      class="countdown-started"
+    >
       <span>🎉 ¡El evento ha comenzado!</span>
     </div>
 
     <!-- Event date badge -->
     <div class="countdown-date-badge">
-      <svg xmlns="http://www.w3.org/2000/svg" class="badge-icon" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="badge-icon"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+          clip-rule="evenodd"
+        />
       </svg>
       20 de agosto, 2026 · Asunción, Paraguay
     </div>

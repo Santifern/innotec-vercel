@@ -1,1 +1,16 @@
 node_modules
+# Nuxt
+.nuxt/
+.output/
+.data/
+dist/
+
+# Node
+node_modules/
+
+# Logs
+*.log
+
+# Local env
+.env
+.env.*
