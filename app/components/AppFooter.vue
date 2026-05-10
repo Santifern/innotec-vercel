@@ -3,14 +3,18 @@ const currentYear = new Date().getFullYear()
 
 const navLinks = [
   { label: 'Inicio', to: '#inicio' },
-  { label: 'Acerca', to: '#acerca' },
-  { label: 'Actividades', to: '#actividades' },
-  { label: 'Programa', to: '#programa' },
-  { label: 'FAQ', to: '#faq' },
-  { label: 'Contacto', to: '#contacto' },
-  { label: 'Hackathon', to: '#hackathon' },
-  { label: 'Inscripción', to: '#inscripcion' },
-  { label: 'Galería', to: '#galeria' }
+  { label: 'Acerca' },
+  { label: 'Actividades' },
+  { label: 'Programa' },
+  { label: 'FAQ' },
+  { label: 'Hackathon' },
+  { label: 'Inscripción' },
+  { label: 'Galería' }
+]
+
+const contactLinks = [
+  { name: 'María Eugenia Pointis', phone: '(+595) 982 386063', href: 'tel:+595982386063' },
+  { name: 'Amelia Nery Huerta', phone: '(+595) 971 650525', href: 'tel:+595971650525' }
 ]
 
 const socialLinks = [
@@ -64,6 +68,21 @@ const socialLinks = [
             El congreso anual de tecnología e innovación organizado por estudiantes de la Facultad de Ciencias y Tecnología de la Universidad Católica "Nuestra Señora de la Asunción".
           </p>
 
+          <div
+            class="footer-contacts"
+            aria-label="Contactos"
+          >
+            <a
+              v-for="contact in contactLinks"
+              :key="contact.name"
+              :href="contact.href"
+              class="footer-contact-link"
+            >
+              <span class="footer-contact-name">{{ contact.name }}</span>
+              <span class="footer-contact-phone">{{ contact.phone }}</span>
+            </a>
+          </div>
+
           <!-- Social Links -->
           <div class="footer-socials">
             <a
@@ -93,12 +112,20 @@ const socialLinks = [
                 :key="link.label"
               >
                 <NuxtLink
+                  v-if="link.to"
                   :to="link.to"
                   class="footer-nav-link"
                 >
-                  <span class="nav-link-arrow">→</span>
+                  <span class="nav-link-arrow">&rarr;</span>
                   {{ link.label }}
                 </NuxtLink>
+                <span
+                  v-else
+                  class="footer-nav-link footer-nav-link--static"
+                >
+                  <span class="nav-link-arrow">&rarr;</span>
+                  {{ link.label }}
+                </span>
               </li>
             </ul>
           </nav>
@@ -262,7 +289,40 @@ const socialLinks = [
   font-size: 0.875rem;
   line-height: 1.65;
   color: rgba(203, 209, 251, 0.6);
+  margin-bottom: 1.125rem;
+}
+
+.footer-contacts {
+  display: grid;
+  gap: 0.625rem;
   margin-bottom: 1.5rem;
+}
+
+.footer-contact-link {
+  display: grid;
+  gap: 0.15rem;
+  width: fit-content;
+  color: rgba(203, 209, 251, 0.74);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.footer-contact-link:hover {
+  color: #F3F6FE;
+}
+
+.footer-contact-name {
+  font-family: 'Fractul Black', 'Fractul', 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.footer-contact-phone {
+  font-family: 'Fractul Regular', 'Fractul', 'Inter', sans-serif;
+  font-size: 0.875rem;
+  color: rgba(123, 138, 247, 0.88);
 }
 
 /* Social buttons */
@@ -316,9 +376,18 @@ const socialLinks = [
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 1rem;
+  row-gap: 0.25rem;
+}
+
+@media (min-width: 768px) {
+  .footer-nav-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(4, auto);
+    grid-auto-flow: column;
+  }
 }
 
 .footer-nav-link {
@@ -330,12 +399,21 @@ const socialLinks = [
   font-size: 0.875rem;
   color: rgba(203, 209, 251, 0.6);
   text-decoration: none;
+  cursor: pointer;
   padding: 0.375rem 0;
   transition: all 0.2s ease;
 }
 
+.footer-nav-link--static {
+  cursor: default;
+}
+
 .footer-nav-link:hover {
   color: #CBD1FB;
+}
+
+.footer-nav-link--static:hover {
+  color: rgba(203, 209, 251, 0.6);
 }
 
 .nav-link-arrow {
@@ -347,6 +425,11 @@ const socialLinks = [
 .footer-nav-link:hover .nav-link-arrow {
   color: #1944F0;
   transform: translateX(2px);
+}
+
+.footer-nav-link--static:hover .nav-link-arrow {
+  color: rgba(25, 68, 240, 0.6);
+  transform: none;
 }
 
 /* ===== EVENT DETAILS ===== */

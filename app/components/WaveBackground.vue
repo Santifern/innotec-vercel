@@ -234,10 +234,12 @@ onBeforeUnmount(() => {
 .wave-background {
   position: absolute;
   top: 0;
-  left: -9%;
+  left: 50%;
   z-index: 0;
-  width: 118%;
+  width: 118vw;
+  min-width: 118%;
   height: 100%;
+  margin-left: -59vw;
   display: block;
   pointer-events: none;
   background: transparent;

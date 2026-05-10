@@ -535,6 +535,7 @@ function staggerMotion(index: number = 0) {
 /* ===== HERO SECTION ===== */
 .hero-section {
   position: relative;
+  width: 100%;
   min-height: 88vh;
   display: flex;
   align-items: center;
@@ -562,11 +563,17 @@ function staggerMotion(index: number = 0) {
 /* Background grid */
 .hero-bg-grid {
   position: absolute;
-  inset: 0 0 -18rem;
+  top: 0;
+  bottom: -18rem;
+  left: 50%;
+  width: 100vw;
+  min-width: 100%;
+  transform: translateX(-50%);
   background-image:
     linear-gradient(rgba(25, 68, 240, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(25, 68, 240, 0.03) 1px, transparent 1px);
   background-size: 72px 72px;
+  background-position: center top;
   mask-image:
     linear-gradient(180deg, black 0%, rgba(0, 0, 0, 0.86) 58%, rgba(0, 0, 0, 0.46) 82%, transparent 100%),
     radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
@@ -1643,7 +1650,7 @@ function staggerMotion(index: number = 0) {
 
 .activities-label {
   font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 1.0625rem;
+  font-size: clamp(1.18rem, 1.6vw, 1.32rem);
   font-weight: 400;
   color: rgba(203, 209, 251, 0.85);
   margin: 0;
@@ -1745,12 +1752,12 @@ function staggerMotion(index: number = 0) {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding-top: clamp(4.5rem, 8vw, 7rem);
+  padding-top: clamp(2.25rem, 4.8vw, 4rem);
 }
 
 .cta-content {
   text-align: center;
-  max-width: 600px;
+  max-width: 680px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1758,9 +1765,13 @@ function staggerMotion(index: number = 0) {
   text-shadow: 0 0 22px rgba(2, 7, 18, 0.72);
 }
 
+.cta-content .section-label {
+  font-size: 0.86rem;
+}
+
 .cta-title {
   font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 2.25rem;
+  font-size: 2.75rem;
   font-weight: 900;
   color: #F3F6FE;
   letter-spacing: -0.04em;
@@ -1772,17 +1783,17 @@ function staggerMotion(index: number = 0) {
 
 @media (min-width: 768px) {
   .cta-title {
-    font-size: 3rem;
+    font-size: 3.7rem;
   }
 }
 
 .cta-description {
   font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 1rem;
+  font-size: 1.08rem;
   font-weight: 400;
   line-height: 1.7;
   color: rgba(238, 244, 255, 0.82);
-  max-width: 420px;
+  max-width: 520px;
   margin: 0;
   text-shadow: 0 0 18px rgba(2, 7, 18, 0.82), 0 0 34px rgba(2, 7, 18, 0.62);
 }

@@ -3,10 +3,8 @@ import { motion } from 'motion-v'
 import type { VariantType } from 'motion-v'
 
 const nuxtApp = useNuxtApp()
-const activeSection = ref<string>()
 const isScrolled = ref(false)
 const mobileMenuOpen = ref(false)
-const normalizedActiveSection = computed(() => activeSection.value === 'acerca-objetivos' ? 'acerca' : activeSection.value)
 
 // Navigation items for Innotec
 const items = computed(() => [
@@ -14,91 +12,62 @@ const items = computed(() => [
     label: 'Inicio',
     to: '#inicio',
     exactHash: true,
-    active: !normalizedActiveSection.value || normalizedActiveSection.value === 'inicio'
+    active: true
   },
   {
     label: 'Acerca de',
-    to: '#acerca',
+    to: undefined,
     exactHash: true,
-    active: normalizedActiveSection.value === 'acerca'
+    active: false
   },
   {
     label: 'Actividades',
-    to: '#actividades',
+    to: undefined,
     exactHash: true,
-    active: normalizedActiveSection.value === 'actividades'
+    active: false
   },
   {
     label: 'Programa',
-    to: '#programa',
+    to: undefined,
     exactHash: true,
-    active: normalizedActiveSection.value === 'programa'
+    active: false
   },
   {
     label: 'Inscripción',
-    to: '#inscripcion',
+    to: undefined,
     exactHash: true,
-    active: normalizedActiveSection.value === 'inscripcion'
+    active: false
   },
   {
     label: 'Galería',
-    to: '#galeria',
+    to: undefined,
     exactHash: true,
-    active: normalizedActiveSection.value === 'galeria'
+    active: false
   },
   {
     label: 'FAQ',
-    to: '#faq',
+    to: undefined,
     exactHash: true,
-    active: normalizedActiveSection.value === 'faq'
-  },
-  {
-    label: 'Contacto',
-    to: '#contacto',
-    exactHash: true,
-    active: normalizedActiveSection.value === 'contacto'
+    active: false
   },
   {
     label: 'Hackathon',
-    to: '#hackathon',
+    to: undefined,
     exactHash: true,
-    active: normalizedActiveSection.value === 'hackathon'
+    active: false
   }
 ])
 
 const desktopItems = computed(() => items.value.filter(item => item.label !== 'Hackathon'))
 
 nuxtApp.hooks.hookOnce('page:loading:end', () => {
-  const sectionIds = ['inicio', 'acerca', 'acerca-objetivos', 'actividades', 'programa', 'inscripcion', 'galeria', 'faq', 'contacto', 'hackathon']
-
-  const updateActiveSection = () => {
+  const updateScrolledState = () => {
     isScrolled.value = window.scrollY > 20
-
-    const headerOffset = 96
-    const currentY = window.scrollY + headerOffset
-    const sections = sectionIds
-      .map((id) => {
-        const element = document.getElementById(id)
-        return element
-          ? { id, top: element.getBoundingClientRect().top + window.scrollY }
-          : undefined
-      })
-      .filter((section): section is { id: string, top: number } => Boolean(section))
-
-    let current = sections[0]?.id
-
-    for (const section of sections) {
-      if (section.top <= currentY) {
-        current = section.id
-      }
-    }
-
-    activeSection.value = current === 'inicio' ? undefined : current
   }
 
-  updateActiveSection()
-  window.addEventListener('scroll', updateActiveSection, { passive: true })
-  window.addEventListener('resize', updateActiveSection, { passive: true })
+  updateScrolledState()
+  window.addEventListener('scroll', updateScrolledState, { passive: true })
+  window.addEventListener('resize', updateScrolledState, { passive: true })
 })
 
 // Hamburger menu animation variants
@@ -144,31 +113,40 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
         class="navbar-nav-desktop"
         aria-label="Navegación principal"
       >
-        <NuxtLink
+        <template
           v-for="item in desktopItems"
           :key="item.label"
-          :to="item.to"
-          class="navbar-nav-item"
-          :class="{ active: item.active }"
         >
-          {{ item.label }}
-          <span class="nav-item-indicator" />
-        </NuxtLink>
+          <NuxtLink
+            v-if="item.to"
+            :to="item.to"
+            class="navbar-nav-item"
+            :class="{ active: item.active }"
+          >
+            {{ item.label }}
+            <span class="nav-item-indicator" />
+          </NuxtLink>
+          <span
+            v-else
+            class="navbar-nav-item navbar-nav-item--static"
+          >
+            {{ item.label }}
+            <span class="nav-item-indicator" />
+          </span>
+        </template>
       </nav>
 
       <div class="navbar-actions">
-        <NuxtLink
-          to="#hackathon"
+        <div
           class="navbar-hackathon-link"
-          :class="{ active: normalizedActiveSection === 'hackathon' }"
-          aria-label="Ir a Hackathon"
+          aria-label="Hackathon"
         >
           <img
             src="/logo-hackathon-navbar.png"
             alt="Hackathon"
             class="navbar-hackathon-logo"
           >
-        </NuxtLink>
+        </div>
 
         <!-- Mobile menu button -->
         <button
@@ -233,16 +211,26 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
           class="mobile-nav"
           aria-label="Navegación móvil"
         >
-          <NuxtLink
+          <template
             v-for="item in items"
             :key="item.label"
-            :to="item.to"
-            class="mobile-nav-item"
-            :class="{ active: item.active }"
-            @click="mobileMenuOpen = false"
           >
-            {{ item.label }}
-          </NuxtLink>
+            <NuxtLink
+              v-if="item.to"
+              :to="item.to"
+              class="mobile-nav-item"
+              :class="{ active: item.active }"
+              @click="mobileMenuOpen = false"
+            >
+              {{ item.label }}
+            </NuxtLink>
+            <span
+              v-else
+              class="mobile-nav-item mobile-nav-item--static"
+            >
+              {{ item.label }}
+            </span>
+          </template>
         </nav>
       </div>
     </Transition>
@@ -454,6 +442,15 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
   background: rgba(25, 68, 240, 0.1);
 }
 
+.navbar-nav-item--static {
+  cursor: default;
+}
+
+.navbar-nav-item--static:hover {
+  color: rgba(203, 209, 251, 0.8);
+  background: transparent;
+}
+
 .navbar-nav-item.active {
   color: #CBD1FB;
   background: rgba(25, 68, 240, 0.08);
@@ -480,6 +477,11 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
 .navbar-nav-item:hover .nav-item-indicator {
   width: calc(100% - 1.5rem);
   opacity: 0.5;
+}
+
+.navbar-nav-item--static:hover .nav-item-indicator {
+  width: 0;
+  opacity: 0;
 }
 
 /* ===== ACTIONS ===== */
@@ -563,6 +565,16 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
   color: #F3F6FE;
   background: rgba(25, 68, 240, 0.12);
   border-color: rgba(25, 68, 240, 0.25);
+}
+
+.mobile-nav-item--static {
+  cursor: default;
+}
+
+.mobile-nav-item--static:hover {
+  color: rgba(203, 209, 251, 0.8);
+  background: transparent;
+  border-color: transparent;
 }
 
 .mobile-nav-item.active {
