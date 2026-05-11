@@ -56,7 +56,7 @@ const socialLinks = [
             aria-label="Innotec 2026"
           >
             <img
-              src="/logo-innotec-blanco.png"
+              src="/logo-innotec-blanco.svg"
               alt="INNOTEC"
               class="footer-logo"
             >

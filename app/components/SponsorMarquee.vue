@@ -32,7 +32,7 @@ const sponsorLogos = [
   },
   {
     name: 'Ferropar',
-    src: '/logos/ferropar.png',
+    src: '/logos/ferropar.svg',
     width: 608,
     height: 121
   },
@@ -44,13 +44,13 @@ const sponsorLogos = [
   },
   {
     name: 'L\'Acerie',
-    src: '/logos/lacerie.png',
+    src: '/logos/lacerie.svg',
     width: 258,
     height: 72
   },
   {
     name: 'SODEP',
-    src: '/logos/sodep.png',
+    src: '/logos/sodep.svg',
     width: 450,
     height: 108
   },
@@ -62,7 +62,7 @@ const sponsorLogos = [
   },
   {
     name: 'Galvamax',
-    src: '/logos/galvamax.png',
+    src: '/logos/galvamax.svg',
     width: 828,
     height: 190
   }

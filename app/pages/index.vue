@@ -122,15 +122,15 @@ const staggerInViewOptions = { once: true, amount: 0.35, margin: '0px 0px -10% 0
 
 const activityImages = [
   {
-    src: '/activity-charlas.jpg',
+    src: '/activity-charlas.webp',
     alt: 'Charla de INNOTEC en auditorio'
   },
   {
-    src: '/activity-talleres.jpg',
+    src: '/activity-talleres.webp',
     alt: 'Taller interactivo de INNOTEC'
   },
   {
-    src: '/activity-visita-tecnica.jpg',
+    src: '/activity-visita-tecnica.webp',
     alt: 'Visita tecnica de INNOTEC'
   }
 ]
@@ -194,7 +194,7 @@ function staggerMotion(index: number = 0) {
         <!-- Main logo -->
         <div class="hero-logo-wrapper">
           <img
-            src="/logo-innotec-blanco.png"
+            src="/logo-innotec-blanco.svg"
             alt="INNOTEC"
             class="hero-logo"
           >
@@ -1701,7 +1701,7 @@ function staggerMotion(index: number = 0) {
   min-height: clamp(30rem, 66vh, 42rem);
   display: flex;
   align-items: flex-start;
-  background: #080C16;
+  background: transparent;
 }
 
 .cta-section::before,
@@ -1714,21 +1714,22 @@ function staggerMotion(index: number = 0) {
 
 .cta-section::before {
   z-index: -2;
-  background-image: url('/vista_tierra.png');
+  background-image: url('/vista_tierra.webp');
   background-size: cover;
   background-position: center bottom;
   filter: saturate(1.08) contrast(1.05);
   transform: scale(1.01);
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.08) 14%, rgba(0, 0, 0, 0.48) 34%, black 54%, black 100%);
-  mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.08) 14%, rgba(0, 0, 0, 0.48) 34%, black 54%, black 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, transparent 20%, rgba(0, 0, 0, 0.04) 38%, rgba(0, 0, 0, 0.28) 56%, rgba(0, 0, 0, 0.72) 76%, black 92%, black 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, transparent 20%, rgba(0, 0, 0, 0.04) 38%, rgba(0, 0, 0, 0.28) 56%, rgba(0, 0, 0, 0.72) 76%, black 92%, black 100%);
 }
 
 .cta-section::after {
   z-index: -1;
   background:
-    linear-gradient(180deg, #080C16 0%, rgba(8, 12, 22, 0.98) 16%, rgba(8, 12, 22, 0.82) 31%, rgba(8, 12, 22, 0.42) 50%, rgba(5, 8, 17, 0.16) 68%, rgba(5, 8, 17, 0.76) 100%),
-    radial-gradient(ellipse 76% 34% at 50% 18%, rgba(49, 107, 255, 0.1), transparent 78%),
-    radial-gradient(ellipse at 50% 38%, rgba(47, 180, 255, 0.24), transparent 36%),
+    linear-gradient(180deg, rgba(8, 12, 22, 0) 0%, rgba(8, 12, 22, 0.12) 20%, rgba(8, 12, 22, 0.42) 42%, rgba(8, 12, 22, 0.64) 58%, rgba(8, 12, 22, 0.38) 74%, rgba(5, 8, 17, 0.76) 100%),
+    radial-gradient(ellipse 90% 38% at 50% 34%, rgba(8, 12, 22, 0.36), rgba(8, 12, 22, 0.14) 48%, transparent 80%),
+    radial-gradient(ellipse 82% 34% at 50% 32%, rgba(49, 107, 255, 0.032), transparent 84%),
+    radial-gradient(ellipse at 50% 50%, rgba(47, 180, 255, 0.16), transparent 44%),
     radial-gradient(ellipse at 50% 68%, rgba(3, 7, 18, 0), rgba(3, 7, 18, 0.48) 78%);
 }
 

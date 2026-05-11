@@ -1,5 +1,5 @@
-import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { shallowRef, defineComponent, computed, toValue, toRefs, ref, getCurrentInstance, h, inject, watch, createVNode, resolveDynamicComponent, unref, mergeProps, withCtx, renderSlot, openBlock, createBlock, toDisplayString, shallowReadonly, Teleport, createCommentVNode, nextTick, toRef as toRef$1, hasInjectionContext, useSlots, customRef, provide, Fragment, useModel, createTextVNode, mergeModels, Comment, cloneVNode, getCurrentScope, onScopeDispose, resolveComponent, camelize as camelize$1, toHandlerKey, isRef, watchEffect, markRaw, onServerPrefetch, reactive, useAttrs, defineAsyncComponent, toRaw, createElementBlock, useSSRContext, Suspense, createApp, readonly, renderList, useId, shallowReactive, onErrorCaptured, effectScope, useTemplateRef, withModifiers, normalizeProps, guardReactiveProps, normalizeStyle, isReadonly, isShallow, isReactive } from 'vue';
-import { m as serialize, n as defu, w as withLeadingSlash, o as withTrailingSlash, l as joinURL, j as createError$1, p as publicAssetsURL, q as klona, r as hasProtocol, v as parseQuery, x as defuFn, y as isEqual, z as getContext, A as parseURL, f as encodePath, B as decodePath, C as withQuery, D as isScriptProtocol, E as withoutTrailingSlash, F as sanitizeStatusCode, $ as $fetch$1, G as baseURL, H as executeAsync } from '../_/nitro.mjs';
+import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { computed, toValue, defineComponent, toRefs, ref, getCurrentInstance, h, inject, watch, createVNode, resolveDynamicComponent, unref, mergeProps, withCtx, renderSlot, openBlock, createBlock, toDisplayString, shallowRef, shallowReadonly, Teleport, createCommentVNode, nextTick, toRef as toRef$1, useSlots, hasInjectionContext, customRef, provide, Fragment, useModel, createTextVNode, mergeModels, Comment, cloneVNode, getCurrentScope, onScopeDispose, resolveComponent, camelize as camelize$1, toHandlerKey, isRef, watchEffect, markRaw, onServerPrefetch, reactive, useAttrs, defineAsyncComponent, toRaw, createElementBlock, useSSRContext, Suspense, createApp, readonly, renderList, useId, shallowReactive, onErrorCaptured, effectScope, useTemplateRef, withModifiers, normalizeProps, guardReactiveProps, normalizeStyle, isReadonly, isShallow, isReactive } from 'vue';
+import { m as serialize, n as defu, w as withLeadingSlash, o as withTrailingSlash, l as joinURL, p as publicAssetsURL, q as klona, r as hasProtocol, v as parseQuery, x as defuFn, y as isEqual, z as getContext, A as parseURL, f as encodePath, B as decodePath, C as withQuery, D as isScriptProtocol, E as withoutTrailingSlash, F as sanitizeStatusCode, $ as $fetch$1, G as baseURL, j as createError$1, H as executeAsync } from '../_/nitro.mjs';
 import { RouterView, createMemoryHistory, createRouter, START_LOCATION } from 'vue-router';
 import { Icon, getIcon, loadIcon as loadIcon$1, _api, addAPIProvider, setCustomIconsLoader } from '@iconify/vue';
 import colors from 'tailwindcss/colors';
@@ -789,7 +789,7 @@ const _routes = [
     name: "index",
     path: "/",
     meta: __nuxt_page_meta || {},
-    component: () => import('./index-BlgLb6bP.mjs')
+    component: () => import('./index-Dfc64HJZ.mjs')
   }
 ];
 const ROUTE_KEY_PARENTHESES_RE = /(:\w+)\([^)]+\)/g;
@@ -1586,55 +1586,55 @@ const plugin_MeUvTuoKUi51yb_kBguab6hdcExVXeTtZtTg9TZZBB8 = /* @__PURE__ */ defin
   // For type portability
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 });
-const LazyProseA = defineAsyncComponent(() => import('./A-CaLwXl17.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseAccordion = defineAsyncComponent(() => import('./Accordion-6z5MrnkH.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseAccordionItem = defineAsyncComponent(() => import('./AccordionItem-cMd9yyu0.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseBadge = defineAsyncComponent(() => import('./Badge-D_XaYD_m.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseBlockquote = defineAsyncComponent(() => import('./Blockquote-DZzKSDxE.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseCallout = defineAsyncComponent(() => import('./Callout-BqXk1Amt.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseCard = defineAsyncComponent(() => import('./Card-DSjMcYKh.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseCardGroup = defineAsyncComponent(() => import('./CardGroup-2vNJyozQ.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseCode = defineAsyncComponent(() => import('./Code-27gSXnTz.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseCodeCollapse = defineAsyncComponent(() => import('./CodeCollapse-Df7Rz9VC.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseCodeGroup = defineAsyncComponent(() => import('./CodeGroup-C1jU3xcu.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseCodeIcon = defineAsyncComponent(() => import('./CodeIcon-D3-j6vcw.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseCodePreview = defineAsyncComponent(() => import('./CodePreview-4DOraF-z.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseCodeTree = defineAsyncComponent(() => import('./CodeTree-Cp_-vA94.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseCollapsible = defineAsyncComponent(() => import('./Collapsible-Bg4ORP3I.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseEm = defineAsyncComponent(() => import('./Em-BO1oxXE0.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseField = defineAsyncComponent(() => import('./Field-D5ZkcTBE.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseFieldGroup = defineAsyncComponent(() => import('./FieldGroup-f5kLifIG.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseH1 = defineAsyncComponent(() => import('./H1-B2ofNG3u.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseH2 = defineAsyncComponent(() => import('./H2-C5QmgCTS.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseH3 = defineAsyncComponent(() => import('./H3--c3oLhwK.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseH4 = defineAsyncComponent(() => import('./H4-CCQQiMBS.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseHr = defineAsyncComponent(() => import('./Hr-DmW7r12m.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseIcon = defineAsyncComponent(() => import('./Icon-74VI7ODc.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseImg = defineAsyncComponent(() => import('./Img-CbEMVS3h.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseKbd = defineAsyncComponent(() => import('./Kbd-BrzYXikY.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseLi = defineAsyncComponent(() => import('./Li-Dwddz2e8.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseOl = defineAsyncComponent(() => import('./Ol-4ohM0G2S.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseP = defineAsyncComponent(() => import('./P-A_4tArxl.mjs').then((r) => r["default"] || r.default || r));
-const LazyProsePre = defineAsyncComponent(() => import('./Pre-9LWdh4pO.mjs').then((r) => r["default"] || r.default || r));
-const LazyProsePrompt = defineAsyncComponent(() => import('./Prompt-BtBHPDDY.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseA = defineAsyncComponent(() => import('./A-Bid27zrt.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseAccordion = defineAsyncComponent(() => import('./Accordion-Ci1EZ8XQ.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseAccordionItem = defineAsyncComponent(() => import('./AccordionItem-WfPdYfz3.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseBadge = defineAsyncComponent(() => import('./Badge-CV0DSQDQ.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseBlockquote = defineAsyncComponent(() => import('./Blockquote-Dd8PY91j.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseCallout = defineAsyncComponent(() => import('./Callout-BQ9z9dEn.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseCard = defineAsyncComponent(() => import('./Card-C4i7q2wz.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseCardGroup = defineAsyncComponent(() => import('./CardGroup-WT8MbMW0.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseCode = defineAsyncComponent(() => import('./Code-8hMHB4aS.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseCodeCollapse = defineAsyncComponent(() => import('./CodeCollapse-BNWF4WG3.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseCodeGroup = defineAsyncComponent(() => import('./CodeGroup-3uMIdRGa.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseCodeIcon = defineAsyncComponent(() => import('./CodeIcon-BH2SYuos.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseCodePreview = defineAsyncComponent(() => import('./CodePreview-QQlYgujs.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseCodeTree = defineAsyncComponent(() => import('./CodeTree-B6Q3KOfg.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseCollapsible = defineAsyncComponent(() => import('./Collapsible-DiTOSk1h.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseEm = defineAsyncComponent(() => import('./Em-Bh-UfVPd.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseField = defineAsyncComponent(() => import('./Field-CO4oy5Je.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseFieldGroup = defineAsyncComponent(() => import('./FieldGroup-D3BVPeQX.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseH1 = defineAsyncComponent(() => import('./H1-W_lBXsZa.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseH2 = defineAsyncComponent(() => import('./H2-hD3LmJ8o.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseH3 = defineAsyncComponent(() => import('./H3-s-3KIZAo.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseH4 = defineAsyncComponent(() => import('./H4-C48xkBlL.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseHr = defineAsyncComponent(() => import('./Hr-fckqCLJ1.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseIcon = defineAsyncComponent(() => import('./Icon-YsDRYQ-e.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseImg = defineAsyncComponent(() => import('./Img-6VDNBMjp.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseKbd = defineAsyncComponent(() => import('./Kbd-N3k1WpIS.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseLi = defineAsyncComponent(() => import('./Li-D8_bblIq.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseOl = defineAsyncComponent(() => import('./Ol-DjDs7eeY.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseP = defineAsyncComponent(() => import('./P-XXymHGR8.mjs').then((r) => r["default"] || r.default || r));
+const LazyProsePre = defineAsyncComponent(() => import('./Pre-CW9yHJLt.mjs').then((r) => r["default"] || r.default || r));
+const LazyProsePrompt = defineAsyncComponent(() => import('./Prompt-D5RtdXy4.mjs').then((r) => r["default"] || r.default || r));
 const LazyProseScript = defineAsyncComponent(() => import('./Script-BOX32BRp.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseSteps = defineAsyncComponent(() => import('./Steps-CChFHEgF.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseStrong = defineAsyncComponent(() => import('./Strong-pY54EzRv.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseTable = defineAsyncComponent(() => import('./Table-CHgfYaTE.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseTabs = defineAsyncComponent(() => import('./Tabs-Bxs8wxgE.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseTabsItem = defineAsyncComponent(() => import('./TabsItem-CrJkHwvn.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseTbody = defineAsyncComponent(() => import('./Tbody-C7zb1iv3.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseTd = defineAsyncComponent(() => import('./Td-D2-4GRUF.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseTh = defineAsyncComponent(() => import('./Th-CAdOMFfg.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseThead = defineAsyncComponent(() => import('./Thead-__rXixCD.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseTr = defineAsyncComponent(() => import('./Tr-C7vJRCza.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseUl = defineAsyncComponent(() => import('./Ul-D0s-eLm-.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseCaution = defineAsyncComponent(() => import('./Caution-0ZpM1Jkx.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseNote = defineAsyncComponent(() => import('./Note-BAfUlOXh.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseTip = defineAsyncComponent(() => import('./Tip-DmEP_EbJ.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseWarning = defineAsyncComponent(() => import('./Warning-p30W_lr0.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseH5 = defineAsyncComponent(() => import('./ProseH5-C4hSwRH6.mjs').then((r) => r["default"] || r.default || r));
-const LazyProseH6 = defineAsyncComponent(() => import('./ProseH6-Yya0Q0nU.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseSteps = defineAsyncComponent(() => import('./Steps-BA2ZaX1L.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseStrong = defineAsyncComponent(() => import('./Strong-D3qjS1ga.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseTable = defineAsyncComponent(() => import('./Table-CRvX9NjC.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseTabs = defineAsyncComponent(() => import('./Tabs-DZppAymx.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseTabsItem = defineAsyncComponent(() => import('./TabsItem-D_i2SQnj.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseTbody = defineAsyncComponent(() => import('./Tbody-CfM7zWkW.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseTd = defineAsyncComponent(() => import('./Td-nTNQbSv4.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseTh = defineAsyncComponent(() => import('./Th-hHFfzgrv.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseThead = defineAsyncComponent(() => import('./Thead-UNQKGN3U.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseTr = defineAsyncComponent(() => import('./Tr-tzxoGXUX.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseUl = defineAsyncComponent(() => import('./Ul-B_Z6ntID.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseCaution = defineAsyncComponent(() => import('./Caution-tCLCkTYk.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseNote = defineAsyncComponent(() => import('./Note-BYBNDHjE.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseTip = defineAsyncComponent(() => import('./Tip-DhSd-9Eo.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseWarning = defineAsyncComponent(() => import('./Warning-D57OzSM8.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseH5 = defineAsyncComponent(() => import('./ProseH5-L_X28Spr.mjs').then((r) => r["default"] || r.default || r));
+const LazyProseH6 = defineAsyncComponent(() => import('./ProseH6-BMcE2vQI.mjs').then((r) => r["default"] || r.default || r));
 const LazyIcon = defineAsyncComponent(() => Promise.resolve().then(() => index).then((r) => r["default"] || r.default || r));
 const lazyGlobalComponents = [
   ["ProseA", LazyProseA],
@@ -8049,8 +8049,8 @@ _sfc_main$6.setup = (props, ctx) => {
   return _sfc_setup$6 ? _sfc_setup$6(props, ctx) : void 0;
 };
 const __nuxt_component_0 = Object.assign(_sfc_main$6, { __name: "UApp" });
-const _imports_0 = publicAssetsURL("/logo-innotec-blanco.png");
-const _imports_1 = publicAssetsURL("/logo-hackathon-navbar.png");
+const _imports_0 = publicAssetsURL("/logo-innotec-blanco.svg");
+const _imports_1 = publicAssetsURL("/logo-hackathon-navbar.svg");
 function createContext(providerComponentName, contextName) {
   const symbolDescription = typeof providerComponentName === "string" && !contextName ? `${providerComponentName}Context` : contextName;
   const injectionKey = Symbol(symbolDescription);
@@ -9875,88 +9875,66 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   __ssrInlineRender: true,
   setup(__props) {
     const nuxtApp = useNuxtApp();
-    const activeSection = ref();
     const isScrolled = ref(false);
     const mobileMenuOpen = ref(false);
-    const normalizedActiveSection = computed(() => activeSection.value === "acerca-objetivos" ? "acerca" : activeSection.value);
     const items = computed(() => [
       {
         label: "Inicio",
         to: "#inicio",
         exactHash: true,
-        active: !normalizedActiveSection.value || normalizedActiveSection.value === "inicio"
+        active: true
       },
       {
         label: "Acerca de",
-        to: "#acerca",
+        to: void 0,
         exactHash: true,
-        active: normalizedActiveSection.value === "acerca"
+        active: false
       },
       {
         label: "Actividades",
-        to: "#actividades",
+        to: void 0,
         exactHash: true,
-        active: normalizedActiveSection.value === "actividades"
+        active: false
       },
       {
         label: "Programa",
-        to: "#programa",
+        to: void 0,
         exactHash: true,
-        active: normalizedActiveSection.value === "programa"
+        active: false
       },
       {
         label: "Inscripción",
-        to: "#inscripcion",
+        to: void 0,
         exactHash: true,
-        active: normalizedActiveSection.value === "inscripcion"
+        active: false
       },
       {
         label: "Galería",
-        to: "#galeria",
+        to: void 0,
         exactHash: true,
-        active: normalizedActiveSection.value === "galeria"
+        active: false
       },
       {
         label: "FAQ",
-        to: "#faq",
+        to: void 0,
         exactHash: true,
-        active: normalizedActiveSection.value === "faq"
-      },
-      {
-        label: "Contacto",
-        to: "#contacto",
-        exactHash: true,
-        active: normalizedActiveSection.value === "contacto"
+        active: false
       },
       {
         label: "Hackathon",
-        to: "#hackathon",
+        to: void 0,
         exactHash: true,
-        active: normalizedActiveSection.value === "hackathon"
+        active: false
       }
     ]);
     const desktopItems = computed(() => items.value.filter((item) => item.label !== "Hackathon"));
     nuxtApp.hooks.hookOnce("page:loading:end", () => {
-      const sectionIds = ["inicio", "acerca", "acerca-objetivos", "actividades", "programa", "inscripcion", "galeria", "faq", "contacto", "hackathon"];
-      const updateActiveSection = () => {
+      const updateScrolledState = () => {
         isScrolled.value = (void 0).scrollY > 20;
-        const headerOffset = 96;
-        const currentY = (void 0).scrollY + headerOffset;
-        const sections = sectionIds.map((id) => {
-          const element = (void 0).getElementById(id);
-          return element ? { id, top: element.getBoundingClientRect().top + (void 0).scrollY } : void 0;
-        }).filter((section) => Boolean(section));
-        let current = sections[0]?.id;
-        for (const section of sections) {
-          if (section.top <= currentY) {
-            current = section.id;
-          }
-        }
-        activeSection.value = current === "inicio" ? void 0 : current;
       };
-      updateActiveSection();
-      (void 0).addEventListener("scroll", updateActiveSection, { passive: true });
-      (void 0).addEventListener("resize", updateActiveSection, { passive: true });
+      updateScrolledState();
+      (void 0).addEventListener("scroll", updateScrolledState, { passive: true });
+      (void 0).addEventListener("resize", updateScrolledState, { passive: true });
     });
     const variants = {
       normal: { rotate: 0, y: 0, opacity: 1 },
@@ -9974,7 +9952,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
       const _component_NuxtLink = __nuxt_component_0$1;
       _push(`<header${ssrRenderAttrs(mergeProps({
         class: ["innotec-navbar fixed top-0 left-0 right-0 z-50 transition-all duration-500", unref(isScrolled) ? "scrolled" : ""]
-      }, _attrs))} data-v-5ea9619a><div class="navbar-glow-line" data-v-5ea9619a></div><div class="navbar-container" data-v-5ea9619a>`);
+      }, _attrs))} data-v-3fbcf2f5><div class="navbar-glow-line" data-v-3fbcf2f5></div><div class="navbar-container" data-v-3fbcf2f5>`);
       _push(ssrRenderComponent(_component_NuxtLink, {
         to: "/",
         class: "navbar-logo-link",
@@ -9982,7 +9960,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<img${ssrRenderAttr("src", _imports_0)} alt="INNOTEC 2026" class="navbar-logo" data-v-5ea9619a${_scopeId}><div class="navbar-logo-badge" data-v-5ea9619a${_scopeId}>2026</div>`);
+            _push2(`<img${ssrRenderAttr("src", _imports_0)} alt="INNOTEC 2026" class="navbar-logo" data-v-3fbcf2f5${_scopeId}><div class="navbar-logo-badge" data-v-3fbcf2f5${_scopeId}>2026</div>`);
           } else {
             return [
               createVNode("img", {
@@ -9996,48 +9974,32 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<nav class="navbar-nav-desktop" aria-label="Navegación principal" data-v-5ea9619a><!--[-->`);
+      _push(`<nav class="navbar-nav-desktop" aria-label="Navegación principal" data-v-3fbcf2f5><!--[-->`);
       ssrRenderList(unref(desktopItems), (item) => {
-        _push(ssrRenderComponent(_component_NuxtLink, {
-          key: item.label,
-          to: item.to,
-          class: ["navbar-nav-item", { active: item.active }]
-        }, {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              _push2(`${ssrInterpolate(item.label)} <span class="nav-item-indicator" data-v-5ea9619a${_scopeId}></span>`);
-            } else {
-              return [
-                createTextVNode(toDisplayString(item.label) + " ", 1),
-                createVNode("span", { class: "nav-item-indicator" })
-              ];
-            }
-          }),
-          _: 2
-        }, _parent));
+        _push(`<!--[-->`);
+        if (item.to) {
+          _push(ssrRenderComponent(_component_NuxtLink, {
+            to: item.to,
+            class: ["navbar-nav-item", { active: item.active }]
+          }, {
+            default: withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                _push2(`${ssrInterpolate(item.label)} <span class="nav-item-indicator" data-v-3fbcf2f5${_scopeId}></span>`);
+              } else {
+                return [
+                  createTextVNode(toDisplayString(item.label) + " ", 1),
+                  createVNode("span", { class: "nav-item-indicator" })
+                ];
+              }
+            }),
+            _: 2
+          }, _parent));
+        } else {
+          _push(`<span class="navbar-nav-item navbar-nav-item--static" data-v-3fbcf2f5>${ssrInterpolate(item.label)} <span class="nav-item-indicator" data-v-3fbcf2f5></span></span>`);
+        }
+        _push(`<!--]-->`);
       });
-      _push(`<!--]--></nav><div class="navbar-actions" data-v-5ea9619a>`);
-      _push(ssrRenderComponent(_component_NuxtLink, {
-        to: "#hackathon",
-        class: ["navbar-hackathon-link", { active: unref(normalizedActiveSection) === "hackathon" }],
-        "aria-label": "Ir a Hackathon"
-      }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            _push2(`<img${ssrRenderAttr("src", _imports_1)} alt="Hackathon" class="navbar-hackathon-logo" data-v-5ea9619a${_scopeId}>`);
-          } else {
-            return [
-              createVNode("img", {
-                src: _imports_1,
-                alt: "Hackathon",
-                class: "navbar-hackathon-logo"
-              })
-            ];
-          }
-        }),
-        _: 1
-      }, _parent));
-      _push(`<button class="${ssrRenderClass([{ active: unref(mobileMenuOpen) }, "navbar-mobile-toggle"])}"${ssrRenderAttr("aria-label", unref(mobileMenuOpen) ? "Cerrar menú" : "Abrir menú")}${ssrRenderAttr("aria-expanded", unref(mobileMenuOpen))} data-v-5ea9619a><svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-v-5ea9619a>`);
+      _push(`<!--]--></nav><div class="navbar-actions" data-v-3fbcf2f5><div class="navbar-hackathon-link" aria-label="Hackathon" data-v-3fbcf2f5><img${ssrRenderAttr("src", _imports_1)} alt="Hackathon" class="navbar-hackathon-logo" data-v-3fbcf2f5></div><button class="${ssrRenderClass([{ active: unref(mobileMenuOpen) }, "navbar-mobile-toggle"])}"${ssrRenderAttr("aria-label", unref(mobileMenuOpen) ? "Cerrar menú" : "Abrir menú")}${ssrRenderAttr("aria-expanded", unref(mobileMenuOpen))} data-v-3fbcf2f5><svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-v-3fbcf2f5>`);
       _push(ssrRenderComponent(unref(motion).line, {
         x1: "4",
         y1: "6",
@@ -10070,25 +10032,30 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
       }, null, _parent));
       _push(`</svg></button></div></div>`);
       if (unref(mobileMenuOpen)) {
-        _push(`<div class="navbar-mobile-menu" data-v-5ea9619a><nav class="mobile-nav" aria-label="Navegación móvil" data-v-5ea9619a><!--[-->`);
+        _push(`<div class="navbar-mobile-menu" data-v-3fbcf2f5><nav class="mobile-nav" aria-label="Navegación móvil" data-v-3fbcf2f5><!--[-->`);
         ssrRenderList(unref(items), (item) => {
-          _push(ssrRenderComponent(_component_NuxtLink, {
-            key: item.label,
-            to: item.to,
-            class: ["mobile-nav-item", { active: item.active }],
-            onClick: ($event) => mobileMenuOpen.value = false
-          }, {
-            default: withCtx((_, _push2, _parent2, _scopeId) => {
-              if (_push2) {
-                _push2(`${ssrInterpolate(item.label)}`);
-              } else {
-                return [
-                  createTextVNode(toDisplayString(item.label), 1)
-                ];
-              }
-            }),
-            _: 2
-          }, _parent));
+          _push(`<!--[-->`);
+          if (item.to) {
+            _push(ssrRenderComponent(_component_NuxtLink, {
+              to: item.to,
+              class: ["mobile-nav-item", { active: item.active }],
+              onClick: ($event) => mobileMenuOpen.value = false
+            }, {
+              default: withCtx((_, _push2, _parent2, _scopeId) => {
+                if (_push2) {
+                  _push2(`${ssrInterpolate(item.label)}`);
+                } else {
+                  return [
+                    createTextVNode(toDisplayString(item.label), 1)
+                  ];
+                }
+              }),
+              _: 2
+            }, _parent));
+          } else {
+            _push(`<span class="mobile-nav-item mobile-nav-item--static" data-v-3fbcf2f5>${ssrInterpolate(item.label)}</span>`);
+          }
+          _push(`<!--]-->`);
         });
         _push(`<!--]--></nav></div>`);
       } else {
@@ -10111,7 +10078,7 @@ _sfc_main$5.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/AppHeader.vue");
   return _sfc_setup$5 ? _sfc_setup$5(props, ctx) : void 0;
 };
-const __nuxt_component_1 = /* @__PURE__ */ Object.assign(_export_sfc(_sfc_main$5, [["__scopeId", "data-v-5ea9619a"]]), { __name: "AppHeader" });
+const __nuxt_component_1 = /* @__PURE__ */ Object.assign(_export_sfc(_sfc_main$5, [["__scopeId", "data-v-3fbcf2f5"]]), { __name: "AppHeader" });
 const theme = {
   "base": "min-h-[calc(100vh-var(--ui-header-height))]"
 };
@@ -10243,14 +10210,17 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
     const currentYear = (/* @__PURE__ */ new Date()).getFullYear();
     const navLinks = [
       { label: "Inicio", to: "#inicio" },
-      { label: "Acerca", to: "#acerca" },
-      { label: "Actividades", to: "#actividades" },
-      { label: "Programa", to: "#programa" },
-      { label: "FAQ", to: "#faq" },
-      { label: "Contacto", to: "#contacto" },
-      { label: "Hackathon", to: "#hackathon" },
-      { label: "Inscripción", to: "#inscripcion" },
-      { label: "Galería", to: "#galeria" }
+      { label: "Acerca" },
+      { label: "Actividades" },
+      { label: "Programa" },
+      { label: "FAQ" },
+      { label: "Hackathon" },
+      { label: "Inscripción" },
+      { label: "Galería" }
+    ];
+    const contactLinks = [
+      { name: "María Eugenia Pointis", phone: "(+595) 982 386063", href: "tel:+595982386063" },
+      { name: "Amelia Nery Huerta", phone: "(+595) 971 650525", href: "tel:+595971650525" }
     ];
     const socialLinks = [
       {
@@ -10271,7 +10241,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
     ];
     return (_ctx, _push, _parent, _attrs) => {
       const _component_NuxtLink = __nuxt_component_0$1;
-      _push(`<footer${ssrRenderAttrs(mergeProps({ class: "innotec-footer" }, _attrs))} data-v-5ed46c2f><div class="footer-separator" data-v-5ed46c2f></div><div class="footer-glow footer-glow--left" data-v-5ed46c2f></div><div class="footer-glow footer-glow--right" data-v-5ed46c2f></div><div class="footer-container" data-v-5ed46c2f><div class="footer-main" data-v-5ed46c2f><div class="footer-brand" data-v-5ed46c2f>`);
+      _push(`<footer${ssrRenderAttrs(mergeProps({ class: "innotec-footer" }, _attrs))} data-v-ab77a4cc><div class="footer-separator" data-v-ab77a4cc></div><div class="footer-glow footer-glow--left" data-v-ab77a4cc></div><div class="footer-glow footer-glow--right" data-v-ab77a4cc></div><div class="footer-container" data-v-ab77a4cc><div class="footer-main" data-v-ab77a4cc><div class="footer-brand" data-v-ab77a4cc>`);
       _push(ssrRenderComponent(_component_NuxtLink, {
         to: "/",
         class: "footer-logo-link",
@@ -10279,7 +10249,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<img${ssrRenderAttr("src", _imports_0)} alt="INNOTEC" class="footer-logo" data-v-5ed46c2f${_scopeId}>`);
+            _push2(`<img${ssrRenderAttr("src", _imports_0)} alt="INNOTEC" class="footer-logo" data-v-ab77a4cc${_scopeId}>`);
           } else {
             return [
               createVNode("img", {
@@ -10292,32 +10262,40 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`<p class="footer-tagline" data-v-5ed46c2f> Innovación • Tecnología • Colaboración </p><p class="footer-description" data-v-5ed46c2f> El congreso anual de tecnología e innovación organizado por estudiantes de la Facultad de Ciencias y Tecnología de la Universidad Católica &quot;Nuestra Señora de la Asunción&quot;. </p><div class="footer-socials" data-v-5ed46c2f><!--[-->`);
-      ssrRenderList(socialLinks, (social) => {
-        _push(`<a${ssrRenderAttr("href", social.to)}${ssrRenderAttr("aria-label", social.label)} target="_blank" rel="noopener noreferrer" class="social-btn" data-v-5ed46c2f><span data-v-5ed46c2f>${social.icon ?? ""}</span></a>`);
+      _push(`<p class="footer-tagline" data-v-ab77a4cc> Innovación • Tecnología • Colaboración </p><p class="footer-description" data-v-ab77a4cc> El congreso anual de tecnología e innovación organizado por estudiantes de la Facultad de Ciencias y Tecnología de la Universidad Católica &quot;Nuestra Señora de la Asunción&quot;. </p><div class="footer-contacts" aria-label="Contactos" data-v-ab77a4cc><!--[-->`);
+      ssrRenderList(contactLinks, (contact) => {
+        _push(`<a${ssrRenderAttr("href", contact.href)} class="footer-contact-link" data-v-ab77a4cc><span class="footer-contact-name" data-v-ab77a4cc>${ssrInterpolate(contact.name)}</span><span class="footer-contact-phone" data-v-ab77a4cc>${ssrInterpolate(contact.phone)}</span></a>`);
       });
-      _push(`<!--]--></div></div><div class="footer-nav-col" data-v-5ed46c2f><h3 class="footer-col-title" data-v-5ed46c2f> Navegación </h3><nav aria-label="Footer navigation" data-v-5ed46c2f><ul class="footer-nav-list" data-v-5ed46c2f><!--[-->`);
+      _push(`<!--]--></div><div class="footer-socials" data-v-ab77a4cc><!--[-->`);
+      ssrRenderList(socialLinks, (social) => {
+        _push(`<a${ssrRenderAttr("href", social.to)}${ssrRenderAttr("aria-label", social.label)} target="_blank" rel="noopener noreferrer" class="social-btn" data-v-ab77a4cc><span data-v-ab77a4cc>${social.icon ?? ""}</span></a>`);
+      });
+      _push(`<!--]--></div></div><div class="footer-nav-col" data-v-ab77a4cc><h3 class="footer-col-title" data-v-ab77a4cc> Navegación </h3><nav aria-label="Footer navigation" data-v-ab77a4cc><ul class="footer-nav-list" data-v-ab77a4cc><!--[-->`);
       ssrRenderList(navLinks, (link) => {
-        _push(`<li data-v-5ed46c2f>`);
-        _push(ssrRenderComponent(_component_NuxtLink, {
-          to: link.to,
-          class: "footer-nav-link"
-        }, {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
-            if (_push2) {
-              _push2(`<span class="nav-link-arrow" data-v-5ed46c2f${_scopeId}>→</span> ${ssrInterpolate(link.label)}`);
-            } else {
-              return [
-                createVNode("span", { class: "nav-link-arrow" }, "→"),
-                createTextVNode(" " + toDisplayString(link.label), 1)
-              ];
-            }
-          }),
-          _: 2
-        }, _parent));
+        _push(`<li data-v-ab77a4cc>`);
+        if (link.to) {
+          _push(ssrRenderComponent(_component_NuxtLink, {
+            to: link.to,
+            class: "footer-nav-link"
+          }, {
+            default: withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                _push2(`<span class="nav-link-arrow" data-v-ab77a4cc${_scopeId}>→</span> ${ssrInterpolate(link.label)}`);
+              } else {
+                return [
+                  createVNode("span", { class: "nav-link-arrow" }, "→"),
+                  createTextVNode(" " + toDisplayString(link.label), 1)
+                ];
+              }
+            }),
+            _: 2
+          }, _parent));
+        } else {
+          _push(`<span class="footer-nav-link footer-nav-link--static" data-v-ab77a4cc><span class="nav-link-arrow" data-v-ab77a4cc>→</span> ${ssrInterpolate(link.label)}</span>`);
+        }
         _push(`</li>`);
       });
-      _push(`<!--]--></ul></nav></div><div class="footer-event-col" data-v-5ed46c2f><h3 class="footer-col-title" data-v-5ed46c2f> El Evento </h3><div class="footer-event-details" data-v-5ed46c2f><div class="event-detail-item" data-v-5ed46c2f><div data-v-5ed46c2f><p class="detail-label" data-v-5ed46c2f> Fecha </p><p class="detail-value" data-v-5ed46c2f> 20 de agosto, 2026 </p></div></div><div class="event-detail-item" data-v-5ed46c2f><div data-v-5ed46c2f><p class="detail-label" data-v-5ed46c2f> Sede </p><p class="detail-value" data-v-5ed46c2f> Universidad Católica del Paraguay </p></div></div><div class="event-detail-item" data-v-5ed46c2f><div data-v-5ed46c2f><p class="detail-label" data-v-5ed46c2f> Actividades </p><p class="detail-value" data-v-5ed46c2f> Charlas • Talleres • Visitas Técnicas </p></div></div></div></div></div><div class="footer-bottom" data-v-5ed46c2f><div class="footer-bottom-separator" data-v-5ed46c2f></div><div class="footer-bottom-content" data-v-5ed46c2f><p class="footer-copyright" data-v-5ed46c2f> © ${ssrInterpolate(unref(currentYear))} INNOTEC — Todos los derechos reservados. </p><p class="footer-credit" data-v-5ed46c2f> Facultad de Ciencias y Tecnología · Universidad Católica del Paraguay </p></div></div></div></footer>`);
+      _push(`<!--]--></ul></nav></div><div class="footer-event-col" data-v-ab77a4cc><h3 class="footer-col-title" data-v-ab77a4cc> El Evento </h3><div class="footer-event-details" data-v-ab77a4cc><div class="event-detail-item" data-v-ab77a4cc><div data-v-ab77a4cc><p class="detail-label" data-v-ab77a4cc> Fecha </p><p class="detail-value" data-v-ab77a4cc> 20 de agosto, 2026 </p></div></div><div class="event-detail-item" data-v-ab77a4cc><div data-v-ab77a4cc><p class="detail-label" data-v-ab77a4cc> Sede </p><p class="detail-value" data-v-ab77a4cc> Universidad Católica del Paraguay </p></div></div><div class="event-detail-item" data-v-ab77a4cc><div data-v-ab77a4cc><p class="detail-label" data-v-ab77a4cc> Actividades </p><p class="detail-value" data-v-ab77a4cc> Charlas • Talleres • Visitas Técnicas </p></div></div></div></div></div><div class="footer-bottom" data-v-ab77a4cc><div class="footer-bottom-separator" data-v-ab77a4cc></div><div class="footer-bottom-content" data-v-ab77a4cc><p class="footer-copyright" data-v-ab77a4cc> © ${ssrInterpolate(unref(currentYear))} INNOTEC — Todos los derechos reservados. </p><p class="footer-credit" data-v-ab77a4cc> Facultad de Ciencias y Tecnología · Universidad Católica del Paraguay </p></div></div></div></footer>`);
     };
   }
 });
@@ -10327,7 +10305,7 @@ _sfc_main$3.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/AppFooter.vue");
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
-const __nuxt_component_4 = /* @__PURE__ */ Object.assign(_export_sfc(_sfc_main$3, [["__scopeId", "data-v-5ed46c2f"]]), { __name: "AppFooter" });
+const __nuxt_component_4 = /* @__PURE__ */ Object.assign(_export_sfc(_sfc_main$3, [["__scopeId", "data-v-ab77a4cc"]]), { __name: "AppFooter" });
 const useColorMode = () => {
   return useState("color-mode").value;
 };
@@ -10357,7 +10335,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       }
     });
     useSeoMeta({
-      ogImage: "/logo-innotec-blanco.png",
+      ogImage: "/logo-innotec-blanco.svg",
       twitterCard: "summary_large_image",
       title: "INNOTEC 2026 — Congreso de Tecnología e Innovación",
       description: "El congreso anual de innovación y tecnología organizado por estudiantes de la Facultad de Ciencias y Tecnología de la Universidad Católica del Paraguay."
@@ -10516,5 +10494,5 @@ let entry;
 }
 const entry_default = ((ssrContext) => entry(ssrContext));
 
-export { createReusableTemplate as A, useEventListener as B, Presence_default as C, useRuntimeConfig as D, injectConfigProviderContext as E, useFieldGroup as F, useComponentIcons as G, _sfc_main$e as H, useResizeObserver as I, useMotionConfig as J, provideAnimatePresence as K, mountedStates as L, Motion as M, motionGlobalConfig as N, resolveBaseURL as O, Primitive as P, ImageComponent as Q, createSharedComposable as R, useClipboard as S, Teleport_default as T, getSlotChildrenText as U, _export_sfc as _, __nuxt_component_0$1 as a, useAsyncData as b, createError as c, useSeoMeta as d, entry_default as default, _imports_0 as e, useAppConfig as f, useComponentUI as g, tv as h, _sfc_main$c as i, isNullish as j, useVModel as k, useForwardExpose as l, createContext$1 as m, useForwardPropsEmits as n, get as o, _sfc_main$g as p, transformUI as q, reactivePick as r, useLocale as s, tryUseNuxtApp as t, useHead as u, _sfc_main$b as v, refAutoReset as w, getActiveElement as x, createEventHook as y, useCollection as z };
+export { useEventListener as A, Presence_default as B, useRuntimeConfig as C, injectConfigProviderContext as D, useFieldGroup as E, useComponentIcons as F, _sfc_main$e as G, useResizeObserver as H, useMotionConfig as I, provideAnimatePresence as J, mountedStates as K, motionGlobalConfig as L, Motion as M, resolveBaseURL as N, ImageComponent as O, Primitive as P, createSharedComposable as Q, useClipboard as R, getSlotChildrenText as S, Teleport_default as T, _export_sfc as _, __nuxt_component_0$1 as a, useAsyncData as b, useSeoMeta as c, _imports_0 as d, entry_default as default, useAppConfig as e, useComponentUI as f, tv as g, _sfc_main$c as h, isNullish as i, useVModel as j, useForwardExpose as k, createContext$1 as l, useForwardPropsEmits as m, get as n, _sfc_main$g as o, transformUI as p, useLocale as q, reactivePick as r, _sfc_main$b as s, tryUseNuxtApp as t, useHead as u, refAutoReset as v, getActiveElement as w, createEventHook as x, useCollection as y, createReusableTemplate as z };
 //# sourceMappingURL=server.mjs.map

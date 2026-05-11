@@ -1,9 +1,0 @@
-{
-  "pid": 27368,
-  "startedAt": 1778275257988,
-  "command": "dev",
-  "cwd": "C:/Users/Elias Román/Desktop/Innotec Web/innotec-2026-landing",
-  "port": 3000,
-  "hostname": "127.0.0.1",
-  "url": "http://127.0.0.1:3000"
-}

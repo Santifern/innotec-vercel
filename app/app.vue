@@ -24,7 +24,7 @@ useHead({
 })
 
 useSeoMeta({
-  ogImage: '/logo-innotec-blanco.png',
+  ogImage: '/logo-innotec-blanco.svg',
   twitterCard: 'summary_large_image',
   title: 'INNOTEC 2026 — Congreso de Tecnología e Innovación',
   description: 'El congreso anual de innovación y tecnología organizado por estudiantes de la Facultad de Ciencias y Tecnología de la Universidad Católica del Paraguay.'

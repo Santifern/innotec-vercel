@@ -14,13 +14,13 @@ Archivos obtenidos para la tanda de sponsors de la imagen.
 
 ## SVG contenedor con imagen oficial embebida
 
-Estos sitios no expusieron un SVG publico del logo durante la busqueda, asi que deje un `.svg` con la imagen oficial embebida.
+Estos sitios no expusieron un SVG publico del logo durante la busqueda, asi que deje un `.svg` con la imagen oficial embebida. Los raster originales ya no se publican como archivos separados.
 
-- `ferropar.svg` - desde `ferropar.png`, sitio oficial Ferropar
-- `lacerie.svg` - desde `lacerie.png`, sitio oficial L'Acerie
-- `sodep.svg` - desde `sodep.png`, sitio oficial SODEP
-- `galvamax.svg` - desde `galvamax.png`, sitio oficial Galvamax
-- `mura.svg` - desde `mura.jpg`, Guia Comercial Paraguaya
+- `ferropar.svg` - sitio oficial Ferropar
+- `lacerie.svg` - sitio oficial L'Acerie
+- `sodep.svg` - sitio oficial SODEP
+- `galvamax.svg` - sitio oficial Galvamax
+- `mura.svg` - Guia Comercial Paraguaya
 
 ## Reconstruido
 

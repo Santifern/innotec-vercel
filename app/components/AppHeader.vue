@@ -101,7 +101,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
         aria-label="Innotec 2026 - Inicio"
       >
         <img
-          src="/logo-innotec-blanco.png"
+          src="/logo-innotec-blanco.svg"
           alt="INNOTEC 2026"
           class="navbar-logo"
         >
@@ -142,7 +142,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
           aria-label="Hackathon"
         >
           <img
-            src="/logo-hackathon-navbar.png"
+            src="/logo-hackathon-navbar.svg"
             alt="Hackathon"
             class="navbar-hackathon-logo"
           >
