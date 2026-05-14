@@ -78,7 +78,7 @@ const fallbackPage = {
     ]
   },
   cta: {
-    title: '¿Listo para ser parte?',
+    title: '¿Listo para \nser parte?',
     description: 'Unete al congreso de tecnologia e innovacion mas importante del Paraguay estudiantil. Inscripcion abierta para estudiantes y profesionales.',
     command: '20 de agosto - Asuncion, Paraguay',
     links: [
@@ -180,7 +180,6 @@ function staggerMotion(index: number = 0) {
       <div class="hero-bg-grid" />
       <div class="hero-bg-glow hero-bg-glow--center" />
       <div class="hero-bg-glow hero-bg-glow--left" />
-      <WaveBackground class="hero-wave-background" />
 
       <!-- Neon floating particles -->
       <div class="neon-particle neon-particle--1" />
@@ -192,13 +191,16 @@ function staggerMotion(index: number = 0) {
 
       <div class="hero-container">
         <!-- Main logo -->
-        <div class="hero-logo-wrapper">
+        <Motion
+          v-bind="enterMotion(0.1)"
+          class="hero-logo-wrapper"
+        >
           <img
             src="/logo-innotec-blanco.svg"
             alt="INNOTEC"
             class="hero-logo"
           >
-        </div>
+        </Motion>
 
         <!-- Title -->
         <Motion
@@ -248,18 +250,6 @@ function staggerMotion(index: number = 0) {
           class="intro-content"
         >
           <div class="intro-heading-panel">
-            <div
-              class="intro-bulb"
-              aria-hidden="true"
-            >
-              <img
-                src="/foquito.png"
-                alt=""
-                class="intro-bulb-image"
-                loading="lazy"
-                decoding="async"
-              >
-            </div>
             <h2 class="section-title">
               ¿Qué es Innotec?
             </h2>
@@ -605,12 +595,6 @@ function staggerMotion(index: number = 0) {
   background: rgba(123, 138, 247, 0.08);
 }
 
-.hero-wave-background {
-  z-index: 1;
-  opacity: 0.92;
-  mix-blend-mode: screen;
-}
-
 @keyframes glow-breathe {
   0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
   50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
@@ -806,11 +790,26 @@ function staggerMotion(index: number = 0) {
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 0 20px rgba(25, 68, 240, 0.5));
+  animation: hero-logo-float 4.8s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform, filter;
 }
 
 @media (min-width: 768px) {
   .hero-logo {
     height: 80px;
+  }
+}
+
+@keyframes hero-logo-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    filter: drop-shadow(0 0 20px rgba(25, 68, 240, 0.5));
+  }
+
+  50% {
+    transform: translateY(-6px) scale(1.015);
+    filter: drop-shadow(0 0 28px rgba(55, 230, 241, 0.42));
   }
 }
 
@@ -1187,40 +1186,6 @@ function staggerMotion(index: number = 0) {
   isolation: isolate;
 }
 
-.intro-section::before {
-  content: '';
-  position: absolute;
-  left: -6vw;
-  right: -6vw;
-  top: clamp(-16rem, -18vw, -8rem);
-  z-index: 0;
-  height: calc(100% + clamp(30rem, 42vw, 44rem));
-  background:
-    radial-gradient(ellipse 86% 42% at 50% 32%, rgba(25, 68, 240, 0.13), rgba(25, 68, 240, 0.072) 42%, rgba(25, 68, 240, 0.028) 66%, transparent 90%),
-    radial-gradient(ellipse 72% 48% at 50% 38%, rgba(31, 82, 255, 0.085), rgba(25, 68, 240, 0.042) 42%, transparent 78%),
-    radial-gradient(ellipse 48% 58% at 24% 48%, rgba(31, 82, 255, 0.16), rgba(18, 51, 162, 0.072) 34%, transparent 72%),
-    radial-gradient(ellipse 68% 52% at 50% 44%, rgba(25, 68, 240, 0.072), rgba(25, 68, 240, 0.028) 42%, transparent 80%),
-    radial-gradient(ellipse 52% 58% at 62% 76%, rgba(25, 68, 240, 0.056), transparent 74%);
-  filter: blur(42px);
-  opacity: 0.58;
-  pointer-events: none;
-}
-
-.intro-section::after {
-  content: '';
-  position: absolute;
-  left: -6vw;
-  right: -6vw;
-  bottom: clamp(-22rem, -24vw, -12rem);
-  z-index: 0;
-  height: clamp(28rem, 44vw, 42rem);
-  background:
-    radial-gradient(ellipse 48% 58% at 22% 36%, rgba(31, 82, 255, 0.1), transparent 70%),
-    radial-gradient(ellipse 64% 58% at 54% 46%, rgba(25, 68, 240, 0.09), rgba(8, 17, 45, 0.03) 48%, transparent 78%);
-  filter: blur(32px);
-  pointer-events: none;
-}
-
 .intro-content {
   position: relative;
   display: grid;
@@ -1230,21 +1195,6 @@ function staggerMotion(index: number = 0) {
   margin: 0 auto;
   width: 100%;
   padding: 2rem 0.4rem;
-}
-
-.intro-content::before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  top: 50%;
-  left: -18rem;
-  width: 52rem;
-  height: 52rem;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(25, 68, 240, 0.34) 0%, rgba(25, 68, 240, 0.18) 34%, rgba(25, 68, 240, 0.07) 58%, transparent 76%);
-  filter: blur(34px);
-  transform: translateY(-50%);
-  pointer-events: none;
 }
 
 .intro-content .section-title {
@@ -1257,66 +1207,6 @@ function staggerMotion(index: number = 0) {
   gap: 1.65rem;
   align-content: center;
   isolation: isolate;
-}
-
-.intro-bulb {
-  position: absolute;
-  z-index: 0;
-  top: 50%;
-  left: clamp(-32rem, -36vw, -20rem);
-  width: clamp(45rem, 70vw, 64rem);
-  height: clamp(50rem, 75vw, 69rem);
-  transform: translateY(-52%);
-  pointer-events: none;
-  opacity: 0.8;
-  mix-blend-mode: screen;
-}
-
-.intro-bulb::before,
-.intro-bulb::after {
-  content: '';
-  position: absolute;
-  pointer-events: none;
-}
-
-.intro-bulb::before {
-  inset: 2% -1% 7%;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 49% 45%, rgba(49, 107, 255, 0.3), rgba(49, 107, 255, 0.13) 36%, transparent 72%);
-  filter: blur(54px);
-  opacity: 0.62;
-  mix-blend-mode: screen;
-}
-
-.intro-bulb::after {
-  inset: auto 4% 2%;
-  height: 42%;
-  background:
-    linear-gradient(180deg, rgba(8, 12, 22, 0), rgba(8, 12, 22, 0.26) 58%, rgba(8, 12, 22, 0.78));
-  filter: blur(18px);
-  opacity: 0.9;
-}
-
-.intro-bulb-image {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 51%;
-  transform: scale(1.2) translateY(2%);
-  opacity: 0.46;
-  filter:
-    blur(3px)
-    brightness(1.28)
-    saturate(1.28)
-    drop-shadow(0 0 38px rgba(49, 107, 255, 0.36))
-    drop-shadow(0 0 96px rgba(49, 107, 255, 0.22));
-  mix-blend-mode: screen;
-  -webkit-mask-image: radial-gradient(ellipse at 50% 52%, black 0%, black 52%, rgba(0, 0, 0, 0.55) 68%, transparent 86%);
-  mask-image: radial-gradient(ellipse at 50% 52%, black 0%, black 52%, rgba(0, 0, 0, 0.55) 68%, transparent 86%);
 }
 
 .intro-content .section-title {
@@ -1504,10 +1394,6 @@ function staggerMotion(index: number = 0) {
     gap: 2.25rem;
     transform: translateY(-0.25rem);
     padding: 1.5rem 1rem;
-  }
-
-  .intro-content::before {
-    top: 50%;
   }
 
   .intro-heading-panel {
@@ -1972,13 +1858,6 @@ function staggerMotion(index: number = 0) {
   margin: 0;
 }
 
-.intro-content::before {
-  left: clamp(-12rem, -14vw, -4rem);
-  width: clamp(28rem, 60vw, 48rem);
-  height: clamp(28rem, 60vw, 48rem);
-  opacity: 0.58;
-}
-
 .intro-text,
 .objectives-list {
   width: 100%;
@@ -2064,14 +1943,6 @@ function staggerMotion(index: number = 0) {
 }
 
 @media (max-width: 759px) {
-  .intro-bulb {
-    top: 32%;
-    left: -20rem;
-    width: 42rem;
-    height: 47rem;
-    opacity: 0.4;
-  }
-
   .intro-concept {
     min-height: 58px;
     font-size: 1rem;
