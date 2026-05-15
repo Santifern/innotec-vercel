@@ -237,77 +237,238 @@ function staggerMotion(index: number = 0) {
       </div>
     </section>
 
-    <!-- ¿Qué es Innotec? -->
+    <!-- Acerca del Congreso -->
     <section
       id="acerca"
-      class="innotec-section intro-section"
+      class="innotec-section acerca-section"
     >
-      <div class="section-container">
+      <div class="section-container acerca-container">
+        <!-- Bloque 1: Header -->
         <Motion
           v-bind="scrollMotion()"
-          class="intro-content"
+          class="acerca-header"
         >
-          <div class="intro-heading-panel">
-            <div
-              class="intro-bulb"
-              aria-hidden="true"
-            >
-              <img
-                src="/foquito.png"
-                alt=""
-                class="intro-bulb-image"
-                loading="lazy"
-                decoding="async"
-              >
-            </div>
-            <h2 class="section-title">
-              ¿Qué es Innotec?
-            </h2>
-            <div
-              class="intro-concepts"
-              aria-label="Conceptos clave de Innotec"
-            >
-              <div class="intro-concept">
-                <span
-                  class="intro-concept-key"
-                  aria-hidden="true"
-                >
-                  I
-                </span>
-                <span>Innovación</span>
-              </div>
-              <div class="intro-concept">
-                <span
-                  class="intro-concept-key"
-                  aria-hidden="true"
-                >
-                  C
-                </span>
-                <span>Colaboración</span>
-              </div>
-              <div class="intro-concept">
-                <span
-                  class="intro-concept-key"
-                  aria-hidden="true"
-                >
-                  A
-                </span>
-                <span>Liderazgo</span>
-              </div>
-            </div>
-          </div>
-          <div class="intro-text">
-            <p>
-              INNOTEC es el congreso anual organizado por estudiantes de la Facultad de Ciencias y Tecnología de la Universidad Católica "Nuestra Señora de la Asunción" de Paraguay.
-            </p>
-            <p>
-              Es un espacio que fomenta la innovación, la colaboración y el desarrollo de nuevas ideas y soluciones tecnológicas entre estudiantes y profesionales expertos en las áreas de Tecnología, Ingeniería, Arquitectura y Diseño. Ampliando sus horizontes y preparándolos para liderar el cambio en sus respectivas áreas.
-            </p>
-            <p>
-              Cada edición se enfoca en temáticas relevantes basados en la innovación y la tecnología, brindando una plataforma de aprendizaje, colaboración y desarrollo de soluciones innovadoras. El INNOTEC conecta a los estudiantes con expertos nacionales e internacionales.
-            </p>
-          </div>
+          <div class="acerca-title-line" />
+          <h2 class="acerca-title">
+            Acerca del Congreso
+          </h2>
+          <p class="acerca-lema">
+            "INNOVAR PARA TRANSFORMAR: Del conocimiento a la acción"
+          </p>
         </Motion>
+
+        <!-- Bloque 2: Descripción -->
+        <Motion
+          v-bind="scrollMotion(0.1)"
+          class="acerca-description-wrapper"
+        >
+          <p class="acerca-description-label">
+            ¿Por qué INNOTEC?
+          </p>
+          <p class="acerca-description">
+            Cada edición de INNOTEC propone un enfoque orientado a la acción: no solo escuchar, sino experimentar, conectar y llevar ideas al mundo real. El congreso reúne a estudiantes de ingeniería, arquitectura, diseño e informática con profesionales y referentes del sector, generando un espacio interdisciplinario donde el conocimiento académico se encuentra con los desafíos del mundo profesional.
+          </p>
+        </Motion>
+
+        <!-- Bloque 3: Cards de info práctica -->
+        <div class="acerca-info-grid">
+          <Motion v-bind="staggerMotion(0)">
+            <div class="acerca-info-card">
+              <div class="acerca-card-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect
+                    x="3"
+                    y="4"
+                    width="18"
+                    height="18"
+                    rx="2"
+                    ry="2"
+                  />
+                  <line
+                    x1="16"
+                    y1="2"
+                    x2="16"
+                    y2="6"
+                  />
+                  <line
+                    x1="8"
+                    y1="2"
+                    x2="8"
+                    y2="6"
+                  />
+                  <line
+                    x1="3"
+                    y1="10"
+                    x2="21"
+                    y2="10"
+                  />
+                </svg>
+              </div>
+              <h3 class="acerca-card-title">
+                Fechas y Horarios
+              </h3>
+              <div class="acerca-dates">
+                <div class="acerca-date-row">
+                  <span class="acerca-date-label">Jornada 1</span>
+                  <span class="acerca-date-value">Jueves 20 de agosto, 2026</span>
+                  <span class="acerca-date-time">8:00 – 21:30</span>
+                </div>
+                <div class="acerca-date-row">
+                  <span class="acerca-date-label">Jornada 2</span>
+                  <span class="acerca-date-value">Viernes 21 de agosto, 2026</span>
+                  <span class="acerca-date-time">8:00 – 18:00</span>
+                </div>
+              </div>
+            </div>
+          </Motion>
+
+          <Motion v-bind="staggerMotion(1)">
+            <div class="acerca-info-card">
+              <div class="acerca-card-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle
+                    cx="12"
+                    cy="10"
+                    r="3"
+                  />
+                </svg>
+              </div>
+              <h3 class="acerca-card-title">
+                Sede
+              </h3>
+              <p class="acerca-card-text">
+                Salón Bicentenario<br>Paseo La Galería<br>Asunción, Paraguay
+              </p>
+              <a
+                href="https://maps.google.com/?q=Paseo+La+Galeria+Asuncion+Paraguay"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="acerca-maps-btn"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line
+                    x1="10"
+                    y1="14"
+                    x2="21"
+                    y2="3"
+                  />
+                </svg>
+                Ver en Google Maps
+              </a>
+            </div>
+          </Motion>
+
+          <Motion v-bind="staggerMotion(2)">
+            <div class="acerca-info-card">
+              <div class="acerca-card-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle
+                    cx="9"
+                    cy="7"
+                    r="4"
+                  />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+              </div>
+              <h3 class="acerca-card-title">
+                ¿Para quién?
+              </h3>
+              <p class="acerca-card-text">
+                Estudiantes de ingeniería, arquitectura, diseño e informática de distintas universidades del Paraguay, y profesionales del sector tecnológico y creativo.
+              </p>
+            </div>
+          </Motion>
+        </div>
+
+        <!-- Separador -->
+        <div class="acerca-separator" />
+
+        <!-- Bloque 4: Ejes Temáticos -->
+        <Motion
+          v-bind="scrollMotion(0.05)"
+          class="acerca-ejes-header"
+        >
+          <h3 class="acerca-ejes-title">
+            Ejes Temáticos
+          </h3>
+        </Motion>
+
+        <div class="acerca-ejes-grid">
+          <Motion v-bind="staggerMotion(0)">
+            <div class="acerca-eje-card">
+              <span class="acerca-eje-num">01</span>
+              <h4 class="acerca-eje-title">
+                Tecnología Aplicada y Sistemas Inteligentes
+              </h4>
+              <p class="acerca-eje-desc">
+                Cómo las tecnologías actuales se transforman en soluciones concretas, conectando innovación con implementación real, prototipos y validación en escenarios reales adaptados al contexto local.
+              </p>
+            </div>
+          </Motion>
+
+          <Motion v-bind="staggerMotion(1)">
+            <div class="acerca-eje-card">
+              <span class="acerca-eje-num">02</span>
+              <h4 class="acerca-eje-title">
+                De la Teoría al Territorio
+              </h4>
+              <p class="acerca-eje-desc">
+                Vincular conocimiento con observación directa del territorio. Proyectos urbanos, criterios de diseño, planificación y gestión, decisiones y desafíos en la práctica.
+              </p>
+            </div>
+          </Motion>
+
+          <Motion v-bind="staggerMotion(2)">
+            <div class="acerca-eje-card">
+              <span class="acerca-eje-num">03</span>
+              <h4 class="acerca-eje-title">
+                Diseño, Innovación y Experiencia
+              </h4>
+              <p class="acerca-eje-desc">
+                El diseño como herramienta más allá de lo estético. Diseño centrado en el usuario, urbanismo táctico, arquitectura del futuro, vínculo entre lo conceptual y lo real.
+              </p>
+            </div>
+          </Motion>
+        </div>
       </div>
     </section>
 
@@ -2089,5 +2250,341 @@ function staggerMotion(index: number = 0) {
     width: min(8rem, 44vw);
     height: 2px;
   }
+}
+
+/* ===== ACERCA SECTION ===== */
+.acerca-section {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: clamp(4.5rem, 9vw, 7.5rem) clamp(1.25rem, 4vw, 3rem);
+}
+
+.acerca-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(25, 68, 240, 0.13), transparent 68%),
+    radial-gradient(ellipse 55% 40% at 85% 90%, rgba(123, 138, 247, 0.07), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.acerca-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+/* Header */
+.acerca-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.acerca-title-line {
+  width: 3.5rem;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #1944F0, #7B8AF7, transparent);
+  border-radius: 2px;
+  box-shadow: 0 0 14px rgba(25, 68, 240, 0.65);
+}
+
+.acerca-title {
+  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+  font-weight: 900;
+  color: #F3F6FE;
+  margin: 0;
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+}
+
+.acerca-lema {
+  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: clamp(0.95rem, 1.8vw, 1.18rem);
+  color: #CBD1FB;
+  margin: 0;
+  font-style: italic;
+  max-width: 54ch;
+  line-height: 1.55;
+  opacity: 0.88;
+}
+
+/* Descripción */
+.acerca-description-wrapper {
+  max-width: 70ch;
+  text-align: center;
+}
+
+.acerca-description-label {
+  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 900;
+  color: #7B8AF7;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  margin: 0 0 0.55rem;
+}
+
+.acerca-description {
+  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: 1.04rem;
+  line-height: 1.8;
+  color: rgba(203, 209, 251, 0.78);
+  margin: 0;
+}
+
+/* Info cards grid */
+.acerca-info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+  width: 100%;
+  align-items: stretch;
+}
+
+@media (min-width: 580px) {
+  .acerca-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .acerca-info-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.acerca-info-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 1.625rem 1.4rem;
+  background: linear-gradient(145deg, rgba(14, 21, 46, 0.72), rgba(8, 12, 22, 0.6));
+  border: 1px solid rgba(25, 68, 240, 0.22);
+  border-radius: 12px;
+  height: 100%;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.acerca-info-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  right: 1rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(123, 138, 247, 0.45), transparent);
+  pointer-events: none;
+}
+
+.acerca-info-card:hover {
+  border-color: rgba(25, 68, 240, 0.52);
+  box-shadow: 0 0 26px rgba(25, 68, 240, 0.16), 0 10px 28px rgba(0, 0, 0, 0.18);
+  transform: translateY(-3px);
+}
+
+.acerca-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: rgba(25, 68, 240, 0.12);
+  border: 1px solid rgba(25, 68, 240, 0.28);
+  border-radius: 10px;
+  color: #7B8AF7;
+  flex-shrink: 0;
+}
+
+.acerca-card-icon svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.acerca-card-title {
+  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: 0.975rem;
+  font-weight: 900;
+  color: #F3F6FE;
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.acerca-card-text {
+  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.68;
+  color: rgba(203, 209, 251, 0.72);
+  margin: 0;
+}
+
+.acerca-dates {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.acerca-date-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.08rem;
+  padding: 0.6rem 0.75rem;
+  background: rgba(25, 68, 240, 0.08);
+  border: 1px solid rgba(25, 68, 240, 0.16);
+  border-radius: 8px;
+}
+
+.acerca-date-label {
+  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 900;
+  color: #7B8AF7;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.acerca-date-value {
+  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: 0.875rem;
+  color: #F3F6FE;
+  font-weight: 400;
+}
+
+.acerca-date-time {
+  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: rgba(203, 209, 251, 0.58);
+}
+
+.acerca-maps-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.48rem 0.95rem;
+  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #7B8AF7;
+  background: rgba(25, 68, 240, 0.1);
+  border: 1px solid rgba(25, 68, 240, 0.28);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.acerca-maps-btn:hover {
+  color: #CBD1FB;
+  background: rgba(25, 68, 240, 0.2);
+  border-color: rgba(25, 68, 240, 0.52);
+  box-shadow: 0 0 12px rgba(25, 68, 240, 0.22);
+}
+
+/* Separador */
+.acerca-separator {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(25, 68, 240, 0.38), rgba(123, 138, 247, 0.22), transparent);
+}
+
+/* Ejes Temáticos */
+.acerca-ejes-header {
+  text-align: center;
+  width: 100%;
+}
+
+.acerca-ejes-title {
+  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: clamp(1.45rem, 3vw, 1.9rem);
+  font-weight: 900;
+  color: #F3F6FE;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.acerca-ejes-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  width: 100%;
+  align-items: stretch;
+}
+
+@media (min-width: 720px) {
+  .acerca-ejes-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.acerca-eje-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 1.625rem 1.4rem;
+  background: linear-gradient(145deg, rgba(11, 17, 38, 0.68), rgba(8, 12, 22, 0.58));
+  border: 1px solid rgba(25, 68, 240, 0.18);
+  border-radius: 12px;
+  transition: border-color 0.28s ease, box-shadow 0.28s ease;
+  overflow: hidden;
+  height: 100%;
+}
+
+.acerca-eje-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  right: 1rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(25, 68, 240, 0.35), transparent);
+  pointer-events: none;
+}
+
+.acerca-eje-card:hover {
+  border-color: #1944F0;
+  box-shadow:
+    0 0 0 1px rgba(25, 68, 240, 0.28),
+    0 0 22px rgba(25, 68, 240, 0.18),
+    0 8px 24px rgba(0, 0, 0, 0.16);
+}
+
+.acerca-eje-num {
+  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: rgba(25, 68, 240, 0.22);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  display: block;
+}
+
+.acerca-eje-title {
+  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: 0.975rem;
+  font-weight: 900;
+  color: #F3F6FE;
+  margin: 0;
+  line-height: 1.32;
+}
+
+.acerca-eje-desc {
+  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: 0.86rem;
+  line-height: 1.7;
+  color: rgba(203, 209, 251, 0.65);
+  margin: 0;
 }
 </style>

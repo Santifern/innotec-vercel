@@ -16,7 +16,7 @@ const items = computed(() => [
   },
   {
     label: 'Acerca de',
-    to: undefined,
+    to: '#acerca',
     exactHash: true,
     active: false
   },
