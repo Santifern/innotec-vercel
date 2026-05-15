@@ -1,5 +1,5 @@
 import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'vue-bundle-renderer/runtime';
-import { c as buildAssetsURL, p as publicAssetsURL, u as useRuntimeConfig, g as getResponseStatusText, e as getResponseStatus, f as encodePath, h as defineRenderHandler, i as getQuery, j as createError, d as destr, k as getRouteRules, l as joinURL, b as useNitroApp } from '../_/nitro.mjs';
+import { c as buildAssetsURL, u as useRuntimeConfig, g as getResponseStatusText, e as getResponseStatus, f as defineRenderHandler, p as publicAssetsURL, h as getQuery, i as createError, d as destr, j as getRouteRules, k as joinURL, b as useNitroApp } from '../_/nitro.mjs';
 import { renderToString } from 'vue/server-renderer';
 import { createHead as createHead$1, propsToString, renderSSRHead } from 'unhead/server';
 import { stringify, uneval } from 'devalue';
@@ -103,26 +103,22 @@ const appSpaLoaderAttrs = {"id":"__nuxt-loader"};
 
 const appId = "nuxt-app";
 
-// @ts-expect-error private property consumed by vite-generated url helpers
-globalThis.__buildAssetsURL = buildAssetsURL;
-// @ts-expect-error private property consumed by vite-generated url helpers
-globalThis.__publicAssetsURL = publicAssetsURL;
 const APP_ROOT_OPEN_TAG = `<${appRootTag}${propsToString(appRootAttrs)}>`;
 const APP_ROOT_CLOSE_TAG = `</${appRootTag}>`;
 // @ts-expect-error file will be produced after app build
 const getServerEntry = () => import('../build/server.mjs').then((r) => r.default || r);
 // @ts-expect-error file will be produced after app build
 const getPrecomputedDependencies = () => import('../build/client.precomputed.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
-
+// -- SSR Renderer --
 const getSSRRenderer = lazyCachedFunction(async () => {
-	
+	// Load server bundle
 	const createSSRApp = await getServerEntry();
 	if (!createSSRApp) {
 		throw new Error("Server bundle is not available");
 	}
-	
+	// Load precomputed dependencies
 	const precomputed = await getPrecomputedDependencies();
-	
+	// Create renderer
 	const renderer = createRenderer(createSSRApp, {
 		precomputed,
 		manifest: undefined,
@@ -135,7 +131,7 @@ const getSSRRenderer = lazyCachedFunction(async () => {
 	}
 	return renderer;
 });
-
+// -- SPA Renderer --
 const getSPARenderer = lazyCachedFunction(async () => {
 	const precomputed = await getPrecomputedDependencies();
 	// @ts-expect-error virtual file
@@ -148,7 +144,7 @@ const getSPARenderer = lazyCachedFunction(async () => {
 			return appTemplate + loaderTemplate;
 		}
 	});
-	
+	// Create SPA renderer and cache the result for all requests
 	const renderer = createRenderer(() => () => {}, {
 		precomputed,
 		manifest: undefined,
@@ -217,7 +213,11 @@ function renderPayloadJsonScript(opts) {
 	const config = uneval(opts.ssrContext.config);
 	return [payload, { innerHTML: `window.__NUXT__={};window.__NUXT__.config=${config}` }];
 }
-
+/**
+* Encode forward slashes as unicode escape sequences to prevent
+* Google from treating them as internal links and trying to crawl them.
+* @see https://github.com/nuxt/nuxt/issues/24175
+*/
 function encodeForwardSlashes(str) {
 	return str.replaceAll("/", "\\u002F");
 }
@@ -239,17 +239,9 @@ const unheadOptions = {
   disableDefaults: true,
 };
 
-function encodeEventPath(path) {
-	const queryIndex = path.indexOf("?");
-	if (queryIndex === -1) {
-		return encodePath(path);
-	}
-	return encodePath(path.slice(0, queryIndex)) + path.slice(queryIndex);
-}
 function createSSRContext(event) {
-	const url = encodeEventPath(event.path);
 	const ssrContext = {
-		url,
+		url: event.path,
 		event,
 		runtimeConfig: useRuntimeConfig(event),
 		noSSR: event.context.nuxt?.noSSR || (false),
@@ -296,7 +288,7 @@ const PAYLOAD_URL_RE = /^[^?]*\/_payload.json(?:\?.*)?$/ ;
 const PAYLOAD_FILENAME = "_payload.json" ;
 const handler = defineRenderHandler(async (event) => {
 	const nitroApp = useNitroApp();
-	
+	// Whether we're rendering an error page
 	const ssrError = event.path.startsWith("/__nuxt_error") ? getQuery(event) : null;
 	if (ssrError && !("__unenv__" in event.node.req)) {
 		throw createError({
@@ -305,16 +297,16 @@ const handler = defineRenderHandler(async (event) => {
 			message: "Page Not Found: /__nuxt_error"
 		});
 	}
-	
+	// Initialize ssr context
 	const ssrContext = createSSRContext(event);
-	
+	// needed for hash hydration plugin to work
 	const headEntryOptions = { mode: "server" };
 	ssrContext.head.push(appHead, headEntryOptions);
 	if (ssrError) {
-		
+		// eslint-disable-next-line @typescript-eslint/no-deprecated
 		const status = ssrError.status || ssrError.statusCode;
 		if (status) {
-			
+			// eslint-disable-next-line @typescript-eslint/no-deprecated
 			ssrError.status = ssrError.statusCode = Number.parseInt(status);
 		}
 		if (typeof ssrError.data === "string") {
@@ -324,13 +316,13 @@ const handler = defineRenderHandler(async (event) => {
 		}
 		setSSRError(ssrContext, ssrError);
 	}
-	
+	// Get route options (for `ssr: false`, `isr`, `cache` and `noScripts`)
 	const routeOptions = getRouteRules(event);
-	
+	// Whether we are prerendering route or using ISR/SWR caching
 	const _PAYLOAD_EXTRACTION = !ssrContext.noSSR && (NUXT_RUNTIME_PAYLOAD_EXTRACTION);
-	
-	
-	
+	// When NUXT_PAYLOAD_INLINE is true (payloadExtraction: 'client'), we inline the full payload
+	// in the HTML to avoid a separate _payload.json fetch on initial load (which would trigger a
+	// second render or lambda invocation). The _payload.json endpoint still works for client-side nav.
 	const _PAYLOAD_INLINE = !_PAYLOAD_EXTRACTION || NUXT_PAYLOAD_INLINE;
 	const isRenderingPayload = (_PAYLOAD_EXTRACTION || false) && PAYLOAD_URL_RE.test(ssrContext.url);
 	if (isRenderingPayload) {
@@ -342,7 +334,7 @@ const handler = defineRenderHandler(async (event) => {
 		ssrContext.noSSR = true;
 	}
 	const payloadURL = _PAYLOAD_EXTRACTION ? joinURL(ssrContext.runtimeConfig.app.cdnURL || ssrContext.runtimeConfig.app.baseURL, ssrContext.url.replace(/\?.*$/, ""), PAYLOAD_FILENAME) + "?" + ssrContext.runtimeConfig.app.buildId : undefined;
-	
+	// Render app
 	const renderer = await getRenderer(ssrContext);
 	{
 		for (const id of entryIds) {
@@ -350,41 +342,41 @@ const handler = defineRenderHandler(async (event) => {
 		}
 	}
 	const _rendered = await renderer.renderToString(ssrContext).catch(async (error) => {
-		
-		
+		// We use error to bypass full render if we have an early response we can make
+		// TODO: remove _renderResponse in nuxt v5
 		if ((ssrContext["~renderResponse"] || ssrContext._renderResponse) && error.message === "skipping render") {
 			return {};
 		}
-		
+		// Use explicitly thrown error in preference to subsequent rendering errors
 		const _err = !ssrError && ssrContext.payload?.error || error;
 		await ssrContext.nuxt?.hooks.callHook("app:error", _err);
 		throw _err;
 	});
-	
-	
+	// Render inline styles
+	// TODO: remove _renderResponse in nuxt v5
 	const inlinedStyles = !ssrContext["~renderResponse"] && !ssrContext._renderResponse && !isRenderingPayload ? await renderInlineStyles(ssrContext.modules ?? []) : [];
 	await ssrContext.nuxt?.hooks.callHook("app:rendered", {
 		ssrContext,
 		renderResult: _rendered
 	});
 	if (ssrContext["~renderResponse"] || ssrContext._renderResponse) {
-		
+		// TODO: remove _renderResponse in nuxt v5
 		return ssrContext["~renderResponse"] || ssrContext._renderResponse;
 	}
-	
+	// Handle errors
 	if (ssrContext.payload?.error && !ssrError) {
 		throw ssrContext.payload.error;
 	}
-	
+	// Directly render payload routes
 	if (isRenderingPayload) {
 		const response = renderPayloadResponse(ssrContext);
 		return response;
 	}
 	const NO_SCRIPTS = routeOptions.noScripts;
-	
+	// Setup head
 	const { styles, scripts } = getRequestDependencies(ssrContext, renderer.rendererContext);
-	
-	
+	// 1. Preload payloads and app manifest
+	// Skip preload when inlining full payload in HTML (no separate fetch needed for initial load)
 	if (_PAYLOAD_EXTRACTION && !_PAYLOAD_INLINE && !NO_SCRIPTS) {
 		ssrContext.head.push({ link: [{
 			rel: "preload",
@@ -393,15 +385,15 @@ const handler = defineRenderHandler(async (event) => {
 			href: payloadURL
 		} ] }, headEntryOptions);
 	}
-	
+	// 2. Styles
 	if (inlinedStyles.length) {
 		ssrContext.head.push({ style: inlinedStyles });
 	}
 	const link = [];
 	for (const resource of Object.values(styles)) {
-		
-		
-		
+		// Add CSS links in <head> for CSS files
+		// - in production
+		// - in dev mode when not rendering an island
 		link.push({
 			rel: "stylesheet",
 			href: renderer.rendererContext.buildAssetsURL(resource.file),
@@ -412,9 +404,9 @@ const handler = defineRenderHandler(async (event) => {
 		ssrContext.head.push({ link }, headEntryOptions);
 	}
 	if (!NO_SCRIPTS) {
-		
-		
-		
+		// 4. Resource Hints
+		// Remove lazy hydrated modules from ssrContext.modules so they don't get preloaded
+		// (CSS links are already added above, this only affects JS preloads)
 		if (ssrContext["~lazyHydratedModules"]) {
 			for (const id of ssrContext["~lazyHydratedModules"]) {
 				ssrContext.modules?.delete(id);
@@ -422,7 +414,7 @@ const handler = defineRenderHandler(async (event) => {
 		}
 		ssrContext.head.push({ link: getPreloadLinks(ssrContext, renderer.rendererContext) }, headEntryOptions);
 		ssrContext.head.push({ link: getPrefetchLinks(ssrContext, renderer.rendererContext) }, headEntryOptions);
-		
+		// 5. Payloads
 		ssrContext.head.push({ script: _PAYLOAD_INLINE ? renderPayloadJsonScript({
 			ssrContext,
 			data: ssrContext.payload
@@ -432,26 +424,23 @@ const handler = defineRenderHandler(async (event) => {
 			src: payloadURL
 		})  }, {
 			...headEntryOptions,
-			
 			tagPosition: "bodyClose",
 			tagPriority: "high"
 		});
 	}
-	
+	// 6. Scripts
 	if (!routeOptions.noScripts) {
 		const tagPosition = "head";
 		ssrContext.head.push({ script: Object.values(scripts).map((resource) => ({
 			type: resource.module ? "module" : null,
 			src: renderer.rendererContext.buildAssetsURL(resource.file),
 			defer: resource.module ? null : true,
-			
-			
 			tagPosition,
 			crossorigin: ""
 		})) }, headEntryOptions);
 	}
 	const { headTags, bodyTags, bodyTagsOpen, htmlAttrs, bodyAttrs } = await renderSSRHead(ssrContext.head, renderSSRHeadOptions);
-	
+	// Create render context
 	const htmlContext = {
 		htmlAttrs: htmlAttrs ? [htmlAttrs] : [],
 		head: normalizeChunks([headTags]),
@@ -460,9 +449,9 @@ const handler = defineRenderHandler(async (event) => {
 		body: [_rendered.html, APP_TELEPORT_OPEN_TAG + (HAS_APP_TELEPORTS ? joinTags([ssrContext.teleports?.[`#${appTeleportAttrs.id}`]]) : "") + APP_TELEPORT_CLOSE_TAG],
 		bodyAppend: [bodyTags]
 	};
-	
+	// Allow hooking into the rendered result
 	await nitroApp.hooks.callHook("render:html", htmlContext, { event });
-	
+	// Construct HTML response
 	return {
 		body: renderHTMLDocument(htmlContext),
 		statusCode: getResponseStatus(event),

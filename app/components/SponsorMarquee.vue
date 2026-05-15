@@ -71,13 +71,13 @@ const sponsorLogos = [
 
 <template>
   <section
-    class="sponsor-marquee pb-6 pt-24 md:pb-8 md:pt-32"
+    class="sponsor-marquee pb-6 pt-10 md:pb-8 md:pt-14"
     aria-labelledby="sponsor-marquee-title"
   >
     <div class="mx-auto w-full max-w-7xl px-5 sm:px-8">
       <Motion
         v-bind="scrollMotion()"
-        class="mb-16"
+        class="mb-10 md:mb-12"
       >
         <h2
           id="sponsor-marquee-title"
