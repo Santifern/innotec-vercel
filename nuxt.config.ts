@@ -26,7 +26,7 @@ export default defineNuxtConfig({
     prerender: {
       routes: [
         '/',
-        '/inscripciones'
+        '/hackathon/inscripciones'
       ]
     }
   },
