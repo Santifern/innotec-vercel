@@ -4,36 +4,18 @@ definePageMeta({
 })
 
 useSeoMeta({
-  title: 'Inscripciones - INNOTEC 2026',
-  description: 'Inscripciones para INNOTEC 2026 y Hackathon 2026.'
+  title: 'Inscripcion INNOTEC 2026',
+  description: 'Formulario de inscripcion para participar de INNOTEC 2026.'
 })
 
-const registrationOptions = [
-  {
-    id: 'innotec',
-    eyebrow: 'Congreso',
-    title: 'INNOTEC 2026',
-    description: 'Registro para participar del congreso, sus charlas, talleres y visitas tecnicas.',
-    date: '20 de agosto, 2026',
-    cost: 'Costo pendiente de confirmacion',
-    formUrl: ''
-  },
-  {
-    id: 'hackathon',
-    eyebrow: 'Competencia',
-    title: 'Hackathon 2026',
-    description: 'Registro para equipos y participantes del hackathon asociado a INNOTEC 2026.',
-    date: 'Fecha pendiente de confirmacion',
-    cost: 'Costo pendiente de confirmacion',
-    formUrl: ''
-  }
-] as const
-
-const activeRegistrationId = ref<(typeof registrationOptions)[number]['id']>('innotec')
-
-const activeRegistration = computed(() => {
-  return registrationOptions.find(option => option.id === activeRegistrationId.value) ?? registrationOptions[0]
-})
+const registration = {
+  eyebrow: 'Congreso',
+  title: 'Inscripcion INNOTEC 2026',
+  description: 'Completa el formulario para registrarte al congreso, sus charlas, talleres y visitas tecnicas.',
+  date: '20 de agosto, 2026',
+  cost: 'Costo pendiente de confirmacion',
+  formUrl: ''
+} as const
 
 function getGoogleFormEmbedUrl(url: string) {
   if (!url) {
@@ -55,20 +37,20 @@ function getGoogleFormEmbedUrl(url: string) {
     <section class="registration-hero">
       <div class="registration-shell">
         <NuxtLink
-          to="/"
+          to="/#inicio"
           class="registration-back-link"
         >
-          <span aria-hidden="true">←</span>
+          <span aria-hidden="true">&lt;-</span>
           Volver al inicio
         </NuxtLink>
 
         <div class="registration-heading">
           <p class="registration-kicker">
-            Inscripciones
+            {{ registration.eyebrow }}
           </p>
-          <h1>Elegi tu modalidad de registro</h1>
+          <h1>{{ registration.title }}</h1>
           <p>
-            Selecciona INNOTEC o Hackathon para completar el formulario correspondiente.
+            {{ registration.description }}
           </p>
         </div>
       </div>
@@ -76,77 +58,49 @@ function getGoogleFormEmbedUrl(url: string) {
 
     <section class="registration-content">
       <div class="registration-shell registration-layout">
-        <aside
-          class="registration-options"
-          aria-label="Tipos de inscripcion"
-        >
-          <button
-            v-for="option in registrationOptions"
-            :key="option.id"
-            type="button"
-            class="registration-option"
-            :class="{ active: activeRegistrationId === option.id }"
-            @click="activeRegistrationId = option.id"
-          >
-            <span class="registration-option-eyebrow">{{ option.eyebrow }}</span>
-            <span class="registration-option-title">{{ option.title }}</span>
-            <span class="registration-option-description">{{ option.description }}</span>
-          </button>
-        </aside>
-
-        <div class="registration-detail">
-          <div class="registration-summary">
+        <div class="registration-summary">
+          <dl class="registration-facts">
             <div>
-              <p class="registration-kicker">
-                {{ activeRegistration.eyebrow }}
-              </p>
-              <h2>{{ activeRegistration.title }}</h2>
-              <p>{{ activeRegistration.description }}</p>
+              <dt>Fecha</dt>
+              <dd>{{ registration.date }}</dd>
             </div>
-
-            <dl class="registration-facts">
-              <div>
-                <dt>Fecha</dt>
-                <dd>{{ activeRegistration.date }}</dd>
-              </div>
-              <div>
-                <dt>Costo</dt>
-                <dd>{{ activeRegistration.cost }}</dd>
-              </div>
-            </dl>
-          </div>
-
-          <div class="registration-form-frame">
-            <iframe
-              v-if="activeRegistration.formUrl"
-              :src="getGoogleFormEmbedUrl(activeRegistration.formUrl)"
-              :title="`Formulario de inscripcion - ${activeRegistration.title}`"
-              loading="lazy"
-            />
-
-            <div
-              v-else
-              class="registration-form-placeholder"
-            >
-              <p class="registration-placeholder-title">
-                Formulario pendiente
-              </p>
-              <p>
-                El formulario de Google para {{ activeRegistration.title }} se publicara en este espacio.
-              </p>
+            <div>
+              <dt>Costo</dt>
+              <dd>{{ registration.cost }}</dd>
             </div>
-          </div>
-
-          <a
-            v-if="activeRegistration.formUrl"
-            :href="activeRegistration.formUrl"
-            class="registration-external-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Abrir formulario en otra pestana
-          </a>
+          </dl>
         </div>
+
+        <div class="registration-form-frame">
+          <iframe
+            v-if="registration.formUrl"
+            :src="getGoogleFormEmbedUrl(registration.formUrl)"
+            title="Formulario de inscripcion INNOTEC 2026"
+            loading="lazy"
+          />
+
+          <div
+            v-else
+            class="registration-form-placeholder"
+          >
+            <p class="registration-placeholder-title">
+              Formulario pendiente
+            </p>
+            <p>
+              El formulario de Google para INNOTEC 2026 se publicara en este espacio.
+            </p>
+          </div>
+        </div>
+
+        <a
+          v-if="registration.formUrl"
+          :href="registration.formUrl"
+          class="registration-external-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Abrir formulario en otra pestana
+        </a>
       </div>
     </section>
   </div>
@@ -157,13 +111,13 @@ function getGoogleFormEmbedUrl(url: string) {
   min-height: 100vh;
   background:
     radial-gradient(ellipse at 18% 10%, rgba(25, 68, 240, 0.24), transparent 34%),
-    radial-gradient(ellipse at 82% 18%, rgba(217, 70, 239, 0.14), transparent 32%),
+    radial-gradient(ellipse at 82% 18%, rgba(55, 230, 241, 0.1), transparent 32%),
     #080C16;
   color: #F3F6FE;
 }
 
 .registration-shell {
-  width: min(100%, 1120px);
+  width: min(100%, 1040px);
   margin-inline: auto;
   padding-inline: clamp(1.25rem, 4vw, 2rem);
 }
@@ -190,7 +144,7 @@ function getGoogleFormEmbedUrl(url: string) {
 }
 
 .registration-heading {
-  max-width: 760px;
+  max-width: 780px;
 }
 
 .registration-kicker {
@@ -203,21 +157,16 @@ function getGoogleFormEmbedUrl(url: string) {
   text-transform: uppercase;
 }
 
-.registration-heading h1,
-.registration-summary h2 {
+.registration-heading h1 {
   margin: 0;
   font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: clamp(2.75rem, 8vw, 5.7rem);
   font-weight: 900;
   line-height: 1;
   letter-spacing: 0;
 }
 
-.registration-heading h1 {
-  font-size: clamp(2.9rem, 8vw, 5.8rem);
-}
-
-.registration-heading p:last-child,
-.registration-summary p {
+.registration-heading p:last-child {
   margin: 1.1rem 0 0;
   max-width: 640px;
   color: rgba(224, 229, 255, 0.82);
@@ -232,79 +181,15 @@ function getGoogleFormEmbedUrl(url: string) {
 
 .registration-layout {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-}
-
-.registration-options {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.85rem;
-}
-
-.registration-option {
-  display: grid;
-  gap: 0.45rem;
-  min-height: 9.25rem;
-  padding: 1.1rem;
-  color: inherit;
-  text-align: left;
-  background:
-    linear-gradient(135deg, rgba(16, 45, 122, 0.46), rgba(8, 20, 54, 0.54)),
-    rgba(7, 12, 28, 0.62);
-  border: 1px solid rgba(38, 117, 255, 0.28);
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: inset 0 1px 0 rgba(243, 246, 254, 0.06);
-  transition: border-color 0.24s ease, box-shadow 0.24s ease, transform 0.24s ease;
-}
-
-.registration-option:hover,
-.registration-option.active {
-  border-color: rgba(55, 230, 241, 0.62);
-  box-shadow: 0 0 28px rgba(25, 68, 240, 0.22), inset 0 1px 0 rgba(243, 246, 254, 0.08);
-  transform: translateY(-2px);
-}
-
-.registration-option-eyebrow {
-  color: #67A4FF;
-  font-size: 0.78rem;
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.registration-option-title {
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 1.35rem;
-  font-weight: 900;
-  line-height: 1.1;
-}
-
-.registration-option-description {
-  color: rgba(203, 209, 251, 0.78);
-  font-size: 0.95rem;
-  line-height: 1.45;
-}
-
-.registration-detail {
-  display: grid;
   gap: 1rem;
-  min-width: 0;
 }
 
 .registration-summary {
-  display: grid;
-  gap: 1.25rem;
   padding: clamp(1.25rem, 3vw, 1.6rem);
   background: rgba(13, 20, 40, 0.7);
   border: 1px solid rgba(25, 68, 240, 0.24);
   border-radius: 8px;
   backdrop-filter: blur(18px);
-}
-
-.registration-summary h2 {
-  font-size: clamp(2rem, 4vw, 3.25rem);
 }
 
 .registration-facts {
@@ -389,25 +274,8 @@ function getGoogleFormEmbedUrl(url: string) {
 }
 
 @media (min-width: 760px) {
-  .registration-options {
+  .registration-facts {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .registration-summary {
-    grid-template-columns: minmax(0, 1fr) minmax(15rem, 0.42fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .registration-layout {
-    grid-template-columns: minmax(17rem, 0.34fr) minmax(0, 0.66fr);
-    align-items: start;
-  }
-
-  .registration-options {
-    position: sticky;
-    top: 6.5rem;
-    grid-template-columns: 1fr;
   }
 }
 </style>
