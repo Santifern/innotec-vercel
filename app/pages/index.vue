@@ -94,7 +94,8 @@ const fallbackPage = {
 const { data: page } = await useAsyncData('index', async () => {
   return await queryCollection('content').first() ?? fallbackPage
 }, {
-  default: () => fallbackPage
+  default: () => fallbackPage,
+  lazy: true
 })
 
 const title = page.value?.seo?.title || page.value?.title
@@ -192,7 +193,7 @@ function staggerMotion(index: number = 0) {
       <div class="hero-container">
         <!-- Main logo -->
         <Motion
-          v-bind="enterMotion(0.1)"
+          v-bind="enterMotion(0.05)"
           class="hero-logo-wrapper"
         >
           <img
@@ -245,59 +246,46 @@ function staggerMotion(index: number = 0) {
       class="innotec-section intro-section"
     >
       <div class="section-container">
-        <Motion
-          v-bind="scrollMotion()"
-          class="intro-content"
-        >
-          <div class="intro-heading-panel">
-            <h2 class="section-title">
+        <div class="intro-split">
+          <!-- LEFT: title + text -->
+          <Motion
+            v-bind="scrollMotion()"
+            class="intro-left"
+          >
+            <h2 class="section-title intro-title">
               ¿Qué es Innotec?
             </h2>
-            <div
-              class="intro-concepts"
-              aria-label="Conceptos clave de Innotec"
-            >
-              <div class="intro-concept">
-                <span
-                  class="intro-concept-key"
-                  aria-hidden="true"
-                >
-                  I
-                </span>
-                <span>Innovación</span>
-              </div>
-              <div class="intro-concept">
-                <span
-                  class="intro-concept-key"
-                  aria-hidden="true"
-                >
-                  C
-                </span>
-                <span>Colaboración</span>
-              </div>
-              <div class="intro-concept">
-                <span
-                  class="intro-concept-key"
-                  aria-hidden="true"
-                >
-                  A
-                </span>
-                <span>Liderazgo</span>
-              </div>
+            <div class="intro-text">
+              <p>
+                INNOTEC es el congreso anual organizado por estudiantes de la Facultad de Ciencias y Tecnología de la Universidad Católica "Nuestra Señora de la Asunción" de Paraguay.
+              </p>
+              <p>
+                Es un espacio que fomenta la innovación, la colaboración y el desarrollo de nuevas ideas y soluciones tecnológicas entre estudiantes y profesionales expertos en las áreas de Tecnología, Ingeniería, Arquitectura y Diseño. Ampliando sus horizontes y preparándolos para liderar el cambio en sus respectivas áreas.
+              </p>
+              <p>
+                Cada edición se enfoca en temáticas relevantes basados en la innovación y la tecnología, brindando una plataforma de aprendizaje, colaboración y desarrollo de soluciones innovadoras. El INNOTEC conecta a los estudiantes con expertos nacionales e internacionales.
+              </p>
             </div>
-          </div>
-          <div class="intro-text">
-            <p>
-              INNOTEC es el congreso anual organizado por estudiantes de la Facultad de Ciencias y Tecnología de la Universidad Católica "Nuestra Señora de la Asunción" de Paraguay.
-            </p>
-            <p>
-              Es un espacio que fomenta la innovación, la colaboración y el desarrollo de nuevas ideas y soluciones tecnológicas entre estudiantes y profesionales expertos en las áreas de Tecnología, Ingeniería, Arquitectura y Diseño. Ampliando sus horizontes y preparándolos para liderar el cambio en sus respectivas áreas.
-            </p>
-            <p>
-              Cada edición se enfoca en temáticas relevantes basados en la innovación y la tecnología, brindando una plataforma de aprendizaje, colaboración y desarrollo de soluciones innovadoras. El INNOTEC conecta a los estudiantes con expertos nacionales e internacionales.
-            </p>
-          </div>
-        </Motion>
+          </Motion>
+
+          <!-- RIGHT: image -->
+          <Motion
+            v-bind="scrollMotion(0.18)"
+            class="intro-image-col"
+          >
+            <div class="intro-image-frame">
+              <div class="intro-image-glow" />
+              <img
+                src="/innotec-page.webp"
+                alt="Evento INNOTEC — congreso de tecnología e innovación"
+                class="intro-image"
+                loading="lazy"
+                decoding="async"
+              >
+              <div class="intro-image-overlay" />
+            </div>
+          </Motion>
+        </div>
       </div>
     </section>
 
@@ -790,26 +778,11 @@ function staggerMotion(index: number = 0) {
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 0 20px rgba(25, 68, 240, 0.5));
-  animation: hero-logo-float 4.8s ease-in-out infinite;
-  transform-origin: center;
-  will-change: transform, filter;
 }
 
 @media (min-width: 768px) {
   .hero-logo {
     height: 80px;
-  }
-}
-
-@keyframes hero-logo-float {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-    filter: drop-shadow(0 0 20px rgba(25, 68, 240, 0.5));
-  }
-
-  50% {
-    transform: translateY(-6px) scale(1.015);
-    filter: drop-shadow(0 0 28px rgba(55, 230, 241, 0.42));
   }
 }
 
@@ -898,41 +871,59 @@ function staggerMotion(index: number = 0) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.75rem;
+  gap: 0.5rem;
+  padding: 0.8rem 1.85rem;
   font-size: 0.9375rem;
-  font-weight: 400;
-  border-radius: 10px;
+  font-weight: 600;
+  border-radius: 100px;
   text-decoration: none;
   cursor: pointer;
+  border: none;
   transform-origin: center;
-  transition: transform 0.28s ease, background 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease, color 0.28s ease;
+  transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
   letter-spacing: 0.01em;
 }
 
+.hero-btn-arrow {
+  display: inline-block;
+  font-style: normal;
+  font-size: 1em;
+  line-height: 1;
+  transition: transform 0.22s ease;
+}
+
+.hero-btn:hover .hero-btn-arrow {
+  transform: translateX(5px);
+}
+
 .hero-btn--primary {
-  color: #F3F6FE;
-  background: linear-gradient(135deg, #1235C8 0%, #1944F0 46%, #37E6F1 100%);
-  border: 1px solid rgba(55, 230, 241, 0.46);
-  box-shadow: 0 0 25px rgba(25, 68, 240, 0.45), 0 0 0 rgba(55, 230, 241, 0);
+  color: #ffffff;
+  background: #2d55f5;
+  box-shadow: 0 4px 22px rgba(25, 68, 240, 0.42), 0 1px 3px rgba(0, 0, 0, 0.18);
 }
 
 .hero-btn--primary:hover {
-  background: linear-gradient(135deg, #1944F0 0%, #2B45F3 48%, #37E6F1 100%);
-  box-shadow: 0 0 18px rgba(55, 230, 241, 0.72), 0 0 44px rgba(25, 68, 240, 0.7), 0 0 72px rgba(55, 230, 241, 0.2);
-  transform: translateY(-3px) scale(1.035);
-  border-color: rgba(55, 230, 241, 0.82);
+  background: #3a63ff;
+  box-shadow: 0 6px 32px rgba(25, 68, 240, 0.62), 0 2px 8px rgba(0, 0, 0, 0.22);
+  transform: translateY(-2px) scale(1.025);
+}
+
+.hero-btn--primary:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 12px rgba(25, 68, 240, 0.38);
 }
 
 .hero-btn--secondary {
-  color: rgba(203, 209, 251, 0.85);
-  background: rgba(25, 68, 240, 0.1);
-  border: 1px solid rgba(25, 68, 240, 0.3);
+  color: rgba(203, 209, 251, 0.9);
+  background: rgba(25, 68, 240, 0.12);
+  border: 1.5px solid rgba(25, 68, 240, 0.35);
+  border-radius: 100px;
 }
 
 .hero-btn--secondary:hover {
   color: #F3F6FE;
-  background: rgba(25, 68, 240, 0.18);
-  border-color: rgba(25, 68, 240, 0.55);
+  background: rgba(25, 68, 240, 0.2);
+  border-color: rgba(55, 100, 255, 0.6);
   transform: translateY(-2px);
 }
 
@@ -1002,7 +993,126 @@ function staggerMotion(index: number = 0) {
   margin: 0 2rem;
 }
 
-/* ===== FEATURES GRID ===== */
+/* ===== ¿QUÉ ES INNOTEC? — SPLIT LAYOUT ===== */
+.intro-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+@media (min-width: 860px) {
+  .intro-split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: stretch;
+  }
+}
+
+/* Left column */
+.intro-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: clamp(1.5rem, 3vw, 2rem);
+}
+
+.intro-title {
+  margin: 0 !important;
+  max-width: 9.5ch;
+  font-size: clamp(3.25rem, 10vw, 5.55rem);
+  line-height: 0.95;
+}
+
+@media (min-width: 768px) {
+  .intro-title {
+    font-size: clamp(4.2rem, 6.8vw, 5.55rem);
+  }
+}
+
+.intro-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.intro-text p {
+  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: rgba(203, 209, 251, 0.72);
+  margin: 0;
+}
+
+/* Right column — image */
+.intro-image-col {
+  --intro-image-offset: 0rem;
+  --intro-image-extra: 0rem;
+
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  padding-top: var(--intro-image-offset);
+}
+
+.intro-image-frame {
+  position: relative;
+  width: 100%;
+  height: calc(100% - var(--intro-image-offset) + var(--intro-image-extra));
+  min-height: 360px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(102, 73, 246, 0.28),
+    0 4px 40px rgba(0, 0, 0, 0.55),
+    0 0 60px rgba(102, 73, 246, 0.14);
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.intro-image-frame:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 0 1px rgba(102, 73, 246, 0.48),
+    0 8px 52px rgba(0, 0, 0, 0.62),
+    0 0 80px rgba(102, 73, 246, 0.22);
+}
+
+/* Ambient glow behind the frame */
+.intro-image-glow {
+  position: absolute;
+  inset: -20px;
+  z-index: -1;
+  border-radius: 24px;
+  background: radial-gradient(ellipse at 50% 60%, rgba(102, 73, 246, 0.22), transparent 68%);
+  pointer-events: none;
+  filter: blur(24px);
+}
+
+.intro-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+@media (min-width: 860px) {
+  .intro-image-col {
+    --intro-image-offset: 0rem;
+    --intro-image-extra: 0rem;
+  }
+}
+
+/* Subtle gradient overlay at bottom edge for depth */
+.intro-image-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, transparent 55%, rgba(8, 10, 22, 0.45) 100%),
+    radial-gradient(ellipse at 80% 10%, rgba(102, 73, 246, 0.12), transparent 50%);
+  pointer-events: none;
+}
+
 .features-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1246,23 +1356,47 @@ function staggerMotion(index: number = 0) {
   border-radius: 8px;
   box-shadow: 0 0 24px rgba(25, 68, 240, 0.22), inset 0 1px 0 rgba(243, 246, 254, 0.08);
   backdrop-filter: blur(14px);
+  transform: translateY(0);
+  transition: transform 0.24s ease, border-color 0.24s ease, background 0.24s ease, box-shadow 0.24s ease;
+}
+
+.intro-concept:hover {
+  transform: translateY(-4px);
+  border-color: rgba(55, 230, 241, 0.78);
+  background:
+    linear-gradient(90deg, rgba(24, 73, 178, 0.58), rgba(9, 25, 68, 0.68)),
+    rgba(7, 12, 28, 0.62);
+  box-shadow:
+    0 12px 34px rgba(0, 0, 0, 0.28),
+    0 0 30px rgba(55, 230, 241, 0.2),
+    inset 0 1px 0 rgba(243, 246, 254, 0.12);
 }
 
 .intro-concept-key {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.45rem;
-  height: 2.45rem;
+  width: 2.1rem;
+  height: 2.1rem;
   flex-shrink: 0;
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 1.18rem;
-  font-weight: 900;
-  color: #67A4FF;
-  border: 1px solid rgba(38, 117, 255, 0.78);
-  border-radius: 8px;
-  background: rgba(23, 79, 191, 0.2);
-  box-shadow: 0 0 18px rgba(38, 117, 255, 0.22), inset 0 1px 0 rgba(243, 246, 254, 0.06);
+  transition: transform 0.24s ease;
+}
+
+.intro-concept:hover .intro-concept-key {
+  transform: scale(1.08);
+}
+
+.intro-concept-icon {
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(55, 230, 241, 0.38));
+  transition: filter 0.24s ease, transform 0.24s ease;
+}
+
+.intro-concept:hover .intro-concept-icon {
+  transform: rotate(-5deg);
+  filter: drop-shadow(0 0 12px rgba(55, 230, 241, 0.72));
 }
 
 .intro-text {
@@ -1949,9 +2083,8 @@ function staggerMotion(index: number = 0) {
   }
 
   .intro-concept-key {
-    width: 2.25rem;
-    height: 2.25rem;
-    font-size: 1.05rem;
+    width: 2rem;
+    height: 2rem;
   }
 
   .objectives-content .section-header::before {
