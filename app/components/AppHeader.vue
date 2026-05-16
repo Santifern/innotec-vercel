@@ -3,6 +3,7 @@ import { motion } from 'motion-v'
 import type { VariantType } from 'motion-v'
 
 const nuxtApp = useNuxtApp()
+const route = useRoute()
 const isScrolled = ref(false)
 const mobileMenuOpen = ref(false)
 
@@ -10,9 +11,9 @@ const mobileMenuOpen = ref(false)
 const items = computed(() => [
   {
     label: 'Inicio',
-    to: '#inicio',
+    to: '/#inicio',
     exactHash: true,
-    active: true
+    active: route.path === '/'
   },
   {
     label: 'Acerca de',
@@ -28,9 +29,9 @@ const items = computed(() => [
   },
   {
     label: 'Programa',
-    to: undefined,
+    to: '/programa',
     exactHash: true,
-    active: false
+    active: route.path === '/programa'
   },
   {
     label: 'Inscripción',

@@ -2,10 +2,10 @@
 const currentYear = new Date().getFullYear()
 
 const navLinks = [
-  { label: 'Inicio', to: '#inicio' },
+  { label: 'Inicio', to: '/#inicio' },
   { label: 'Acerca' },
   { label: 'Actividades' },
-  { label: 'Programa' },
+  { label: 'Programa', to: '/programa' },
   { label: 'FAQ' },
   { label: 'Hackathon' },
   { label: 'Inscripción' },
