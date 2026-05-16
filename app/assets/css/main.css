@@ -63,6 +63,20 @@
   --color-blue-900: #080C16;
   --color-blue-950: #04060D;
 
+  /* ===== HACKATHON BRAND COLOR PALETTE ===== */
+  /* Primary Purple - Hackathon brand color */
+  --color-hackathon-purple-50: #e7e4f5;
+  --color-hackathon-purple-100: #d0bef6;
+  --color-hackathon-purple-200: #bb99f8;
+  --color-hackathon-purple-300: #a372f8;
+  --color-hackathon-purple-400: #8d4cf7;
+  --color-hackathon-purple-500: #7b4af6;
+  --color-hackathon-purple-600: #6649f6;
+  --color-hackathon-purple-700: #5434d4;
+  --color-hackathon-purple-800: #3d1f99;
+  --color-hackathon-purple-900: #270e5c;
+  --color-hackathon-purple-950: #14072e;
+
   /* Animations */
   --animate-shimmer: shimmer 8s ease-in-out infinite alternate;
   --animate-countdown-pulse: countdown-pulse 2s ease-in-out infinite;

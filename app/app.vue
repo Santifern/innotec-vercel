@@ -2,6 +2,9 @@
 const colorMode = useColorMode()
 colorMode.preference = 'dark'
 
+const route = useRoute()
+const isHackathonPage = computed(() => route.path === '/hackathon')
+
 const color = computed(() => '#080C16')
 
 useHead({
@@ -33,7 +36,8 @@ useSeoMeta({
 
 <template>
   <UApp :toaster="{ expand: false }">
-    <AppHeader />
+    <HackathonHeader v-if="isHackathonPage" />
+    <AppHeader v-else />
 
     <UMain>
       <NuxtPage />
