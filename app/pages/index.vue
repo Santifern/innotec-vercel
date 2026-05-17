@@ -433,6 +433,9 @@ function staggerMotion(index: number = 0) {
     <!-- Section divider -->
     <div class="section-divider" />
 
+    <!-- Cronograma Hackathon -->
+    <HackathonSchedule />
+
     <SponsorMarquee />
 
     <!-- Inscription CTA section -->
