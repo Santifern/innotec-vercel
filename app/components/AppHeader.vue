@@ -53,9 +53,9 @@ const items = computed(() => [
   },
   {
     label: 'Hackathon',
-    to: undefined,
+    to: '/hackathon/inscripciones',
     exactHash: true,
-    active: false
+    active: route.path === '/hackathon/inscripciones'
   }
 ])
 
@@ -138,16 +138,18 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
       </nav>
 
       <div class="navbar-actions">
-        <div
+        <NuxtLink
+          to="/hackathon/inscripciones"
           class="navbar-hackathon-link"
           aria-label="Hackathon"
+          :class="{ active: route.path === '/hackathon/inscripciones' }"
         >
           <img
             src="/logo-hackathon-navbar.svg"
             alt="Hackathon"
             class="navbar-hackathon-logo"
           >
-        </div>
+        </NuxtLink>
 
         <!-- Mobile menu button -->
         <button
