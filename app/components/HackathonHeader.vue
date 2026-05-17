@@ -414,7 +414,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
 
 /* ===== INNOTEC BUTTON ===== */
 .navbar-innotec-link {
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   height: 34px;
@@ -450,12 +450,6 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
   opacity: 1;
   filter: drop-shadow(0 0 10px rgba(25, 68, 240, 0.45));
   transform: translateY(-1px);
-}
-
-@media (min-width: 1180px) {
-  .navbar-innotec-link {
-    display: flex;
-  }
 }
 
 /* ===== ACTIONS ===== */

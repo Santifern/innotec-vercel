@@ -92,7 +92,7 @@ const fallbackPage = {
 } as const
 
 const { data: page } = await useAsyncData('hackathon', async () => {
-  return await queryCollection('content').first() ?? fallbackPage
+  return await queryCollection('content').path('/hackathon').first() ?? fallbackPage
 }, {
   default: () => fallbackPage
 })

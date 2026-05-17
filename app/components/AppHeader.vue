@@ -23,7 +23,7 @@ const items = computed(() => [
   },
   {
     label: 'Actividades',
-    to: undefined,
+    to: '#actividades',
     exactHash: true,
     active: false
   },
@@ -41,13 +41,13 @@ const items = computed(() => [
   },
   {
     label: 'Galería',
-    to: undefined,
+    to: '/gallery',
     exactHash: true,
-    active: false
+    active: route.path === '/gallery'
   },
   {
     label: 'FAQ',
-    to: undefined,
+    to: '#faq',
     exactHash: true,
     active: false
   },
@@ -364,7 +364,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
 }
 
 .navbar-hackathon-link {
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   height: 36px;
@@ -401,12 +401,6 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
 .navbar-hackathon-link.active .navbar-hackathon-logo {
   opacity: 1;
   transform: translateY(-1px);
-}
-
-@media (min-width: 1180px) {
-  .navbar-hackathon-link {
-    display: flex;
-  }
 }
 
 /* ===== DESKTOP NAVIGATION ===== */
