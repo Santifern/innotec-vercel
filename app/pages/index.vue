@@ -17,7 +17,7 @@ const fallbackPage = {
         label: 'Inscribete ahora',
         color: 'primary',
         size: 'xl',
-        to: '#inscripcion'
+        to: '/inscripciones'
       },
       {
         label: 'Conoce mas',
@@ -85,7 +85,7 @@ const fallbackPage = {
       {
         label: 'Inscribete al INNOTEC 2026',
         color: 'primary',
-        to: '#inscripcion'
+        to: '/inscripciones'
       }
     ]
   }

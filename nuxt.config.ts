@@ -25,7 +25,8 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: [
-        '/'
+        '/',
+        '/inscripciones'
       ]
     }
   },

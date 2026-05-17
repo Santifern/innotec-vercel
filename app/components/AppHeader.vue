@@ -35,9 +35,9 @@ const items = computed(() => [
   },
   {
     label: 'Inscripción',
-    to: undefined,
+    to: '/inscripciones',
     exactHash: true,
-    active: false
+    active: route.path === '/inscripciones'
   },
   {
     label: 'Galería',
