@@ -435,6 +435,15 @@ function staggerMotion(index: number = 0) {
 
     <SponsorMarquee />
 
+    <!-- Section divider -->
+    <div class="section-divider" />
+
+    <!-- Preguntas frecuentes -->
+    <FaqSection />
+
+    <!-- Section divider -->
+    <div class="section-divider" />
+
     <!-- Inscription CTA section -->
     <section
       id="inscripcion"
