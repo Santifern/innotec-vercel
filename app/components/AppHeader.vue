@@ -3,6 +3,7 @@ import { motion } from 'motion-v'
 import type { VariantType } from 'motion-v'
 
 const nuxtApp = useNuxtApp()
+const route = useRoute()
 const isScrolled = ref(false)
 const mobileMenuOpen = ref(false)
 
@@ -10,9 +11,9 @@ const mobileMenuOpen = ref(false)
 const items = computed(() => [
   {
     label: 'Inicio',
-    to: '#inicio',
+    to: '/#inicio',
     exactHash: true,
-    active: true
+    active: route.path === '/'
   },
   {
     label: 'Acerca de',
@@ -28,9 +29,9 @@ const items = computed(() => [
   },
   {
     label: 'Programa',
-    to: undefined,
+    to: '/programa',
     exactHash: true,
-    active: false
+    active: route.path === '/programa'
   },
   {
     label: 'Inscripción',
@@ -364,40 +365,39 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
   display: none;
   align-items: center;
   justify-content: center;
-  height: 34px;
-  padding: 0 0.55rem;
-  border: 1px solid rgba(217, 70, 239, 0.3);
-  border-radius: 8px;
+  height: 36px;
+  padding: 0 0.75rem;
+  border: none;
+  border-radius: 100px;
   background:
-    linear-gradient(135deg, rgba(217, 70, 239, 0.14), rgba(25, 68, 240, 0.08)),
-    rgba(25, 68, 240, 0.04);
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.18), transparent 28%),
+    linear-gradient(135deg, #6649f6 0%, #4b2fb8 38%, #301b59 68%, #191521 100%);
   text-decoration: none;
-  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 2px 12px rgba(102, 73, 246, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.22s ease;
 }
 
 .navbar-hackathon-logo {
   width: 118px;
   height: auto;
   display: block;
-  opacity: 0.92;
-  filter: drop-shadow(0 0 8px rgba(217, 70, 239, 0.2));
-  transition: opacity 0.25s ease, filter 0.25s ease, transform 0.25s ease;
+  opacity: 1;
+  filter: brightness(1.06);
+  transition: opacity 0.22s ease, transform 0.22s ease;
 }
 
 .navbar-hackathon-link:hover,
 .navbar-hackathon-link.active {
   background:
-    linear-gradient(135deg, rgba(217, 70, 239, 0.24), rgba(25, 68, 240, 0.16)),
-    rgba(25, 68, 240, 0.08);
-  border-color: rgba(217, 70, 239, 0.64);
-  box-shadow: 0 0 18px rgba(217, 70, 239, 0.26), 0 0 24px rgba(25, 68, 240, 0.18);
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.24), transparent 30%),
+    linear-gradient(135deg, #7a5ff8 0%, #5a3ec8 38%, #3d2470 68%, #211a2e 100%);
+  box-shadow: 0 4px 20px rgba(102, 73, 246, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.14);
   transform: translateY(-1px);
 }
 
 .navbar-hackathon-link:hover .navbar-hackathon-logo,
 .navbar-hackathon-link.active .navbar-hackathon-logo {
   opacity: 1;
-  filter: drop-shadow(0 0 10px rgba(217, 70, 239, 0.45));
   transform: translateY(-1px);
 }
 
