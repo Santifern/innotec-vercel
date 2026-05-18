@@ -600,9 +600,6 @@ function staggerMotion(index: number = 0) {
     <!-- Section divider -->
     <div class="section-divider" />
 
-    <!-- Cronograma Hackathon -->
-    <HackathonSchedule />
-
     <SponsorMarquee />
 
     <!-- Section divider -->
@@ -2372,6 +2369,8 @@ function staggerMotion(index: number = 0) {
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 0.9rem;
   padding: 1.625rem 1.4rem;
   background: linear-gradient(145deg, rgba(14, 21, 46, 0.72), rgba(8, 12, 22, 0.6));
@@ -2420,6 +2419,7 @@ function staggerMotion(index: number = 0) {
   color: #F3F6FE;
   margin: 0;
   letter-spacing: 0;
+  text-align: center;
 }
 
 .acerca-card-text {
@@ -2439,6 +2439,8 @@ function staggerMotion(index: number = 0) {
 .acerca-date-row {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 0.08rem;
   padding: 0.6rem 0.75rem;
   background: rgba(25, 68, 240, 0.08);
@@ -2533,6 +2535,8 @@ function staggerMotion(index: number = 0) {
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 0.65rem;
   padding: 1.625rem 1.4rem;
   background: linear-gradient(145deg, rgba(11, 17, 38, 0.68), rgba(8, 12, 22, 0.58));
@@ -2573,6 +2577,7 @@ function staggerMotion(index: number = 0) {
   color: #F3F6FE;
   margin: 0;
   line-height: 1.32;
+  text-align: center;
 }
 
 .acerca-eje-desc {
