@@ -95,7 +95,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
         class="navbar-logo-link"
         aria-label="Hackathon - Inicio"
       >
-        <img
+        <NuxtImg
           src="/logo-hackathon-navbar.svg"
           alt="HACKATHON"
           class="navbar-logo"
@@ -137,7 +137,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
           class="navbar-innotec-link"
           aria-label="Ir a Innotec"
         >
-          <img
+          <NuxtImg
             src="/logo-innotec-blanco.svg"
             alt="Innotec"
             class="navbar-innotec-logo"

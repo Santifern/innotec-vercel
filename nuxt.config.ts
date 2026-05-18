@@ -5,7 +5,8 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/ui',
     '@vueuse/nuxt',
-    'motion-v/nuxt'
+    'motion-v/nuxt',
+    '@nuxt/image'
   ],
 
   devtools: {
@@ -38,6 +39,19 @@ export default defineNuxtConfig({
         commaDangle: 'never',
         braceStyle: '1tbs'
       }
+    }
+  },
+
+  image: {
+    domains: ['localhost'],
+    format: ['webp', 'avif', 'jpg'],
+    screens: {
+      xs: 320,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      xxl: 1536
     }
   }
 })

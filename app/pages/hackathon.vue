@@ -194,7 +194,7 @@ function staggerMotion(index: number = 0) {
       <div class="hero-container">
         <!-- Main logo -->
         <div class="hero-logo-wrapper">
-          <img
+          <NuxtImg
             src="/logo-innotec-blanco.svg"
             alt="INNOTEC"
             class="hero-logo"
@@ -255,7 +255,7 @@ function staggerMotion(index: number = 0) {
             Hackathon es un espacio dirigido a estudiantes de diferentes carreras para la colaboración interdisciplinaria, donde se fomenta la creatividad y la innovación para resolver problemas reales, mientras se adquieren valiosas habilidades prácticas.
           </p>
           <div class="intro-image-wrapper">
-            <img
+            <NuxtImg
               src="/activity-charlas.webp"
               alt="Estudiantes colaborando en el hackathon"
               class="intro-image"

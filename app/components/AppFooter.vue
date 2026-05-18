@@ -55,7 +55,7 @@ const socialLinks = [
             class="footer-logo-link"
             aria-label="Innotec 2026"
           >
-            <img
+            <NuxtImg
               src="/logo-innotec-blanco.svg"
               alt="INNOTEC"
               class="footer-logo"

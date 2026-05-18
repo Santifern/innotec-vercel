@@ -117,7 +117,7 @@ useSeoMeta({
       <div class="hero-container">
         <!-- Logo -->
         <Motion v-bind="enterMotion(0.1)" class="hero-logo-wrapper">
-          <img src="/logo-innotec-blanco.svg" alt="INNOTEC" class="hero-logo">
+          <NuxtImg src="/logo-innotec-blanco.svg" alt="INNOTEC" class="hero-logo">
         </Motion>
 
         <!-- Title -->
@@ -178,7 +178,7 @@ useSeoMeta({
               @click="selectedMediaIndex = index"
             >
               <figure class="gallery-media">
-                <img
+                <NuxtImg
                   :src="item.thumbnail"
                   :alt="item.alt"
                   class="gallery-image"

@@ -101,7 +101,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
         class="navbar-logo-link"
         aria-label="Innotec 2026 - Inicio"
       >
-        <img
+        <NuxtImg
           src="/logo-innotec-blanco.svg"
           alt="INNOTEC 2026"
           class="navbar-logo"
@@ -144,7 +144,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
           aria-label="Hackathon"
           :class="{ active: route.path === '/hackathon/inscripciones' }"
         >
-          <img
+          <NuxtImg
             src="/logo-hackathon-navbar.svg"
             alt="Hackathon"
             class="navbar-hackathon-logo"

@@ -193,7 +193,7 @@ function staggerMotion(index: number = 0) {
       <div class="hero-container">
         <!-- Main logo -->
         <div class="hero-logo-wrapper">
-          <img
+          <NuxtImg
             src="/logo-innotec-blanco.svg"
             alt="INNOTEC"
             class="hero-logo"
@@ -570,7 +570,7 @@ function staggerMotion(index: number = 0) {
                 class="feature-card-media"
                 :class="`feature-card-media--${index}`"
               >
-                <img
+                <NuxtImg
                   :src="getActivityImage(index).src"
                   :alt="getActivityImage(index).alt"
                   class="feature-card-image"

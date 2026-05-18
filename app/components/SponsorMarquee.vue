@@ -108,7 +108,7 @@ const sponsorLogos = [
               class="group flex h-24 min-w-44 items-center justify-center sm:h-28 sm:min-w-52 lg:h-32 lg:min-w-60"
               :aria-label="logo.name"
             >
-              <img
+              <NuxtImg
                 :src="logo.src"
                 :alt="logo.name"
                 :width="logo.width"
