@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useIntervalFn } from '@vueuse/core'
+
 // Target date: August 20, 2026
 const targetDate = new Date('2026-08-20T00:00:00')
 
@@ -31,15 +33,14 @@ function padZero(n: number): string {
   return String(n).padStart(2, '0')
 }
 
-let interval: ReturnType<typeof setInterval>
+const { pause } = useIntervalFn(updateCountdown, 1000, { immediate: true })
 
 onMounted(() => {
   updateCountdown()
-  interval = setInterval(updateCountdown, 1000)
 })
 
 onUnmounted(() => {
-  if (interval) clearInterval(interval)
+  pause()
 })
 </script>
 

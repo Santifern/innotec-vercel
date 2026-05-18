@@ -91,8 +91,14 @@ const fallbackPage = {
   }
 } as const
 
-const { data: page } = await useAsyncData('index', async () => {
-  return await queryCollection('content').first() ?? fallbackPage
+const { data: page, error } = await useAsyncData('index', async () => {
+  try {
+    const result = await queryCollection('content').first()
+    return result ?? fallbackPage
+  } catch (e) {
+    console.error('Error loading page content:', e)
+    return fallbackPage
+  }
 }, {
   default: () => fallbackPage
 })
