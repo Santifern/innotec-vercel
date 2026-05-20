@@ -170,7 +170,7 @@ function toggle(index: number) {
 
 .section-label {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: 1.5rem;
   font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
   font-weight: 900;
   color: #D946EF;

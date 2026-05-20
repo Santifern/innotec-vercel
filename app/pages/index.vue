@@ -91,8 +91,14 @@ const fallbackPage = {
   }
 } as const
 
-const { data: page } = await useAsyncData('index', async () => {
-  return await queryCollection('content').first() ?? fallbackPage
+const { data: page, error } = await useAsyncData('index', async () => {
+  try {
+    const result = await queryCollection('content').first()
+    return result ?? fallbackPage
+  } catch (e) {
+    console.error('Error loading page content:', e)
+    return fallbackPage
+  }
 }, {
   default: () => fallbackPage
 })
@@ -197,7 +203,7 @@ function staggerMotion(index: number = 0) {
             src="/logo-innotec-blanco.svg"
             alt="INNOTEC"
             class="hero-logo"
-          >
+          />
         </div>
 
         <!-- Title -->
@@ -428,7 +434,7 @@ function staggerMotion(index: number = 0) {
           class="acerca-ejes-header"
         >
           <h3 class="acerca-ejes-title">
-            Ejes Temáticos
+            Temas
           </h3>
         </Motion>
 
@@ -576,7 +582,7 @@ function staggerMotion(index: number = 0) {
                   class="feature-card-image"
                   loading="lazy"
                   decoding="async"
-                >
+                />
               </figure>
               <h3 class="feature-card-title">
                 {{ feature.title }}
@@ -593,9 +599,6 @@ function staggerMotion(index: number = 0) {
 
     <!-- Section divider -->
     <div class="section-divider" />
-
-    <!-- Cronograma Hackathon -->
-    <HackathonSchedule />
 
     <SponsorMarquee />
 
@@ -1133,7 +1136,7 @@ function staggerMotion(index: number = 0) {
 
 .section-label {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: 1.5rem;
   font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
   font-weight: 900;
   color: #D946EF;
@@ -1221,13 +1224,7 @@ function staggerMotion(index: number = 0) {
   opacity: 0.72;
 }
 
-.feature-card:hover {
-  background:
-    linear-gradient(180deg, rgba(15, 23, 46, 0.9), rgba(10, 16, 32, 0.82));
-  border-color: rgba(55, 230, 241, 0.72);
-  transform: translateY(-5px);
-  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.28), 0 0 26px rgba(55, 230, 241, 0.22), inset 0 1px 0 rgba(243, 246, 254, 0.06);
-}
+
 
 .feature-card-glow {
   position: absolute;
@@ -1243,9 +1240,7 @@ function staggerMotion(index: number = 0) {
   transition: opacity 0.25s ease;
 }
 
-.feature-card:hover .feature-card-glow {
-  opacity: 1;
-}
+
 
 .feature-card-media {
   position: relative;
@@ -1284,9 +1279,7 @@ function staggerMotion(index: number = 0) {
   transition: opacity 0.35s ease;
 }
 
-.feature-card:hover .feature-card-media::before {
-  opacity: 0.48;
-}
+
 
 .feature-card-media::after {
   content: '';
@@ -1308,10 +1301,7 @@ function staggerMotion(index: number = 0) {
   transition: transform 0.4s ease, filter 0.4s ease;
 }
 
-.feature-card:hover .feature-card-image {
-  transform: scale(1.07);
-  filter: saturate(1.08) brightness(1.04);
-}
+
 
 .feature-card-media--0 .feature-card-image {
   object-position: center 74%;
@@ -1940,7 +1930,7 @@ function staggerMotion(index: number = 0) {
 }
 
 .cta-content .section-label {
-  font-size: 0.86rem;
+  font-size: 1.6rem;
 }
 
 .cta-title {
@@ -2338,7 +2328,7 @@ function staggerMotion(index: number = 0) {
 
 .acerca-description-label {
   font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.7rem;
+  font-size: 1.5rem;
   font-weight: 900;
   color: #7B8AF7;
   text-transform: uppercase;
@@ -2379,6 +2369,8 @@ function staggerMotion(index: number = 0) {
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 0.9rem;
   padding: 1.625rem 1.4rem;
   background: linear-gradient(145deg, rgba(14, 21, 46, 0.72), rgba(8, 12, 22, 0.6));
@@ -2400,11 +2392,7 @@ function staggerMotion(index: number = 0) {
   pointer-events: none;
 }
 
-.acerca-info-card:hover {
-  border-color: rgba(25, 68, 240, 0.52);
-  box-shadow: 0 0 26px rgba(25, 68, 240, 0.16), 0 10px 28px rgba(0, 0, 0, 0.18);
-  transform: translateY(-3px);
-}
+
 
 .acerca-card-icon {
   display: flex;
@@ -2431,6 +2419,7 @@ function staggerMotion(index: number = 0) {
   color: #F3F6FE;
   margin: 0;
   letter-spacing: 0;
+  text-align: center;
 }
 
 .acerca-card-text {
@@ -2450,6 +2439,8 @@ function staggerMotion(index: number = 0) {
 .acerca-date-row {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 0.08rem;
   padding: 0.6rem 0.75rem;
   background: rgba(25, 68, 240, 0.08);
@@ -2544,6 +2535,8 @@ function staggerMotion(index: number = 0) {
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 0.65rem;
   padding: 1.625rem 1.4rem;
   background: linear-gradient(145deg, rgba(11, 17, 38, 0.68), rgba(8, 12, 22, 0.58));
@@ -2565,13 +2558,7 @@ function staggerMotion(index: number = 0) {
   pointer-events: none;
 }
 
-.acerca-eje-card:hover {
-  border-color: #1944F0;
-  box-shadow:
-    0 0 0 1px rgba(25, 68, 240, 0.28),
-    0 0 22px rgba(25, 68, 240, 0.18),
-    0 8px 24px rgba(0, 0, 0, 0.16);
-}
+
 
 .acerca-eje-num {
   font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
@@ -2590,6 +2577,7 @@ function staggerMotion(index: number = 0) {
   color: #F3F6FE;
   margin: 0;
   line-height: 1.32;
+  text-align: center;
 }
 
 .acerca-eje-desc {
