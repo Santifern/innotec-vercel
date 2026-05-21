@@ -59,7 +59,7 @@ const socialLinks = [
               src="/logo-innotec-blanco.svg"
               alt="INNOTEC"
               class="footer-logo"
-            >
+            />
           </NuxtLink>
           <p class="footer-tagline">
             Innovación • Tecnología • Colaboración

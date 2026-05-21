@@ -1,3 +1,5 @@
+<!-- No aplica y puede generar problemas por sponsors no confirmados -->
+
 <script setup lang="ts">
 const smoothEase = [0.22, 1, 0.36, 1] as [number, number, number, number]
 const scrollInViewOptions = { once: true, amount: 0.3, margin: '0px 0px -12% 0px' as const }
@@ -116,7 +118,7 @@ const sponsorLogos = [
                 class="h-auto max-h-[4.5rem] w-auto max-w-[13rem] object-contain grayscale opacity-70 transition-[filter,opacity] duration-200 group-hover:grayscale-0 group-hover:opacity-100 sm:max-h-20 sm:max-w-[16rem] lg:max-h-24 lg:max-w-[19rem]"
                 :loading="loopIndex === 1 ? 'eager' : 'lazy'"
                 decoding="async"
-              >
+              />
             </a>
           </div>
         </div>

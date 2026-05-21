@@ -117,7 +117,7 @@ useSeoMeta({
       <div class="hero-container">
         <!-- Logo -->
         <Motion v-bind="enterMotion(0.1)" class="hero-logo-wrapper">
-          <NuxtImg src="/logo-innotec-blanco.svg" alt="INNOTEC" class="hero-logo">
+          <NuxtImg src="/logo-innotec-blanco.svg" alt="INNOTEC" class="hero-logo"/>
         </Motion>
 
         <!-- Title -->
@@ -184,7 +184,7 @@ useSeoMeta({
                   class="gallery-image"
                   loading="lazy"
                   decoding="async"
-                >
+                />
                 <!-- Video Icon Overlay -->
                 <div v-if="item.type === 'video'" class="video-icon-overlay">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="video-icon">

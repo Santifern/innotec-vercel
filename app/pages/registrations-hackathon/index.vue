@@ -1,6 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
-  colorMode: 'dark'
+  colorMode: 'dark',
+  layout: 'default',
 })
 
 useSeoMeta({

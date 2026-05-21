@@ -600,7 +600,7 @@ function staggerMotion(index: number = 0) {
     <!-- Section divider -->
     <div class="section-divider" />
 
-    <SponsorMarquee />
+    <!-- <SponsorMarquee /> -->
 
     <!-- Section divider -->
     <div class="section-divider" />

@@ -336,7 +336,7 @@ function staggerMotion(index: number = 0) {
     <!-- Section divider -->
     <div class="section-divider" />
 
-    <!-- <SponsorMarquee /> -->
+    <SponsorMarquee />
 
     <!-- Inscription CTA section -->
     <section
@@ -779,7 +779,7 @@ function staggerMotion(index: number = 0) {
 
 .section-label {
   display: inline-block;
-  font-size: 1.5rem;
+  font-size: 0.75rem;
   font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
   font-weight: 900;
   color: #a372f8;
@@ -834,7 +834,12 @@ function staggerMotion(index: number = 0) {
   overflow: hidden;
 }
 
-
+.feature-card:hover {
+  background: linear-gradient(180deg, rgba(15, 23, 46, 0.9), rgba(10, 16, 32, 0.82));
+  border-color: rgba(163, 114, 248, 0.72);
+  transform: translateY(-5px);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.28), 0 0 26px rgba(163, 114, 248, 0.22), inset 0 1px 0 rgba(243, 246, 254, 0.06);
+}
 
 .feature-card-title {
   position: relative;
@@ -1273,7 +1278,10 @@ function staggerMotion(index: number = 0) {
   transition: border-color 0.25s ease, background 0.25s ease;
 }
 
-
+.metodologia-item:hover {
+  border-color: rgba(163, 114, 248, 0.35);
+  background: rgba(163, 114, 248, 0.08);
+}
 
 .metodologia-number {
   display: flex;
@@ -1438,7 +1446,9 @@ function staggerMotion(index: number = 0) {
   transition: opacity 0.35s ease;
 }
 
-
+.feature-card:hover .feature-card-media::before {
+  opacity: 0.48;
+}
 
 .feature-card-media::after {
   content: '';
@@ -1460,7 +1470,10 @@ function staggerMotion(index: number = 0) {
   transition: transform 0.4s ease, filter 0.4s ease;
 }
 
-
+.feature-card:hover .feature-card-image {
+  transform: scale(1.07);
+  filter: saturate(1.08) brightness(1.04);
+}
 
 .feature-card-media--0 .feature-card-image {
   object-position: center 74%;
@@ -1488,7 +1501,9 @@ function staggerMotion(index: number = 0) {
   transition: opacity 0.25s ease;
 }
 
-
+.feature-card:hover .feature-card-glow {
+  opacity: 1;
+}
 
 .intro-content {
   position: relative;

@@ -99,7 +99,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
           src="/logo-hackathon-navbar.svg"
           alt="HACKATHON"
           class="navbar-logo"
-        >
+        />
       </NuxtLink>
 
       <!-- Desktop Navigation -->
@@ -141,7 +141,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
             src="/logo-innotec-blanco.svg"
             alt="Innotec"
             class="navbar-innotec-logo"
-          >
+          />
         </NuxtLink>
 
         <!-- Mobile menu button -->
