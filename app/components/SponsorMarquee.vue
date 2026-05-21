@@ -116,7 +116,7 @@ const sponsorLogos = [
                 class="h-auto max-h-[4.5rem] w-auto max-w-[13rem] object-contain grayscale opacity-70 transition-[filter,opacity] duration-200 group-hover:grayscale-0 group-hover:opacity-100 sm:max-h-20 sm:max-w-[16rem] lg:max-h-24 lg:max-w-[19rem]"
                 :loading="loopIndex === 1 ? 'eager' : 'lazy'"
                 decoding="async"
-              >
+              />
             </a>
           </div>
         </div>
