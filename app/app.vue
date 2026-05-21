@@ -37,7 +37,7 @@ useSeoMeta({
 <template>
   <UApp :toaster="{ expand: false }">
     <HackathonHeader v-if="isHackathonPage" />
-    <AppHeader v-else />
+    <NavBarMenu v-else />
 
     <UMain>
       <NuxtPage />
