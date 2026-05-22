@@ -67,7 +67,6 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
             v-if="item.to"
             :to="item.to"
             class="navbar-nav-item"
-            :class="{ active: item.active }"
           >
             {{ item.label }}
             <span class="nav-item-indicator" />
@@ -144,10 +143,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
               v-if="item.to"
               :to="item.to"
               class="mobile-nav-item"
-              :class="[
-                { active: item.active },
-                item.mobileClass || ''
-              ]"
+              :class="[item.mobileClass || '']"
               @click="mobileMenuOpen = false"
             >
               {{ item.label }}
@@ -327,7 +323,8 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
   background: transparent;
 }
 
-.navbar-nav-item.active {
+.navbar-nav-item.active,
+.navbar-nav-item.router-link-active {
   color: var(--nav-item-active);
   background: rgba(var(--nav-accent-rgb), 0.08);
 }
@@ -345,7 +342,8 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
   transition: width 0.25s ease, opacity 0.25s ease;
 }
 
-.navbar-nav-item.active .nav-item-indicator {
+.navbar-nav-item.active .nav-item-indicator,
+.navbar-nav-item.router-link-active .nav-item-indicator {
   width: calc(100% - 1.5rem);
   opacity: 1;
 }
@@ -484,7 +482,8 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
   border-color: transparent;
 }
 
-.mobile-nav-item.active {
+.mobile-nav-item.active,
+.mobile-nav-item.router-link-active {
   color: var(--nav-item-active);
   background: rgba(var(--nav-accent-rgb), 0.1);
   border-color: rgba(var(--nav-accent-rgb), 0.3);
@@ -500,7 +499,8 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
 }
 
 .mobile-nav-item--hackathon:hover,
-.mobile-nav-item--hackathon.active {
+.mobile-nav-item--hackathon.active,
+.mobile-nav-item--hackathon.router-link-active {
   border-color: rgba(217, 70, 239, 0.62) !important;
   box-shadow: 0 0 18px rgba(217, 70, 239, 0.2) !important;
 }

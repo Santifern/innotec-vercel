@@ -1,55 +1,45 @@
 <script setup lang="ts">
-const route = useRoute()
-
 // Navigation items for Innotec
 const items = computed(() => [
   {
     label: 'Inicio',
     to: '/#inicio',
-    exactHash: true,
-    active: route.path === '/'
+    exactHash: true
   },
   {
     label: 'Acerca de',
-    to: '#acerca',
-    exactHash: true,
-    active: false
+    to: '/#acerca',
+    exactHash: true
   },
   {
     label: 'Actividades',
-    to: '#actividades',
-    exactHash: true,
-    active: false
+    to: '/#actividades',
+    exactHash: true
   },
   {
     label: 'Programa',
-    to: '/programa',
-    exactHash: true,
-    active: route.path === '/programa'
+    to: '/schedule',
+    exactHash: true
   },
   {
     label: 'Inscripción',
-    to: '/inscripciones',
-    exactHash: true,
-    active: route.path === '/inscripciones'
+    to: '/regitration-innotec',
+    exactHash: true
   },
   {
     label: 'Galería',
     to: '/gallery',
-    exactHash: true,
-    active: route.path === '/gallery'
+    exactHash: true
   },
   {
     label: 'FAQ',
-    to: '#faq',
-    exactHash: true,
-    active: false
+    to: '/faq',
+    exactHash: true
   },
   {
     label: 'Hackathon',
-    to: '/hackathon/inscripciones',
+    to: '/hackathon',
     exactHash: true,
-    active: route.path === '/hackathon/inscripciones',
     mobileClass: 'mobile-nav-item--hackathon'
   }
 ])
@@ -80,10 +70,9 @@ const desktopItems = computed(() => items.value.filter(item => item.label !== 'H
 
     <template #action>
       <NuxtLink
-        to="/hackathon/inscripciones"
+        to="/hackathon"
         class="navbar-hackathon-link"
         aria-label="Hackathon"
-        :class="{ active: route.path === '/hackathon/inscripciones' }"
       >
         <NuxtImg
           src="/logo-hackathon-navbar.svg"

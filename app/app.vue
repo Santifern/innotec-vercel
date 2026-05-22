@@ -3,7 +3,7 @@ const colorMode = useColorMode()
 colorMode.preference = 'dark'
 
 const route = useRoute()
-const isHackathonPage = computed(() => route.path === '/hackathon')
+const isHackathonPage = computed(() => route.path.startsWith('/hackathon'))
 
 const color = computed(() => '#080C16')
 

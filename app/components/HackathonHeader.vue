@@ -3,45 +3,38 @@
 const items = computed(() => [
   {
     label: 'Acerca del Congreso',
-    to: '#acerca',
-    exactHash: true,
-    active: false
+    to: '/hackathon#acerca',
+    exactHash: true
   },
   {
     label: 'Ponencias y Tracks',
-    to: '#actividades',
-    exactHash: true,
-    active: false
+    to: '/hackathon#actividades',
+    exactHash: true
   },
   {
     label: 'Programa',
-    to: undefined,
-    exactHash: true,
-    active: false
+    to: '/hackathon/schedule',
+    exactHash: true
   },
   {
     label: 'Inscripción',
-    to: '#inscripcion',
-    exactHash: true,
-    active: false
+    to: '/registrations-hackathon',
+    exactHash: true
   },
   {
     label: 'Galería',
-    to: undefined,
-    exactHash: true,
-    active: false
+    to: '/gallery',
+    exactHash: true
   },
   {
     label: 'FAQ',
-    to: undefined,
-    exactHash: true,
-    active: false
+    to: '/faq',
+    exactHash: true
   },
   {
     label: 'Innotec',
     to: '/',
     exactHash: false,
-    active: false,
     isAction: true,
     mobileClass: 'mobile-nav-item--innotec'
   }
