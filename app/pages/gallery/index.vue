@@ -126,6 +126,7 @@ useSeoMeta({
             Galería
             <br>
             <span class="hero-title-gradient">INNOTEC 2026</span>
+            <br/>
           </h1>
         </Motion>
 

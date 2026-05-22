@@ -319,6 +319,13 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
   }
 }
 
+@media (max-width: 640px) {
+  .navbar-container {
+    padding: 0.6rem 1rem;
+    gap: 0.5rem;
+  }
+}
+
 /* ===== LOGO ===== */
 .navbar-logo-link {
   display: flex;
@@ -334,6 +341,12 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
   object-fit: contain;
   filter: brightness(1);
   transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+@media (max-width: 640px) {
+  .navbar-logo {
+    height: 20px;
+  }
 }
 
 .navbar-logo-link:hover .navbar-logo {
@@ -355,6 +368,13 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
   padding: 1px 5px;
   letter-spacing: 0.05em;
   transition: all 0.3s ease;
+}
+
+@media (max-width: 640px) {
+  .navbar-logo-badge {
+    font-size: 0.55rem;
+    padding: 1px 3px;
+  }
 }
 
 .navbar-logo-link:hover .navbar-logo-badge {
@@ -386,6 +406,16 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
   opacity: 1;
   filter: brightness(1.06);
   transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+@media (max-width: 640px) {
+  .navbar-hackathon-link {
+    height: 30px;
+    padding: 0 0.5rem;
+  }
+  .navbar-hackathon-logo {
+    width: 80px;
+  }
 }
 
 .navbar-hackathon-link:hover,
@@ -488,6 +518,12 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
   flex-shrink: 0;
 }
 
+@media (max-width: 640px) {
+  .navbar-actions {
+    gap: 0.4rem;
+  }
+}
+
 /* Mobile toggle */
 .navbar-mobile-toggle {
   display: flex;
@@ -501,6 +537,13 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.25s ease;
+}
+
+@media (max-width: 640px) {
+  .navbar-mobile-toggle {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 .navbar-mobile-toggle:hover {

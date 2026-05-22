@@ -312,6 +312,13 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
   }
 }
 
+@media (max-width: 640px) {
+  .navbar-container {
+    padding: 0.6rem 1rem;
+    gap: 0.5rem;
+  }
+}
+
 /* ===== LOGO ===== */
 .navbar-logo-link {
   display: flex;
@@ -437,6 +444,16 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
   transition: opacity 0.25s ease, filter 0.25s ease, transform 0.25s ease;
 }
 
+@media (max-width: 640px) {
+  .navbar-innotec-link {
+    height: 30px;
+    padding: 0 0.45rem;
+  }
+  .navbar-innotec-logo {
+    width: 75px;
+  }
+}
+
 .navbar-innotec-link:hover {
   background:
     linear-gradient(135deg, rgba(25, 68, 240, 0.24), rgba(123, 138, 247, 0.16)),
@@ -460,6 +477,12 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
   flex-shrink: 0;
 }
 
+@media (max-width: 640px) {
+  .navbar-actions {
+    gap: 0.4rem;
+  }
+}
+
 /* Mobile toggle */
 .navbar-mobile-toggle {
   display: flex;
@@ -473,6 +496,13 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.25s ease;
+}
+
+@media (max-width: 640px) {
+  .navbar-mobile-toggle {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 .navbar-mobile-toggle:hover {
