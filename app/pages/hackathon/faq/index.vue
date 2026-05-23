@@ -25,32 +25,40 @@ interface FaqItem {
 
 const faqItems: FaqItem[] = [
   {
-    question: '¿Quién puede asistir al INNOTEC 2026?',
-    answer: 'El INNOTEC está abierto a estudiantes universitarios de cualquier institución, así como a profesionales y personas interesadas en las áreas de Tecnología, Ingeniería, Arquitectura y Diseño. ¡Todos son bienvenidos!'
+    question: '¿Es necesario saber programar?',
+    answer: 'No. A diferencia de otros hackathones enfocados únicamente en programación, nuestro evento está orientado al desarrollo de propuestas y prototipos funcionales, por lo que cualquier persona puede aportar desde su área: diseño, gestión, comunicación, análisis, investigación, innovación, entre otras.'
   },
   {
-    question: '¿Cuándo y dónde se realizará el evento?',
-    answer: 'El INNOTEC 2026 se realizará el 20 de agosto de 2026 en Asunción, Paraguay. La ubicación exacta del venue será anunciada próximamente a través de nuestras redes sociales.'
+    question: '¿Cómo creamos una aplicación sin programación?',
+    answer: 'Utilizando herramientas accesibles e intuitivas que permiten crear prototipos de aplicaciones de manera visual y sin necesidad de escribir ningún tipo de código.'
   },
   {
-    question: '¿Tiene costo la inscripción?',
-    answer: 'La inscripción es completamente gratuita para todos los asistentes. Solo es necesario registrarse a través del formulario de inscripción para asegurar tu lugar, ya que los cupos son limitados.'
+    question: '¿Quiénes pueden participar del Hackathon?',
+    answer: 'Pueden participar estudiantes de todas las carreras y perfiles. De hecho, uno de los principales objetivos del hackathon es formar equipos diversos, integrados por personas con diferentes habilidades, conocimientos y formas de pensar, ya que la innovación surge cuando distintas perspectivas trabajan juntas para resolver una problemática en común.'
   },
   {
-    question: '¿Cómo me inscribo al evento?',
-    answer: 'Podés inscribirte haciendo clic en el botón "Inscribete ahora" en esta página. Completá el formulario con tus datos y recibirás una confirmación por correo electrónico con toda la información necesaria.'
+    question: '¿Puedo inscribirme si no tengo equipo?',
+    answer: '¡Sí, por supuesto! La idea principal del evento es que puedas conectar con personas de diferentes carreras. Organizaremos el espacio para que conozcas a otros participantes y formen equipos multidisciplinarios en el momento.'
   },
   {
-    question: '¿Cuáles son las actividades del INNOTEC?',
-    answer: 'El INNOTEC ofrece tres tipos de actividades: Charlas con expertos nacionales e internacionales que comparten las últimas tendencias en tecnología, Talleres interactivos donde aprenderás herramientas y técnicas aplicadas, y Visitas Técnicas a empresas e instalaciones referentes del sector tecnológico.'
+    question: '¿De cuántas personas deben ser los equipos?',
+    answer: 'Los equipos estarán conformados por grupos de 6 a 8 personas aproximadamente. El número exacto se definirá dependiendo principalmente de la cantidad total de inscritos.'
   },
   {
-    question: '¿Se entrega certificado de asistencia?',
-    answer: 'Sí, todos los asistentes que completen el evento recibirán un certificado digital de asistencia emitido por la Facultad de Ciencias y Tecnología de la Universidad Católica del Paraguay.'
+    question: '¿Qué necesito llevar el día del evento?',
+    answer: 'Es fundamental que traigas un dispositivo (computadora portátil o tablet) con su respectivo cargador para poder utilizar las herramientas de prototipado. Además, te sugerimos traer alargues o zapatillas (triples) eléctricas para mayor comodidad tuya y de tu equipo.'
   },
   {
-    question: '¿Puedo asistir si no soy estudiante de la UCA?',
-    answer: 'Por supuesto. El INNOTEC es un evento abierto a la comunidad. No es necesario ser estudiante de la UCA para participar. Aceptamos estudiantes de cualquier universidad y también profesionales que quieran ser parte de la experiencia.'
+    question: '¿Qué beneficios ofrece participar del hackathon?',
+    answer: 'La participación al evento ofrece créditos académicos y premios monetarios para el equipo ganador. Además de fomentar la creatividad y el trabajo colaborativo, permite fortalecer habilidades de liderazgo, comunicación y resolución de problemas en entornos de alta exigencia y rápida toma de decisiones.'
+  },
+  {
+    question: '¿Cómo puedo inscribirme?',
+    answer: 'Asegurá tu lugar a través del formulario de inscripción.',
+    link: {
+      label: 'Ir al formulario',
+      to: '/registrations-hackathon'
+    }
   }
 ]
 
@@ -109,10 +117,10 @@ definePageMeta({
 })
 
 useSeoMeta({
-  title: 'FAQ - INNOTEC 2026',
-  ogTitle: 'FAQ - INNOTEC 2026',
-  description: 'Preguntas frecuentes sobre INNOTEC 2026.',
-  ogDescription: 'Preguntas frecuentes sobre INNOTEC 2026.'
+  title: 'FAQ - HACKATHON 2026',
+  ogTitle: 'FAQ - HACKATHON 2026',
+  description: 'Preguntas frecuentes sobre el Hackathon 2026.',
+  ogDescription: 'Preguntas frecuentes sobre el Hackathon 2026.'
 })
 </script>
 
@@ -121,19 +129,19 @@ useSeoMeta({
     id="faq"
     class="relative z-[2] overflow-hidden isolate py-[clamp(3rem,6vw,5.5rem)] px-[clamp(1.25rem,4vw,3rem)]"
   >
-    <div class="absolute -z-10 -top-[10%] -right-[20%] w-[clamp(28rem,55vw,50rem)] h-[clamp(28rem,55vw,50rem)] rounded-full bg-[radial-gradient(circle,rgba(25,68,240,0.13)_0%,rgba(25,68,240,0.06)_44%,transparent_70%)] blur-[72px] pointer-events-none" />
+    <div class="absolute -z-10 -top-[10%] -right-[20%] w-[clamp(28rem,55vw,50rem)] h-[clamp(28rem,55vw,50rem)] rounded-full bg-[radial-gradient(circle,rgba(163,114,248,0.13)_0%,rgba(163,114,248,0.06)_44%,transparent_70%)] blur-[72px] pointer-events-none" />
 
     <div class="max-w-[860px] mx-auto">
       <div class="text-center mb-[clamp(2.5rem,5vw,3.75rem)]">
         <h1 class="text-[clamp(1.9rem,4.5vw,2.75rem)] font-black text-[#F3F6FE] m-0 mb-[0.75rem] leading-[1.1] tracking-normal">
           Preguntas frecuentes
         </h1>
-        <p class="text-[1rem] font-normal leading-[1.7] text-[rgba(203,209,251,0.65)] max-w-[480px] mx-auto">
-          Todo lo que necesitás saber sobre INNOTEC 2026.
+        <p class="text-[1rem] font-normal leading-[1.7] text-[rgba(208,190,246,0.65)] max-w-[480px] mx-auto">
+          Todo lo que necesitás saber antes de inscribirte.
         </p>
       </div>
 
-      <div class="flex flex-col gap-0 border-t border-[rgba(25,68,240,0.18)]">
+      <div class="flex flex-col gap-0 border-t border-[rgba(163,114,248,0.18)]">
         <div
           v-for="(item, index) in faqItems"
           :key="item.question"
@@ -143,15 +151,15 @@ useSeoMeta({
           :style="{ transitionDelay: `${Math.min(index, 3) * 0.05}s` }"
         >
           <div
-            class="group relative border-b border-[rgba(25,68,240,0.18)] transition-colors duration-250 ease-in-out"
-            :class="{ 'border-[rgba(25,68,240,0.32)]': openIndex === index }"
+            class="group relative border-b border-[rgba(163,114,248,0.18)] transition-colors duration-250 ease-in-out"
+            :class="{ 'border-[rgba(55,230,241,0.32)]': openIndex === index }"
             @pointermove="updateFaqHover"
             @pointerleave="resetFaqHover"
           >
             <!-- Flashlight hover effect -->
             <div 
               class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-              style="background: radial-gradient(600px circle at var(--faq-hover-x, 50%) var(--faq-hover-y, 50%), rgba(25,68,240,0.06), transparent 40%);"
+              style="background: radial-gradient(600px circle at var(--faq-hover-x, 50%) var(--faq-hover-y, 50%), rgba(55,230,241,0.06), transparent 40%);"
             />
 
             <button
@@ -168,8 +176,8 @@ useSeoMeta({
               </span>
 
               <!-- Icon -->
-              <span class="flex items-center justify-center shrink-0 w-7 h-7 rounded-md border border-[rgba(25,68,240,0.28)] bg-[rgba(25,68,240,0.08)] text-[rgba(25,68,240,0.7)] transition-all duration-300 group-hover:border-[rgba(25,68,240,0.46)] group-hover:bg-[rgba(25,68,240,0.08)] group-hover:text-[#1944F0]"
-                :class="{ 'rotate-180 border-[rgba(25,68,240,0.56)] bg-[rgba(25,68,240,0.1)] text-[#1944F0]': openIndex === index }"
+              <span class="flex items-center justify-center shrink-0 w-7 h-7 rounded-md border border-[rgba(163,114,248,0.28)] bg-[rgba(163,114,248,0.08)] text-[rgba(163,114,248,0.7)] transition-all duration-300 group-hover:border-[rgba(55,230,241,0.46)] group-hover:bg-[rgba(55,230,241,0.08)] group-hover:text-[#37E6F1]"
+                :class="{ 'rotate-180 border-[rgba(55,230,241,0.56)] bg-[rgba(55,230,241,0.1)] text-[#37E6F1]': openIndex === index }"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M6 9l6 6 6-6" />
@@ -183,13 +191,13 @@ useSeoMeta({
               :style="{ maxHeight: openIndex === index ? '400px' : '0px', opacity: openIndex === index ? 1 : 0 }"
             >
               <div class="pb-[1.35rem]">
-                <p class="text-[clamp(0.9rem,1.2vw,0.975rem)] font-normal leading-[1.72] text-[rgba(203,209,251,0.72)] m-0 pl-4 border-l-2 border-[rgba(25,68,240,0.42)]">
+                <p class="text-[clamp(0.9rem,1.2vw,0.975rem)] font-normal leading-[1.72] text-[rgba(208,190,246,0.72)] m-0 pl-4 border-l-2 border-[rgba(55,230,241,0.42)]">
                   {{ item.answer }}
                 </p>
                 <NuxtLink
                   v-if="item.link"
                   :to="item.link.to"
-                  class="inline-block mt-3 ml-4 text-[0.9rem] font-bold text-[#1944F0] hover:text-[#F3F6FE] transition-colors"
+                  class="inline-block mt-3 ml-4 text-[0.9rem] font-bold text-[#D946EF] hover:text-[#F3F6FE] transition-colors"
                 >
                   {{ item.link.label }}
                 </NuxtLink>

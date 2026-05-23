@@ -28,7 +28,7 @@ const items = computed(() => [
   },
   {
     label: 'FAQ',
-    to: '/faq',
+    to: '/hackathon/faq',
     exactHash: true
   },
   {
