@@ -249,178 +249,39 @@ function staggerMotion(index: number = 0) {
       class="innotec-section acerca-section"
     >
       <div class="section-container acerca-container">
-        <!-- Bloque 1: Header -->
-        <Motion
-          v-bind="scrollMotion()"
-          class="acerca-header"
-        >
-          <div class="acerca-title-line" />
-          <h2 class="acerca-title">
-            Acerca del Congreso
-          </h2>
-          <p class="acerca-lema">
-            "INNOVAR PARA TRANSFORMAR: Del conocimiento a la acción"
-          </p>
-        </Motion>
+        <!-- ¿Qué es Innotec? Content -->
+        <div class="que-es-innotec-grid">
+          <!-- Left column: Text -->
+          <Motion
+            v-bind="scrollMotion()"
+            class="que-es-innotec-content"
+          >
+            <h2 class="que-es-innotec-title">
+              ¿Qué es<br>Innotec?
+            </h2>
 
-        <!-- Bloque 2: Descripción -->
-        <Motion
-          v-bind="scrollMotion(0.1)"
-          class="acerca-description-wrapper"
-        >
-          <p class="acerca-description-label">
-            ¿Por qué INNOTEC?
-          </p>
-          <p class="acerca-description">
-            Cada edición de INNOTEC propone un enfoque orientado a la acción: no solo escuchar, sino experimentar, conectar y llevar ideas al mundo real. El congreso reúne a estudiantes de ingeniería, arquitectura, diseño e informática con profesionales y referentes del sector, generando un espacio interdisciplinario donde el conocimiento académico se encuentra con los desafíos del mundo profesional.
-          </p>
-        </Motion>
+            <div class="que-es-innotec-text">
+              <p>
+                INNOTEC es el congreso anual organizado por estudiantes de la Facultad de Ciencias y Tecnología de la Universidad Católica "Nuestra Señora de la Asunción" de Paraguay.
+              </p>
 
-        <!-- Bloque 3: Cards de info práctica -->
-        <div class="acerca-info-grid">
-          <Motion v-bind="staggerMotion(0)">
-            <div class="acerca-info-card">
-              <div class="acerca-card-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.75"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <rect
-                    x="3"
-                    y="4"
-                    width="18"
-                    height="18"
-                    rx="2"
-                    ry="2"
-                  />
-                  <line
-                    x1="16"
-                    y1="2"
-                    x2="16"
-                    y2="6"
-                  />
-                  <line
-                    x1="8"
-                    y1="2"
-                    x2="8"
-                    y2="6"
-                  />
-                  <line
-                    x1="3"
-                    y1="10"
-                    x2="21"
-                    y2="10"
-                  />
-                </svg>
-              </div>
-              <h3 class="acerca-card-title">
-                Fechas y Horarios
-              </h3>
-              <div class="acerca-dates">
-                <div class="acerca-date-row">
-                  <span class="acerca-date-label">Jornada 1</span>
-                  <span class="acerca-date-value">Jueves 20 de agosto, 2026</span>
-                  <span class="acerca-date-time">8:00 – 21:30</span>
-                </div>
-                <div class="acerca-date-row">
-                  <span class="acerca-date-label">Jornada 2</span>
-                  <span class="acerca-date-value">Viernes 21 de agosto, 2026</span>
-                  <span class="acerca-date-time">8:00 – 18:00</span>
-                </div>
-              </div>
+              <p>
+                Es un espacio que fomenta la innovación, la colaboración y el desarrollo de nuevas ideas y soluciones tecnológicas entre estudiantes y profesionales expertos en las áreas de Tecnología, Ingeniería, Arquitectura y Diseño. Ampliando sus horizontes y preparándolos para liderar el cambio en sus respectivas áreas.
+              </p>
+
+              <p>
+                Cada edición se enfoca en temáticas relevantes basadas en la innovación y la tecnología, brindando una plataforma de aprendizaje, colaboración y desarrollo de soluciones innovadoras. El INNOTEC conecta a los estudiantes con expertos nacionales e internacionales.
+              </p>
             </div>
           </Motion>
 
-          <Motion v-bind="staggerMotion(1)">
-            <div class="acerca-info-card">
-              <div class="acerca-card-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.75"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                  <circle
-                    cx="12"
-                    cy="10"
-                    r="3"
-                  />
-                </svg>
-              </div>
-              <h3 class="acerca-card-title">
-                Sede
-              </h3>
-              <p class="acerca-card-text">
-                Salón Bicentenario<br>Paseo La Galería<br>Asunción, Paraguay
-              </p>
-              <a
-                href="https://maps.google.com/?q=Paseo+La+Galeria+Asuncion+Paraguay"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="acerca-maps-btn"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="13"
-                  height="13"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line
-                    x1="10"
-                    y1="14"
-                    x2="21"
-                    y2="3"
-                  />
-                </svg>
-                Ver en Google Maps
-              </a>
-            </div>
-          </Motion>
-
-          <Motion v-bind="staggerMotion(2)">
-            <div class="acerca-info-card">
-              <div class="acerca-card-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.75"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                  <circle
-                    cx="9"
-                    cy="7"
-                    r="4"
-                  />
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                </svg>
-              </div>
-              <h3 class="acerca-card-title">
-                ¿Para quién?
-              </h3>
-              <p class="acerca-card-text">
-                Estudiantes de ingeniería, arquitectura, diseño e informática de distintas universidades del Paraguay, y profesionales del sector tecnológico y creativo.
-              </p>
+          <!-- Right column: Image placeholder -->
+          <Motion
+            v-bind="scrollMotion(0.1)"
+            class="que-es-innotec-image-container"
+          >
+            <div class="que-es-innotec-image-placeholder">
+              <!-- Imagen será insertada aquí -->
             </div>
           </Motion>
         </div>
@@ -487,72 +348,38 @@ function staggerMotion(index: number = 0) {
       class="innotec-section objectives-section"
     >
       <div class="section-container objectives-content">
+        <!-- Columna izquierda: Título grande -->
         <Motion
           v-bind="scrollMotion()"
           class="section-header"
         >
           <h2 class="section-title">
-            ¿Cuáles son sus<br>objetivos y actividades?
+            ¿Cuáles son sus objetivos y actividades?
           </h2>
         </Motion>
 
+        <!-- Columna derecha: Kicker + cards numeradas -->
         <Motion
-          v-bind="scrollMotion(0.15)"
+          v-bind="scrollMotion(0.12)"
           class="objectives-list"
         >
           <p class="objectives-kicker">
             Con el Innotec se busca:
           </p>
-          <ul class="objectives-ul">
-            <li>
-              <span class="obj-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" /></svg>
-              </span>
-              Fomentar la innovación, la creatividad y el crecimiento personal y profesional en las áreas de ingeniería, arquitectura y diseño.
-            </li>
-            <li>
-              <span class="obj-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" /></svg>
-              </span>
-              Brindar una plataforma de intercambio de conocimientos y experiencias en el ámbito científico y tecnológico.
-            </li>
-            <li>
-              <span class="obj-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" /></svg>
-              </span>
-              Inspirar a los jóvenes estudiantes a explorar nuevas posibilidades en sus respectivas carreras, fuera del aula.
-            </li>
-          </ul>
+          <div class="objectives-cards">
+            <div class="obj-card">
+              <span class="obj-num">01</span>
+              <p class="obj-text">Fomentar la innovación, la creatividad y el crecimiento personal y profesional en las áreas de ingeniería, arquitectura y diseño.</p>
+            </div>
+            <div class="obj-card">
+              <span class="obj-num">02</span>
+              <p class="obj-text">Brindar una plataforma de intercambio de conocimientos y experiencias en el ámbito científico y tecnológico.</p>
+            </div>
+            <div class="obj-card">
+              <span class="obj-num">03</span>
+              <p class="obj-text">Inspirar a los jóvenes estudiantes a explorar nuevas posibilidades en sus respectivas carreras, fuera del aula.</p>
+            </div>
+          </div>
         </Motion>
 
         <Motion
@@ -596,17 +423,6 @@ function staggerMotion(index: number = 0) {
         </div>
       </div>
     </section>
-
-    <!-- Section divider -->
-    <div class="section-divider" />
-
-    <!-- <SponsorMarquee /> -->
-
-    <!-- Section divider -->
-    <div class="section-divider" />
-
-    <!-- Preguntas frecuentes -->
-    <FaqSection />
 
     <!-- Section divider -->
     <div class="section-divider" />
@@ -1750,60 +1566,71 @@ function staggerMotion(index: number = 0) {
 
 .objectives-list {
   max-width: 100%;
-  margin: 0 0 1.5rem;
+  margin: 0;
 }
 
 .objectives-kicker {
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: rgba(203, 209, 251, 0.78);
-  margin: 0 0 1.1rem;
+  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 900;
+  line-height: 1.4;
+  color: #CBD1FB;
+  margin: 0 0 1rem;
+  letter-spacing: 0.01em;
 }
 
-.objectives-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-  border-top: 1px solid rgba(25, 68, 240, 0.24);
-}
-
-.objectives-ul li {
-  position: relative;
+/* Cards numeradas */
+.objectives-cards {
   display: flex;
-  align-items: flex-start;
-  gap: 0.9rem;
-  padding: 1rem 0;
-  border-bottom: 1px solid rgba(25, 68, 240, 0.24);
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.96rem;
-  font-weight: 400;
-  line-height: 1.6;
-  color: rgba(203, 209, 251, 0.8);
+  flex-direction: column;
+  gap: 0.65rem;
 }
 
-.obj-icon {
+.obj-card {
+  display: grid;
+  grid-template-columns: 2.6rem 1fr;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.95rem 1.1rem;
+  background: linear-gradient(135deg, rgba(14, 21, 46, 0.78), rgba(8, 12, 22, 0.62));
+  border: 1px solid rgba(25, 68, 240, 0.2);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s ease;
+}
+
+.obj-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  right: 1rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(123, 138, 247, 0.35), transparent);
+  pointer-events: none;
+}
+
+.obj-num {
+  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: rgba(25, 68, 240, 0.65);
+  line-height: 1;
+  letter-spacing: -0.02em;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  width: 1.5rem;
-  height: 1.5rem;
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  color: #34D399;
-  margin-top: 0.1rem;
-  filter: drop-shadow(0 0 8px rgba(52, 211, 153, 0.28));
+  align-self: center;
 }
 
-.obj-icon svg {
-  width: 1rem;
-  height: 1rem;
+.obj-text {
+  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.62;
+  color: rgba(203, 209, 251, 0.78);
+  margin: 0;
 }
 
 .activities-intro {
@@ -1823,7 +1650,7 @@ function staggerMotion(index: number = 0) {
   .objectives-content {
     grid-template-columns: minmax(360px, 1fr) minmax(0, 1.1fr);
     gap: 4rem;
-    align-items: start;
+    align-items: center;
   }
 
   .objectives-content .section-header {
@@ -1838,12 +1665,6 @@ function staggerMotion(index: number = 0) {
     font-weight: 900;
     line-height: 0.95;
     margin-bottom: 1.25rem;
-  }
-
-  .objectives-content .section-description {
-    font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-    font-weight: 400;
-    margin: 0;
   }
 
   .objectives-list {
@@ -2252,6 +2073,122 @@ function staggerMotion(index: number = 0) {
     width: min(8rem, 44vw);
     height: 2px;
   }
+}
+
+/* ===== ¿QUÉ ES INNOTEC? GRID ===== */
+/* ===== QUE ES INNOTEC ===== */
+.que-es-innotec-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .que-es-innotec-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+}
+
+.que-es-innotec-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.que-es-innotec-title {
+  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 900;
+  color: #F3F6FE;
+  letter-spacing: -0.02em;
+  line-height: 1.06;
+  margin: 0;
+}
+
+.que-es-innotec-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.que-es-innotec-text p {
+  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.72;
+  color: rgba(203, 209, 251, 0.72);
+  margin: 0;
+}
+
+/* Highlight del primer párrafo para mejor jerarquía */
+.que-es-innotec-text p:first-child {
+  color: rgba(203, 209, 251, 0.88);
+  font-size: 0.975rem;
+}
+
+/* Strong highlights dentro del texto */
+.que-es-innotec-text p strong {
+  color: #CBD1FB;
+  font-weight: 600;
+}
+
+/* ===== IMAGE SIDE ===== */
+.que-es-innotec-image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+@media (min-width: 768px) {
+  .que-es-innotec-image-container {
+    min-height: 480px;
+  }
+}
+
+.que-es-innotec-image-placeholder {
+  width: 100%;
+  min-height: 340px;
+  background:
+    linear-gradient(160deg, rgba(25, 68, 240, 0.14) 0%, rgba(8, 12, 22, 0.6) 55%, rgba(123, 138, 247, 0.08) 100%);
+  border: 1px solid rgba(123, 138, 247, 0.28);
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  box-shadow:
+    0 0 0 1px rgba(25, 68, 240, 0.12),
+    0 24px 56px rgba(0, 0, 0, 0.45),
+    0 0 40px rgba(25, 68, 240, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Glow interior */
+.que-es-innotec-image-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 70% 30%, rgba(123, 138, 247, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 80%, rgba(25, 68, 240, 0.12) 0%, transparent 45%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Línea de brillo superior */
+.que-es-innotec-image-placeholder::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(123, 138, 247, 0.6), transparent);
+  pointer-events: none;
+  z-index: 2;
 }
 
 /* ===== ACERCA SECTION ===== */
