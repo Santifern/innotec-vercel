@@ -333,11 +333,6 @@ function staggerMotion(index: number = 0) {
       </div>
     </section>
 
-    <!-- Section divider -->
-    <div class="section-divider" />
-
-    <SponsorMarquee />
-
     <!-- Inscription CTA section -->
     <section
       id="inscripcion"

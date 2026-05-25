@@ -43,6 +43,7 @@ useSeoMeta({
       <NuxtPage />
     </UMain>
 
-    <AppFooter />
+    <HackathonFooter v-if="isHackathonPage" />
+    <AppFooter v-else />
   </UApp>
 </template>

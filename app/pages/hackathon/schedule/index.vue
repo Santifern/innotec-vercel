@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref, computed } from 'vue'
+
 definePageMeta({
   colorMode: 'dark'
 })
@@ -11,49 +13,37 @@ useSeoMeta({
 })
 
 const smoothEase = [0.22, 1, 0.36, 1] as [number, number, number, number]
-const scrollInViewOptions = { once: true, amount: 0.28, margin: '0px 0px -12% 0px' as const }
+const scrollInViewOptions = { once: true, amount: 0.1, margin: '0px 0px -5% 0px' as const }
 
 function scrollMotion(delay: number = 0) {
   return {
-    initial: { opacity: 0, y: 34, filter: 'blur(8px)' },
+    initial: { opacity: 0, y: 28, filter: 'blur(8px)' },
     whileInView: { opacity: 1, y: 0, filter: 'blur(0px)' },
     inViewOptions: scrollInViewOptions,
-    transition: { duration: 0.82, delay, ease: smoothEase }
+    transition: { duration: 0.72, delay, ease: smoothEase }
   }
 }
 
 function staggerMotion(index: number = 0) {
   return {
-    initial: { opacity: 0, y: 14, filter: 'blur(3px)' },
-    whileInView: { opacity: 1, y: 0, filter: 'blur(0px)' },
+    initial: { opacity: 0, y: 12 },
+    whileInView: { opacity: 1, y: 0 },
     inViewOptions: scrollInViewOptions,
-    transition: { duration: 0.52, delay: index * 0.055, ease: smoothEase }
+    transition: { duration: 0.4, delay: index * 0.07, ease: smoothEase }
   }
 }
 
-interface ScheduleEvent {
-  time: string
-  label: string
-  highlight: boolean // true = evento clave (relleno), false = actividad (outline)
-}
-
-interface ScheduleDay {
-  day: string
-  events: ScheduleEvent[]
-}
-
-//? EDITAR LOS DÍAS Y EVENTOS DEL HACKATHON AQUÍ
-const schedule: ScheduleDay[] = [
+const schedule = [
   {
     day: 'Día 1',
     events: [
-      { time: '8:00',  label: 'Acreditación',              highlight: true  },
-      { time: '8:30',  label: 'Proceso de Design Thinking', highlight: false },
-      { time: '12:30', label: 'Almuerzo',                   highlight: true  },
-      { time: '14:00', label: 'Acreditación',              highlight: true  },
-      { time: '14:15', label: 'Figma',                      highlight: false },
-      { time: '15:00', label: 'Trabajo en Grupos',          highlight: false },
-      { time: '20:00', label: 'Cierre Día 1',               highlight: true  }
+      { time: '8:00',  label: 'Acreditación',               highlight: true  },
+      { time: '8:30',  label: 'Proceso de Design Thinking',  highlight: false },
+      { time: '12:30', label: 'Almuerzo',                    highlight: true  },
+      { time: '14:00', label: 'Acreditación',                highlight: true  },
+      { time: '14:15', label: 'Figma',                       highlight: false },
+      { time: '15:00', label: 'Trabajo en Grupos',           highlight: false },
+      { time: '20:00', label: 'Cierre Día 1',                highlight: true  }
     ]
   },
   {
@@ -68,312 +58,534 @@ const schedule: ScheduleDay[] = [
     ]
   }
 ]
+
+const activeTab = ref(0)
+
+// Each non-highlight event alternates side: first → right (time left, card right), second → left (card left, time right)
+const activeDayEvents = computed(() => {
+  const events = schedule[activeTab.value]?.events ?? []
+  let nonHighlightCount = 0
+  return events.map((event) => {
+    let side = 'center'
+    if (!event.highlight) {
+      side = nonHighlightCount % 2 === 0 ? 'right' : 'left'
+      nonHighlightCount++
+    }
+    return { ...event, side }
+  })
+})
 </script>
 
 <template>
-  <section
-    id="cronograma"
-    class="innotec-section hackathon-schedule-section"
-  >
-    <div class="schedule-bg-glow schedule-bg-glow--left" />
-    <div class="schedule-bg-glow schedule-bg-glow--right" />
+  <section id="cronograma" class="schedule-section">
+    <!-- BG Effects -->
+    <div class="bg-grid" />
+    <div class="bg-glow bg-glow--l" />
+    <div class="bg-glow bg-glow--r" />
 
-    <div class="section-container">
+    <div class="s-container">
       <!-- Header -->
-      <Motion
-        v-bind="scrollMotion()"
-        class="schedule-header"
-      >
-        <span class="section-label">Hackathon</span>
-        <h2 class="section-title">
-          Cronograma
-        </h2>
-        <p class="section-description">
+      <Motion v-bind="scrollMotion()" class="s-header">
+        <h2 class="s-title">Cronograma</h2>
+        <p class="s-subtitle">
           Dos días de innovación, trabajo en equipo y aprendizaje intensivo.
         </p>
       </Motion>
 
-      <!-- Days grid -->
-      <div class="schedule-days">
-        <Motion
-          v-for="(dayData, dayIndex) in schedule"
-          :key="dayData.day"
-          v-bind="scrollMotion(dayIndex * 0.12)"
-          class="schedule-day"
-        >
-          <!-- Day header -->
-          <div class="schedule-day-header">
-            <div class="schedule-day-meta">
-              <h3 class="schedule-day-title">
-                Cronograma
-                <strong>{{ dayData.day }}</strong>
-              </h3>
-              <div class="schedule-day-badge">
-                HACKATHON
-              </div>
-            </div>
-            <div class="schedule-col-labels">
-              <span>Horario</span>
-              <span class="schedule-col-divider" aria-hidden="true" />
-              <span>Evento</span>
-            </div>
-          </div>
+      <!-- Tabs -->
+      <Motion v-bind="scrollMotion(0.1)" class="tabs-row">
+        <div class="tabs">
+          <button
+            v-for="(day, i) in schedule"
+            :key="i"
+            class="tab"
+            :class="{ 'tab--active': activeTab === i }"
+            @click="activeTab = i"
+          >
+            <span class="tab__title">{{ day.day }}</span>
+            <span class="tab__sub">CRONOGRAMA {{ day.day.toUpperCase() }}</span>
+          </button>
+        </div>
+      </Motion>
 
-          <!-- Events -->
-          <div class="schedule-events">
-            <Motion
-              v-for="(event, eventIndex) in dayData.events"
-              :key="`${dayData.day}-${event.time}`"
-              v-bind="staggerMotion(eventIndex)"
-            >
-              <div
-                class="schedule-event"
-                :class="event.highlight ? 'schedule-event--highlight' : 'schedule-event--default'"
-              >
-                <span class="schedule-event-time">{{ event.time }}</span>
-                <span class="schedule-event-label">{{ event.label }}</span>
+      <!-- Timeline -->
+      <div class="tl">
+        <!-- Continuous vertical line behind everything -->
+        <div class="tl__line" />
+
+        <!-- Header pill with dot below -->
+        <div class="tl__top">
+          <div class="tl__pill">CRONOGRAMA DÍA {{ activeTab + 1 }}</div>
+          <div class="tl__top-dot" />
+        </div>
+
+        <!-- Events -->
+        <div class="tl__events">
+          <Motion
+            v-for="(event, i) in activeDayEvents"
+            :key="`${activeTab}-${event.time}-${i}`"
+            v-bind="staggerMotion(i)"
+            class="tl-event"
+            :class="`tl-event--${event.side}`"
+          >
+            <!-- ===== HIGHLIGHT (CENTER) ===== -->
+            <template v-if="event.side === 'center'">
+              <!-- dot sits above the pill on the center line -->
+              <div class="tl-event__pre-dot" />
+              <!-- full-width pill -->
+              <div class="hl-pill">
+                <span class="hl-pill__time">{{ event.time }}</span>
+                <span class="hl-pill__sep" />
+                <span class="hl-pill__label">{{ event.label.toUpperCase() }}</span>
               </div>
-            </Motion>
-          </div>
-        </Motion>
+            </template>
+
+            <!-- ===== SIDE RIGHT: time LEFT · dot · card RIGHT ===== -->
+            <template v-else-if="event.side === 'right'">
+              <div class="tl-event__time tl-event__time--r">{{ event.time }}</div>
+              <div class="tl-event__dot" />
+              <div class="tl-event__card tl-event__card--r">{{ event.label }}</div>
+            </template>
+
+            <!-- ===== SIDE LEFT: card LEFT · dot · time RIGHT ===== -->
+            <template v-else>
+              <div class="tl-event__card tl-event__card--l">{{ event.label }}</div>
+              <div class="tl-event__dot" />
+              <div class="tl-event__time tl-event__time--l">{{ event.time }}</div>
+            </template>
+          </Motion>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-.hackathon-schedule-section {
+/* ===== SECTION ===== */
+.schedule-section {
   position: relative;
-  z-index: 2;
+  min-height: 100vh;
+  background: #0c0918;
   overflow: hidden;
-  isolation: isolate;
-  padding-top: clamp(3rem, 6vw, 5.5rem);
-  padding-bottom: clamp(3rem, 6vw, 5.5rem);
+  padding-top: clamp(5rem, 10vw, 7rem);
+  padding-bottom: clamp(4rem, 8vw, 6rem);
   padding-inline: clamp(1.25rem, 4vw, 3rem);
 }
 
-.schedule-bg-glow {
+/* BG Grid */
+.bg-grid {
   position: absolute;
-  z-index: -1;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(163, 114, 248, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(163, 114, 248, 0.055) 1px, transparent 1px);
+  background-size: 72px 72px;
+  pointer-events: none;
+}
+
+/* BG Glows */
+.bg-glow {
+  position: absolute;
+  z-index: 0;
   border-radius: 50%;
   pointer-events: none;
-  filter: blur(90px);
+  filter: blur(120px);
 }
-
-.schedule-bg-glow--left {
-  top: 10%;
-  left: -18%;
-  width: clamp(24rem, 48vw, 44rem);
-  height: clamp(24rem, 48vw, 44rem);
-  background: radial-gradient(circle, rgba(25, 68, 240, 0.14) 0%, rgba(25, 68, 240, 0.06) 50%, transparent 72%);
+.bg-glow--l {
+  top: 15%;
+  left: -8%;
+  width: 480px;
+  height: 480px;
+  background: rgba(100, 50, 220, 0.12);
 }
-
-.schedule-bg-glow--right {
+.bg-glow--r {
   bottom: 5%;
-  right: -14%;
-  width: clamp(20rem, 38vw, 36rem);
-  height: clamp(20rem, 38vw, 36rem);
-  background: radial-gradient(circle, rgba(55, 230, 241, 0.07) 0%, transparent 65%);
+  right: -8%;
+  width: 380px;
+  height: 380px;
+  background: rgba(80, 30, 180, 0.1);
 }
 
-.section-container {
-  max-width: 1040px;
+/* Container */
+.s-container {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
   margin: 0 auto;
 }
 
 /* ===== HEADER ===== */
-.schedule-header {
+.s-header {
   text-align: center;
-  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 2rem;
 }
 
-.section-label {
-  display: inline-block;
-  font-size: 1.5rem;
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-weight: 900;
-  color: #D946EF;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  margin-bottom: 0.75rem;
-  text-shadow: 0 0 18px rgba(217, 70, 239, 0.3);
-}
-
-.section-title {
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: clamp(1.9rem, 4.5vw, 2.75rem);
+.s-title {
+  font-family: 'Fractul Black', 'Fractul', 'Inter', sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 900;
   color: #F3F6FE;
-  margin: 0 0 0.75rem;
-  line-height: 1.1;
-  letter-spacing: 0;
+  margin: 0 0 0.65rem;
+  letter-spacing: -0.02em;
 }
 
-.section-description {
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
+.s-subtitle {
   font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.7;
-  color: rgba(203, 209, 251, 0.65);
-  max-width: 440px;
+  line-height: 1.6;
+  /* Gradient text matching the reference image */
+  background: linear-gradient(90deg, #7B9CF8 0%, #a372f8 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  max-width: 420px;
   margin: 0 auto;
 }
 
-/* ===== DAYS GRID ===== */
-.schedule-days {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
+/* ===== TABS ===== */
+.tabs-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
 }
 
-@media (min-width: 860px) {
-  .schedule-days {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-  }
+.tabs {
+  display: inline-flex;
+  background: rgba(18, 10, 38, 0.95);
+  border: 1px solid rgba(163, 114, 248, 0.2);
+  border-radius: 8px;
+  padding: 4px;
+  gap: 4px;
 }
 
-/* ===== SINGLE DAY ===== */
-.schedule-day {
+.tab {
   display: flex;
   flex-direction: column;
-  gap: 0;
-  border: 1px solid rgba(123, 138, 247, 0.22);
-  border-radius: 12px;
-  overflow: hidden;
-  background: linear-gradient(180deg, rgba(13, 20, 40, 0.72), rgba(9, 14, 28, 0.62));
-  box-shadow: inset 0 1px 0 rgba(243, 246, 254, 0.04);
-}
-
-/* ===== DAY HEADER ===== */
-.schedule-day-header {
-  padding: 1.1rem 1.4rem 0;
-  background: rgba(25, 68, 240, 0.06);
-  border-bottom: 1px solid rgba(123, 138, 247, 0.18);
-}
-
-.schedule-day-meta {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
+  padding: 0.8rem 2.5rem;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  min-width: 155px;
 }
 
-.schedule-day-title {
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 1.05rem;
-  font-weight: 400;
-  color: rgba(203, 209, 251, 0.8);
-  margin: 0;
-  letter-spacing: 0;
+.tab--active {
+  background: rgba(80, 35, 160, 0.35);
+  border-color: rgba(163, 114, 248, 0.5);
 }
 
-.schedule-day-title strong {
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
+.tab__title {
+  font-family: 'Fractul Black', 'Fractul', 'Inter', sans-serif;
   font-weight: 900;
+  font-size: 1rem;
   color: #F3F6FE;
+  display: block;
+  margin-bottom: 0.2rem;
 }
 
-.schedule-day-badge {
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  color: rgba(123, 138, 247, 0.7);
-  border: 1px solid rgba(123, 138, 247, 0.28);
-  border-radius: 4px;
-  padding: 0.2rem 0.6rem;
-  background: rgba(25, 68, 240, 0.08);
-}
-
-.schedule-col-labels {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding-bottom: 0.6rem;
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.72rem;
-  font-weight: 900;
-  color: rgba(123, 138, 247, 0.6);
+.tab__sub {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: rgba(203, 209, 251, 0.45);
+  display: block;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
 }
 
-.schedule-col-divider {
-  display: inline-block;
+.tab--active .tab__sub {
+  color: rgba(203, 209, 251, 0.85);
+}
+
+/* ===== TIMELINE WRAPPER ===== */
+.tl {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Center vertical line runs full height */
+.tl__line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
   width: 1px;
-  height: 12px;
-  background: rgba(123, 138, 247, 0.32);
-  flex-shrink: 0;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    180deg,
+    rgba(163, 114, 248, 0.9) 0%,
+    rgba(163, 114, 248, 0.4) 60%,
+    rgba(163, 114, 248, 0.08) 100%
+  );
+  z-index: 0;
+}
+
+/* Top: white pill + dot */
+.tl__top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.tl__pill {
+  background: #F3F6FE;
+  color: #0c0918;
+  font-family: 'Fractul Black', 'Fractul', 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  padding: 0.65rem 1.75rem;
+  border-radius: 100px;
+}
+
+.tl__top-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #a372f8;
+  box-shadow: 0 0 10px rgba(163, 114, 248, 0.9);
+  z-index: 5;
 }
 
 /* ===== EVENTS LIST ===== */
-.schedule-events {
+.tl__events {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding: 0.75rem 0.75rem 0.75rem;
+  gap: 1.75rem;
+  position: relative;
+  z-index: 1;
 }
 
-/* ===== SINGLE EVENT ===== */
-.schedule-event {
+/* ===== BASE EVENT ===== */
+.tl-event {
+  width: 100%;
+  position: relative;
+}
+
+/* ===== CENTER / HIGHLIGHT EVENT ===== */
+.tl-event--center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+/* Dot above the highlight pill */
+.tl-event__pre-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #b89bf8;
+  box-shadow: 0 0 10px rgba(163, 114, 248, 0.85);
+  z-index: 5;
+  flex-shrink: 0;
+}
+
+/* The full-width highlight pill */
+.hl-pill {
   display: flex;
   align-items: center;
-  gap: 0;
-  border-radius: 7px;
-  overflow: hidden;
-  min-height: 2.75rem;
+  justify-content: center;
+  background: linear-gradient(90deg, #130a2e 0%, #1f0d50 35%, #1f0d50 65%, #130a2e 100%);
+  border: 1px solid rgba(163, 114, 248, 0.4);
+  box-shadow: 0 0 24px rgba(100, 40, 200, 0.2);
+  border-radius: 100px;
+  overflow: visible;
+  min-height: 52px;
+  position: relative;
+  z-index: 2;
+  padding: 0;
+  width: auto;
+  min-width: 520px;
+  text-align: center;
 }
 
-.schedule-event-time {
+/* Time portion of highlight pill */
+.hl-pill__time {
+  font-family: 'Fractul Black', 'Fractul', 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 1rem;
+  color: #F3F6FE;
+  padding: 0.85rem 0.75rem 0.85rem 1.75rem;
+  white-space: nowrap;
   flex-shrink: 0;
-  width: 4.25rem;
-  padding: 0.6rem 0.75rem;
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.84rem;
-  font-weight: 900;
-  text-align: center;
-  line-height: 1;
 }
 
-.schedule-event-label {
+/* Vertical separator line inside pill */
+.hl-pill__sep {
+  display: block;
+  width: 1px;
+  height: 26px;
+  background: rgba(163, 114, 248, 0.35);
+  flex-shrink: 0;
+  margin: 0 1rem;
+}
+
+/* Label portion of highlight pill */
+.hl-pill__label {
+  font-family: 'Fractul Black', 'Fractul', 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 1rem;
+  color: #F3F6FE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.75rem 0.85rem 0.75rem;
+  white-space: nowrap;
   flex: 1;
-  padding: 0.6rem 1rem;
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.88rem;
+}
+
+/* ===== SIDE RIGHT EVENT: time LEFT · dot · card RIGHT ===== */
+.tl-event--right {
+  display: flex;
+  align-items: center;
+}
+
+/* ===== SIDE LEFT EVENT: card LEFT · dot · time RIGHT ===== */
+.tl-event--left {
+  display: flex;
+  align-items: center;
+}
+
+/* Large time (both sides) */
+.tl-event__time {
+  flex: 1;
+  font-family: 'Fractul Black', 'Fractul', 'Inter', sans-serif;
   font-weight: 900;
-  line-height: 1.3;
-  text-align: center;
-}
-
-/* Highlight event (relleno) */
-.schedule-event--highlight {
-  background: linear-gradient(90deg, #1235C8 0%, #1944F0 52%, #2B45F3 100%);
-  border: 1px solid rgba(55, 230, 241, 0.28);
-  box-shadow: 0 0 18px rgba(25, 68, 240, 0.28), inset 0 1px 0 rgba(243, 246, 254, 0.1);
-}
-
-.schedule-event--highlight .schedule-event-time {
-  color: rgba(203, 209, 251, 0.72);
-  border-right: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.schedule-event--highlight .schedule-event-label {
+  font-size: clamp(1.6rem, 3vw, 2rem);
   color: #F3F6FE;
 }
 
-/* Default event (outline) */
-.schedule-event--default {
-  background: rgba(25, 68, 240, 0.06);
-  border: 1px solid rgba(123, 138, 247, 0.22);
+.tl-event__time--r {
+  text-align: right;
+  padding-right: 1.5rem;
 }
 
-.schedule-event--default .schedule-event-time {
-  color: rgba(123, 138, 247, 0.72);
-  border-right: 1px solid rgba(123, 138, 247, 0.18);
+.tl-event__time--l {
+  text-align: left;
+  padding-left: 1.5rem;
 }
 
-.schedule-event--default .schedule-event-label {
-  color: rgba(203, 209, 251, 0.82);
+/* Center dot (flex child, stays at center via equal flex cols) */
+.tl-event__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #9B73F8;
+  box-shadow: 0 0 12px rgba(163, 114, 248, 0.9);
+  flex-shrink: 0;
+  z-index: 5;
+}
+
+/* Card (both sides) */
+.tl-event__card {
+  flex: 1;
+  background: rgba(10, 6, 26, 0.75);
+  border: 1px solid rgba(163, 114, 248, 0.22);
+  border-radius: 6px;
+  padding: 1rem 1.5rem;
+  font-family: 'Fractul Black', 'Fractul', 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 1rem;
+  color: #F3F6FE;
+}
+
+.tl-event__card--r {
+  text-align: left;
+  margin-left: 1.5rem;
+}
+
+.tl-event__card--l {
+  text-align: left;
+  margin-right: 1.5rem;
+}
+
+/* ===== MOBILE (≤ 640px) ===== */
+@media (max-width: 640px) {
+  /* Shift the center line to the left */
+  .tl__line {
+    left: 1.25rem;
+    transform: none;
+  }
+
+  .tl__top-dot {
+    /* keep aligned with the line */
+  }
+
+  /* Highlight events: left-anchored */
+  .tl-event--center {
+    align-items: flex-start;
+    padding-left: 2.5rem;
+  }
+
+  .tl-event__pre-dot {
+    position: absolute;
+    left: 1.25rem;
+    top: 0;
+    transform: translateX(-50%);
+  }
+
+  .hl-pill {
+    border-radius: 8px;
+    display: flex;
+    min-width: 420px;
+    text-align: center;
+  }
+
+  .hl-pill__time {
+    padding: 0.85rem 0.6rem 0.85rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .hl-pill__sep {
+    margin: 0 0.75rem;
+  }
+
+  .hl-pill__label {
+    font-size: 0.9rem;
+    padding: 0.85rem 1.25rem 0.85rem 0.6rem;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Side events: all flow right */
+  .tl-event--right,
+  .tl-event--left {
+    padding-left: 2.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .tl-event__dot {
+    position: absolute;
+    left: 1.25rem;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .tl-event__time--r,
+  .tl-event__time--l {
+    text-align: left;
+    padding: 0;
+    font-size: 1.3rem;
+    color: rgba(163, 114, 248, 0.9);
+  }
+
+  .tl-event__card--r,
+  .tl-event__card--l {
+    margin: 0;
+    width: 100%;
+  }
 }
 </style>
