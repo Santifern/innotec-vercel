@@ -10,7 +10,6 @@ useSeoMeta({
 })
 
 const registration = {
-  eyebrow: 'Hackathon',
   title: 'Inscripcion Hackathon 2026',
   description: 'Completa el formulario para registrar tu participacion o la de tu equipo en el Hackathon 2026.',
   date: 'Fecha pendiente de confirmacion',
@@ -46,9 +45,6 @@ function getGoogleFormEmbedUrl(url: string) {
         </NuxtLink>
 
         <div class="registration-heading">
-          <p class="registration-kicker">
-            {{ registration.eyebrow }}
-          </p>
           <h1>{{ registration.title }}</h1>
           <p>
             {{ registration.description }}
