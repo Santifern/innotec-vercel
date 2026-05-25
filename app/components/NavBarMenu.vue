@@ -8,7 +8,7 @@ const items = computed(() => [
   },
   {
     label: 'Acerca de',
-    to: '/#acerca',
+    to: '/acerca',
     exactHash: true
   },
   {

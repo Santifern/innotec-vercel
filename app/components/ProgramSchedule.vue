@@ -26,204 +26,151 @@ const days: Array<{ id: DayId, label: string, dateLabel: string }> = [
 
 const scheduleByDay: Record<DayId, ScheduleEntry[]> = {
   'day-1': [
-    { time: '7:30', kind: 'Acreditación', isBreak: true, span: true },
-    { time: '8:30', kind: 'Apertura', isBreak: true, span: true },
+    { time: '07:30', kind: 'Acreditación', isBreak: true, span: true },
+    { time: '08:30', kind: 'Ceremonia de apertura', isBreak: true, span: true },
     {
-      time: '9:00',
-      kind: 'Charla',
-      speaker: 'Maximiliano Corsi',
+      time: '09:00',
+      kind: 'Charla Magistral 1',
       room: 'Salón Magistral',
-      title: 'Transformando el Futuro Energético del Paraguay: Biocombustibles, Innovación y Eficiencia con Impacto'
+      title: 'EJE CIVIL - EXPERIENCIAS EN EL TRABAJO',
+      span: true
     },
-    { time: '9:45', kind: 'Receso', isBreak: true, span: true },
+    { time: '09:45', kind: 'Receso', isBreak: true, span: true },
     {
       time: '10:00',
-      kind: 'Charla',
-      speaker: 'Juan Migliore',
+      kind: 'Debate / Roundtable',
       room: 'Salón Magistral',
-      title: 'Lo que nadie te cuenta de Construir tan Alto'
+      title: 'Mix de carreras con un mismo enfoque',
+      span: true
     },
     { time: '10:45', kind: 'Coffee Break', isBreak: true, span: true },
     {
-      time: '11:45',
-      kind: 'Charla',
-      speaker: 'Laura Flores',
+      time: '11:25',
+      kind: 'Charla Magistral 2',
       room: 'Salón Magistral',
-      title: 'Seguridad Industrial en Plantas de Producción'
+      title: 'EJE ARQUI / DISEÑO',
+      span: true
     },
-    { time: '12:30', kind: 'Almuerzo', isBreak: true, span: true },
-    { time: '14:00', kind: 'Reapertura', isBreak: true, span: true },
     {
-      time: '14:15',
+      time: '12:10',
+      kind: 'Charla',
+      room: 'Salón Magistral',
+      title: 'GESTIÓN DE PROYECTOS',
+      span: true
+    },
+    { time: '13:00', kind: 'Almuerzo', isBreak: true, span: true },
+    {
+      time: '15:00',
+      kind: 'Talleres simultáneos',
+      activities: [
+        {
+          room: 'Salón 1',
+          kind: 'Taller 1',
+          title: 'Civil / Arqui (Construcción)'
+        },
+        {
+          room: 'Salón 2',
+          kind: 'Taller 2',
+          title: 'Industrial / Informática'
+        }
+      ]
+    },
+    { time: '16:30', kind: 'Receso', isBreak: true, span: true },
+    {
+      time: '16:45',
       kind: 'Charlas simultáneas',
       activities: [
         {
           room: 'Salón 1',
-          kind: 'Charla',
-          speaker: 'Adriana Añazco',
-          title: 'Del Plan al Impacto: Innovación, Gestión y Sostenibilidad en la Dirección de Proyectos'
+          kind: 'Charla Técnica',
+          title: 'Civil'
         },
         {
           room: 'Salón 2',
-          kind: 'Charla',
-          speaker: 'Fabian Dominguez',
-          title: 'Finanzas Públicas y Tributos: Lo que todo Profesional del Futuro debe entender del Estado'
+          kind: 'Charla Técnica',
+          title: 'Industrial'
         }
       ]
     },
-    { time: '15:00', kind: 'Receso', isBreak: true, span: true },
     {
-      time: '15:15',
+      time: '17:30',
       kind: 'Charlas simultáneas',
       activities: [
         {
           room: 'Salón 1',
-          kind: 'Charla',
-          speaker: 'Camilo Boggiano',
-          title: 'Juventud y Desarrollo: Claves para Construir un Futuro Competitivo desde Paraguay'
+          kind: 'Charla Técnica',
+          title: 'Arquitectura'
         },
         {
           room: 'Salón 2',
-          kind: 'Charla',
-          speaker: 'Rodrigo Sánchez',
-          title: 'El Acero también Innova: cómo la Industria Tradicional se Transforma con Tecnología y Sostenibilidad'
+          kind: 'Charla Técnica',
+          title: 'Informática / Electrónica / Análisis'
         }
       ]
     },
-    { time: '16:00', kind: 'Coffee Break', isBreak: true, span: true },
-    {
-      time: '16:15',
-      kind: 'Charlas simultáneas',
-      activities: [
-        {
-          room: 'Salón 1',
-          kind: 'Charla',
-          speaker: 'Rodrigo Campos Cervera',
-          title: 'De la Idea al Producto: cómo Nacen las Soluciones Digitales en Paraguay'
-        },
-        {
-          room: 'Salón 2',
-          kind: 'Charla',
-          speaker: 'Héctor Pérez',
-          title: 'De Raíces a Resultados: Innovación Sostenible con EDGE'
-        }
-      ]
-    },
-    { time: '17:00', kind: 'Break', isBreak: true, span: true },
-    {
-      time: '19:00',
-      kind: 'Charlas simultáneas',
-      activities: [
-        {
-          room: 'Salón 1',
-          kind: 'Charla',
-          speaker: 'Elian y Michael',
-          title: 'Diseñar sin Manual: Lo que No te Cuentan de la Vida en Agencia'
-        },
-        {
-          room: 'Salón 2',
-          kind: 'Charla',
-          speaker: 'Cesar Ayala',
-          title: 'Datos: el Recurso Invisible que Construye el Futuro'
-        }
-      ]
-    },
-    { time: '19:45', kind: 'Receso', isBreak: true, span: true },
+    { time: '18:15', kind: 'Bloque turno noche', isBreak: true, span: true },
     {
       time: '20:00',
-      kind: 'Talleres simultáneos',
+      kind: 'Talleres y Charlas',
       activities: [
         {
           room: 'Salón 1',
-          kind: 'Taller',
-          speaker: 'Rocio Rojas',
-          title: 'Más Likes, Más Clientes: El Arte de Vender Diseño en el Mundo Digital'
+          kind: 'Taller 3',
+          title: 'Diseño + Arquitectura + Charla técnica'
         },
         {
           room: 'Salón 2',
-          kind: 'Taller',
-          speaker: 'Pedro Coronel',
-          title: 'Datos que Valen Oro: Big Data e IA como Motores del Paraguay del Siglo XXI'
+          kind: 'Taller 4',
+          title: 'Informática / Electrónica / Análisis + Charla técnica'
         }
       ]
-    },
-    { time: '21:30', kind: 'Cierre Día 1', isBreak: true, span: true }
+    }
   ],
   'day-2': [
-    { time: '8:00', kind: 'Acreditación', isBreak: true, span: true },
-    { time: '8:30', kind: 'Apertura', isBreak: true, span: true },
+    { time: '08:00', kind: 'Acreditación', isBreak: true, span: true },
+    { time: '08:30', kind: 'Apertura', isBreak: true, span: true },
     {
-      time: '9:00',
-      kind: 'Talleres simultáneos',
+      time: '09:00',
+      kind: 'Actividades simultáneas',
       activities: [
         {
           room: 'Salón 1',
           kind: 'Taller',
-          speaker: 'Diego y Gian Franco',
-          title: 'Coordinación, Estabilidad y Economía: Desafío de la Ingeniería Moderna'
+          title: 'START UP / PITCH (Liderazgo / Inicio de trabajo)'
         },
         {
           room: 'Salón 2',
-          kind: 'Taller',
-          speaker: 'Fernando Espinola',
-          title: 'Desafío de un Líder Joven en Medio de la Turbulencia Generacional'
+          kind: 'Visitas Técnicas',
+          title: 'RRPP'
         }
       ]
     },
-    { time: '10:30', kind: 'Receso', isBreak: true, span: true },
+    { time: '13:00', kind: 'Almuerzo', isBreak: true, span: true },
     {
-      time: '10:45',
-      kind: 'Talleres simultáneos',
-      activities: [
-        {
-          room: 'Salón 1',
-          kind: 'Taller',
-          speaker: 'Mercedes Romero',
-          title: 'Liderazgo, Influencia y Manejo de Equipos'
-        },
-        {
-          room: 'Salón 2',
-          kind: 'Taller',
-          speaker: 'José Alvarez',
-          title: 'Startup Sprint: del Problema al MVP'
-        }
-      ]
-    },
-    { time: '12:15', kind: 'Almuerzo', isBreak: true, span: true },
-    { time: '14:00', kind: 'Reapertura', isBreak: true, span: true },
-    {
-      time: '14:15',
-      kind: 'Charla',
-      speaker: 'Aldo Cristaldo',
+      time: '15:00',
+      kind: 'Charla Magistral',
       room: 'Salón Magistral',
-      title: 'Análisis Dicotómico en la Construcción'
+      title: 'INDUSTRIAL / CIVIL + EMPRENDEDURISMO',
+      span: true
     },
-    { time: '15:00', kind: 'Receso', isBreak: true, span: true },
+    { time: '15:45', kind: 'Receso', isBreak: true, span: true },
     {
-      time: '15:15',
-      kind: 'Charla',
-      speaker: 'Ing Rodney Roman y Ing. Andrea Tejera',
+      time: '16:00',
+      kind: 'Charla Magistral',
       room: 'Salón Magistral',
-      title: 'De ASHRAE: qué es, qué hacemos, las Actividades del Student Branch y sus Beneficios.'
+      title: 'INFORMATICA / ANALISIS DE SISTEMAS',
+      span: true
     },
-    { time: '16:00', kind: 'Receso', isBreak: true, span: true },
     {
-      time: '16:15',
-      kind: 'Charla',
-      speaker: 'Ruben Jacks',
+      time: '16:45',
+      kind: 'Charla Magistral',
       room: 'Salón Magistral',
-      title: 'Liderazgo: El Secreto para Construir Empresas que Trascienden'
+      title: 'CIERRE IMPORTANTE',
+      span: true
     },
-    { time: '17:00', kind: 'Receso', isBreak: true, span: true },
-    {
-      time: '17:15',
-      kind: 'Charla',
-      speaker: 'Eduardo Viedma',
-      room: 'Salón Magistral',
-      title: 'Economía energética 360°: innovación, eficiencia y oportunidades para Paraguay'
-    },
+    { time: '17:45', kind: 'Presentación breve ganador Hackathon', isBreak: true, span: true },
     { time: '18:00', kind: 'Premiación Hackathon', isBreak: true, span: true },
-    { time: '21:30', kind: 'Clausura', isBreak: true, span: true }
+    { time: '19:00', kind: 'Clausura del congreso', isBreak: true, span: true }
   ]
 }
 
