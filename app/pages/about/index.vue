@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Motion } from 'motion-v'
-
 useHead({
   title: 'Acerca de - Innotec 2026',
   meta: [
@@ -224,14 +222,14 @@ const staggerMotion = (index: number, baseDelay = 0.1) => ({
               <div class="org-image-placeholder">
                 <NuxtImg
                   src="/placeholder-person-3.jpg"
-                  alt="Amelia Huerta"
+                  alt="Amelia Nery Huerta"
                   class="org-image"
                   fallback="/logo-innotec.svg"
                 />
               </div>
               <div class="org-info">
                 <span class="org-badge">ORGANIZADORA</span>
-                <h3 class="org-name">Amelia Huerta</h3>
+                <h3 class="org-name">Amelia Nery Huerta</h3>
                 <p class="org-role">Directora general</p>
               </div>
             </div>
@@ -348,81 +346,80 @@ const staggerMotion = (index: number, baseDelay = 0.1) => ({
   margin: 0;
 }
 
-/* ===== SHARED SECTIONS ===== */
+/* ===== EJES TEMATICOS SECTION ===== */
+.acerca-ejes-section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(5rem, 10vw, 8rem) clamp(1.25rem, 4vw, 3rem);
+}
+
 .section-header-center {
   text-align: center;
-  margin-bottom: 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
 }
 
 .section-title {
   font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 900;
   margin: 0;
+  color: #F3F6FE;
   letter-spacing: -0.01em;
 }
 
 .section-subtitle {
   font-size: 1rem;
   color: rgba(203, 209, 251, 0.7);
-  margin: 0.5rem 0 0;
-}
-
-/* ===== EJES TEMATICOS ===== */
-.acerca-ejes-section {
-  position: relative;
-  z-index: 1;
-  padding-block: clamp(3rem, 5vw, 5rem);
+  margin-top: 0.5rem;
+  margin-bottom: 0;
 }
 
 .ejes-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .ejes-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(2rem, 4vw, 3rem);
 }
 
 .eje-card {
-  background: linear-gradient(145deg, rgba(14, 21, 46, 0.4), rgba(8, 12, 22, 0.6));
-  border: 1px solid rgba(25, 68, 240, 0.15);
+  position: relative;
+  padding: clamp(2rem, 4vw, 2.5rem);
+  border: 1px solid rgba(25, 68, 240, 0.24);
   border-radius: 12px;
-  padding: 2rem;
+  background: linear-gradient(135deg, rgba(14, 21, 46, 0.4), rgba(8, 12, 22, 0.3));
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
   height: 100%;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .eje-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(25, 68, 240, 0.4);
+  border-color: rgba(123, 138, 247, 0.5);
+  background: linear-gradient(135deg, rgba(14, 21, 46, 0.6), rgba(8, 12, 22, 0.5));
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(25, 68, 240, 0.2);
 }
 
 .eje-num {
+  display: block;
   font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
   font-size: 2.5rem;
   font-weight: 900;
-  color: rgba(25, 68, 240, 0.4);
-  line-height: 1;
+  color: rgba(123, 138, 247, 0.4);
   margin-bottom: 1rem;
+  line-height: 1;
 }
 
 .eje-title {
   font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
   font-size: 1.25rem;
   font-weight: 900;
-  line-height: 1.3;
+  color: #CBD1FB;
   margin: 0 0 1rem;
-  color: #F3F6FE;
+  line-height: 1.3;
 }
 
 .eje-desc {
@@ -436,39 +433,35 @@ const staggerMotion = (index: number, baseDelay = 0.1) => ({
 .acerca-info-section {
   position: relative;
   z-index: 1;
-  padding-block: clamp(3rem, 5vw, 5rem);
+  padding: clamp(5rem, 10vw, 8rem) clamp(1.25rem, 4vw, 3rem);
 }
 
 .info-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-@media (min-width: 900px) {
-  .info-grid {
-    grid-template-columns: 1fr 1.5fr;
-    gap: 2rem;
-  }
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: start;
 }
 
 .info-left-col {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: clamp(2rem, 4vw, 2.5rem);
 }
 
 .info-card {
-  background: linear-gradient(145deg, rgba(14, 21, 46, 0.6), rgba(8, 12, 22, 0.8));
-  border: 1px solid rgba(25, 68, 240, 0.2);
+  border: 1px solid rgba(25, 68, 240, 0.24);
   border-radius: 12px;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
+  background: linear-gradient(135deg, rgba(14, 21, 46, 0.4), rgba(8, 12, 22, 0.3));
+  padding: clamp(1.5rem, 3vw, 2rem);
+  transition: all 0.3s ease;
 }
 
-.info-card-map {
-  height: 100%;
+.info-card:hover {
+  border-color: rgba(123, 138, 247, 0.5);
+  background: linear-gradient(135deg, rgba(14, 21, 46, 0.6), rgba(8, 12, 22, 0.5));
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(25, 68, 240, 0.2);
 }
 
 .info-card-header {
@@ -479,212 +472,194 @@ const staggerMotion = (index: number, baseDelay = 0.1) => ({
 }
 
 .info-icon {
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  background: rgba(25, 68, 240, 0.1);
   color: #7B8AF7;
 }
 
 .info-card-title {
   font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   font-weight: 900;
+  color: #CBD1FB;
   margin: 0;
 }
 
+.info-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .date-block {
-  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
 }
 
 .date-block:last-child {
-  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .date-badge {
   display: inline-block;
   font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 900;
-  color: #1944F0;
-  background: rgba(25, 68, 240, 0.15);
-  padding: 0.2rem 0.6rem;
-  border-radius: 4px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #7B8AF7;
   margin-bottom: 0.5rem;
-  letter-spacing: 0.05em;
 }
 
 .date-text {
   font-size: 0.95rem;
-  line-height: 1.5;
+  line-height: 1.6;
   color: rgba(203, 209, 251, 0.85);
   margin: 0;
-}
-
-.date-text strong {
-  color: #F3F6FE;
 }
 
 .para-quien-text {
   font-size: 0.95rem;
-  line-height: 1.6;
-  color: rgba(203, 209, 251, 0.85);
+  line-height: 1.7;
+  color: rgba(203, 209, 251, 0.8);
   margin: 0;
+}
+
+.info-card-map {
+  display: flex;
+  flex-direction: column;
 }
 
 .sede-text {
   font-size: 0.95rem;
+  color: rgba(203, 209, 251, 0.8);
+  margin: 0 0 1rem;
   line-height: 1.6;
-  color: rgba(203, 209, 251, 0.85);
-  margin: 0 0 1.5rem;
 }
 
 .map-placeholder {
   flex: 1;
-  min-height: 250px;
-  width: 100%;
+  min-height: 300px;
+  border: 1px solid rgba(25, 68, 240, 0.24);
   border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 1.5rem;
-  border: 1px solid rgba(25, 68, 240, 0.3);
-  position: relative;
-}
-
-.map-mockup {
-  width: 100%;
-  height: 100%;
-  background: #E5E7EB; /* Light grey mimicking a map loading state */
+  background: rgba(8, 12, 22, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #6B7280;
-  font-weight: 600;
+  margin-bottom: 1rem;
 }
 
-/* Optional actual google maps iframe class when added */
-.map-placeholder iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
+.map-mockup {
+  color: rgba(203, 209, 251, 0.5);
+  font-size: 0.9rem;
 }
 
 .btn-maps {
-  width: 100%;
-  padding: 0.75rem;
-  background: transparent;
-  border: 1px solid rgba(25, 68, 240, 0.4);
-  color: #CBD1FB;
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgba(123, 138, 247, 0.5);
   border-radius: 8px;
+  background: linear-gradient(135deg, rgba(25, 68, 240, 0.2), rgba(123, 138, 247, 0.1));
+  color: #7B8AF7;
+  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 900;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .btn-maps:hover {
-  background: rgba(25, 68, 240, 0.15);
-  color: #F3F6FE;
-  border-color: rgba(25, 68, 240, 0.8);
+  border-color: rgba(123, 138, 247, 0.8);
+  background: linear-gradient(135deg, rgba(25, 68, 240, 0.35), rgba(123, 138, 247, 0.2));
+  color: #CBD1FB;
+  box-shadow: 0 4px 16px rgba(25, 68, 240, 0.2);
 }
 
-/* ===== ORGANIZADORAS ===== */
+/* ===== ORGANIZADORAS SECTION ===== */
 .acerca-org-section {
   position: relative;
   z-index: 1;
-  padding-block: clamp(3rem, 5vw, 6rem);
+  padding: clamp(5rem, 10vw, 8rem) clamp(1.25rem, 4vw, 3rem);
 }
 
 .org-glow-line {
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, rgba(55, 230, 241, 0.8), rgba(25, 68, 240, 0.8), transparent);
-  margin-bottom: 1rem;
-  border-radius: 2px;
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(123, 138, 247, 0.6), transparent);
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 12px rgba(123, 138, 247, 0.3);
 }
 
 .org-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  margin-top: 3rem;
-}
-
-@media (min-width: 768px) {
-  .org-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(2rem, 4vw, 3rem);
 }
 
 .org-card {
-  background: linear-gradient(145deg, rgba(14, 21, 46, 0.5), rgba(8, 12, 22, 0.8));
-  border: 1px solid rgba(25, 68, 240, 0.15);
-  border-radius: 12px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.org-card:hover {
+  transform: translateY(-8px);
 }
 
 .org-image-placeholder {
   width: 100%;
-  aspect-ratio: 3/4;
-  background: rgba(255, 255, 255, 0.85); /* Light background for portraits */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+  aspect-ratio: 1;
+  border-radius: 12px;
   overflow: hidden;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(25, 68, 240, 0.24);
 }
 
 .org-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.1; /* Assuming the placeholders are missing, makes it look less broken */
-}
-
-/* To simulate the mockup images specifically while they are missing */
-.org-image-placeholder::after {
-  content: 'Foto';
-  position: absolute;
-  color: #9CA3AF;
-  font-weight: 600;
-  font-size: 1.5rem;
-}
-
-.org-info {
-  padding: 1.5rem;
-  background: #080C16;
-  border-top: 1px solid rgba(25, 68, 240, 0.2);
 }
 
 .org-badge {
   display: inline-block;
   font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   font-weight: 900;
-  color: #1944F0;
-  background: transparent;
-  border: 1px solid rgba(25, 68, 240, 0.4);
-  padding: 0.2rem 0.6rem;
-  border-radius: 100px;
-  margin-bottom: 0.75rem;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #7B8AF7;
+  margin-bottom: 0.5rem;
 }
 
 .org-name {
   font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 900;
-  margin: 0 0 0.25rem;
-  color: #F3F6FE;
+  color: #CBD1FB;
+  margin: 0.5rem 0;
 }
 
 .org-role {
   font-size: 0.9rem;
   color: rgba(203, 209, 251, 0.7);
   margin: 0;
+}
+
+.org-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .org-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

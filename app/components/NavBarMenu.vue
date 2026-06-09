@@ -8,22 +8,22 @@ const items = computed(() => [
   },
   {
     label: 'Acerca de',
-    to: '/acerca',
+    to: '/about',
     exactHash: true
   },
   {
     label: 'Actividades',
-    to: '/actividades',
+    to: '/activities',
     exactHash: true
   },
   {
-    label: 'Programa',
+    label: 'Cronograma',
     to: '/schedule',
     exactHash: true
   },
   {
     label: 'Inscripción',
-    to: '/regitration-innotec',
+    to: '/registration-innotec',
     exactHash: true
   },
   {

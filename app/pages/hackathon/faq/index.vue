@@ -57,7 +57,7 @@ const faqItems: FaqItem[] = [
     answer: 'Asegurá tu lugar a través del formulario de inscripción.',
     link: {
       label: 'Ir al formulario',
-      to: '/registrations-hackathon'
+      to: '/registration-hackathon'
     }
   }
 ]
@@ -113,6 +113,7 @@ function toggle(index: number) {
 }
 
 definePageMeta({
+  layout: 'hackathon',
   colorMode: 'dark'
 })
 

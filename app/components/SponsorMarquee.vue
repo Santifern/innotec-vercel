@@ -1,17 +1,7 @@
 <!-- No aplica y puede generar problemas por sponsors no confirmados -->
 
 <script setup lang="ts">
-const smoothEase = [0.22, 1, 0.36, 1] as [number, number, number, number]
-const scrollInViewOptions = { once: true, amount: 0.3, margin: '0px 0px -12% 0px' as const }
-
-function scrollMotion(delay: number = 0) {
-  return {
-    initial: { opacity: 0, y: 18 },
-    whileInView: { opacity: 1, y: 0 },
-    inViewOptions: scrollInViewOptions,
-    transition: { duration: 0.48, delay, ease: smoothEase }
-  }
-}
+const scrollMotion = useScrollMotion
 
 const sponsorLogos = [
   {

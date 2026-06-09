@@ -2,28 +2,33 @@
 // Navigation items for Hackathon
 const items = computed(() => [
   {
-    label: 'Acerca del Congreso',
-    to: '/hackathon#acerca',
+    label: 'Inicio',
+    to: '/hackathon#inicio',
+    exactHash: true
+  },
+  {
+    label: 'Acerca de',
+    to: '/hackathon/about',
     exactHash: true
   },
   {
     label: 'Ponencias y Tracks',
-    to: '/hackathon#actividades',
+    to: '/hackathon/ponencias-tracks',
     exactHash: true
   },
   {
-    label: 'Programa',
+    label: 'Cronograma',
     to: '/hackathon/schedule',
     exactHash: true
   },
   {
     label: 'Inscripción',
-    to: '/registrations-hackathon',
+    to: '/registration-hackathon',
     exactHash: true
   },
   {
     label: 'Galería',
-    to: '/gallery',
+    to: '/hackathon/gallery',
     exactHash: true
   },
   {
@@ -108,48 +113,42 @@ const desktopItems = computed(() => items.value.filter(item => !item.isAction))
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 34px;
-  padding: 0 0.55rem;
-  border: 1px solid rgba(25, 68, 240, 0.3);
-  border-radius: 8px;
-  background:
-    linear-gradient(135deg, rgba(25, 68, 240, 0.14), rgba(123, 138, 247, 0.08)),
-    rgba(25, 68, 240, 0.04);
+  height: 36px;
+  padding: 0 1.25rem;
+  border-radius: 100px;
+  border: 1px solid rgba(30, 80, 255, 0.4);
+  background: linear-gradient(90deg, #184df5 0%, rgba(10, 15, 40, 0.6) 100%);
+  box-shadow: -4px 0 16px rgba(24, 77, 245, 0.4);
   text-decoration: none;
-  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  transition: all 0.3s ease;
 }
 
 .navbar-innotec-logo {
-  width: 100px;
-  height: auto;
+  height: 14px;
+  width: auto;
   display: block;
-  opacity: 0.92;
-  filter: drop-shadow(0 0 8px rgba(25, 68, 240, 0.2));
-  transition: opacity 0.25s ease, filter 0.25s ease, transform 0.25s ease;
+  opacity: 1;
+  transition: all 0.25s ease;
 }
 
 @media (max-width: 640px) {
   .navbar-innotec-link {
-    height: 30px;
-    padding: 0 0.45rem;
+    height: 32px;
+    padding: 0 1rem;
   }
   .navbar-innotec-logo {
-    width: 75px;
+    height: 12px;
   }
 }
 
 .navbar-innotec-link:hover {
-  background:
-    linear-gradient(135deg, rgba(25, 68, 240, 0.24), rgba(123, 138, 247, 0.16)),
-    rgba(25, 68, 240, 0.08);
-  border-color: rgba(25, 68, 240, 0.64);
-  box-shadow: 0 0 18px rgba(25, 68, 240, 0.26), 0 0 24px rgba(123, 138, 247, 0.18);
+  background: linear-gradient(90deg, #2558fb 0%, rgba(15, 25, 55, 0.8) 100%);
+  border-color: rgba(60, 110, 255, 0.6);
+  box-shadow: -4px 0 24px rgba(37, 88, 251, 0.6);
   transform: translateY(-1px);
 }
 
 .navbar-innotec-link:hover .navbar-innotec-logo {
-  opacity: 1;
-  filter: drop-shadow(0 0 10px rgba(25, 68, 240, 0.45));
-  transform: translateY(-1px);
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.4));
 }
 </style>

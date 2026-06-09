@@ -1,4 +1,9 @@
 <script setup lang="ts">
+
+type WindowWithIdleCallback = Window & {
+  requestIdleCallback?: (callback: () => void, options?: { timeout?: number }) => number
+}
+
 definePageMeta({
   colorMode: 'dark'
 })
@@ -11,7 +16,7 @@ const fallbackPage = {
   title: 'Innovar para transformar:\ndel conocimiento a la accion',
   description: 'INNOTEC es el congreso anual de tecnologia e innovacion organizado por estudiantes de la Facultad de Ciencias y Tecnologia de la Universidad Catolica del Paraguay. Un espacio para aprender, colaborar y liderar el cambio.',
   hero: {
-    headline: '20 de agosto, 2026 - Asuncion, Paraguay',
+    headline: '20 y 21 de agosto, 2026 - Asuncion, Paraguay',
     links: [
       {
         label: 'Inscribete ahora',
@@ -78,9 +83,9 @@ const fallbackPage = {
     ]
   },
   cta: {
-    title: '¿Listo para ser parte?',
+    title: '¿Listo para \nser parte?',
     description: 'Unete al congreso de tecnologia e innovacion mas importante del Paraguay estudiantil. Inscripcion abierta para estudiantes y profesionales.',
-    command: '20 de agosto - Asuncion, Paraguay',
+    command: '20 y 21 de agosto - Asuncion, Paraguay',
     links: [
       {
         label: 'Inscribete al INNOTEC 2026',
@@ -91,17 +96,7 @@ const fallbackPage = {
   }
 } as const
 
-const { data: page, error } = await useAsyncData('index', async () => {
-  try {
-    const result = await queryCollection('content').first()
-    return result ?? fallbackPage
-  } catch (e) {
-    console.error('Error loading page content:', e)
-    return fallbackPage
-  }
-}, {
-  default: () => fallbackPage
-})
+const page = ref(fallbackPage)
 
 const title = page.value?.seo?.title || page.value?.title
 const description = page.value?.seo?.description || page.value?.description
@@ -122,21 +117,23 @@ const heroTitle = computed(() => {
   }
 })
 
-const smoothEase = [0.22, 1, 0.36, 1] as [number, number, number, number]
-const scrollInViewOptions = { once: true, amount: 0.28, margin: '0px 0px -12% 0px' as const }
-const staggerInViewOptions = { once: true, amount: 0.35, margin: '0px 0px -10% 0px' as const }
+
+
+const showDeferredSections = ref(false)
+const scrollMotion = useScrollMotionAdvanced
+const staggerMotion = (index: number = 0) => useStaggerMotionAdvanced(index, 0)
 
 const activityImages = [
   {
-    src: '/activity-charlas.webp',
+    src: '/images/innotec/activity-charlas.webp',
     alt: 'Charla de INNOTEC en auditorio'
   },
   {
-    src: '/activity-talleres.webp',
+    src: '/images/innotec/activity-talleres.webp',
     alt: 'Taller interactivo de INNOTEC'
   },
   {
-    src: '/activity-visita-tecnica.webp',
+    src: '/images/innotec/activity-visita-tecnica.webp',
     alt: 'Visita tecnica de INNOTEC'
   }
 ]
@@ -145,31 +142,32 @@ function getActivityImage(index: number) {
   return activityImages[index] ?? activityImages[0]!
 }
 
-function enterMotion(delay: number = 0) {
-  return {
-    initial: { opacity: 0, y: 16 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, delay }
-  }
+function updateObjectiveHover(event: PointerEvent) {
+  const card = event.currentTarget as HTMLElement
+  const rect = card.getBoundingClientRect()
+  card.style.setProperty('--hover-x', `${event.clientX - rect.left}px`)
+  card.style.setProperty('--hover-y', `${event.clientY - rect.top}px`)
 }
 
-function scrollMotion(delay: number = 0) {
-  return {
-    initial: { opacity: 0, y: 34, filter: 'blur(8px)' },
-    whileInView: { opacity: 1, y: 0, filter: 'blur(0px)' },
-    inViewOptions: scrollInViewOptions,
-    transition: { duration: 0.82, delay, ease: smoothEase }
-  }
+function resetObjectiveHover(event: PointerEvent) {
+  const card = event.currentTarget as HTMLElement
+  card.style.removeProperty('--hover-x')
+  card.style.removeProperty('--hover-y')
 }
 
-function staggerMotion(index: number = 0) {
-  return {
-    initial: { opacity: 0, y: 28, scale: 0.98, filter: 'blur(6px)' },
-    whileInView: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
-    inViewOptions: staggerInViewOptions,
-    transition: { duration: 0.72, delay: index * 0.1, ease: smoothEase }
+onMounted(() => {
+  const revealDeferredSections = () => {
+    showDeferredSections.value = true
   }
-}
+  const browserWindow = window as WindowWithIdleCallback
+
+  if (browserWindow.requestIdleCallback) {
+    browserWindow.requestIdleCallback(revealDeferredSections, { timeout: 900 })
+    return
+  }
+
+  window.setTimeout(revealDeferredSections, 160)
+})
 </script>
 
 <template>
@@ -177,162 +175,62 @@ function staggerMotion(index: number = 0) {
     v-if="page"
     class="innotec-page"
   >
-    <!-- Hero -->
-    <section
+    <HeroSection
       id="inicio"
-      class="hero-section"
-    >
-      <!-- Background effects -->
-      <div class="hero-bg-grid" />
-      <div class="hero-bg-glow hero-bg-glow--center" />
-      <div class="hero-bg-glow hero-bg-glow--left" />
-      <WaveBackground class="hero-wave-background" />
+      logo-src="/logo-innotec-blanco.svg"
+      logo-alt="INNOTEC"
+      :title-primary="heroTitle.primary"
+      :title-secondary="heroTitle.secondary"
+      :description="page.description"
+      target-date="2026-08-20T00:00:00"
+    />
 
-      <!-- Neon floating particles -->
-      <div class="neon-particle neon-particle--1" />
-      <div class="neon-particle neon-particle--2" />
-      <div class="neon-particle neon-particle--3" />
-      <div class="neon-particle neon-particle--4" />
-      <div class="neon-particle neon-particle--5" />
-      <div class="neon-particle neon-particle--6" />
-
-      <div class="hero-container">
-        <!-- Main logo -->
-        <div class="hero-logo-wrapper">
-          <NuxtImg
-            src="/logo-innotec-blanco.svg"
-            alt="INNOTEC"
-            class="hero-logo"
-          />
-        </div>
-
-        <!-- Title -->
-        <Motion
-          v-bind="enterMotion(0.25)"
-          class="hero-title-wrapper"
-        >
-          <h1 class="hero-title">
-            {{ heroTitle.primary }}
-            <br v-if="heroTitle.secondary">
-            <span
-              v-if="heroTitle.secondary"
-              class="hero-title-gradient"
-            >
-              {{ heroTitle.secondary }}
-            </span>
-          </h1>
-        </Motion>
-
-        <!-- Description -->
-        <Motion
-          v-bind="enterMotion(0.4)"
-          class="hero-desc-wrapper"
-        >
-          <p class="hero-description">
-            {{ page.description }}
-          </p>
-        </Motion>
-
-        <!-- Countdown Timer -->
-        <Motion
-          v-bind="enterMotion(0.55)"
-          class="hero-countdown-wrapper"
-        >
-          <CountdownTimer />
-        </Motion>
-      </div>
-    </section>
-
-    <!-- Acerca del Congreso -->
+    <!-- ¿Qué es Innotec? -->
     <section
+      v-if="showDeferredSections"
       id="acerca"
-      class="innotec-section acerca-section"
+      class="innotec-section intro-section"
     >
-      <div class="section-container acerca-container">
-        <!-- ¿Qué es Innotec? Content -->
-        <div class="que-es-innotec-grid">
-          <!-- Left column: Text -->
+      <div class="section-container">
+        <div class="intro-split">
+          <!-- LEFT: title + text -->
           <Motion
             v-bind="scrollMotion()"
-            class="que-es-innotec-content"
+            class="intro-left"
           >
-            <h2 class="que-es-innotec-title">
-              ¿Qué es<br>Innotec?
+            <h2 class="section-title intro-title">
+              ¿Qué es Innotec?
             </h2>
-
-            <div class="que-es-innotec-text">
+            <div class="intro-text">
               <p>
                 INNOTEC es el congreso anual organizado por estudiantes de la Facultad de Ciencias y Tecnología de la Universidad Católica "Nuestra Señora de la Asunción" de Paraguay.
               </p>
-
               <p>
-                Es un espacio que fomenta la innovación, la colaboración y el desarrollo de nuevas ideas y soluciones tecnológicas entre estudiantes y profesionales expertos en las áreas de Tecnología, Ingeniería, Arquitectura y Diseño. Ampliando sus horizontes y preparándolos para liderar el cambio en sus respectivas áreas.
+                Es un espacio que fomenta la innovación, la colaboración y el desarrollo de nuevas ideas y soluciones tecnológicas entre estudiantes y profesionales expertos en las áreas de Tecnología, Ingeniería, Arquitectura y Diseño.
+                <br>
+                Ampliando sus horizontes y preparándolos para liderar el cambio en sus respectivas áreas.
               </p>
-
               <p>
-                Cada edición se enfoca en temáticas relevantes basadas en la innovación y la tecnología, brindando una plataforma de aprendizaje, colaboración y desarrollo de soluciones innovadoras. El INNOTEC conecta a los estudiantes con expertos nacionales e internacionales.
+                Cada edición se enfoca en temáticas relevantes basados en la innovación y la tecnología, brindando una plataforma de aprendizaje, colaboración y desarrollo de soluciones innovadoras. El INNOTEC conecta a los estudiantes con expertos nacionales e internacionales.
               </p>
             </div>
           </Motion>
 
-          <!-- Right column: Image placeholder -->
+          <!-- RIGHT: image -->
           <Motion
-            v-bind="scrollMotion(0.1)"
-            class="que-es-innotec-image-container"
+            v-bind="scrollMotion(0.18)"
+            class="intro-image-col"
           >
-            <div class="que-es-innotec-image-placeholder">
-              <!-- Imagen será insertada aquí -->
-            </div>
-          </Motion>
-        </div>
-
-        <!-- Separador -->
-        <div class="acerca-separator" />
-
-        <!-- Bloque 4: Ejes Temáticos -->
-        <Motion
-          v-bind="scrollMotion(0.05)"
-          class="acerca-ejes-header"
-        >
-          <h3 class="acerca-ejes-title">
-            Temas
-          </h3>
-        </Motion>
-
-        <div class="acerca-ejes-grid">
-          <Motion v-bind="staggerMotion(0)">
-            <div class="acerca-eje-card">
-              <span class="acerca-eje-num">01</span>
-              <h4 class="acerca-eje-title">
-                Tecnología Aplicada y Sistemas Inteligentes
-              </h4>
-              <p class="acerca-eje-desc">
-                Cómo las tecnologías actuales se transforman en soluciones concretas, conectando innovación con implementación real, prototipos y validación en escenarios reales adaptados al contexto local.
-              </p>
-            </div>
-          </Motion>
-
-          <Motion v-bind="staggerMotion(1)">
-            <div class="acerca-eje-card">
-              <span class="acerca-eje-num">02</span>
-              <h4 class="acerca-eje-title">
-                De la Teoría al Territorio
-              </h4>
-              <p class="acerca-eje-desc">
-                Vincular conocimiento con observación directa del territorio. Proyectos urbanos, criterios de diseño, planificación y gestión, decisiones y desafíos en la práctica.
-              </p>
-            </div>
-          </Motion>
-
-          <Motion v-bind="staggerMotion(2)">
-            <div class="acerca-eje-card">
-              <span class="acerca-eje-num">03</span>
-              <h4 class="acerca-eje-title">
-                Diseño, Innovación y Experiencia
-              </h4>
-              <p class="acerca-eje-desc">
-                El diseño como herramienta más allá de lo estético. Diseño centrado en el usuario, urbanismo táctico, arquitectura del futuro, vínculo entre lo conceptual y lo real.
-              </p>
+            <div class="intro-image-frame">
+              <div class="intro-image-glow" />
+              <NuxtImg
+                src="/images/innotec/innotec-page.jpeg"
+                alt="Evento INNOTEC — congreso de tecnología e innovación"
+                class="intro-image"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="intro-image-overlay" />
             </div>
           </Motion>
         </div>
@@ -340,46 +238,63 @@ function staggerMotion(index: number = 0) {
     </section>
 
     <!-- Section divider -->
-    <div class="section-divider" />
+    <div
+      v-if="showDeferredSections"
+      class="section-divider"
+    />
 
-    <!-- ¿Cuáles son sus objetivos y actividades? -->
+    <!-- ¿Cuáls son sus objetivos y actividades? -->
     <section
+      v-if="showDeferredSections"
       id="acerca-objetivos"
       class="innotec-section objectives-section"
     >
       <div class="section-container objectives-content">
-        <!-- Columna izquierda: Título grande -->
         <Motion
           v-bind="scrollMotion()"
           class="section-header"
         >
           <h2 class="section-title">
-            ¿Cuáles son sus objetivos y actividades?
+            <span class="objectives-title-line">¿Cuáles son</span>
+            <span class="objectives-title-line">sus</span>
+            <span class="objectives-title-line">objetivos y</span>
+            <span class="objectives-title-line">actividades?</span>
           </h2>
         </Motion>
 
-        <!-- Columna derecha: Kicker + cards numeradas -->
         <Motion
-          v-bind="scrollMotion(0.12)"
+          v-bind="scrollMotion(0.15)"
           class="objectives-list"
         >
           <p class="objectives-kicker">
             Con el Innotec se busca:
           </p>
-          <div class="objectives-cards">
-            <div class="obj-card">
-              <span class="obj-num">01</span>
-              <p class="obj-text">Fomentar la innovación, la creatividad y el crecimiento personal y profesional en las áreas de ingeniería, arquitectura y diseño.</p>
-            </div>
-            <div class="obj-card">
-              <span class="obj-num">02</span>
-              <p class="obj-text">Brindar una plataforma de intercambio de conocimientos y experiencias en el ámbito científico y tecnológico.</p>
-            </div>
-            <div class="obj-card">
-              <span class="obj-num">03</span>
-              <p class="obj-text">Inspirar a los jóvenes estudiantes a explorar nuevas posibilidades en sus respectivas carreras, fuera del aula.</p>
-            </div>
-          </div>
+          <ul class="objectives-ul">
+            <li
+              @pointermove="updateObjectiveHover"
+              @pointerleave="resetObjectiveHover"
+            >
+              <span class="objective-card-text">
+                Fomentar la innovación, la creatividad y el crecimiento personal y profesional en las áreas de ingeniería, arquitectura y diseño.
+              </span>
+            </li>
+            <li
+              @pointermove="updateObjectiveHover"
+              @pointerleave="resetObjectiveHover"
+            >
+              <span class="objective-card-text">
+                Brindar una plataforma de intercambio de conocimientos y experiencias en el ámbito científico y tecnológico.
+              </span>
+            </li>
+            <li
+              @pointermove="updateObjectiveHover"
+              @pointerleave="resetObjectiveHover"
+            >
+              <span class="objective-card-text">
+                Inspirar a los jóvenes estudiantes a explorar nuevas posibilidades en sus respectivas carreras, fuera del aula.
+              </span>
+            </li>
+          </ul>
         </Motion>
 
         <Motion
@@ -398,7 +313,11 @@ function staggerMotion(index: number = 0) {
             :key="feature.title"
             v-bind="staggerMotion(index)"
           >
-            <div class="feature-card">
+            <div
+              class="feature-card"
+              @pointermove="updateObjectiveHover"
+              @pointerleave="resetObjectiveHover"
+            >
               <figure
                 class="feature-card-media"
                 :class="`feature-card-media--${index}`"
@@ -425,10 +344,16 @@ function staggerMotion(index: number = 0) {
     </section>
 
     <!-- Section divider -->
-    <div class="section-divider" />
+    <div
+      v-if="showDeferredSections"
+      class="section-divider"
+    />
+
+    <LazySharedSponsorMarquee v-if="showDeferredSections" />
 
     <!-- Inscription CTA section -->
     <section
+      v-if="showDeferredSections"
       id="inscripcion"
       class="innotec-section cta-section"
     >
@@ -480,6 +405,7 @@ function staggerMotion(index: number = 0) {
   </div>
 </template>
 
+
 <style scoped>
 /* ===== PAGE BASE ===== */
 .innotec-page {
@@ -524,411 +450,6 @@ function staggerMotion(index: number = 0) {
   z-index: 2;
 }
 
-/* ===== HERO SECTION ===== */
-.hero-section {
-  position: relative;
-  width: 100%;
-  min-height: 88vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: visible;
-  padding: 7rem 1.5rem 2.75rem;
-  isolation: isolate;
-}
-
-.hero-section::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: clamp(-22rem, -23vw, -14rem);
-  z-index: 1;
-  height: clamp(26rem, 42vw, 38rem);
-  background:
-    radial-gradient(ellipse 82% 66% at 44% 54%, rgba(31, 82, 255, 0.17), rgba(25, 68, 240, 0.1) 42%, rgba(25, 68, 240, 0.045) 68%, transparent 92%),
-    radial-gradient(ellipse 58% 58% at 68% 56%, rgba(25, 68, 240, 0.1), rgba(25, 68, 240, 0.04) 56%, transparent 88%);
-  filter: blur(38px);
-  pointer-events: none;
-}
-
-/* Background grid */
-.hero-bg-grid {
-  position: absolute;
-  top: 0;
-  bottom: -18rem;
-  left: 50%;
-  width: 100vw;
-  min-width: 100%;
-  transform: translateX(-50%);
-  background-image:
-    linear-gradient(rgba(25, 68, 240, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(25, 68, 240, 0.03) 1px, transparent 1px);
-  background-size: 72px 72px;
-  background-position: center top;
-  mask-image:
-    linear-gradient(180deg, black 0%, rgba(0, 0, 0, 0.86) 58%, rgba(0, 0, 0, 0.46) 82%, transparent 100%),
-    radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
-}
-
-/* Background glow blobs */
-.hero-bg-glow {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  pointer-events: none;
-}
-
-.hero-bg-glow--center {
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 600px;
-  height: 300px;
-  background: rgba(25, 68, 240, 0.15);
-  animation: glow-breathe 6s ease-in-out infinite;
-}
-
-.hero-bg-glow--left {
-  bottom: 20%;
-  left: -100px;
-  width: 300px;
-  height: 300px;
-  background: rgba(123, 138, 247, 0.08);
-}
-
-.hero-wave-background {
-  z-index: 1;
-  opacity: 0.92;
-  mix-blend-mode: screen;
-}
-
-@keyframes glow-breathe {
-  0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
-  50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
-}
-
-/* ===== NEON FLOATING PARTICLES ===== */
-.neon-particle {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.neon-particle--1 {
-  width: 4px;
-  height: 4px;
-  background: #7B8AF7;
-  box-shadow: 0 0 8px 2px rgba(123, 138, 247, 0.8), 0 0 20px 4px rgba(25, 68, 240, 0.4);
-  top: 18%;
-  left: 15%;
-  animation: particle-float-1 8s ease-in-out infinite;
-}
-
-.neon-particle--2 {
-  width: 3px;
-  height: 3px;
-  background: #1944F0;
-  box-shadow: 0 0 6px 2px rgba(25, 68, 240, 0.9), 0 0 16px 4px rgba(25, 68, 240, 0.4);
-  top: 30%;
-  right: 20%;
-  animation: particle-float-2 10s ease-in-out infinite;
-}
-
-.neon-particle--3 {
-  width: 3px;
-  height: 3px;
-  background: #CBD1FB;
-  box-shadow: 0 0 6px 2px rgba(203, 209, 251, 0.6), 0 0 14px 3px rgba(123, 138, 247, 0.3);
-  bottom: 25%;
-  right: 12%;
-  animation: particle-float-3 12s ease-in-out infinite;
-}
-
-.neon-particle--4 {
-  width: 5px;
-  height: 5px;
-  background: #9FACF9;
-  box-shadow: 0 0 10px 3px rgba(159, 172, 249, 0.85), 0 0 24px 7px rgba(25, 68, 240, 0.35);
-  top: 10%;
-  left: 7%;
-  animation: particle-float-2 11s ease-in-out infinite;
-}
-
-.neon-particle--5 {
-  width: 4px;
-  height: 4px;
-  background: #2B45F3;
-  box-shadow: 0 0 9px 3px rgba(43, 69, 243, 0.9), 0 0 22px 6px rgba(25, 68, 240, 0.36);
-  top: 34%;
-  right: 30%;
-  animation: particle-float-1 9s ease-in-out infinite;
-}
-
-.neon-particle--6 {
-  width: 4px;
-  height: 4px;
-  background: #F3F6FE;
-  box-shadow: 0 0 8px 3px rgba(243, 246, 254, 0.72), 0 0 20px 6px rgba(123, 138, 247, 0.32);
-  bottom: 12%;
-  right: 10%;
-  animation: particle-float-3 13s ease-in-out infinite;
-}
-
-@keyframes particle-float-1 {
-  0%, 100% { transform: translate(0, 0); opacity: 0.7; }
-  25% { transform: translate(20px, -30px); opacity: 1; }
-  50% { transform: translate(-10px, -50px); opacity: 0.5; }
-  75% { transform: translate(15px, -20px); opacity: 0.9; }
-}
-
-@keyframes particle-float-2 {
-  0%, 100% { transform: translate(0, 0); opacity: 0.5; }
-  33% { transform: translate(-25px, 20px); opacity: 1; }
-  66% { transform: translate(15px, -15px); opacity: 0.6; }
-}
-
-@keyframes particle-float-3 {
-  0%, 100% { transform: translate(0, 0); opacity: 0.6; }
-  50% { transform: translate(-20px, -40px); opacity: 1; }
-}
-
-/* ===== NEON SECTION DIVIDER ===== */
-.neon-divider {
-  position: relative;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.neon-divider-line {
-  position: relative;
-  width: 100%;
-  max-width: 800px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(25, 68, 240, 0.6), rgba(123, 138, 247, 0.8), rgba(25, 68, 240, 0.6), transparent);
-  box-shadow: 0 0 8px rgba(25, 68, 240, 0.5), 0 0 20px rgba(25, 68, 240, 0.3);
-  animation: neon-line-pulse 3s ease-in-out infinite;
-}
-
-.neon-divider-line::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, #7B8AF7, transparent);
-  transform: translateY(-50%);
-  border-radius: 2px;
-  animation: neon-scan 4s ease-in-out infinite;
-}
-
-@keyframes neon-line-pulse {
-  0%, 100% { opacity: 0.6; box-shadow: 0 0 8px rgba(25, 68, 240, 0.5), 0 0 20px rgba(25, 68, 240, 0.3); }
-  50% { opacity: 1; box-shadow: 0 0 12px rgba(25, 68, 240, 0.8), 0 0 30px rgba(25, 68, 240, 0.5), 0 0 50px rgba(25, 68, 240, 0.2); }
-}
-
-@keyframes neon-scan {
-  0% { left: -60px; opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { left: calc(100% + 60px); opacity: 0; }
-}
-
-/* ===== NEON ACCENT LINES ===== */
-.neon-accent {
-  position: absolute;
-  width: 200px;
-  height: 1px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.neon-accent--left {
-  top: 15%;
-  left: 0;
-  background: linear-gradient(90deg, transparent, rgba(25, 68, 240, 0.5), transparent);
-  box-shadow: 0 0 10px rgba(25, 68, 240, 0.3);
-  animation: accent-left 6s ease-in-out infinite;
-}
-
-.neon-accent--right {
-  bottom: 20%;
-  right: 0;
-  background: linear-gradient(90deg, transparent, rgba(123, 138, 247, 0.4), transparent);
-  box-shadow: 0 0 8px rgba(123, 138, 247, 0.25);
-  animation: accent-right 8s ease-in-out infinite;
-}
-
-@keyframes accent-left {
-  0%, 100% { width: 150px; opacity: 0.4; }
-  50% { width: 300px; opacity: 0.8; }
-}
-
-@keyframes accent-right {
-  0%, 100% { width: 120px; opacity: 0.3; }
-  50% { width: 250px; opacity: 0.7; }
-}
-
-/* Hero container */
-.hero-container {
-  position: relative;
-  z-index: 10;
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-/* Hero logo */
-.hero-logo-wrapper {
-  display: flex;
-  justify-content: center;
-}
-
-.hero-logo {
-  height: 64px;
-  width: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 0 20px rgba(25, 68, 240, 0.5));
-}
-
-@media (min-width: 768px) {
-  .hero-logo {
-    height: 80px;
-  }
-}
-
-/* Hero title */
-.hero-title-wrapper {
-  display: flex;
-  justify-content: center;
-}
-
-.hero-title {
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  max-width: 13ch;
-  font-size: 1.95rem;
-  font-weight: 900;
-  color: #F3F6FE;
-  letter-spacing: 0;
-  line-height: 1.12;
-  margin: 0;
-}
-
-@media (min-width: 640px) {
-  .hero-title {
-    max-width: 18ch;
-    font-size: 2.65rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .hero-title {
-    max-width: 22ch;
-    font-size: 3.45rem;
-  }
-}
-
-.hero-title-gradient {
-  background: linear-gradient(135deg, #CBD1FB 0%, #7B8AF7 42%, #1944F0 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Hero description */
-.hero-desc-wrapper {
-  display: flex;
-  justify-content: center;
-}
-
-.hero-description {
-  max-width: 640px;
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.7;
-  color: rgba(203, 209, 251, 0.7);
-  margin: 0;
-}
-
-@media (min-width: 768px) {
-  .hero-description {
-    font-size: 1.0625rem;
-  }
-}
-
-/* Countdown wrapper */
-.hero-countdown-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-/* Hero CTA buttons */
-.hero-links-wrapper {
-  display: flex;
-  justify-content: center;
-}
-
-.hero-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.875rem;
-  justify-content: center;
-}
-
-.hero-btn {
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem 1.75rem;
-  font-size: 0.9375rem;
-  font-weight: 400;
-  border-radius: 10px;
-  text-decoration: none;
-  cursor: pointer;
-  transform-origin: center;
-  transition: transform 0.28s ease, background 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease, color 0.28s ease;
-  letter-spacing: 0.01em;
-}
-
-.hero-btn--primary {
-  color: #F3F6FE;
-  background: linear-gradient(135deg, #1235C8 0%, #1944F0 46%, #37E6F1 100%);
-  border: 1px solid rgba(55, 230, 241, 0.46);
-  box-shadow: 0 0 25px rgba(25, 68, 240, 0.45), 0 0 0 rgba(55, 230, 241, 0);
-}
-
-.hero-btn--primary:hover {
-  background: linear-gradient(135deg, #1944F0 0%, #2B45F3 48%, #37E6F1 100%);
-  box-shadow: 0 0 18px rgba(55, 230, 241, 0.72), 0 0 44px rgba(25, 68, 240, 0.7), 0 0 72px rgba(55, 230, 241, 0.2);
-  transform: translateY(-3px) scale(1.035);
-  border-color: rgba(55, 230, 241, 0.82);
-}
-
-.hero-btn--secondary {
-  color: rgba(203, 209, 251, 0.85);
-  background: rgba(25, 68, 240, 0.1);
-  border: 1px solid rgba(25, 68, 240, 0.3);
-}
-
-.hero-btn--secondary:hover {
-  color: #F3F6FE;
-  background: rgba(25, 68, 240, 0.18);
-  border-color: rgba(25, 68, 240, 0.55);
-  transform: translateY(-2px);
-}
-
 /* ===== SECTIONS ===== */
 .innotec-section {
   padding: 4.5rem 1.25rem;
@@ -952,7 +473,7 @@ function staggerMotion(index: number = 0) {
 
 .section-label {
   display: inline-block;
-  font-size: 1.5rem;
+  font-size: 0.75rem;
   font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
   font-weight: 900;
   color: #D946EF;
@@ -995,36 +516,168 @@ function staggerMotion(index: number = 0) {
   margin: 0 2rem;
 }
 
-/* ===== FEATURES GRID ===== */
-.features-grid {
+/* ===== ¿QUÉ ES INNOTEC? — SPLIT LAYOUT ===== */
+.intro-split {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem;
-  align-items: stretch;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
 }
 
-@media (min-width: 640px) {
-  .features-grid {
-    grid-template-columns: repeat(2, 1fr);
+@media (min-width: 860px) {
+  .intro-split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: stretch;
   }
 }
 
-@media (min-width: 1024px) {
+/* Left column */
+.intro-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: clamp(1.5rem, 3vw, 2rem);
+}
+
+.intro-title {
+  align-self: center;
+  margin: 0 !important;
+  max-width: 9.5ch;
+  font-size: clamp(3.25rem, 10vw, 5.55rem);
+  line-height: 0.95;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .intro-title {
+    font-size: clamp(4.2rem, 6.8vw, 5.55rem);
+  }
+}
+
+.intro-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.intro-text p {
+  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: rgba(203, 209, 251, 0.72);
+  margin: 0;
+}
+
+/* Right column — image */
+.intro-image-col {
+  --intro-image-offset: 0rem;
+  --intro-image-extra: 0rem;
+
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  padding-top: var(--intro-image-offset);
+}
+
+.intro-image-frame {
+  position: relative;
+  width: 100%;
+  height: calc(100% - var(--intro-image-offset) + var(--intro-image-extra));
+  min-height: 360px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(102, 73, 246, 0.28),
+    0 4px 40px rgba(0, 0, 0, 0.55),
+    0 0 60px rgba(102, 73, 246, 0.14);
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.intro-image-frame:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 0 1px rgba(102, 73, 246, 0.48),
+    0 8px 52px rgba(0, 0, 0, 0.62),
+    0 0 80px rgba(102, 73, 246, 0.22);
+}
+
+/* Ambient glow behind the frame */
+.intro-image-glow {
+  position: absolute;
+  inset: -20px;
+  z-index: -1;
+  border-radius: 24px;
+  background: radial-gradient(ellipse at 50% 60%, rgba(102, 73, 246, 0.22), transparent 68%);
+  pointer-events: none;
+  filter: blur(24px);
+}
+
+.intro-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+@media (min-width: 860px) {
+  .intro-image-col {
+    --intro-image-offset: 0rem;
+    --intro-image-extra: 0rem;
+  }
+}
+
+/* Subtle gradient overlay at bottom edge for depth */
+.intro-image-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, transparent 55%, rgba(8, 10, 22, 0.45) 100%),
+    radial-gradient(ellipse at 80% 10%, rgba(102, 73, 246, 0.12), transparent 50%);
+  pointer-events: none;
+}
+
+.features-grid {
+  --features-gap: clamp(1rem, 2.5vw, 1.35rem);
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--features-gap);
+  align-items: stretch;
+}
+
+.features-grid > * {
+  min-width: 0;
+}
+
+@media (min-width: 700px) {
   .features-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1080px) {
+  .features-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 .feature-card {
+  --feature-card-pad: clamp(0.95rem, 2.4vw, 1.2rem);
+
   position: relative;
-  min-height: 430px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
   height: 100%;
-  padding: 0 1.2rem 1.35rem;
+  padding: 0 var(--feature-card-pad) clamp(1.15rem, 2.8vw, 1.35rem);
   background:
     linear-gradient(180deg, rgba(13, 20, 40, 0.86), rgba(9, 14, 28, 0.76));
   border: 1px solid rgba(123, 138, 247, 0.18);
   border-radius: 8px;
   box-shadow: inset 0 1px 0 rgba(243, 246, 254, 0.04);
+  isolation: isolate;
   transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
   overflow: hidden;
 }
@@ -1032,6 +685,7 @@ function staggerMotion(index: number = 0) {
 .feature-card::before {
   content: '';
   position: absolute;
+  z-index: 1;
   top: 0;
   left: 1.5rem;
   right: 1.5rem;
@@ -1040,7 +694,32 @@ function staggerMotion(index: number = 0) {
   opacity: 0.72;
 }
 
+.feature-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(90deg, transparent, rgba(123, 138, 247, 0.16), transparent),
+    radial-gradient(circle at var(--hover-x, 18%) var(--hover-y, 50%), rgba(25, 68, 240, 0.24), transparent 34%);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-18%);
+  transition: opacity 0.28s ease, transform 0.42s ease;
+}
 
+.feature-card:hover {
+  background:
+    linear-gradient(180deg, rgba(15, 23, 46, 0.9), rgba(10, 16, 32, 0.82));
+  border-color: rgba(123, 138, 247, 0.68);
+  transform: translateY(-5px);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.28), 0 0 28px rgba(25, 68, 240, 0.22), inset 0 1px 0 rgba(243, 246, 254, 0.06);
+}
+
+.feature-card:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
 
 .feature-card-glow {
   position: absolute;
@@ -1049,21 +728,23 @@ function staggerMotion(index: number = 0) {
   right: 0;
   height: 100%;
   background:
-    radial-gradient(ellipse at 12% 0%, rgba(55, 230, 241, 0.16) 0%, transparent 58%),
-    radial-gradient(ellipse at 84% 8%, rgba(217, 70, 239, 0.12) 0%, transparent 42%);
+    radial-gradient(ellipse at 12% 0%, rgba(123, 138, 247, 0.18) 0%, transparent 58%),
+    radial-gradient(ellipse at 84% 8%, rgba(25, 68, 240, 0.12) 0%, transparent 42%);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease;
 }
 
-
+.feature-card:hover .feature-card-glow {
+  opacity: 1;
+}
 
 .feature-card-media {
   position: relative;
-  z-index: 1;
-  width: calc(100% + 2.4rem);
-  height: 240px;
-  margin: 0 -1.2rem 1.35rem;
+  z-index: 2;
+  width: calc(100% + (var(--feature-card-pad) * 2));
+  height: clamp(13.25rem, 30vw, 15.625rem);
+  margin: 0 calc(var(--feature-card-pad) * -1) clamp(1.05rem, 2.5vw, 1.35rem);
   overflow: hidden;
   background: rgba(8, 12, 22, 0.72);
   border: 0;
@@ -1073,7 +754,7 @@ function staggerMotion(index: number = 0) {
   isolation: isolate;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1080px) {
   .feature-card-media {
     height: 250px;
   }
@@ -1095,7 +776,9 @@ function staggerMotion(index: number = 0) {
   transition: opacity 0.35s ease;
 }
 
-
+.feature-card:hover .feature-card-media::before {
+  opacity: 0.48;
+}
 
 .feature-card-media::after {
   content: '';
@@ -1117,7 +800,10 @@ function staggerMotion(index: number = 0) {
   transition: transform 0.4s ease, filter 0.4s ease;
 }
 
-
+.feature-card:hover .feature-card-image {
+  transform: scale(1.07);
+  filter: saturate(1.08) brightness(1.04);
+}
 
 .feature-card-media--0 .feature-card-image {
   object-position: center 74%;
@@ -1133,21 +819,22 @@ function staggerMotion(index: number = 0) {
 
 .feature-card-title {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 1.02rem;
+  font-size: clamp(1rem, 1.5vw, 1.08rem);
   font-weight: 900;
   color: #F3F6FE;
   margin: 0 0 0.7rem;
   letter-spacing: 0;
   line-height: 1.3;
+  overflow-wrap: anywhere;
 }
 
 .feature-card-desc {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.94rem;
+  font-size: clamp(0.91rem, 1.35vw, 0.97rem);
   font-weight: 400;
   line-height: 1.65;
   color: rgba(203, 209, 251, 0.68);
@@ -1166,40 +853,6 @@ function staggerMotion(index: number = 0) {
   isolation: isolate;
 }
 
-.intro-section::before {
-  content: '';
-  position: absolute;
-  left: -6vw;
-  right: -6vw;
-  top: clamp(-16rem, -18vw, -8rem);
-  z-index: 0;
-  height: calc(100% + clamp(30rem, 42vw, 44rem));
-  background:
-    radial-gradient(ellipse 86% 42% at 50% 32%, rgba(25, 68, 240, 0.13), rgba(25, 68, 240, 0.072) 42%, rgba(25, 68, 240, 0.028) 66%, transparent 90%),
-    radial-gradient(ellipse 72% 48% at 50% 38%, rgba(31, 82, 255, 0.085), rgba(25, 68, 240, 0.042) 42%, transparent 78%),
-    radial-gradient(ellipse 48% 58% at 24% 48%, rgba(31, 82, 255, 0.16), rgba(18, 51, 162, 0.072) 34%, transparent 72%),
-    radial-gradient(ellipse 68% 52% at 50% 44%, rgba(25, 68, 240, 0.072), rgba(25, 68, 240, 0.028) 42%, transparent 80%),
-    radial-gradient(ellipse 52% 58% at 62% 76%, rgba(25, 68, 240, 0.056), transparent 74%);
-  filter: blur(42px);
-  opacity: 0.58;
-  pointer-events: none;
-}
-
-.intro-section::after {
-  content: '';
-  position: absolute;
-  left: -6vw;
-  right: -6vw;
-  bottom: clamp(-22rem, -24vw, -12rem);
-  z-index: 0;
-  height: clamp(28rem, 44vw, 42rem);
-  background:
-    radial-gradient(ellipse 48% 58% at 22% 36%, rgba(31, 82, 255, 0.1), transparent 70%),
-    radial-gradient(ellipse 64% 58% at 54% 46%, rgba(25, 68, 240, 0.09), rgba(8, 17, 45, 0.03) 48%, transparent 78%);
-  filter: blur(32px);
-  pointer-events: none;
-}
-
 .intro-content {
   position: relative;
   display: grid;
@@ -1209,21 +862,6 @@ function staggerMotion(index: number = 0) {
   margin: 0 auto;
   width: 100%;
   padding: 2rem 0.4rem;
-}
-
-.intro-content::before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  top: 50%;
-  left: -18rem;
-  width: 52rem;
-  height: 52rem;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(25, 68, 240, 0.34) 0%, rgba(25, 68, 240, 0.18) 34%, rgba(25, 68, 240, 0.07) 58%, transparent 76%);
-  filter: blur(34px);
-  transform: translateY(-50%);
-  pointer-events: none;
 }
 
 .intro-content .section-title {
@@ -1236,66 +874,6 @@ function staggerMotion(index: number = 0) {
   gap: 1.65rem;
   align-content: center;
   isolation: isolate;
-}
-
-.intro-bulb {
-  position: absolute;
-  z-index: 0;
-  top: 50%;
-  left: clamp(-32rem, -36vw, -20rem);
-  width: clamp(45rem, 70vw, 64rem);
-  height: clamp(50rem, 75vw, 69rem);
-  transform: translateY(-52%);
-  pointer-events: none;
-  opacity: 0.8;
-  mix-blend-mode: screen;
-}
-
-.intro-bulb::before,
-.intro-bulb::after {
-  content: '';
-  position: absolute;
-  pointer-events: none;
-}
-
-.intro-bulb::before {
-  inset: 2% -1% 7%;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 49% 45%, rgba(49, 107, 255, 0.3), rgba(49, 107, 255, 0.13) 36%, transparent 72%);
-  filter: blur(54px);
-  opacity: 0.62;
-  mix-blend-mode: screen;
-}
-
-.intro-bulb::after {
-  inset: auto 4% 2%;
-  height: 42%;
-  background:
-    linear-gradient(180deg, rgba(8, 12, 22, 0), rgba(8, 12, 22, 0.26) 58%, rgba(8, 12, 22, 0.78));
-  filter: blur(18px);
-  opacity: 0.9;
-}
-
-.intro-bulb-image {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 51%;
-  transform: scale(1.2) translateY(2%);
-  opacity: 0.46;
-  filter:
-    blur(3px)
-    brightness(1.28)
-    saturate(1.28)
-    drop-shadow(0 0 38px rgba(49, 107, 255, 0.36))
-    drop-shadow(0 0 96px rgba(49, 107, 255, 0.22));
-  mix-blend-mode: screen;
-  -webkit-mask-image: radial-gradient(ellipse at 50% 52%, black 0%, black 52%, rgba(0, 0, 0, 0.55) 68%, transparent 86%);
-  mask-image: radial-gradient(ellipse at 50% 52%, black 0%, black 52%, rgba(0, 0, 0, 0.55) 68%, transparent 86%);
 }
 
 .intro-content .section-title {
@@ -1335,23 +913,47 @@ function staggerMotion(index: number = 0) {
   border-radius: 8px;
   box-shadow: 0 0 24px rgba(25, 68, 240, 0.22), inset 0 1px 0 rgba(243, 246, 254, 0.08);
   backdrop-filter: blur(14px);
+  transform: translateY(0);
+  transition: transform 0.24s ease, border-color 0.24s ease, background 0.24s ease, box-shadow 0.24s ease;
+}
+
+.intro-concept:hover {
+  transform: translateY(-4px);
+  border-color: rgba(55, 230, 241, 0.78);
+  background:
+    linear-gradient(90deg, rgba(24, 73, 178, 0.58), rgba(9, 25, 68, 0.68)),
+    rgba(7, 12, 28, 0.62);
+  box-shadow:
+    0 12px 34px rgba(0, 0, 0, 0.28),
+    0 0 30px rgba(55, 230, 241, 0.2),
+    inset 0 1px 0 rgba(243, 246, 254, 0.12);
 }
 
 .intro-concept-key {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.45rem;
-  height: 2.45rem;
+  width: 2.1rem;
+  height: 2.1rem;
   flex-shrink: 0;
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 1.18rem;
-  font-weight: 900;
-  color: #67A4FF;
-  border: 1px solid rgba(38, 117, 255, 0.78);
-  border-radius: 8px;
-  background: rgba(23, 79, 191, 0.2);
-  box-shadow: 0 0 18px rgba(38, 117, 255, 0.22), inset 0 1px 0 rgba(243, 246, 254, 0.06);
+  transition: transform 0.24s ease;
+}
+
+.intro-concept:hover .intro-concept-key {
+  transform: scale(1.08);
+}
+
+.intro-concept-icon {
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(55, 230, 241, 0.38));
+  transition: filter 0.24s ease, transform 0.24s ease;
+}
+
+.intro-concept:hover .intro-concept-icon {
+  transform: rotate(-5deg);
+  filter: drop-shadow(0 0 12px rgba(55, 230, 241, 0.72));
 }
 
 .intro-text {
@@ -1370,14 +972,14 @@ function staggerMotion(index: number = 0) {
   color: rgba(224, 229, 255, 0.9);
   margin: 0;
   text-align: left;
-  border-left: 2px solid rgba(83, 113, 246, 0.62);
+  border-left: 2px solid rgba(25, 68, 240, 0.84);
 }
 
 .intro-text p:first-child {
   font-size: 1.12rem;
   line-height: 1.72;
   color: rgba(243, 246, 254, 0.94);
-  border-left-color: rgba(55, 230, 241, 0.7);
+  border-left-color: rgba(25, 68, 240, 0.84);
   text-shadow: 0 0 18px rgba(25, 68, 240, 0.16);
 }
 
@@ -1485,10 +1087,6 @@ function staggerMotion(index: number = 0) {
     padding: 1.5rem 1rem;
   }
 
-  .intro-content::before {
-    top: 50%;
-  }
-
   .intro-heading-panel {
     grid-column: 1;
     grid-row: 1;
@@ -1566,71 +1164,118 @@ function staggerMotion(index: number = 0) {
 
 .objectives-list {
   max-width: 100%;
-  margin: 0;
+  margin: 0 0 1.8rem;
 }
 
 .objectives-kicker {
   font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 1.05rem;
+  font-size: clamp(1.65rem, 3.5vw, 2rem);
   font-weight: 900;
-  line-height: 1.4;
-  color: #CBD1FB;
-  margin: 0 0 1rem;
-  letter-spacing: 0.01em;
+  line-height: 1.2;
+  color: transparent;
+  background: linear-gradient(90deg, #CBD1FB 0%, #7B8AF7 48%, #1944F0 100%);
+  background-clip: text;
+  margin: 0 0 1.1rem;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* Cards numeradas */
-.objectives-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
-
-.obj-card {
+.objectives-ul {
+  counter-reset: objective-card;
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: grid;
-  grid-template-columns: 2.6rem 1fr;
-  gap: 0.75rem;
-  align-items: center;
-  padding: 0.95rem 1.1rem;
-  background: linear-gradient(135deg, rgba(14, 21, 46, 0.78), rgba(8, 12, 22, 0.62));
-  border: 1px solid rgba(25, 68, 240, 0.2);
-  border-radius: 10px;
-  position: relative;
-  overflow: hidden;
-  transition: border-color 0.25s ease;
+  grid-template-columns: 1fr;
+  gap: clamp(0.75rem, 2vw, 0.95rem);
+  border-top: 0;
 }
 
-.obj-card::before {
+.objectives-ul li {
+  position: relative;
+  counter-increment: objective-card;
+  display: grid;
+  grid-template-columns: clamp(2.35rem, 7vw, 2.85rem) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(0.75rem, 2vw, 1rem);
+  min-height: clamp(5.25rem, 13vw, 6.15rem);
+  padding: clamp(0.9rem, 2.4vw, 1.05rem) clamp(0.95rem, 2.8vw, 1.2rem);
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid rgba(25, 68, 240, 0.24);
+  border-radius: 8px;
+  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: clamp(0.92rem, 1.6vw, 0.96rem);
+  font-weight: 400;
+  line-height: 1.62;
+  color: rgba(203, 209, 251, 0.82);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015) 48%, rgba(25, 68, 240, 0.035)),
+    rgba(6, 10, 22, 0.58);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition:
+    border-color 0.28s ease,
+    box-shadow 0.28s ease,
+    color 0.28s ease,
+    transform 0.28s ease,
+    background 0.28s ease;
+}
+
+.objectives-ul li::before {
+  content: counter(objective-card, decimal-leading-zero);
+  position: relative;
+  z-index: 1;
+  color: #F3F6FE;
+  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
+  font-size: clamp(1.65rem, 4.8vw, 2rem);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+  transition: color 0.28s ease, text-shadow 0.28s ease, transform 0.28s ease;
+}
+
+.objectives-ul li::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 1rem;
-  right: 1rem;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(123, 138, 247, 0.35), transparent);
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(90deg, transparent, rgba(123, 138, 247, 0.16), transparent),
+    radial-gradient(circle at var(--hover-x, 18%) var(--hover-y, 50%), rgba(25, 68, 240, 0.24), transparent 34%);
+  opacity: 0;
+  transform: translateX(-18%);
+  transition: opacity 0.28s ease, transform 0.42s ease;
   pointer-events: none;
 }
 
-.obj-num {
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 1.35rem;
-  font-weight: 900;
-  color: rgba(25, 68, 240, 0.65);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-self: center;
+.objective-card-text {
+  position: relative;
+  z-index: 1;
+  display: block;
 }
 
-.obj-text {
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.9rem;
-  font-weight: 400;
-  line-height: 1.62;
-  color: rgba(203, 209, 251, 0.78);
-  margin: 0;
+.objectives-ul li:hover {
+  border-color: rgba(123, 138, 247, 0.68);
+  color: rgba(238, 243, 255, 0.94);
+  background:
+    linear-gradient(135deg, rgba(25, 68, 240, 0.13), rgba(255, 255, 255, 0.025) 52%, rgba(123, 138, 247, 0.08)),
+    rgba(8, 13, 28, 0.72);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.075),
+    0 14px 32px rgba(0, 0, 0, 0.2),
+    0 0 28px rgba(25, 68, 240, 0.2);
+  transform: translateY(-2px) translateX(0.18rem);
+}
+
+.objectives-ul li:hover::before {
+  color: #7B8AF7;
+  text-shadow: 0 0 22px rgba(25, 68, 240, 0.7);
+  transform: translateY(-2px);
+}
+
+.objectives-ul li:hover::after {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .activities-intro {
@@ -1642,20 +1287,23 @@ function staggerMotion(index: number = 0) {
   font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
   font-size: clamp(1.18rem, 1.6vw, 1.32rem);
   font-weight: 400;
+  line-height: 1.35;
   color: rgba(203, 209, 251, 0.85);
-  margin: 0;
+  max-width: min(100%, 42rem);
+  margin: 0 auto;
 }
 
 @media (min-width: 900px) {
   .objectives-content {
     grid-template-columns: minmax(360px, 1fr) minmax(0, 1.1fr);
     gap: 4rem;
-    align-items: center;
+    align-items: start;
   }
 
   .objectives-content .section-header {
-    text-align: left;
+    text-align: center;
     margin-bottom: 0;
+    justify-items: center;
   }
 
   .objectives-content .section-title {
@@ -1665,6 +1313,13 @@ function staggerMotion(index: number = 0) {
     font-weight: 900;
     line-height: 0.95;
     margin-bottom: 1.25rem;
+    text-align: center;
+  }
+
+  .objectives-content .section-description {
+    font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
+    font-weight: 400;
+    margin: 0;
   }
 
   .objectives-list {
@@ -1698,23 +1353,30 @@ function staggerMotion(index: number = 0) {
 
 .cta-section::before {
   z-index: -2;
-  background-image: url('/vista_tierra.webp');
+  background-image:
+    linear-gradient(180deg, rgba(8, 12, 22, 0.94) 0%, rgba(8, 12, 22, 0.46) 34%, rgba(8, 12, 22, 0.18) 58%, rgba(8, 12, 22, 0.82) 100%),
+    url('/images/shared/vista_tierra.webp');
   background-size: cover;
   background-position: center bottom;
-  filter: saturate(1.08) contrast(1.05);
+  filter: saturate(1.06) contrast(1.04) brightness(0.92);
   transform: scale(1.01);
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, transparent 20%, rgba(0, 0, 0, 0.04) 38%, rgba(0, 0, 0, 0.28) 56%, rgba(0, 0, 0, 0.72) 76%, black 92%, black 100%);
-  mask-image: linear-gradient(180deg, transparent 0%, transparent 20%, rgba(0, 0, 0, 0.04) 38%, rgba(0, 0, 0, 0.28) 56%, rgba(0, 0, 0, 0.72) 76%, black 92%, black 100%);
+  -webkit-mask-image:
+    linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.28) 18%, black 36%, black 78%, rgba(0, 0, 0, 0.72) 90%, transparent 100%),
+    radial-gradient(ellipse 86% 74% at 50% 58%, black 18%, rgba(0, 0, 0, 0.84) 54%, transparent 100%);
+  mask-image:
+    linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.28) 18%, black 36%, black 78%, rgba(0, 0, 0, 0.72) 90%, transparent 100%),
+    radial-gradient(ellipse 86% 74% at 50% 58%, black 18%, rgba(0, 0, 0, 0.84) 54%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 }
 
 .cta-section::after {
   z-index: -1;
   background:
-    linear-gradient(180deg, rgba(8, 12, 22, 0) 0%, rgba(8, 12, 22, 0.12) 20%, rgba(8, 12, 22, 0.42) 42%, rgba(8, 12, 22, 0.64) 58%, rgba(8, 12, 22, 0.38) 74%, rgba(5, 8, 17, 0.76) 100%),
-    radial-gradient(ellipse 90% 38% at 50% 34%, rgba(8, 12, 22, 0.36), rgba(8, 12, 22, 0.14) 48%, transparent 80%),
-    radial-gradient(ellipse 82% 34% at 50% 32%, rgba(49, 107, 255, 0.032), transparent 84%),
-    radial-gradient(ellipse at 50% 50%, rgba(47, 180, 255, 0.16), transparent 44%),
-    radial-gradient(ellipse at 50% 68%, rgba(3, 7, 18, 0), rgba(3, 7, 18, 0.48) 78%);
+    linear-gradient(180deg, rgba(8, 12, 22, 0.92) 0%, rgba(8, 12, 22, 0.48) 19%, rgba(8, 12, 22, 0.18) 46%, rgba(8, 12, 22, 0.44) 75%, #080C16 100%),
+    radial-gradient(ellipse 78% 46% at 50% 40%, rgba(41, 105, 255, 0.22), rgba(25, 68, 240, 0.08) 45%, transparent 78%),
+    radial-gradient(ellipse 58% 40% at 50% 62%, rgba(47, 180, 255, 0.13), rgba(47, 180, 255, 0.04) 48%, transparent 82%),
+    radial-gradient(ellipse 92% 62% at 50% 53%, rgba(3, 7, 18, 0), rgba(3, 7, 18, 0.58) 88%);
 }
 
 .cta-bg-glow {
@@ -1751,7 +1413,8 @@ function staggerMotion(index: number = 0) {
 }
 
 .cta-content .section-label {
-  font-size: 1.6rem;
+  font-size: 0.86rem;
+  color: #1944f0;
 }
 
 .cta-title {
@@ -1938,8 +1601,8 @@ function staggerMotion(index: number = 0) {
   bottom: 0.15rem;
   width: 2px;
   border-radius: 999px;
-  background: linear-gradient(180deg, rgba(55, 230, 241, 0.12), rgba(55, 230, 241, 0.76), rgba(25, 68, 240, 0.18));
-  box-shadow: 0 0 18px rgba(55, 230, 241, 0.22);
+  background: linear-gradient(180deg, rgba(123, 138, 247, 0.18), rgba(25, 68, 240, 0.84), rgba(123, 138, 247, 0.22));
+  box-shadow: 0 0 18px rgba(25, 68, 240, 0.28);
 }
 
 .intro-content .section-title,
@@ -1949,18 +1612,32 @@ function staggerMotion(index: number = 0) {
   font-size: clamp(2.75rem, 8.5vw, 4.8rem);
   line-height: 0.95;
   text-align: left;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.objectives-content .section-header {
+  justify-items: center;
+  text-align: center;
+}
+
+.objectives-content .section-title {
+  width: fit-content;
+  max-width: 100%;
+  text-align: center;
+  overflow-wrap: normal;
+  text-wrap: wrap;
+  word-break: normal;
+}
+
+.objectives-title-line {
+  display: block;
+  white-space: nowrap;
 }
 
 .intro-concepts {
   width: min(100%, 22rem);
   margin: 0;
-}
-
-.intro-content::before {
-  left: clamp(-12rem, -14vw, -4rem);
-  width: clamp(28rem, 60vw, 48rem);
-  height: clamp(28rem, 60vw, 48rem);
-  opacity: 0.58;
 }
 
 .intro-text,
@@ -1997,11 +1674,26 @@ function staggerMotion(index: number = 0) {
   justify-content: center;
 }
 
-@media (min-width: 640px) and (max-width: 1023px) {
+@media (min-width: 700px) and (max-width: 1079px) {
   .objectives-content .features-grid > :last-child:nth-child(odd) {
     grid-column: 1 / -1;
     justify-self: center;
-    width: min(100%, calc((100% - 1rem) / 2));
+    width: min(100%, calc((100% - var(--features-gap)) / 2));
+  }
+}
+
+@media (max-width: 699px) {
+  .activities-intro {
+    margin-top: clamp(2rem, 10vw, 2.75rem);
+    margin-bottom: 1rem;
+  }
+
+  .feature-card:hover {
+    transform: none;
+  }
+
+  .feature-card:hover .feature-card-image {
+    transform: scale(1.03);
   }
 }
 
@@ -2048,480 +1740,111 @@ function staggerMotion(index: number = 0) {
 }
 
 @media (max-width: 759px) {
-  .intro-bulb {
-    top: 32%;
-    left: -20rem;
-    width: 42rem;
-    height: 47rem;
-    opacity: 0.4;
-  }
-
   .intro-concept {
     min-height: 58px;
     font-size: 1rem;
   }
 
   .intro-concept-key {
-    width: 2.25rem;
-    height: 2.25rem;
-    font-size: 1.05rem;
+    width: 2rem;
+    height: 2rem;
   }
 
   .objectives-content .section-header::before {
+    left: 50%;
     top: auto;
     bottom: -0.6rem;
     width: min(8rem, 44vw);
     height: 2px;
+    transform: translateX(-50%);
   }
 }
 
-/* ===== ¿QUÉ ES INNOTEC? GRID ===== */
-/* ===== QUE ES INNOTEC ===== */
-.que-es-innotec-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
-  align-items: center;
-  width: 100%;
-}
+@media (max-width: 899px) {
+  .objectives-section {
+    padding-top: clamp(2.5rem, 9vw, 4rem);
+    padding-bottom: clamp(2.25rem, 9vw, 3.5rem);
+  }
 
-@media (min-width: 768px) {
-  .que-es-innotec-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
+  .objectives-content {
+    grid-template-columns: 1fr;
+    gap: clamp(1.75rem, 7vw, 2.75rem);
+    align-items: start;
+  }
+
+  .objectives-content .section-header {
+    justify-items: center;
+    padding-left: 0;
+    text-align: center;
+  }
+
+  .objectives-content .section-title {
+    max-width: 100%;
+    font-size: clamp(2.35rem, 10vw, 3.25rem);
+    text-align: center;
+  }
+
+  .objectives-list {
+    width: min(100%, 42rem);
+    margin-inline: auto;
+    margin-left: auto;
+  }
+
+  .objectives-kicker {
+    margin-bottom: clamp(0.9rem, 3vw, 1.15rem);
+    text-align: center;
+  }
+
+  .objectives-ul li {
+    min-height: auto;
   }
 }
 
-.que-es-innotec-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
-}
+@media (min-width: 900px) and (max-width: 1099px) {
+  .objectives-content {
+    grid-template-columns: minmax(15rem, 0.82fr) minmax(0, 1.18fr);
+    column-gap: clamp(2rem, 4vw, 3rem);
+  }
 
-.que-es-innotec-title {
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: clamp(2.4rem, 5vw, 3.6rem);
-  font-weight: 900;
-  color: #F3F6FE;
-  letter-spacing: -0.02em;
-  line-height: 1.06;
-  margin: 0;
-}
+  .objectives-content .section-title {
+    max-width: 100%;
+    font-size: clamp(3rem, 4.8vw, 3.65rem);
+  }
 
-.que-es-innotec-text {
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-}
+  .objectives-list {
+    --objectives-list-shift: clamp(1rem, 2.4vw, 1.75rem);
+  }
 
-.que-es-innotec-text p {
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.9375rem;
-  font-weight: 400;
-  line-height: 1.72;
-  color: rgba(203, 209, 251, 0.72);
-  margin: 0;
-}
-
-/* Highlight del primer párrafo para mejor jerarquía */
-.que-es-innotec-text p:first-child {
-  color: rgba(203, 209, 251, 0.88);
-  font-size: 0.975rem;
-}
-
-/* Strong highlights dentro del texto */
-.que-es-innotec-text p strong {
-  color: #CBD1FB;
-  font-weight: 600;
-}
-
-/* ===== IMAGE SIDE ===== */
-.que-es-innotec-image-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-}
-
-@media (min-width: 768px) {
-  .que-es-innotec-image-container {
-    min-height: 480px;
+  .objectives-kicker {
+    font-size: clamp(1.65rem, 2.8vw, 1.9rem);
   }
 }
 
-.que-es-innotec-image-placeholder {
-  width: 100%;
-  min-height: 340px;
-  background:
-    linear-gradient(160deg, rgba(25, 68, 240, 0.14) 0%, rgba(8, 12, 22, 0.6) 55%, rgba(123, 138, 247, 0.08) 100%);
-  border: 1px solid rgba(123, 138, 247, 0.28);
-  border-radius: 18px;
-  overflow: hidden;
-  position: relative;
-  box-shadow:
-    0 0 0 1px rgba(25, 68, 240, 0.12),
-    0 24px 56px rgba(0, 0, 0, 0.45),
-    0 0 40px rgba(25, 68, 240, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
-}
+@media (max-width: 420px) {
+  .objectives-section {
+    padding-inline: clamp(1rem, 5vw, 1.25rem);
+  }
 
-/* Glow interior */
-.que-es-innotec-image-placeholder::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 70% 30%, rgba(123, 138, 247, 0.18) 0%, transparent 55%),
-    radial-gradient(ellipse at 20% 80%, rgba(25, 68, 240, 0.12) 0%, transparent 45%);
-  pointer-events: none;
-  z-index: 1;
-}
+  .objectives-content .section-title {
+    font-size: clamp(2rem, 9.8vw, 2.75rem);
+  }
 
-/* Línea de brillo superior */
-.que-es-innotec-image-placeholder::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(123, 138, 247, 0.6), transparent);
-  pointer-events: none;
-  z-index: 2;
-}
+  .objectives-kicker {
+    font-size: clamp(1.45rem, 7vw, 1.85rem);
+  }
 
-/* ===== ACERCA SECTION ===== */
-.acerca-section {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  padding: clamp(4.5rem, 9vw, 7.5rem) clamp(1.25rem, 4vw, 3rem);
-}
-
-.acerca-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(25, 68, 240, 0.13), transparent 68%),
-    radial-gradient(ellipse 55% 40% at 85% 90%, rgba(123, 138, 247, 0.07), transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.acerca-container {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3rem;
-}
-
-/* Header */
-.acerca-header {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.1rem;
-}
-
-.acerca-title-line {
-  width: 3.5rem;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, #1944F0, #7B8AF7, transparent);
-  border-radius: 2px;
-  box-shadow: 0 0 14px rgba(25, 68, 240, 0.65);
-}
-
-.acerca-title {
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: clamp(2.1rem, 5vw, 3.4rem);
-  font-weight: 900;
-  color: #F3F6FE;
-  margin: 0;
-  line-height: 1.06;
-  letter-spacing: -0.01em;
-}
-
-.acerca-lema {
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: clamp(0.95rem, 1.8vw, 1.18rem);
-  color: #CBD1FB;
-  margin: 0;
-  font-style: italic;
-  max-width: 54ch;
-  line-height: 1.55;
-  opacity: 0.88;
-}
-
-/* Descripción */
-.acerca-description-wrapper {
-  max-width: 70ch;
-  text-align: center;
-}
-
-.acerca-description-label {
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: #7B8AF7;
-  text-transform: uppercase;
-  letter-spacing: 0.13em;
-  margin: 0 0 0.55rem;
-}
-
-.acerca-description {
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 1.04rem;
-  line-height: 1.8;
-  color: rgba(203, 209, 251, 0.78);
-  margin: 0;
-}
-
-/* Info cards grid */
-.acerca-info-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.1rem;
-  width: 100%;
-  align-items: stretch;
-}
-
-@media (min-width: 580px) {
-  .acerca-info-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .objectives-ul li {
+    grid-template-columns: clamp(2.1rem, 12vw, 2.45rem) minmax(0, 1fr);
+    padding: 0.95rem;
+    line-height: 1.55;
   }
 }
 
-@media (min-width: 900px) {
-  .acerca-info-grid {
-    grid-template-columns: repeat(3, 1fr);
+@media (max-width: 359px) {
+  .objectives-ul li {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
   }
 }
 
-.acerca-info-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0.9rem;
-  padding: 1.625rem 1.4rem;
-  background: linear-gradient(145deg, rgba(14, 21, 46, 0.72), rgba(8, 12, 22, 0.6));
-  border: 1px solid rgba(25, 68, 240, 0.22);
-  border-radius: 12px;
-  height: 100%;
-  overflow: hidden;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-.acerca-info-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 1rem;
-  right: 1rem;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(123, 138, 247, 0.45), transparent);
-  pointer-events: none;
-}
-
-
-
-.acerca-card-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  background: rgba(25, 68, 240, 0.12);
-  border: 1px solid rgba(25, 68, 240, 0.28);
-  border-radius: 10px;
-  color: #7B8AF7;
-  flex-shrink: 0;
-}
-
-.acerca-card-icon svg {
-  width: 1.2rem;
-  height: 1.2rem;
-}
-
-.acerca-card-title {
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.975rem;
-  font-weight: 900;
-  color: #F3F6FE;
-  margin: 0;
-  letter-spacing: 0;
-  text-align: center;
-}
-
-.acerca-card-text {
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.9rem;
-  line-height: 1.68;
-  color: rgba(203, 209, 251, 0.72);
-  margin: 0;
-}
-
-.acerca-dates {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
-
-.acerca-date-row {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0.08rem;
-  padding: 0.6rem 0.75rem;
-  background: rgba(25, 68, 240, 0.08);
-  border: 1px solid rgba(25, 68, 240, 0.16);
-  border-radius: 8px;
-}
-
-.acerca-date-label {
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.65rem;
-  font-weight: 900;
-  color: #7B8AF7;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
-
-.acerca-date-value {
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.875rem;
-  color: #F3F6FE;
-  font-weight: 400;
-}
-
-.acerca-date-time {
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.8rem;
-  color: rgba(203, 209, 251, 0.58);
-}
-
-.acerca-maps-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.48rem 0.95rem;
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: #7B8AF7;
-  background: rgba(25, 68, 240, 0.1);
-  border: 1px solid rgba(25, 68, 240, 0.28);
-  border-radius: 8px;
-  text-decoration: none;
-  transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-  align-self: flex-start;
-  margin-top: auto;
-}
-
-.acerca-maps-btn:hover {
-  color: #CBD1FB;
-  background: rgba(25, 68, 240, 0.2);
-  border-color: rgba(25, 68, 240, 0.52);
-  box-shadow: 0 0 12px rgba(25, 68, 240, 0.22);
-}
-
-/* Separador */
-.acerca-separator {
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(25, 68, 240, 0.38), rgba(123, 138, 247, 0.22), transparent);
-}
-
-/* Ejes Temáticos */
-.acerca-ejes-header {
-  text-align: center;
-  width: 100%;
-}
-
-.acerca-ejes-title {
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: clamp(1.45rem, 3vw, 1.9rem);
-  font-weight: 900;
-  color: #F3F6FE;
-  margin: 0;
-  letter-spacing: -0.01em;
-}
-
-.acerca-ejes-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  width: 100%;
-  align-items: stretch;
-}
-
-@media (min-width: 720px) {
-  .acerca-ejes-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.acerca-eje-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0.65rem;
-  padding: 1.625rem 1.4rem;
-  background: linear-gradient(145deg, rgba(11, 17, 38, 0.68), rgba(8, 12, 22, 0.58));
-  border: 1px solid rgba(25, 68, 240, 0.18);
-  border-radius: 12px;
-  transition: border-color 0.28s ease, box-shadow 0.28s ease;
-  overflow: hidden;
-  height: 100%;
-}
-
-.acerca-eje-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 1rem;
-  right: 1rem;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(25, 68, 240, 0.35), transparent);
-  pointer-events: none;
-}
-
-
-
-.acerca-eje-num {
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 2.4rem;
-  font-weight: 900;
-  color: rgba(25, 68, 240, 0.22);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  display: block;
-}
-
-.acerca-eje-title {
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.975rem;
-  font-weight: 900;
-  color: #F3F6FE;
-  margin: 0;
-  line-height: 1.32;
-  text-align: center;
-}
-
-.acerca-eje-desc {
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.86rem;
-  line-height: 1.7;
-  color: rgba(203, 209, 251, 0.65);
-  margin: 0;
-}
 </style>

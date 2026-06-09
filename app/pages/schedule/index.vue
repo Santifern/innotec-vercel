@@ -4,8 +4,8 @@ definePageMeta({
 })
 
 useSeoMeta({
-  title: 'Programa - INNOTEC 2026',
-  ogTitle: 'Programa - INNOTEC 2026',
+  title: 'Cronograma - INNOTEC 2026',
+  ogTitle: 'Cronograma - INNOTEC 2026',
   description: 'Cronograma detallado de actividades de INNOTEC 2026.',
   ogDescription: 'Cronograma detallado de actividades de INNOTEC 2026.'
 })

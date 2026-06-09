@@ -210,7 +210,7 @@ function scheduleMotion(index: number) {
 
 <template>
   <section
-    id="programa"
+    id="cronograma"
     class="program-section"
   >
     <div class="program-bg-line program-bg-line--one" />
@@ -223,7 +223,7 @@ function scheduleMotion(index: number) {
         v-bind="scheduleMotion(0)"
         class="program-header"
       >
-        <span class="section-label">Programa</span>
+        
         <h2 class="section-title">
           Cronograma de actividades
         </h2>
@@ -390,7 +390,7 @@ function scheduleMotion(index: number) {
   bottom: 8%;
   width: 30rem;
   height: 30rem;
-  background: rgba(55, 230, 241, 0.1);
+  background: rgba(25, 68, 240, 0.12);
 }
 
 .program-bg-line {
@@ -422,6 +422,19 @@ function scheduleMotion(index: number) {
   max-width: 680px;
   margin: 0 auto 1.6rem;
   text-align: center;
+}
+
+.program-header .section-label {
+  font-size: clamp(1rem, 1.5vw, 1.24rem);
+}
+
+.program-header .section-title {
+  font-size: clamp(1.72rem, 3.2vw, 2.45rem);
+}
+
+.program-header .section-description {
+  font-size: clamp(1.05rem, 1.65vw, 1.28rem);
+  line-height: 1.5;
 }
 
 .program-tabs {
@@ -473,9 +486,9 @@ function scheduleMotion(index: number) {
 
 .program-tab.active {
   color: #F3F6FE;
-  border-color: rgba(55, 230, 241, 0.56);
+  border-color: rgba(123, 138, 247, 0.56);
   background:
-    linear-gradient(135deg, rgba(25, 68, 240, 0.34), rgba(55, 230, 241, 0.12)),
+    linear-gradient(135deg, rgba(25, 68, 240, 0.34), rgba(123, 138, 247, 0.14)),
     rgba(25, 68, 240, 0.16);
   box-shadow: 0 0 22px rgba(25, 68, 240, 0.34), inset 0 1px 0 rgba(243, 246, 254, 0.08);
 }
@@ -494,8 +507,8 @@ function scheduleMotion(index: number) {
   bottom: 0;
   left: 50%;
   width: 1px;
-  background: linear-gradient(180deg, transparent, rgba(55, 230, 241, 0.58), rgba(25, 68, 240, 0.2), transparent);
-  box-shadow: 0 0 24px rgba(55, 230, 241, 0.22);
+  background: linear-gradient(180deg, transparent, rgba(123, 138, 247, 0.58), rgba(25, 68, 240, 0.2), transparent);
+  box-shadow: 0 0 24px rgba(25, 68, 240, 0.24);
 }
 
 .program-day-chip {
@@ -503,10 +516,10 @@ function scheduleMotion(index: number) {
   position: relative;
   z-index: 2;
   margin-bottom: 0.4rem;
-  padding: 0.46rem 1rem;
+  padding: 0.58rem 1.2rem;
   color: #061954;
   font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.76rem;
+  font-size: clamp(0.88rem, 1.25vw, 1.05rem);
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -547,6 +560,10 @@ function scheduleMotion(index: number) {
   justify-self: center;
 }
 
+.program-row--break.program-row--span .program-card {
+  width: min(100%, 560px);
+}
+
 .program-row--span .program-time {
   position: absolute;
   left: 0;
@@ -574,10 +591,10 @@ function scheduleMotion(index: number) {
   justify-self: center;
   width: 0.75rem;
   height: 0.75rem;
-  border: 1px solid rgba(55, 230, 241, 0.82);
+  border: 1px solid rgba(123, 138, 247, 0.82);
   border-radius: 999px;
   background: #1944F0;
-  box-shadow: 0 0 0 6px rgba(25, 68, 240, 0.14), 0 0 22px rgba(55, 230, 241, 0.5);
+  box-shadow: 0 0 0 6px rgba(25, 68, 240, 0.14), 0 0 22px rgba(25, 68, 240, 0.46);
 }
 
 .program-card {
@@ -602,7 +619,7 @@ function scheduleMotion(index: number) {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 0% 0%, rgba(55, 230, 241, 0.13), transparent 50%),
+    radial-gradient(ellipse at 0% 0%, rgba(25, 68, 240, 0.18), transparent 50%),
     linear-gradient(120deg, rgba(243, 246, 254, 0.045), transparent 42%);
   opacity: 0.9;
 }
@@ -612,9 +629,10 @@ function scheduleMotion(index: number) {
   color: #F3F6FE;
   text-align: center;
   background:
-    linear-gradient(135deg, rgba(18, 53, 200, 0.96), rgba(25, 68, 240, 0.94) 52%, rgba(43, 69, 243, 0.92));
-  border-color: rgba(55, 230, 241, 0.34);
-  box-shadow: 0 12px 30px rgba(1, 8, 32, 0.2), 0 0 24px rgba(25, 68, 240, 0.22);
+    radial-gradient(circle at 50% 50%, #1B3CB0 0%, #1939A8 22%, #132357 62%, #141F44 100%);
+  border-color: rgba(123, 138, 247, 0.38);
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(1, 8, 32, 0.18), 0 0 16px rgba(25, 68, 240, 0.14), inset 0 1px 0 rgba(243, 246, 254, 0.06);
 }
 
 .program-row--break .program-time {
@@ -627,17 +645,20 @@ function scheduleMotion(index: number) {
 
 .program-row--break .program-kind {
   color: #F3F6FE;
-  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-size: clamp(1.12rem, 2.25vw, 1.5rem);
   justify-content: center;
+  text-transform: uppercase;
 }
 
 .program-row--break .program-card-header {
-  display: grid;
-  grid-template-columns: 6.35rem minmax(12rem, max-content);
+  display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.9rem;
-  transform: translateX(-3.625rem);
+  gap: 1.45rem;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  transform: none;
 }
 
 .program-card-header,
@@ -675,13 +696,17 @@ function scheduleMotion(index: number) {
 
 .program-row--break .program-card-time {
   display: inline-flex;
-  min-width: 6.35rem;
-  padding: 0.5rem 1.05rem;
-  color: #1944F0;
-  font-size: 1.28rem;
-  border-color: rgba(243, 246, 254, 0.92);
-  background: #F3F6FE;
-  box-shadow: 0 8px 22px rgba(1, 8, 32, 0.18);
+  justify-content: center;
+  position: absolute;
+  left: 1.6rem;
+  min-width: auto;
+  padding: 0;
+  color: #F3F6FE;
+  font-size: 1.62rem;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  text-transform: uppercase;
 }
 
 .program-kind,
@@ -780,6 +805,31 @@ function scheduleMotion(index: number) {
   line-height: 1.5;
 }
 
+/* ===== TABLET BREAKPOINT ===== */
+@media (max-width: 960px) {
+  .program-row {
+    grid-template-columns: minmax(0, 1fr) 42px minmax(0, 1fr);
+  }
+
+  .program-time {
+    font-size: clamp(1.15rem, 2.4vw, 1.75rem);
+    min-width: 4.2rem;
+  }
+
+  .program-row--left .program-time {
+    left: calc(50% + 1.15rem);
+  }
+
+  .program-row--right .program-time {
+    right: calc(50% + 1.15rem);
+  }
+
+  .program-speaker {
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  }
+}
+
+/* ===== MOBILE BREAKPOINT ===== */
 @media (max-width: 760px) {
   .program-section {
     padding-inline: 1rem;
@@ -794,9 +844,9 @@ function scheduleMotion(index: number) {
   }
 
   .program-row {
-    grid-template-columns: 2.3rem minmax(0, 1fr);
+    grid-template-columns: 1.8rem minmax(0, 1fr);
     align-items: start;
-    gap: 0.8rem;
+    gap: 0.7rem;
     min-height: auto;
   }
 
@@ -810,18 +860,7 @@ function scheduleMotion(index: number) {
   .program-row--left .program-time,
   .program-row--right .program-time,
   .program-row--span .program-time {
-    position: static;
-    top: auto;
-    left: auto;
-    right: auto;
-    grid-column: 1;
-    grid-row: 1;
-    justify-self: start;
-    transform: none;
-    padding-top: 0.95rem;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    font-size: 1.05rem;
+    display: none;
   }
 
   .program-node {
@@ -835,12 +874,67 @@ function scheduleMotion(index: number) {
     padding: 0.92rem;
   }
 
+  .program-card-header {
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .program-card-time {
+    display: inline-flex;
+    flex: 0 0 auto;
+    margin-top: 0.1rem;
+    color: #F3F6FE;
+    background: rgba(25, 68, 240, 0.24);
+    border-color: rgba(123, 138, 247, 0.44);
+    box-shadow: 0 0 14px rgba(25, 68, 240, 0.16);
+  }
+
+  .program-kind {
+    flex: 1 1 min(100%, 12rem);
+    line-height: 1.18;
+  }
+
   .program-activity-grid {
     grid-template-columns: 1fr;
   }
+
+  .program-row--break .program-card {
+    border-radius: 12px;
+    padding: 0.75rem 0.85rem;
+  }
+
+  .program-row--break .program-card-header {
+    flex-direction: column;
+    gap: 0.35rem;
+    transform: none;
+  }
+
+  .program-row--break .program-card-time {
+    position: static;
+    min-width: auto;
+    padding-inline: 0;
+    font-size: 1.28rem;
+  }
+
+  .program-row--break .program-kind {
+    font-size: clamp(0.88rem, 3.8vw, 1.15rem);
+  }
+
+  .program-speaker {
+    font-size: clamp(1.05rem, 4.5vw, 1.35rem);
+  }
+
+  .program-title {
+    font-size: 0.92rem;
+  }
 }
 
+/* ===== SMALL MOBILE ===== */
 @media (max-width: 440px) {
+  .program-section {
+    padding-inline: 0.75rem;
+  }
+
   .program-tabs {
     width: 100%;
   }
@@ -853,17 +947,29 @@ function scheduleMotion(index: number) {
     font-size: 0.62rem;
   }
 
-  .program-row--break .program-card-header {
-    grid-template-columns: 5.8rem minmax(0, 1fr);
-    justify-content: stretch;
-    gap: 0.65rem;
-    transform: none;
+  .program-card {
+    padding: 0.78rem;
   }
 
-  .program-row--break .program-card-time {
-    min-width: 5.8rem;
-    padding-inline: 0.7rem;
-    font-size: 1.08rem;
+  .program-activity {
+    padding: 0.72rem;
+  }
+
+  .program-activity h3 {
+    font-size: 0.95rem;
+  }
+
+  .program-activity p {
+    font-size: 0.86rem;
+  }
+
+  .program-kind {
+    font-size: 0.92rem;
+  }
+
+  .program-day-chip {
+    padding: 0.45rem 0.95rem;
+    font-size: 0.78rem;
   }
 }
 

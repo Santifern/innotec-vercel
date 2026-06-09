@@ -1,24 +1,6 @@
 <script setup lang="ts">
-const smoothEase = [0.22, 1, 0.36, 1] as [number, number, number, number]
-const scrollInViewOptions = { once: true, amount: 0.28, margin: '0px 0px -12% 0px' as const }
-
-function scrollMotion(delay: number = 0) {
-  return {
-    initial: { opacity: 0, y: 34, filter: 'blur(8px)' },
-    whileInView: { opacity: 1, y: 0, filter: 'blur(0px)' },
-    inViewOptions: scrollInViewOptions,
-    transition: { duration: 0.82, delay, ease: smoothEase }
-  }
-}
-
-function staggerMotion(index: number = 0) {
-  return {
-    initial: { opacity: 0, y: 20, filter: 'blur(4px)' },
-    whileInView: { opacity: 1, y: 0, filter: 'blur(0px)' },
-    inViewOptions: scrollInViewOptions,
-    transition: { duration: 0.62, delay: index * 0.07, ease: smoothEase }
-  }
-}
+const scrollMotion = useScrollMotionAdvanced
+const staggerMotion = (index: number = 0) => useStaggerMotionAdvanced(index, 0)
 
 interface FaqItem {
   question: string

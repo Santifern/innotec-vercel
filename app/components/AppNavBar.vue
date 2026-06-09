@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { motion } from 'motion-v'
-import type { VariantType } from 'motion-v'
+import type { NavItem } from '~/types/navigation'
 
 const props = defineProps<{
   theme?: 'innotec' | 'hackathon'
-  items: any[]
-  desktopItems: any[]
+  items: NavItem[]
+  desktopItems: NavItem[]
   largeBreakpoint?: boolean
 }>()
 
@@ -24,17 +22,42 @@ nuxtApp.hooks.hookOnce('page:loading:end', () => {
   window.addEventListener('resize', updateScrolledState, { passive: true })
 })
 
-// Hamburger menu animation variants
-const variants: Record<string, VariantType | ((custom: unknown) => VariantType)> = {
-  normal: { rotate: 0, y: 0, opacity: 1 },
-  close: (custom: unknown) => {
-    const c = custom as number
-    return {
-      rotate: c === 1 ? 45 : c === 3 ? -45 : 0,
-      y: c === 1 ? 6 : c === 3 ? -6 : 0,
-      opacity: c === 2 ? 0 : 1,
-      transition: { type: 'spring', stiffness: 260, damping: 20 }
+const route = useRoute()
+const router = useRouter()
+
+const handleNavClick = async (e: MouseEvent, to: string) => {
+  if (to && to.includes('#')) {
+    const [path, hash] = to.split('#')
+    
+    // Si la ruta base es la misma que la actual o está vacía, hacemos scroll manual
+    if (path === route.path || path === '' || (path === '/hackathon' && route.path === '/hackathon')) {
+      e.preventDefault()
+      
+      // Si estamos en móvil, cerramos el menú
+      mobileMenuOpen.value = false
+
+      const el = hash ? document.getElementById(hash) : null
+      if (el) {
+        // Calculamos el offset del navbar fijo
+        const headerOffset = 80
+        const elementPosition = el.getBoundingClientRect().top
+        const offsetPosition = elementPosition + window.scrollY - headerOffset
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        })
+        
+        // Actualizamos la URL sin recargar
+        router.push({ hash: '#' + hash })
+      } else if (path !== route.path && path !== '') {
+        // Si el elemento no está en la página actual pero la ruta es diferente, navegamos
+        await router.push(to)
+      }
     }
+  } else {
+    // Para rutas sin hash en móvil, cerramos el menú
+    mobileMenuOpen.value = false
   }
 }
 </script>
@@ -67,6 +90,9 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
             v-if="item.to"
             :to="item.to"
             class="navbar-nav-item"
+            :exact-hash="item.exactHash"
+            :exact="item.exact"
+            @click="(e) => handleNavClick(e, item.to ?? '')"
           >
             {{ item.label }}
             <span class="nav-item-indicator" />
@@ -102,23 +128,20 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <motion.line
+            <line
               x1="4" y1="6" x2="20" y2="6"
-              :variants="variants"
-              :animate="mobileMenuOpen ? 'close' : 'normal'"
-              :custom="1" class="outline-none"
+              class="outline-none hamburger-line hamburger-line--1"
+              :class="{ active: mobileMenuOpen }"
             />
-            <motion.line
+            <line
               x1="4" y1="12" x2="20" y2="12"
-              :variants="variants"
-              :animate="mobileMenuOpen ? 'close' : 'normal'"
-              :custom="2" class="outline-none"
+              class="outline-none hamburger-line hamburger-line--2"
+              :class="{ active: mobileMenuOpen }"
             />
-            <motion.line
+            <line
               x1="4" y1="18" x2="20" y2="18"
-              :variants="variants"
-              :animate="mobileMenuOpen ? 'close' : 'normal'"
-              :custom="3" class="outline-none"
+              class="outline-none hamburger-line hamburger-line--3"
+              :class="{ active: mobileMenuOpen }"
             />
           </svg>
         </button>
@@ -144,7 +167,9 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
               :to="item.to"
               class="mobile-nav-item"
               :class="[item.mobileClass || '']"
-              @click="mobileMenuOpen = false"
+              :exact-hash="item.exactHash"
+              :exact="item.exact"
+              @click="(e) => handleNavClick(e, item.to ?? '')"
             >
               {{ item.label }}
             </NuxtLink>
@@ -324,7 +349,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
 }
 
 .navbar-nav-item.active,
-.navbar-nav-item.router-link-active {
+.navbar-nav-item.router-link-exact-active {
   color: var(--nav-item-active);
   background: rgba(var(--nav-accent-rgb), 0.08);
 }
@@ -343,7 +368,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
 }
 
 .navbar-nav-item.active .nav-item-indicator,
-.navbar-nav-item.router-link-active .nav-item-indicator {
+.navbar-nav-item.router-link-exact-active .nav-item-indicator {
   width: calc(100% - 1.5rem);
   opacity: 1;
 }
@@ -483,7 +508,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
 }
 
 .mobile-nav-item.active,
-.mobile-nav-item.router-link-active {
+.mobile-nav-item.router-link-exact-active {
   color: var(--nav-item-active);
   background: rgba(var(--nav-accent-rgb), 0.1);
   border-color: rgba(var(--nav-accent-rgb), 0.3);
@@ -500,7 +525,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
 
 .mobile-nav-item--hackathon:hover,
 .mobile-nav-item--hackathon.active,
-.mobile-nav-item--hackathon.router-link-active {
+.mobile-nav-item--hackathon.router-link-exact-active {
   border-color: rgba(217, 70, 239, 0.62) !important;
   box-shadow: 0 0 18px rgba(217, 70, 239, 0.2) !important;
 }
@@ -532,5 +557,24 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
 .mobile-menu-leave-to {
   opacity: 0;
   transform: translateY(-8px);
+}
+
+/* ===== HAMBURGER ANIMATION ===== */
+.hamburger-line {
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+.hamburger-line--1.active {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.hamburger-line--2.active {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger-line--3.active {
+  transform: translateY(-6px) rotate(-45deg);
 }
 </style>

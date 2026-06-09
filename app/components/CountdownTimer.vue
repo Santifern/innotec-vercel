@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { useIntervalFn } from '@vueuse/core'
 
-// Target date: August 20, 2026
-const targetDate = new Date('2026-08-20T00:00:00')
+const props = defineProps<{
+  targetDate?: string
+  theme?: 'innotec' | 'hackathon'
+}>()
 
+const targetDate = new Date(props.targetDate || '2026-08-20T00:00:00')
 const days = ref(0)
 const hours = ref(0)
 const minutes = ref(0)
@@ -45,7 +48,10 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="countdown-wrapper">
+  <div
+    class="countdown-wrapper"
+    :class="props.theme === 'hackathon' ? 'theme-hackathon' : 'theme-innotec'"
+  >
     <!-- Label -->
     <p class="countdown-label">
       <span class="label-dot" />
@@ -128,17 +134,26 @@ onUnmounted(() => {
           clip-rule="evenodd"
         />
       </svg>
-      20 de agosto, 2026 · Asunción, Paraguay
+      20 y 21 de agosto, 2026 · Asunción, Paraguay
     </div>
   </div>
 </template>
 
 <style scoped>
 .countdown-wrapper {
+  --cd-primary-rgb: 25, 68, 240;
+  --cd-primary: #1944F0;
+  --cd-primary-light-rgb: 203, 209, 251;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.25rem;
+}
+
+.countdown-wrapper.theme-hackathon {
+  --cd-primary-rgb: 163, 114, 248;
+  --cd-primary: #a372f8;
+  --cd-primary-light-rgb: 208, 190, 246;
 }
 
 /* Label */
@@ -148,7 +163,7 @@ onUnmounted(() => {
   gap: 0.5rem;
   font-size: 0.8125rem;
   font-weight: 600;
-  color: rgba(203, 209, 251, 0.7);
+  color: rgba(var(--cd-primary-light-rgb), 0.7);
   text-transform: uppercase;
   letter-spacing: 0.12em;
 }
@@ -158,8 +173,8 @@ onUnmounted(() => {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #1944F0;
-  box-shadow: 0 0 8px rgba(25, 68, 240, 0.8);
+  background: var(--cd-primary);
+  box-shadow: 0 0 8px rgba(var(--cd-primary-rgb), 0.8);
   animation: dot-pulse 2s ease-in-out infinite;
 }
 
@@ -185,7 +200,7 @@ onUnmounted(() => {
 .countdown-separator {
   font-size: 1.75rem;
   font-weight: 700;
-  color: rgba(25, 68, 240, 0.7);
+  color: rgba(var(--cd-primary-rgb), 0.7);
   line-height: 1;
   padding-bottom: 1.5rem;
   animation: separator-blink 2s ease-in-out infinite;
@@ -213,7 +228,7 @@ onUnmounted(() => {
   width: 72px;
   height: 72px;
   background: rgba(13, 20, 40, 0.9);
-  border: 1px solid rgba(25, 68, 240, 0.35);
+  border: 1px solid rgba(var(--cd-primary-rgb), 0.35);
   border-radius: 12px;
   overflow: hidden;
   transition: border-color 0.3s ease;
@@ -235,13 +250,13 @@ onUnmounted(() => {
 }
 
 .countdown-card:hover {
-  border-color: rgba(25, 68, 240, 0.6);
+  border-color: rgba(var(--cd-primary-rgb), 0.6);
 }
 
 .countdown-card-glow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center bottom, rgba(25, 68, 240, 0.12) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center bottom, rgba(var(--cd-primary-rgb), 0.12) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -279,24 +294,24 @@ onUnmounted(() => {
   0% {
     opacity: 0.82;
     transform: translateY(0.18rem) scale(0.94);
-    text-shadow: 0 0 0 rgba(25, 68, 240, 0);
+    text-shadow: 0 0 0 rgba(var(--cd-primary-rgb), 0);
   }
 
   18% {
     opacity: 1;
     transform: translateY(0) scale(1.08);
-    text-shadow: 0 0 18px rgba(25, 68, 240, 0.5);
+    text-shadow: 0 0 18px rgba(var(--cd-primary-rgb), 0.5);
   }
 
   38% {
     transform: translateY(0) scale(1);
-    text-shadow: 0 0 10px rgba(25, 68, 240, 0.28);
+    text-shadow: 0 0 10px rgba(var(--cd-primary-rgb), 0.28);
   }
 
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
-    text-shadow: 0 0 0 rgba(25, 68, 240, 0);
+    text-shadow: 0 0 0 rgba(var(--cd-primary-rgb), 0);
   }
 }
 
@@ -304,7 +319,7 @@ onUnmounted(() => {
 .countdown-unit-label {
   font-size: 0.6875rem;
   font-weight: 600;
-  color: rgba(25, 68, 240, 0.8);
+  color: rgba(var(--cd-primary-rgb), 0.8);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
@@ -325,9 +340,9 @@ onUnmounted(() => {
   padding: 0.4375rem 1rem;
   font-size: 0.8125rem;
   font-weight: 500;
-  color: rgba(203, 209, 251, 0.7);
-  background: rgba(25, 68, 240, 0.08);
-  border: 1px solid rgba(25, 68, 240, 0.2);
+  color: rgba(var(--cd-primary-light-rgb), 0.7);
+  background: rgba(var(--cd-primary-rgb), 0.08);
+  border: 1px solid rgba(var(--cd-primary-rgb), 0.2);
   border-radius: 100px;
   line-height: 1.35;
   text-align: center;
@@ -336,6 +351,6 @@ onUnmounted(() => {
 .badge-icon {
   width: 13px;
   height: 13px;
-  color: rgba(25, 68, 240, 0.8);
+  color: rgba(var(--cd-primary-rgb), 0.8);
 }
 </style>
