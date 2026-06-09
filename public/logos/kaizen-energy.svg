@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" role="img" aria-labelledby="kaizen-title">
+  <title id="kaizen-title">Kaizen Energy</title>
+
+  <!-- Red arc: large circle arc, open at top-right (about 300 degrees) -->
+  <!-- Center at (60,60), radius 46, arc from ~40° to ~320° going counter-clockwise (i.e., leaving gap at top-right) -->
+  <path
+    d="M 60,14 A 46,46 0 1 0 102.8,83"
+    fill="none"
+    stroke="#e01020"
+    stroke-width="7.5"
+    stroke-linecap="round"
+  />
+
+  <!-- Sound/signal bars: 4 vertical bars centered inside the circle -->
+  <!-- Bar 1 (leftmost, shortest) -->
+  <rect x="32" y="54" width="7" height="24" rx="3.5" fill="#e01020"/>
+  <!-- Bar 2 -->
+  <rect x="46" y="40" width="7" height="40" rx="3.5" fill="#e01020"/>
+  <!-- Bar 3 (tallest, center-right) -->
+  <rect x="60" y="34" width="7" height="52" rx="3.5" fill="#e01020"/>
+  <!-- Bar 4 -->
+  <rect x="74" y="44" width="7" height="34" rx="3.5" fill="#e01020"/>
+
+  <!-- KAIZEN ENERGY text in white, bold, wide-spaced -->
+  <text
+    x="120"
+    y="70"
+    font-family="'Helvetica Neue', Helvetica, 'Arial Black', Arial, sans-serif"
+    font-size="38"
+    font-weight="700"
+    fill="#ffffff"
+    dominant-baseline="middle"
+    letter-spacing="4"
+  >KAIZEN ENERGY</text>
+</svg>

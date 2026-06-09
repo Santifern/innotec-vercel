@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" role="img" aria-labelledby="domec-title">
+  <title id="domec-title">DOMEC</title>
+  <defs>
+    <clipPath id="domec-mark-clip">
+      <rect x="12" y="8" width="296" height="158" rx="11"/>
+    </clipPath>
+  </defs>
+  <rect x="12" y="8" width="296" height="158" rx="11" fill="#fff"/>
+  <path d="M160 8h137c6.1 0 11 4.9 11 11v136c0 6.1-4.9 11-11 11H160Z" fill="#0700a8"/>
+  <g fill="none" stroke="#0700a8" stroke-linejoin="round">
+    <rect x="12" y="8" width="296" height="158" rx="11" stroke-width="2.6"/>
+    <path d="M160 8v158" stroke-width="2.2"/>
+  </g>
+  <g clip-path="url(#domec-mark-clip)" fill="none" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M10 130h48l63-78h39" stroke="#0700a8" stroke-width="13"/>
+    <path d="M160 59h34l63 78h52" stroke="#fff" stroke-width="13"/>
+  </g>
+  <text
+    x="160"
+    y="214"
+    fill="none"
+    stroke="#0700a8"
+    stroke-width="2.7"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="65"
+    font-style="italic"
+    font-weight="700"
+    text-anchor="middle"
+  >DOMEC</text>
+</svg>
