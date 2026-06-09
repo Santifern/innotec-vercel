@@ -3,14 +3,14 @@ import CountdownTimer from '~/components/CountdownTimer.vue'
 import SponsorMarquee from '~/components/SponsorMarquee.vue'
 
 definePageMeta({
-  layout: 'hackathon',
   colorMode: 'dark',
+  layout: 'hackathon',
   section: 'hackathon'
 })
 
 const fallbackPage = {
   seo: {
-    title: 'HACKATHON 2026 - El desafío de la innovación',
+    title: 'INNOTEC',
     description: 'Un evento intensivo de 48 horas donde equipos de desarrolladores, diseñadores e innovadores trabajan juntos para crear soluciones tecnológicas. 20 y 21 de agosto de 2026.'
   },
   title: 'Construye el futuro\nen 48 horas',
@@ -19,10 +19,10 @@ const fallbackPage = {
     headline: '20 y 21 de agosto, 2026 - Asuncion, Paraguay',
     links: [
       {
-        label: 'Inscribe tu equipo',
+        label: 'Inscribite al Hackathon 2026',
         color: 'primary',
         size: 'xl',
-        to: '#inscripcion'
+        to: '/registration-hackathon'
       },
       {
         label: 'Ver detalles',
@@ -88,9 +88,9 @@ const fallbackPage = {
     command: '20 y 21 de agosto - Asuncion, Paraguay',
     links: [
       {
-        label: 'Inscribe tu equipo ahora',
+        label: 'Inscribite al Hackathon 2026',
         color: 'primary',
-        to: '#inscripcion'
+        to: '/registration-hackathon'
       }
     ]
   }
@@ -125,15 +125,15 @@ const staggerInViewOptions = { once: true, amount: 0.35, margin: '0px 0px -10% 0
 
 const _activityImages = [
   {
-    src: '/images/hackathon/activity-charlas.webp',
+    src: '/images/innotec/activity-charlas.webp',
     alt: 'Competencia de desarrollo en hackathon'
   },
   {
-    src: '/images/hackathon/activity-talleres.webp',
+    src: '/images/innotec/activity-talleres.webp',
     alt: 'Competencia de diseño en hackathon'
   },
   {
-    src: '/images/hackathon/activity-visita-tecnica.webp',
+    src: '/images/innotec/activity-visita-tecnica.webp',
     alt: 'Competencia de innovación en hackathon'
   }
 ]
@@ -187,17 +187,73 @@ function resetMethodologyHover(event: PointerEvent) {
     v-if="page"
     class="hackathon-page"
   >
-
-    <HeroSection
+    <!-- Hero -->
+    <section
       id="inicio"
-      logo-src="/logo-hackathon-navbar.svg"
-      logo-alt="Hackathon"
-      :title-primary="heroTitle.primary"
-      :title-secondary="heroTitle.secondary"
-      :description="page.description"
-      target-date="2026-08-20T00:00:00"
-      countdown-theme="hackathon"
-    />
+      class="hero-section"
+    >
+      <!-- Background effects -->
+      <div class="hero-bg-grid" />
+      <div class="hero-bg-glow hero-bg-glow--center" />
+      <div class="hero-bg-glow hero-bg-glow--left" />
+
+      <!-- Neon floating particles -->
+      <div class="neon-particle neon-particle--1" />
+      <div class="neon-particle neon-particle--2" />
+      <div class="neon-particle neon-particle--3" />
+      <div class="neon-particle neon-particle--4" />
+      <div class="neon-particle neon-particle--5" />
+      <div class="neon-particle neon-particle--6" />
+
+      <div class="hero-container">
+        <!-- Main logo -->
+        <div class="hero-logo-wrapper">
+          <NuxtImg
+            src="/images/hackathon/logo-hackathon-navbar.svg"
+            alt="Hackathon"
+            class="hero-logo"
+          />
+        </div>
+
+        <!-- Title -->
+        <Motion
+          v-bind="enterMotion(0.25)"
+          class="hero-title-wrapper"
+        >
+          <h1 class="hero-title">
+            {{ heroTitle.primary }}
+            <br v-if="heroTitle.secondary">
+            <span
+              v-if="heroTitle.secondary"
+              class="hero-title-gradient"
+            >
+              {{ heroTitle.secondary }}
+            </span>
+          </h1>
+        </Motion>
+
+        <!-- Description -->
+        <Motion
+          v-bind="enterMotion(0.4)"
+          class="hero-desc-wrapper"
+        >
+          <p class="hero-description">
+            {{ page.description }}
+          </p>
+        </Motion>
+
+        <!-- Countdown Timer -->
+        <Motion
+          v-bind="enterMotion(0.55)"
+          class="hero-countdown-wrapper"
+        >
+          <CountdownTimer
+            target-date="2026-08-20T00:00:00"
+            theme="hackathon"
+          />
+        </Motion>
+      </div>
+    </section>
 
     <!-- ¿Qué es? -->
     <section
@@ -247,7 +303,7 @@ function resetMethodologyHover(event: PointerEvent) {
     </section>
 
     <!-- Section divider -->
-    <div class="section-divider"/>
+    <div class="section-divider" />
 
     <!-- Metodología -->
     <section
@@ -325,7 +381,6 @@ function resetMethodologyHover(event: PointerEvent) {
       </div>
     </section>
 
-
     <!-- Section divider -->
     <div class="section-divider" />
 
@@ -338,6 +393,14 @@ function resetMethodologyHover(event: PointerEvent) {
     >
       <!-- Background effects -->
       <div class="cta-bg-glow" />
+      <NuxtImg
+        src="/images/innotec/foquito.png"
+        alt=""
+        class="cta-foquito cta-foquito--hackathon"
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+      />
 
       <div class="section-container cta-container">
         <Motion
@@ -384,318 +447,4 @@ function resetMethodologyHover(event: PointerEvent) {
   </div>
 </template>
 
-<style scoped>
-/* ===== HACKATHON INTRO SPLIT ===== */
-.hackathon-intro-split {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: start;
-}
-
-@media (min-width: 860px) {
-  .hackathon-intro-split {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    align-items: stretch;
-  }
-}
-
-.hackathon-intro-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: clamp(1.5rem, 3vw, 2rem);
-}
-
-.hackathon-intro-title {
-  margin: 0 !important;
-  max-width: 9.5ch;
-  font-size: clamp(3.25rem, 10vw, 5.55rem);
-  line-height: 0.95;
-  text-align: left;
-}
-
-@media (min-width: 768px) {
-  .hackathon-intro-title {
-    font-size: clamp(4.2rem, 6.8vw, 5.55rem);
-  }
-}
-
-.hackathon-intro-text {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.hackathon-intro-text p {
-  position: relative;
-  margin: 0;
-  padding-left: 1rem;
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.97rem;
-  line-height: 1.75;
-  color: #F3F6FE;
-}
-
-.hackathon-intro-text p::before {
-  position: absolute;
-  left: 0;
-  top: 0.15em;
-  bottom: 0.18em;
-  width: 2px;
-  content: '';
-  border-radius: 999px;
-  background: linear-gradient(180deg, rgba(187, 153, 248, 0.16), rgba(163, 114, 248, 0.78), rgba(123, 74, 246, 0.22));
-  box-shadow: 0 0 18px rgba(163, 114, 248, 0.22);
-}
-
-.hackathon-intro-text p:first-child {
-  color: #F3F6FE;
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-weight: 400;
-}
-
-.hackathon-intro-image-col {
-  width: 100%;
-  display: flex;
-  align-items: stretch;
-}
-
-.hackathon-intro-image-frame {
-  position: relative;
-  width: 100%;
-  min-height: 360px;
-  overflow: hidden;
-  border-radius: 16px;
-  box-shadow:
-    0 0 0 1px rgba(163, 114, 248, 0.3),
-    0 4px 40px rgba(0, 0, 0, 0.55),
-    0 0 60px rgba(163, 114, 248, 0.14);
-  transition: box-shadow 0.35s ease, transform 0.35s ease;
-}
-
-.hackathon-intro-image-frame:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    0 0 0 1px rgba(163, 114, 248, 0.5),
-    0 8px 52px rgba(0, 0, 0, 0.62),
-    0 0 80px rgba(163, 114, 248, 0.22);
-}
-
-.hackathon-intro-image-glow {
-  position: absolute;
-  inset: -20px;
-  z-index: -1;
-  border-radius: 24px;
-  background: radial-gradient(ellipse at 50% 60%, rgba(163, 114, 248, 0.24), transparent 68%);
-  filter: blur(24px);
-  pointer-events: none;
-}
-
-.hackathon-intro-image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 16px;
-}
-
-.hackathon-intro-image-overlay {
-  position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  background:
-    linear-gradient(180deg, transparent 55%, rgba(8, 10, 22, 0.45) 100%),
-    radial-gradient(ellipse at 80% 10%, rgba(163, 114, 248, 0.12), transparent 50%);
-  pointer-events: none;
-}
-
-/* ===== METODOLOGÍA ===== */
-.metodologia-section {
-  padding-top: 3rem;
-  padding-bottom: 4rem;
-}
-
-@media (min-width: 768px) {
-  .metodologia-section {
-    padding-top: 3.5rem;
-    padding-bottom: 4.75rem;
-  }
-}
-
-.metodologia-card {
-  position: relative;
-  display: grid;
-  gap: 1.75rem;
-  width: min(100%, 1100px);
-  max-width: 1100px;
-  margin-inline: auto;
-}
-
-@media (min-width: 768px) {
-  .metodologia-card {
-    grid-template-columns: minmax(16rem, 0.78fr) minmax(0, 1.22fr);
-    align-items: center;
-    column-gap: clamp(2.5rem, 6vw, 4rem);
-  }
-}
-
-.metodologia-title {
-  position: relative;
-  max-width: 9.8ch;
-  margin: 0;
-  padding-left: clamp(1.15rem, 2.2vw, 1.85rem);
-  text-align: left;
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: clamp(2.6rem, 7vw, 4.75rem);
-  font-weight: 900;
-  line-height: 0.95;
-  color: #F3F6FE;
-}
-
-.metodologia-title::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.08em;
-  bottom: 0.15rem;
-  width: 2px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, rgba(188, 154, 255, 0.1), rgba(163, 114, 248, 0.78), rgba(123, 74, 246, 0.18));
-  box-shadow: 0 0 18px rgba(163, 114, 248, 0.24);
-}
-
-.metodologia-list-panel {
-  display: grid;
-  gap: 1rem;
-  min-width: 0;
-}
-
-.metodologia-kicker {
-  margin: 0 0 0.15rem;
-  margin-bottom: 0.6rem;
-  text-align: left;
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: clamp(2rem, 3.6vw, 2.8rem);
-  font-weight: 900;
-  line-height: 1.1;
-  color: transparent;
-  background: linear-gradient(135deg, #d0bef6 0%, #a372f8 42%, #7b4af6 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.metodologia-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.85rem;
-}
-
-.metodologia-item {
-  position: relative;
-  display: grid;
-  align-items: center;
-  grid-template-columns: 3.2rem minmax(0, 1fr);
-  gap: 1rem;
-  min-height: 6.2rem;
-  padding: 1.2rem 1.35rem;
-  overflow: hidden;
-  isolation: isolate;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015) 48%, rgba(163, 114, 248, 0.08)),
-    rgba(10, 9, 25, 0.66);
-  border: 1px solid rgba(163, 114, 248, 0.28);
-  border-radius: 8px;
-  font-family: 'Fractul', 'Fractul Regular', 'Inter', system-ui, sans-serif;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045);
-  transition:
-    border-color 0.28s ease,
-    box-shadow 0.28s ease,
-    color 0.28s ease,
-    transform 0.28s ease,
-    background 0.28s ease;
-}
-
-.metodologia-item::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background:
-    linear-gradient(90deg, transparent, rgba(196, 159, 255, 0.18), transparent),
-    radial-gradient(circle at var(--hover-x, 18%) var(--hover-y, 50%), rgba(163, 114, 248, 0.3), transparent 34%);
-  opacity: 0;
-  transform: translateX(-18%);
-  transition: opacity 0.28s ease, transform 0.42s ease;
-  pointer-events: none;
-}
-
-.metodologia-number {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  align-self: center;
-  position: relative;
-  z-index: 1;
-  width: 3.2rem;
-  color: #F3F6FE;
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 2rem;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-  line-height: 1;
-  background: none;
-  border-radius: 0;
-  height: auto;
-  transition: color 0.28s ease, text-shadow 0.28s ease, transform 0.28s ease;
-}
-
-.metodologia-item-content {
-  position: relative;
-  z-index: 1;
-  font-family: 'Fractul', 'Fractul Regular', 'Inter', system-ui, sans-serif;
-  font-size: clamp(0.95rem, 1.2vw, 1.06rem);
-  font-weight: 400;
-  line-height: 1.7;
-  color: rgba(225, 214, 252, 0.84);
-  flex: 1;
-}
-
-.metodologia-item-title {
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-weight: 900;
-  color: #F3F6FE;
-  font-style: normal;
-}
-
-.metodologia-item:hover {
-  border-color: rgba(196, 159, 255, 0.72);
-  color: rgba(246, 242, 255, 0.96);
-  background:
-    linear-gradient(135deg, rgba(163, 114, 248, 0.16), rgba(255, 255, 255, 0.025) 52%, rgba(123, 74, 246, 0.12)),
-    rgba(14, 11, 31, 0.76);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.075),
-    0 14px 32px rgba(0, 0, 0, 0.22),
-    0 0 30px rgba(163, 114, 248, 0.24);
-  transform: translateY(-2px) translateX(0.18rem);
-}
-
-.metodologia-item:hover .metodologia-number {
-  background: none;
-  color: #C49FFF;
-  text-shadow: 0 0 22px rgba(163, 114, 248, 0.78);
-  transform: translateY(-2px);
-  box-shadow: none;
-}
-
-.metodologia-item:hover::after {
-  opacity: 1;
-  transform: translateX(0);
-}
-</style>
+<style scoped src="~/assets/css/pages/hackathon-hackathon-index.css"></style>

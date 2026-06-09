@@ -16,7 +16,6 @@ const rightNavLinks = [
 ]
 
 const contactLinks = [
-  { name: 'Monica Zacarías', phone: '(+595) 981 100976', href: 'tel:+595981100976' },
   { name: 'María Eugenia Pointis', phone: '(+595) 982 386063', href: 'tel:+595982386063' },
   { name: 'Amelia Nery Huerta', phone: '(+595) 971 650525', href: 'tel:+595971650525' }
 ]
@@ -34,7 +33,6 @@ const contactLinks = [
     <div class="footer-container">
       <!-- Main footer content -->
       <div class="footer-main">
-
         <!-- Brand column -->
         <div class="footer-brand">
           <NuxtLink

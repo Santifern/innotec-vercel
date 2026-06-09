@@ -162,8 +162,8 @@ function resetTrackHover(event: PointerEvent) {
       >
         <div class="stages-heading">
           <span class="section-label">Actividades</span>
-          <h3 class="stages-title">Las cuatro fases del Hackathon</h3>
-          <p class="stages-description">
+          <h3>Las cuatro fases del Hackathon</h3>
+          <p>
             Cada etapa está pensada para llevar una idea desde el análisis inicial hasta una presentación defendible frente a jurado.
           </p>
         </div>
@@ -188,7 +188,7 @@ function resetTrackHover(event: PointerEvent) {
                   />
                 </span>
               </div>
-              <h4 class="stage-title">{{ stage.title }}</h4>
+              <h4>{{ stage.title }}</h4>
               <p class="stage-subtitle">
                 {{ stage.subtitle }}
               </p>
@@ -203,20 +203,18 @@ function resetTrackHover(event: PointerEvent) {
         </div>
 
         <div class="criteria-card">
-          <div class="criteria-header">
+          <div>
             <span class="criteria-label">Durante el pitch se evalúa</span>
-            <h4 class="criteria-title">Criterios de presentación</h4>
+            <h4>Criterios de presentación</h4>
           </div>
           <ul class="criteria-list">
             <li
               v-for="criterion in evaluationCriteria"
               :key="criterion"
-              class="criteria-item"
             >
               <Icon
                 name="i-lucide-check"
                 aria-hidden="true"
-                class="criteria-icon"
               />
               {{ criterion }}
             </li>

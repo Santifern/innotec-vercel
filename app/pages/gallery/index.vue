@@ -20,7 +20,10 @@ useSeoMeta({
 
       <!-- Camera icon -->
       <div class="icon-wrapper">
-        <UIcon name="i-lucide-camera" class="camera-icon" />
+        <UIcon
+          name="i-lucide-camera"
+          class="camera-icon"
+        />
       </div>
 
       <Motion
@@ -58,7 +61,10 @@ useSeoMeta({
           to="/"
           class="back-link"
         >
-          <UIcon name="i-lucide-arrow-left" class="back-icon" />
+          <UIcon
+            name="i-lucide-arrow-left"
+            class="back-icon"
+          />
           Volver al inicio
         </NuxtLink>
       </Motion>
@@ -122,7 +128,7 @@ useSeoMeta({
   height: 480px;
   bottom: -14%;
   right: -14%;
-  background: radial-gradient(ellipse, rgba(55, 230, 241, 0.12), transparent 70%);
+  background: radial-gradient(ellipse, rgba(123, 138, 247, 0.13), transparent 70%);
 }
 
 /* Camera icon */
@@ -133,8 +139,8 @@ useSeoMeta({
   width: 5rem;
   height: 5rem;
   border-radius: 1.25rem;
-  background: linear-gradient(135deg, rgba(25, 68, 240, 0.22), rgba(55, 230, 241, 0.1));
-  border: 1px solid rgba(55, 230, 241, 0.22);
+  background: linear-gradient(135deg, rgba(25, 68, 240, 0.22), rgba(123, 138, 247, 0.1));
+  border: 1px solid rgba(123, 138, 247, 0.28);
   box-shadow: 0 0 40px rgba(25, 68, 240, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.06);
   animation: float 4s ease-in-out infinite;
 }
@@ -157,7 +163,7 @@ useSeoMeta({
   font-weight: 400;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(55, 230, 241, 0.82);
+  color: rgba(123, 138, 247, 0.86);
   margin: 0 0 0.75rem;
 }
 
@@ -170,7 +176,7 @@ useSeoMeta({
   letter-spacing: -0.04em;
   margin: 0 0 1.25rem;
   color: transparent;
-  background: linear-gradient(135deg, #d0e4ff 0%, #93b6ff 32%, #37E6F1 72%, #6baeff 100%);
+  background: linear-gradient(135deg, #CBD1FB 0%, #7B8AF7 42%, #1944F0 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -192,7 +198,7 @@ useSeoMeta({
   width: 80px;
   height: 2px;
   border-radius: 999px;
-  background: linear-gradient(90deg, transparent, rgba(55, 230, 241, 0.7), transparent);
+  background: linear-gradient(90deg, transparent, rgba(123, 138, 247, 0.72), transparent);
   transform-origin: center;
 }
 
@@ -215,7 +221,7 @@ useSeoMeta({
 
 .back-link:hover {
   color: #F3F6FE;
-  border-color: rgba(55, 230, 241, 0.5);
+  border-color: rgba(123, 138, 247, 0.58);
   background: rgba(25, 68, 240, 0.16);
   transform: translateX(-2px);
 }

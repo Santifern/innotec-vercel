@@ -98,9 +98,24 @@ const desktopItems = computed(() => items.value.filter(item => !item.isAction))
 .navbar-logo {
   height: 26px;
   width: auto;
+  max-width: min(50vw, 390px);
   object-fit: contain;
   filter: brightness(1);
   transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+@media (max-width: 767px) {
+  .navbar-logo {
+    height: 21px;
+    max-width: 58vw;
+  }
+}
+
+@media (max-width: 420px) {
+  .navbar-logo {
+    height: 18px;
+    max-width: 62vw;
+  }
 }
 
 .navbar-logo-link:hover .navbar-logo {

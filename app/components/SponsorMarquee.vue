@@ -1,62 +1,112 @@
-<!-- No aplica y puede generar problemas por sponsors no confirmados -->
-
 <script setup lang="ts">
-const scrollMotion = useScrollMotion
+const smoothEase = [0.22, 1, 0.36, 1] as [number, number, number, number]
+const scrollInViewOptions = { once: true, amount: 0.3, margin: '0px 0px -12% 0px' as const }
+
+function scrollMotion(delay: number = 0) {
+  return {
+    initial: { opacity: 0, y: 18 },
+    whileInView: { opacity: 1, y: 0 },
+    inViewOptions: scrollInViewOptions,
+    transition: { duration: 0.48, delay, ease: smoothEase }
+  }
+}
 
 const sponsorLogos = [
   {
-    name: 'Itaú',
-    src: '/logos/itau.svg',
-    width: 300,
-    height: 304
+    name: '5 Días',
+    slug: 'cinco-dias',
+    src: '/logos/cinco-dias.svg',
+    href: 'https://5dias.com.py/',
+    width: 320,
+    height: 120
   },
   {
-    name: 'Sudameris',
-    src: '/logos/sudameris.svg',
-    width: 253,
-    height: 36
+    name: 'Ambiental S.A.',
+    slug: 'ambiental',
+    src: '/logos/ambiental.svg',
+    href: 'https://ambiental.com.py/',
+    width: 320,
+    height: 120
   },
   {
-    name: 'VMA',
-    src: '/logos/vma.svg',
-    width: 369,
-    height: 55
+    name: 'Copipunto',
+    slug: 'copipunto',
+    src: '/logos/copipunto.svg',
+    href: 'https://copipunto.com/',
+    width: 320,
+    height: 120
+  },
+  {
+    name: 'DOMEC',
+    slug: 'domec',
+    src: '/logos/domec.svg',
+    href: 'https://domec.com.py/',
+    width: 320,
+    height: 120
+  },
+  {
+    name: 'FLUIT',
+    slug: 'fluit',
+    src: '/logos/fluit.png',
+    href: 'https://fluit.com.py/',
+    width: 320,
+    height: 120
+  },
+  {
+    name: 'Farmacenter',
+    slug: 'farmacenter',
+    src: '/logos/farmacenter.svg',
+    href: 'https://www.farmacenter.com.py/',
+    width: 320,
+    height: 120
   },
   {
     name: 'Ferropar',
+    slug: 'ferropar',
     src: '/logos/ferropar.svg',
-    width: 608,
-    height: 121
+    href: 'https://www.ferropar.com/',
+    width: 320,
+    height: 120
   },
   {
-    name: 'Tecinci',
-    src: '/logos/tecinci.svg',
-    width: 200,
-    height: 64
+    name: 'KAIZEN ENERGY',
+    slug: 'kaizen-energy',
+    src: '/logos/kaizen-energy.svg',
+    href: 'https://www.kaizenenergy.com.py/',
+    width: 320,
+    height: 120
   },
   {
-    name: 'L\'Acerie',
-    src: '/logos/lacerie.svg',
-    width: 258,
-    height: 72
+    name: 'PREPAR S.A.',
+    slug: 'prepar',
+    src: '/logos/prepar.svg',
+    href: 'https://www.prepar.com.py/',
+    width: 320,
+    height: 120
   },
   {
-    name: 'SODEP',
-    src: '/logos/sodep.svg',
-    width: 450,
-    height: 108
+    name: 'COPEL S.A.',
+    slug: 'copel',
+    src: '/logos/copel.svg',
+    href: 'https://www.copel.com.py/',
+    width: 320,
+    height: 120
   },
   {
-    name: 'Fabripar',
-    src: '/logos/fabripar.svg',
-    width: 355,
-    height: 94
+    name: 'PARESA S.A.',
+    slug: 'paresa',
+    src: '/logos/paresa.svg',
+    href: 'https://www.miportal.com.py/',
+    width: 320,
+    height: 120
   },
   {
-    name: 'Galvamax',
-    src: '/logos/galvamax.svg',
-    width: 828,
-    height: 190
+    name: 'Sudameris',
+    slug: 'sudameris',
+    src: '/logos/sudameris.svg',
+    href: 'https://www.sudameris.com.py/',
+    width: 320,
+    height: 120
   }
 ]
 </script>
@@ -96,16 +146,21 @@ const sponsorLogos = [
             <a
               v-for="logo in sponsorLogos"
               :key="`${loopIndex}-${logo.name}`"
-              href="#"
-              class="group flex h-24 min-w-44 items-center justify-center sm:h-28 sm:min-w-52 lg:h-32 lg:min-w-60"
-              :aria-label="logo.name"
+              :href="logo.href"
+              target="_blank"
+              rel="noopener noreferrer"
+              :tabindex="loopIndex === 2 ? -1 : undefined"
+              class="sponsor-card group"
+              :class="`sponsor-card--${logo.slug}`"
+              :aria-label="`Visitar sitio oficial de ${logo.name}`"
             >
               <NuxtImg
                 :src="logo.src"
                 :alt="logo.name"
                 :width="logo.width"
                 :height="logo.height"
-                class="h-auto max-h-[4.5rem] w-auto max-w-[13rem] object-contain grayscale opacity-70 transition-[filter,opacity] duration-200 group-hover:grayscale-0 group-hover:opacity-100 sm:max-h-20 sm:max-w-[16rem] lg:max-h-24 lg:max-w-[19rem]"
+                class="sponsor-logo"
+                :class="`sponsor-logo--${logo.slug}`"
                 :loading="loopIndex === 1 ? 'eager' : 'lazy'"
                 decoding="async"
               />
@@ -117,58 +172,4 @@ const sponsorLogos = [
   </section>
 </template>
 
-<style scoped>
-.sponsor-marquee {
-  position: relative;
-  z-index: 2;
-  background: transparent;
-}
-
-.sponsor-marquee__viewport {
-  mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%);
-}
-
-.sponsor-marquee__track {
-  animation: sponsor-marquee-scroll 32s linear infinite;
-  will-change: transform;
-}
-
-.sponsor-marquee__viewport:hover .sponsor-marquee__track {
-  animation-play-state: paused;
-}
-
-.sponsor-marquee__fade {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  z-index: 2;
-  width: min(7rem, 18vw);
-  pointer-events: none;
-}
-
-.sponsor-marquee__fade--left {
-  left: 0;
-  background: linear-gradient(90deg, #080C16 0%, rgba(8, 12, 22, 0.72) 42%, rgba(8, 12, 22, 0) 100%);
-}
-
-.sponsor-marquee__fade--right {
-  right: 0;
-  background: linear-gradient(270deg, #080C16 0%, rgba(8, 12, 22, 0.72) 42%, rgba(8, 12, 22, 0) 100%);
-}
-
-@keyframes sponsor-marquee-scroll {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sponsor-marquee__track {
-    animation: none;
-  }
-}
-</style>
+<style src="~/assets/css/components/shared-sponsor-marquee.css"></style>

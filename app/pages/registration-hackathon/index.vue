@@ -1,278 +1,264 @@
 <script setup lang="ts">
 definePageMeta({
   colorMode: 'dark',
-  layout: 'hackathon'
+  layout: 'hackathon',
+  section: 'hackathon'
 })
 
 useSeoMeta({
-  title: 'Inscripcion Hackathon 2026',
-  description: 'Formulario de inscripcion para participar del Hackathon 2026.'
+  title: 'Inscripción Hackathon 2026',
+  ogTitle: 'Inscripción Hackathon 2026',
+  description: 'Completá el formulario único para participar del Hackathon 2026.',
+  ogDescription: 'Completá el formulario único para participar del Hackathon 2026.'
 })
 
-const registration = {
-  title: 'Inscripcion Hackathon 2026',
-  description: 'Completa el formulario para registrar tu participacion o la de tu equipo en el Hackathon 2026.',
-  date: 'Fecha pendiente de confirmacion',
-  cost: 'Costo pendiente de confirmacion',
-  formUrl: ''
-} as const
+const registrationFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSe6DAsB9rITrM8_znORdCOmwdN6T2eWF3tf4DO9rVZydzFn4w/viewform?usp=header'
 
-function getGoogleFormEmbedUrl(url: string) {
-  if (!url) {
-    return ''
-  }
+const smoothEase = [0.22, 1, 0.36, 1] as [number, number, number, number]
 
-  try {
-    const parsedUrl = new URL(url)
-    parsedUrl.searchParams.set('embedded', 'true')
-    return parsedUrl.toString()
-  } catch {
-    return url
+const checklist = [
+  'Tené a mano tus datos personales y un correo activo.',
+  'Definí si participás desde la UCA o desde otra institución.',
+  'Si vas en equipo, confirmá los datos de tus integrantes.',
+  'Si sos externo, tené preparado el nombre de tu institución.',
+  'La inscripción se completa en un formulario externo de Google.'
+] as const
+
+function enterMotion(delay: number = 0) {
+  return {
+    initial: { opacity: 0, y: 16 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay, ease: smoothEase }
   }
+}
+
+function updateHover(event: PointerEvent) {
+  const card = event.currentTarget as HTMLElement
+  const rect = card.getBoundingClientRect()
+  card.style.setProperty('--hover-x', `${event.clientX - rect.left}px`)
+  card.style.setProperty('--hover-y', `${event.clientY - rect.top}px`)
+}
+
+function resetHover(event: PointerEvent) {
+  const card = event.currentTarget as HTMLElement
+  card.style.removeProperty('--hover-x')
+  card.style.removeProperty('--hover-y')
 }
 </script>
 
 <template>
-  <div class="registration-page">
-    <section class="registration-hero">
-      <div class="registration-shell">
-        <NuxtLink
-          to="/"
-          class="registration-back-link"
-        >
-          <span aria-hidden="true">&lt;-</span>
-          Volver al inicio
-        </NuxtLink>
+  <div class="hack-reg-page hack-reg-page--single">
+    <div
+      class="hack-reg-bg-grid"
+      aria-hidden="true"
+    />
+    <div
+      class="hack-reg-bg-glow hack-reg-bg-glow--left"
+      aria-hidden="true"
+    />
+    <div
+      class="hack-reg-bg-glow hack-reg-bg-glow--right"
+      aria-hidden="true"
+    />
 
-        <div class="registration-heading">
-          <h1>{{ registration.title }}</h1>
-          <p>
-            {{ registration.description }}
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="registration-content">
-      <div class="registration-shell registration-layout">
-        <div class="registration-summary">
-          <dl class="registration-facts">
-            <div>
-              <dt>Fecha</dt>
-              <dd>{{ registration.date }}</dd>
+    <section
+      class="hack-reg-hero"
+      aria-labelledby="hack-reg-hero-title"
+    >
+      <div class="hack-reg-shell">
+        <div class="hack-reg-hero-main">
+          <Motion v-bind="enterMotion(0.05)">
+            <div class="hack-reg-status">
+              <span
+                class="hack-reg-status-dot"
+                aria-hidden="true"
+              />
+              Inscripción abierta
             </div>
-            <div>
-              <dt>Costo</dt>
-              <dd>{{ registration.cost }}</dd>
+          </Motion>
+
+          <Motion v-bind="enterMotion(0.18)">
+            <h1
+              id="hack-reg-hero-title"
+              class="hack-reg-hero-title"
+            >
+              Inscripción
+              <span>Hackathon 2026</span>
+            </h1>
+          </Motion>
+
+          <Motion v-bind="enterMotion(0.3)">
+            <p class="hack-reg-hero-desc">
+              Registrá tu participación o la de tu equipo con un único formulario.
+              Dejamos el proceso directo para que puedas enfocarte en el desafío.
+            </p>
+          </Motion>
+
+          <Motion v-bind="enterMotion(0.4)">
+            <div class="hack-reg-hero-chips">
+              <span>
+                <span
+                  class="hack-reg-chip-icon"
+                  aria-hidden="true"
+                >
+                  <Icon name="i-lucide-calendar" />
+                </span>
+                20 y 21 de agosto, 2026
+              </span>
+              <span>
+                <span
+                  class="hack-reg-chip-icon"
+                  aria-hidden="true"
+                >
+                  <Icon name="i-lucide-map-pin" />
+                </span>
+                Asunción, Paraguay
+              </span>
             </div>
-          </dl>
+          </Motion>
+
+          <Motion v-bind="enterMotion(0.5)">
+            <div class="hack-reg-hero-actions">
+              <span class="hack-reg-btn hack-reg-btn--disabled">
+                <Icon
+                  name="i-lucide-clock"
+                  aria-hidden="true"
+                />
+                Próximamente
+              </span>
+              <NuxtLink
+                to="/hackathon"
+                class="hack-reg-btn hack-reg-btn--ghost"
+              >
+                Volver al inicio
+              </NuxtLink>
+            </div>
+          </Motion>
         </div>
 
-        <div class="registration-form-frame">
-          <iframe
-            v-if="registration.formUrl"
-            :src="getGoogleFormEmbedUrl(registration.formUrl)"
-            title="Formulario de inscripcion Hackathon 2026"
-            loading="lazy"
-          />
-
-          <div
-            v-else
-            class="registration-form-placeholder"
+        <Motion v-bind="enterMotion(0.35)">
+          <aside
+            class="hack-reg-checklist"
+            aria-label="Antes de empezar"
+            @pointermove="updateHover"
+            @pointerleave="resetHover"
           >
-            <p class="registration-placeholder-title">
-              Formulario pendiente
-            </p>
-            <p>
-              El formulario de Google para Hackathon 2026 se publicara en este espacio.
-            </p>
-          </div>
-        </div>
+            <div class="hack-reg-checklist-header">
+              <Icon
+                name="i-lucide-clipboard-list"
+                aria-hidden="true"
+              />
+              <h2>Antes de empezar</h2>
+            </div>
 
-        <a
-          v-if="registration.formUrl"
-          :href="registration.formUrl"
-          class="registration-external-link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Abrir formulario en otra pestana
-        </a>
+            <ul>
+              <li
+                v-for="item in checklist"
+                :key="item"
+              >
+                <Icon
+                  name="i-lucide-check-circle-2"
+                  aria-hidden="true"
+                />
+                {{ item }}
+              </li>
+            </ul>
+          </aside>
+        </Motion>
       </div>
     </section>
   </div>
 </template>
 
+<style scoped src="~/assets/css/pages/hackathon-hackathon-inscripciones.css"></style>
+
 <style scoped>
-.registration-page {
-  min-height: 100vh;
-  background:
-    radial-gradient(ellipse at 18% 10%, rgba(217, 70, 239, 0.2), transparent 34%),
-    radial-gradient(ellipse at 82% 18%, rgba(25, 68, 240, 0.16), transparent 32%),
-    #080C16;
-  color: #F3F6FE;
+.hack-reg-page--single {
+  overflow-x: hidden;
 }
 
-.registration-shell {
-  width: min(100%, 1040px);
-  margin-inline: auto;
-  padding-inline: clamp(1.25rem, 4vw, 2rem);
-}
-
-.registration-hero {
-  padding: clamp(6.5rem, 12vw, 9rem) 0 clamp(2.5rem, 6vw, 4rem);
-}
-
-.registration-back-link {
-  display: inline-flex;
+.hack-reg-page--single .hack-reg-hero {
+  min-height: calc(100vh - 4rem);
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-  color: rgba(203, 209, 251, 0.86);
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.95rem;
-  text-decoration: none;
-  transition: color 0.2s ease, transform 0.2s ease;
+  padding-top: 8.5rem;
+  padding-bottom: 5rem;
 }
 
-.registration-back-link:hover {
-  color: #F3F6FE;
-  transform: translateX(-0.2rem);
+.hack-reg-page--single .hack-reg-hero .hack-reg-shell {
+  width: min(100%, 1180px);
+  grid-template-columns: minmax(0, 34rem) minmax(24rem, 34rem);
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
 }
 
-.registration-heading {
-  max-width: 780px;
+.hack-reg-page--single .hack-reg-hero-main {
+  max-width: 34rem;
+  min-width: 0;
 }
 
-.registration-kicker {
-  margin: 0 0 0.75rem;
-  color: #F0A7FF;
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.82rem;
-  font-weight: 900;
-  letter-spacing: 0;
-  text-transform: uppercase;
+.hack-reg-page--single .hack-reg-hero-title {
+  max-width: 9.5ch;
+  font-size: 5.15rem;
 }
 
-.registration-heading h1 {
-  margin: 0;
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: clamp(2.75rem, 8vw, 5.7rem);
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: 0;
+.hack-reg-page--single .hack-reg-hero-title span {
+  font-size: 3.35rem;
 }
 
-.registration-heading p:last-child {
-  margin: 1.1rem 0 0;
-  max-width: 640px;
-  color: rgba(224, 229, 255, 0.82);
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: clamp(1rem, 1.6vw, 1.15rem);
-  line-height: 1.65;
+.hack-reg-page--single .hack-reg-hero-desc {
+  max-width: 34rem;
 }
 
-.registration-content {
-  padding: 0 0 clamp(4rem, 8vw, 6rem);
-}
-
-.registration-layout {
-  display: grid;
-  gap: 1rem;
-}
-
-.registration-summary {
-  padding: clamp(1.25rem, 3vw, 1.6rem);
-  background: rgba(13, 20, 40, 0.7);
-  border: 1px solid rgba(217, 70, 239, 0.24);
-  border-radius: 8px;
-  backdrop-filter: blur(18px);
-}
-
-.registration-facts {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.75rem;
-  margin: 0;
-}
-
-.registration-facts div {
-  padding: 0.9rem 1rem;
-  background: rgba(8, 12, 22, 0.64);
-  border: 1px solid rgba(203, 209, 251, 0.12);
-  border-radius: 8px;
-}
-
-.registration-facts dt {
-  color: rgba(240, 167, 255, 0.92);
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: 0.76rem;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.registration-facts dd {
-  margin: 0.28rem 0 0;
-  color: #F3F6FE;
-  font-size: 0.98rem;
-}
-
-.registration-form-frame {
-  min-height: clamp(36rem, 78vh, 54rem);
-  overflow: hidden;
-  background: rgba(243, 246, 254, 0.98);
-  border: 1px solid rgba(203, 209, 251, 0.22);
-  border-radius: 8px;
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
-}
-
-.registration-form-frame iframe {
-  display: block;
+.hack-reg-page--single .hack-reg-checklist {
   width: 100%;
-  height: clamp(36rem, 78vh, 54rem);
-  border: 0;
+  max-width: 34rem;
+  min-height: 0;
+  justify-self: stretch;
 }
 
-.registration-form-placeholder {
-  display: grid;
-  place-content: center;
-  min-height: clamp(36rem, 78vh, 54rem);
-  padding: 2rem;
-  color: #0D1428;
-  text-align: center;
+@media (max-width: 1200px) {
+  .hack-reg-page--single .hack-reg-hero .hack-reg-shell {
+    grid-template-columns: minmax(0, 31rem) minmax(23rem, 31rem);
+    gap: 2.75rem;
+  }
+
+  .hack-reg-page--single .hack-reg-hero-title {
+    font-size: 4.55rem;
+  }
+
+  .hack-reg-page--single .hack-reg-hero-title span {
+    font-size: 2.9rem;
+  }
 }
 
-.registration-placeholder-title {
-  margin: 0 0 0.6rem;
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-size: clamp(1.65rem, 4vw, 2.4rem);
-  font-weight: 900;
+@media (max-width: 899px) {
+  .hack-reg-page--single .hack-reg-hero {
+    align-items: flex-start;
+    padding-top: 7rem;
+  }
+
+  .hack-reg-page--single .hack-reg-hero .hack-reg-shell {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 42rem;
+    gap: 2rem;
+  }
+
+  .hack-reg-page--single .hack-reg-hero-main,
+  .hack-reg-page--single .hack-reg-checklist,
+  .hack-reg-page--single .hack-reg-hero-desc {
+    max-width: none;
+  }
 }
 
-.registration-form-placeholder p:last-child {
-  margin: 0;
-  max-width: 28rem;
-  color: rgba(13, 20, 40, 0.72);
-  line-height: 1.55;
-}
+@media (max-width: 560px) {
+  .hack-reg-page--single .hack-reg-hero-title {
+    font-size: 3.2rem;
+  }
 
-.registration-external-link {
-  justify-self: start;
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.75rem;
-  padding: 0.75rem 1rem;
-  color: #061954;
-  background: #FFFFFF;
-  border-radius: 8px;
-  font-family: 'Fractul Black', 'Fractul', 'Inter', system-ui, sans-serif;
-  font-weight: 900;
-  text-decoration: none;
-}
-
-@media (min-width: 760px) {
-  .registration-facts {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .hack-reg-page--single .hack-reg-hero-title span {
+    font-size: 2.05rem;
   }
 }
 </style>

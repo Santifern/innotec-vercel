@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { NavItem } from '~/types/navigation'
 
-const props = defineProps<{
+defineProps<{
   theme?: 'innotec' | 'hackathon'
   items: NavItem[]
   desktopItems: NavItem[]
@@ -25,16 +25,29 @@ nuxtApp.hooks.hookOnce('page:loading:end', () => {
 const route = useRoute()
 const router = useRouter()
 
+function closeMobileMenu() {
+  mobileMenuOpen.value = false
+}
+
+watch(
+  () => [route.path, route.hash],
+  () => {
+    closeMobileMenu()
+  }
+)
+
 const handleNavClick = async (e: MouseEvent, to: string) => {
+  closeMobileMenu()
+
   if (to && to.includes('#')) {
     const [path, hash] = to.split('#')
-    
+
     // Si la ruta base es la misma que la actual o está vacía, hacemos scroll manual
     if (path === route.path || path === '' || (path === '/hackathon' && route.path === '/hackathon')) {
       e.preventDefault()
-      
+
       // Si estamos en móvil, cerramos el menú
-      mobileMenuOpen.value = false
+      closeMobileMenu()
 
       const el = hash ? document.getElementById(hash) : null
       if (el) {
@@ -42,12 +55,12 @@ const handleNavClick = async (e: MouseEvent, to: string) => {
         const headerOffset = 80
         const elementPosition = el.getBoundingClientRect().top
         const offsetPosition = elementPosition + window.scrollY - headerOffset
-        
+
         window.scrollTo({
           top: offsetPosition,
           behavior: 'smooth'
         })
-        
+
         // Actualizamos la URL sin recargar
         router.push({ hash: '#' + hash })
       } else if (path !== route.path && path !== '') {
@@ -57,8 +70,28 @@ const handleNavClick = async (e: MouseEvent, to: string) => {
     }
   } else {
     // Para rutas sin hash en móvil, cerramos el menú
-    mobileMenuOpen.value = false
+    closeMobileMenu()
   }
+}
+
+function isNavItemActive(item: NavItem) {
+  if (!item.to) {
+    return false
+  }
+
+  const [targetPathRaw, targetHashRaw = ''] = item.to.split('#')
+  const targetPath = targetPathRaw || route.path
+  const targetHash = targetHashRaw ? `#${targetHashRaw}` : ''
+
+  if (route.path !== targetPath) {
+    return false
+  }
+
+  if (item.exactHash && targetHash) {
+    return route.hash === targetHash || (targetHash === '#inicio' && route.hash === '')
+  }
+
+  return !targetHash || route.hash === targetHash
 }
 </script>
 
@@ -90,8 +123,11 @@ const handleNavClick = async (e: MouseEvent, to: string) => {
             v-if="item.to"
             :to="item.to"
             class="navbar-nav-item"
+            :class="{ active: isNavItemActive(item) }"
             :exact-hash="item.exactHash"
-            :exact="item.exact"
+            :exact="item.exact ?? true"
+            active-class="navbar-router-active-unused"
+            exact-active-class="navbar-router-exact-active-unused"
             @click="(e) => handleNavClick(e, item.to ?? '')"
           >
             {{ item.label }}
@@ -124,25 +160,25 @@ const handleNavClick = async (e: MouseEvent, to: string) => {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
+            stroke-width="2.4"
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <line
-              x1="4" y1="6" x2="20" y2="6"
-              class="outline-none hamburger-line hamburger-line--1"
+            <g
+              class="navbar-menu-icon"
+              :class="{ active: !mobileMenuOpen }"
+            >
+              <line x1="4.5" y1="6.5" x2="19.5" y2="6.5" />
+              <line x1="4.5" y1="12" x2="19.5" y2="12" />
+              <line x1="4.5" y1="17.5" x2="19.5" y2="17.5" />
+            </g>
+            <g
+              class="navbar-close-icon"
               :class="{ active: mobileMenuOpen }"
-            />
-            <line
-              x1="4" y1="12" x2="20" y2="12"
-              class="outline-none hamburger-line hamburger-line--2"
-              :class="{ active: mobileMenuOpen }"
-            />
-            <line
-              x1="4" y1="18" x2="20" y2="18"
-              class="outline-none hamburger-line hamburger-line--3"
-              :class="{ active: mobileMenuOpen }"
-            />
+            >
+              <line x1="6.5" y1="6.5" x2="17.5" y2="17.5" />
+              <line x1="17.5" y1="6.5" x2="6.5" y2="17.5" />
+            </g>
           </svg>
         </button>
       </div>
@@ -166,9 +202,12 @@ const handleNavClick = async (e: MouseEvent, to: string) => {
               v-if="item.to"
               :to="item.to"
               class="mobile-nav-item"
-              :class="[item.mobileClass || '']"
+              :class="[item.mobileClass || '', { active: isNavItemActive(item) }]"
               :exact-hash="item.exactHash"
-              :exact="item.exact"
+              :exact="item.exact ?? true"
+              active-class="navbar-router-active-unused"
+              exact-active-class="navbar-router-exact-active-unused"
+              @pointerdown="closeMobileMenu"
               @click="(e) => handleNavClick(e, item.to ?? '')"
             >
               {{ item.label }}
@@ -193,7 +232,7 @@ const handleNavClick = async (e: MouseEvent, to: string) => {
   --nav-accent-secondary-rgb: 123, 138, 247;
   --nav-accent-hex: #1944F0;
   --nav-accent-secondary-hex: #7B8AF7;
-  
+
   --nav-item-color: rgba(203, 209, 251, 0.8);
   --nav-item-hover: #F3F6FE;
   --nav-item-active: #CBD1FB;
@@ -204,7 +243,7 @@ const handleNavClick = async (e: MouseEvent, to: string) => {
   --nav-accent-secondary-rgb: 187, 153, 248;
   --nav-accent-hex: #a372f8;
   --nav-accent-secondary-hex: #bb99f8;
-  
+
   --nav-item-color: rgba(208, 190, 246, 0.8);
   --nav-item-hover: #F3F6FE;
   --nav-item-active: #d0bef6;
@@ -275,6 +314,7 @@ const handleNavClick = async (e: MouseEvent, to: string) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-width: 0;
   max-width: 1280px;
   margin: 0 auto;
   padding: 0.75rem 1.5rem;
@@ -391,6 +431,13 @@ const handleNavClick = async (e: MouseEvent, to: string) => {
   flex-shrink: 0;
 }
 
+@media (max-width: 767px) {
+  .navbar-actions :deep(a:not(.navbar-mobile-toggle)),
+  .navbar-actions :deep(button:not(.navbar-mobile-toggle)) {
+    display: none;
+  }
+}
+
 @media (max-width: 640px) {
   .navbar-actions {
     gap: 0.4rem;
@@ -493,8 +540,8 @@ const handleNavClick = async (e: MouseEvent, to: string) => {
 
 .mobile-nav-item:hover {
   color: var(--nav-item-hover);
-  background: rgba(var(--nav-accent-rgb), 0.12);
-  border-color: rgba(var(--nav-accent-rgb), 0.25);
+  background: transparent;
+  border-color: transparent;
 }
 
 .mobile-nav-item--static {
@@ -559,22 +606,21 @@ const handleNavClick = async (e: MouseEvent, to: string) => {
   transform: translateY(-8px);
 }
 
-/* ===== HAMBURGER ANIMATION ===== */
-.hamburger-line {
+.navbar-mobile-toggle svg {
+  overflow: visible;
+}
+
+.navbar-menu-icon,
+.navbar-close-icon {
   transform-origin: center;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-}
-
-.hamburger-line--1.active {
-  transform: translateY(6px) rotate(45deg);
-}
-
-.hamburger-line--2.active {
   opacity: 0;
-  transform: scaleX(0);
+  transform: scale(0.72) rotate(-12deg);
+  transition: opacity 0.18s ease, transform 0.22s ease;
 }
 
-.hamburger-line--3.active {
-  transform: translateY(-6px) rotate(-45deg);
+.navbar-menu-icon.active,
+.navbar-close-icon.active {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
 }
 </style>

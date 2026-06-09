@@ -1,19 +1,20 @@
 <script setup lang="ts">
+import HackathonPonenciasTracks from '~/components/HackathonPonenciasTracks.vue'
+
 definePageMeta({
+  colorMode: 'dark',
   layout: 'hackathon',
-  colorMode: 'dark'
+  section: 'hackathon'
 })
 
 useSeoMeta({
   title: 'Ponencias y Tracks - HACKATHON 2026',
   ogTitle: 'Ponencias y Tracks - HACKATHON 2026',
-  description: 'Explora los diferentes tracks y ponencias del Hackathon INNOTEC 2026.',
-  ogDescription: 'Explora los diferentes tracks y ponencias del Hackathon INNOTEC 2026.'
+  description: 'Problemáticas, actividades y fases de trabajo del Hackathon 2026.',
+  ogDescription: 'Problemáticas, actividades y fases de trabajo del Hackathon 2026.'
 })
 </script>
 
 <template>
-  <div>
-    <HackathonPonenciasTracks />
-  </div>
+  <HackathonPonenciasTracks />
 </template>

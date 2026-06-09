@@ -37,7 +37,9 @@ const contacts = [
             class="footer-logo"
             fallback="/logo-innotec-blanco.svg"
           />
-          <h2 class="footer-tagline">INNOVACIÓN &bull; EQUIPOS &bull; PROTOTIPOS</h2>
+          <h2 class="footer-tagline">
+            INNOVACIÓN &bull; EQUIPOS &bull; PROTOTIPOS
+          </h2>
           <p class="footer-description">
             Un espacio de colaboración interdisciplinaria para transformar problemas reales en propuestas con impacto.
           </p>
@@ -45,20 +47,37 @@ const contacts = [
 
         <!-- NAVIGATION COLUMN -->
         <div class="footer-col footer-nav-col">
-          <h3 class="footer-col-title">NAVEGACIÓN</h3>
-          <nav aria-label="Navegación Hackathon" class="nav-grid">
+          <h3 class="footer-col-title">
+            NAVEGACIÓN
+          </h3>
+          <nav
+            aria-label="Navegación Hackathon"
+            class="nav-grid"
+          >
             <ul class="nav-list">
-              <li v-for="link in leftNavLinks" :key="link.label">
-                <NuxtLink :to="link.to" class="nav-link">
-                  <span class="nav-arrow">&rsaquo;</span>
+              <li
+                v-for="link in leftNavLinks"
+                :key="link.label"
+              >
+                <NuxtLink
+                  :to="link.to"
+                  class="nav-link"
+                >
+                  <span class="nav-dot" />
                   {{ link.label }}
                 </NuxtLink>
               </li>
             </ul>
             <ul class="nav-list">
-              <li v-for="link in rightNavLinks" :key="link.label">
-                <NuxtLink :to="link.to" class="nav-link">
-                  <span class="nav-arrow">&rsaquo;</span>
+              <li
+                v-for="link in rightNavLinks"
+                :key="link.label"
+              >
+                <NuxtLink
+                  :to="link.to"
+                  class="nav-link"
+                >
+                  <span class="nav-dot" />
                   {{ link.label }}
                 </NuxtLink>
               </li>
@@ -68,7 +87,9 @@ const contacts = [
 
         <!-- CONTACTS COLUMN -->
         <div class="footer-col footer-contact-col">
-          <h3 class="footer-col-title">CONTACTOS</h3>
+          <h3 class="footer-col-title">
+            CONTACTOS
+          </h3>
           <div class="footer-contacts">
             <a
               v-for="contact in contacts"
@@ -81,16 +102,51 @@ const contacts = [
             </a>
           </div>
           <div class="footer-socials">
-            <a href="#" class="social-btn" aria-label="Instagram">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            <a
+              href="#"
+              class="social-btn"
+              aria-label="Instagram"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect
+                  x="2"
+                  y="2"
+                  width="20"
+                  height="20"
+                  rx="5"
+                  ry="5"
+                />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line
+                  x1="17.5"
+                  y1="6.5"
+                  x2="17.51"
+                  y2="6.5"
+                />
               </svg>
             </a>
-            <a href="#" class="social-btn" aria-label="Medium">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2.93 5.43h.42a1 1 0 0 1 1 1.05v11a1 1 0 0 1-1 1h-.42V19h4.3v-.53h-.4a1 1 0 0 1-1-1v-11a1 1 0 0 1 1-1h-.4V5.43h-4.3v.53zm9.64 0l-4.57 12.35h-.54L2.89 5.43v-.53h3.5v.53h-.37a1 1 0 0 0-1 1.06v9.88l3.86-10.4h.4l4.22 11V6.43a1 1 0 0 0-1-1.05h-.41v-.53h3.76v.53h-.42a1 1 0 0 0-1 1.05v11.12a1 1 0 0 0 1 1h.42v.52h-3.76v-.52h.41a1 1 0 0 0 1-1.05V7.7l-4.63 10.7h-.57l-4.54-12.44v-.53h3.63v.53z" fill="currentColor" stroke="none" />
+            <a
+              href="mailto:innotec@uca.edu.py"
+              class="social-btn"
+              aria-label="Email"
+            >
+              <!-- Gmail / Mail icon (M shape) -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.907 1.528-1.148C21.69 2.28 24 3.434 24 5.457z" />
               </svg>
             </a>
           </div>
@@ -99,12 +155,15 @@ const contacts = [
 
       <!-- BOTTOM BAR -->
       <div class="footer-bottom">
-        <p class="copyright">
-          © {{ currentYear }} HACKATHON INNOTEC — Todos los derechos reservados.
-        </p>
-        <p class="credit">
-          Facultad de Ciencias y Tecnología Universidad Católica Nuestra Señora de la Asunción - Sede Santa Librada
-        </p>
+        <div class="footer-bottom-separator" />
+        <div class="footer-bottom-content">
+          <p class="copyright">
+            © {{ currentYear }} HACKATHON INNOTEC — Todos los derechos reservados.
+          </p>
+          <p class="credit">
+            Facultad de Ciencias y Tecnología Universidad Católica Nuestra Señora de la Asunción - Sede Santa Librada
+          </p>
+        </div>
       </div>
     </div>
   </footer>
@@ -143,74 +202,84 @@ const contacts = [
 .footer-container {
   position: relative;
   z-index: 2;
-  max-width: 1100px; /* Reduced to match layout proportions */
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 4rem 1.5rem 2rem;
+  padding: 3rem 1.5rem 2rem;
+}
+
+@media (min-width: 1024px) {
+  .footer-container {
+    padding: 4rem 2rem 2.5rem;
+  }
 }
 
 .footer-main {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
-  margin-bottom: 4rem;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .footer-main {
-    grid-template-columns: 1.8fr 1.5fr 1fr;
-    gap: 4rem;
+    grid-template-columns: 1.6fr 1.4fr 1fr;
+    gap: 3rem;
+    align-items: start;
   }
 }
 
 /* BRAND COLUMN */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
 .footer-logo {
-  height: 20px;
+  height: 36px;
   width: auto;
-  margin-bottom: 1.25rem;
+  max-width: min(100%, 27rem);
+  object-fit: contain;
+  margin-bottom: 0.75rem;
 }
 
 .footer-tagline {
   font-family: 'Fractul Black', 'Fractul', 'Inter', sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 900;
   color: #a372f8;
-  letter-spacing: 0.1em;
-  margin-bottom: 1.25rem;
+  letter-spacing: 0.12em;
+  margin: 0 0 1rem;
+  text-transform: uppercase;
 }
 
 .footer-description {
-  font-size: 0.85rem;
-  line-height: 1.6;
+  font-family: 'Fractul Regular', 'Fractul', 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 0.84rem;
+  line-height: 1.7;
   color: rgba(203, 209, 251, 0.75);
-  max-width: 380px;
   margin: 0;
 }
 
 /* COLUMN TITLES */
 .footer-col-title {
   font-family: 'Fractul Black', 'Fractul', 'Inter', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 900;
   color: #F3F6FE;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.6rem;
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.625rem;
   border-bottom: 1px solid rgba(163, 114, 248, 0.25);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 /* NAVIGATION */
 .nav-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-@media (min-width: 640px) {
-  .nav-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-  }
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1rem;
 }
 
 .nav-list {
@@ -219,16 +288,19 @@ const contacts = [
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.1rem;
 }
 
 .nav-link {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.85rem;
+  font-family: 'Fractul Regular', 'Fractul', 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
   color: rgba(203, 209, 251, 0.75);
   text-decoration: none;
+  padding: 0.35rem 0;
   transition: color 0.2s;
 }
 
@@ -236,20 +308,26 @@ const contacts = [
   color: #a372f8;
 }
 
-.nav-arrow {
-  color: rgba(163, 114, 248, 0.6);
-  font-size: 1.2rem;
-  line-height: 0;
-  position: relative;
-  top: -1px;
+.nav-dot {
+  flex-shrink: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(163, 114, 248, 0.62);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-link:hover .nav-dot {
+  background: rgba(163, 114, 248, 0.95);
+  box-shadow: 0 0 6px rgba(163, 114, 248, 0.58);
 }
 
 /* CONTACTS */
 .footer-contacts {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .contact-item {
@@ -257,7 +335,8 @@ const contacts = [
   flex-direction: column;
   text-decoration: none;
   transition: opacity 0.2s;
-  gap: 0.1rem;
+  gap: 0.15rem;
+  min-width: 0;
 }
 
 .contact-item:hover {
@@ -266,31 +345,43 @@ const contacts = [
 
 .contact-name {
   font-family: 'Fractul Black', 'Fractul', 'Inter', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.775rem;
   font-weight: 900;
   color: #a372f8;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
 }
 
 .contact-phone {
-  font-size: 0.8rem;
+  font-family: 'Fractul Regular', 'Fractul', 'Inter', sans-serif;
+  font-size: 0.875rem;
   color: rgba(203, 209, 251, 0.85);
+  white-space: nowrap;
+}
+
+@media (min-width: 520px) {
+  .footer-contacts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contact-item:nth-child(3) {
+    grid-column: 1 / -1;
+  }
 }
 
 /* SOCIALS */
 .footer-socials {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 .social-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
   background: rgba(14, 8, 36, 0.8);
   border: 1px solid rgba(163, 114, 248, 0.2);
   color: #d0bef6;
@@ -304,18 +395,33 @@ const contacts = [
   transform: translateY(-2px);
 }
 
+.social-btn svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+
 /* BOTTOM BAR */
 .footer-bottom {
+  padding-top: 1.25rem;
+}
+
+.footer-bottom-separator {
+  height: 1px;
+  background: rgba(163, 114, 248, 0.12);
+  margin-bottom: 1.25rem;
+}
+
+.footer-bottom-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  padding-top: 1rem;
+  gap: 0.375rem;
   text-align: center;
 }
 
 @media (min-width: 768px) {
-  .footer-bottom {
+  .footer-bottom-content {
     flex-direction: row;
     justify-content: space-between;
     text-align: left;
@@ -323,14 +429,17 @@ const contacts = [
 }
 
 .copyright {
-  font-size: 0.75rem;
+  font-family: 'Fractul Regular', 'Fractul', 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
   color: rgba(203, 209, 251, 0.4);
   margin: 0;
 }
 
 .credit {
-  font-family: 'Fractul Regular', 'Fractul', 'Inter', sans-serif;
-  font-size: 0.75rem;
+  font-family: 'Fractul Thin', 'Fractul', 'Inter', sans-serif;
+  font-weight: 100;
+  font-size: 0.74rem;
   color: rgba(163, 114, 248, 0.4);
   margin: 0;
 }

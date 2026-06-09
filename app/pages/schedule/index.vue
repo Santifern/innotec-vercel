@@ -6,11 +6,15 @@ definePageMeta({
 useSeoMeta({
   title: 'Cronograma - INNOTEC 2026',
   ogTitle: 'Cronograma - INNOTEC 2026',
-  description: 'Cronograma detallado de actividades de INNOTEC 2026.',
-  ogDescription: 'Cronograma detallado de actividades de INNOTEC 2026.'
+  description: 'Muy pronto compartiremos el cronograma actualizado de INNOTEC 2026.',
+  ogDescription: 'Muy pronto compartiremos el cronograma actualizado de INNOTEC 2026.'
 })
 </script>
 
 <template>
-  <ProgramSchedule />
+  <ScheduleComingSoon
+    label="Cronograma - INNOTEC 2026"
+    back-to="/"
+    back-label="Volver al inicio"
+  />
 </template>

@@ -96,6 +96,7 @@ const desktopItems = computed(() => items.value.filter(item => item.label !== 'H
 .navbar-logo {
   height: 26px;
   width: auto;
+  max-width: min(46vw, 260px);
   object-fit: contain;
   filter: brightness(1);
   transition: filter 0.3s ease, transform 0.3s ease;
@@ -103,7 +104,8 @@ const desktopItems = computed(() => items.value.filter(item => item.label !== 'H
 
 @media (max-width: 640px) {
   .navbar-logo {
-    height: 20px;
+    height: 19px;
+    max-width: 52vw;
   }
 }
 

@@ -1,0 +1,14 @@
+/* ===== SHARED BASE CLASSES ===== */
+.section-divider,
+.innotec-section {
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== UTILITY CLASSES ===== */
+.neon-divider,
+.section-divider,
+.innotec-section {
+  position: relative;
+  z-index: 2;
+}

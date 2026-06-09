@@ -1,13 +1,18 @@
 <script setup lang="ts">
 const color = computed(() => '#080C16')
+const route = useRoute()
 
 useHead({
+  title: 'INNOTEC',
+  titleTemplate: () => 'INNOTEC',
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
-    { rel: 'icon', href: '/favicon.ico' },
+    { rel: 'icon', type: 'image/png', href: '/favicon.png?v=2' },
+    { rel: 'shortcut icon', type: 'image/png', href: '/favicon.png?v=2' },
+    { rel: 'apple-touch-icon', href: '/foquito.png' },
     { rel: 'preload', href: '/fonts/Fractul-Thin.ttf', as: 'font', type: 'font/ttf', crossorigin: '' },
     { rel: 'preload', href: '/fonts/Fractul-Regular.ttf', as: 'font', type: 'font/ttf', crossorigin: '' },
     { rel: 'preload', href: '/fonts/Fractul-Black.ttf', as: 'font', type: 'font/ttf', crossorigin: '' },
@@ -23,7 +28,7 @@ useHead({
 useSeoMeta({
   ogImage: '/logo-innotec-blanco.svg',
   twitterCard: 'summary_large_image',
-  title: 'INNOTEC 2026 — Congreso de Tecnología e Innovación',
+  title: 'INNOTEC',
   description: 'El congreso anual de innovación y tecnología organizado por estudiantes de la Facultad de Ciencias y Tecnología de la Universidad Católica del Paraguay.'
 })
 </script>
@@ -31,7 +36,7 @@ useSeoMeta({
 <template>
   <UApp :toaster="{ expand: false }">
     <NuxtLayout>
-      <NuxtPage />
+      <NuxtPage :key="route.fullPath" />
     </NuxtLayout>
   </UApp>
 </template>

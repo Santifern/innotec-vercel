@@ -1,0 +1,91 @@
+/* ===== NEON FLOATING PARTICLES ===== */
+.neon-particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.neon-particle--1 {
+  width: 4px;
+  height: 4px;
+  background: #7B8AF7;
+  box-shadow: 0 0 8px 2px rgba(123, 138, 247, 0.8), 0 0 20px 4px rgba(25, 68, 240, 0.4);
+  top: 18%;
+  left: 15%;
+  animation: particle-float-1 8s ease-in-out infinite;
+}
+
+.neon-particle--2 {
+  width: 3px;
+  height: 3px;
+  background: #1944F0;
+  box-shadow: 0 0 6px 2px rgba(25, 68, 240, 0.9), 0 0 16px 4px rgba(25, 68, 240, 0.4);
+  top: 30%;
+  right: 20%;
+  animation: particle-float-2 10s ease-in-out infinite;
+}
+
+.neon-particle--3 {
+  width: 3px;
+  height: 3px;
+  background: #CBD1FB;
+  box-shadow: 0 0 6px 2px rgba(203, 209, 251, 0.6), 0 0 14px 3px rgba(123, 138, 247, 0.3);
+  bottom: 25%;
+  right: 12%;
+  animation: particle-float-3 12s ease-in-out infinite;
+}
+
+.neon-particle--4 {
+  width: 5px;
+  height: 5px;
+  background: #9FACF9;
+  box-shadow: 0 0 10px 3px rgba(159, 172, 249, 0.85), 0 0 24px 7px rgba(25, 68, 240, 0.35);
+  top: 10%;
+  left: 7%;
+  animation: particle-float-2 11s ease-in-out infinite;
+}
+
+.neon-particle--5 {
+  width: 4px;
+  height: 4px;
+  background: #2B45F3;
+  box-shadow: 0 0 9px 3px rgba(43, 69, 243, 0.9), 0 0 22px 6px rgba(25, 68, 240, 0.36);
+  top: 34%;
+  right: 30%;
+  animation: particle-float-1 9s ease-in-out infinite;
+}
+
+.neon-particle--6 {
+  width: 4px;
+  height: 4px;
+  background: #F3F6FE;
+  box-shadow: 0 0 8px 3px rgba(243, 246, 254, 0.72), 0 0 20px 6px rgba(123, 138, 247, 0.32);
+  bottom: 12%;
+  right: 10%;
+  animation: particle-float-3 13s ease-in-out infinite;
+}
+
+@keyframes particle-float-1 {
+  0%, 100% { transform: translate(0, 0); opacity: 0.7; }
+  25% { transform: translate(20px, -30px); opacity: 1; }
+  50% { transform: translate(-10px, -50px); opacity: 0.5; }
+  75% { transform: translate(15px, -20px); opacity: 0.9; }
+}
+
+@keyframes particle-float-2 {
+  0%, 100% { transform: translate(0, 0); opacity: 0.5; }
+  33% { transform: translate(-25px, 20px); opacity: 1; }
+  66% { transform: translate(15px, -15px); opacity: 0.6; }
+}
+
+@keyframes particle-float-3 {
+  0%, 100% { transform: translate(0, 0); opacity: 0.6; }
+  50% { transform: translate(-20px, -40px); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neon-particle {
+    animation: none;
+  }
+}
