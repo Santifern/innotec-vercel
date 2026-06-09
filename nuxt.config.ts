@@ -1,4 +1,4 @@
-import { defineNuxtConfig } from "nuxt/config";
+import { defineNuxtConfig } from 'nuxt/config'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -25,15 +25,15 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2025-01-15',
 
-  nitro: {
-    prerender: {
-      routes: [
-        '/',
-        '/inscripciones',
-        '/hackathon/inscripciones'
-      ]
-    }
-  },
+  // nitro: {
+  //   prerender: {
+  //     routes: [
+  //       '/',
+  //       '/inscripciones',
+  //       '/hackathon/inscripciones'
+  //     ]
+  //   }
+  // },
 
   eslint: {
     config: {

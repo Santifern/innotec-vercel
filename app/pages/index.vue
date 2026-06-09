@@ -17,12 +17,15 @@ const fallbackPage = {
   description: 'INNOTEC es el congreso anual de tecnologia e innovacion organizado por estudiantes de la Facultad de Ciencias y Tecnologia de la Universidad Catolica del Paraguay. Un espacio para aprender, colaborar y liderar el cambio.',
   hero: {
     headline: '20 y 21 de agosto, 2026 - Asuncion, Paraguay',
+
+    // cambiar los links a los forms
+
     links: [
       {
         label: 'Inscribete ahora',
         color: 'primary',
         size: 'xl',
-        to: '/inscripciones'
+        to: '_blank'
       },
       {
         label: 'Conoce mas',
@@ -82,6 +85,7 @@ const fallbackPage = {
       }
     ]
   },
+  // cambiar los links a los forms
   cta: {
     title: '¿Listo para \nser parte?',
     description: 'Unete al congreso de tecnologia e innovacion mas importante del Paraguay estudiantil. Inscripcion abierta para estudiantes y profesionales.',
@@ -90,7 +94,7 @@ const fallbackPage = {
       {
         label: 'Inscribete al INNOTEC 2026',
         color: 'primary',
-        to: '/inscripciones'
+        to: '_blank'
       }
     ]
   }
@@ -116,8 +120,6 @@ const heroTitle = computed(() => {
     secondary: secondaryParts.join(' ').trim()
   }
 })
-
-
 
 const showDeferredSections = ref(false)
 const scrollMotion = useScrollMotionAdvanced
