@@ -1,0 +1,31 @@
+/* ===== SHARED DESIGN TOKENS & STYLES ===== */
+/* Import order: base > components > effects */
+
+@import './_base.css';
+@import './_hero.css';
+@import './_particles.css';
+@import './_neon-effects.css';
+
+/* ===== COLOR TOKENS (Tailwind v4) ===== */
+:root {
+  --color-innotec-primary: #1944F0;
+  --color-innotec-secondary: #7B8AF7;
+  --color-innotec-accent: #37E6F1;
+  --color-innotec-light: #CBD1FB;
+  --color-innotec-lighter: #F3F6FE;
+  --color-innotec-dark: #080C16;
+  
+  /* Semantic colors */
+  --color-text-default: #F3F6FE;
+  --color-text-muted: rgba(203, 209, 251, 0.75);
+  --color-bg-elevated: rgba(14, 21, 46, 0.6);
+  --color-border-muted: rgba(25, 68, 240, 0.24);
+}
+
+/* ===== MOTION UTILITIES ===== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

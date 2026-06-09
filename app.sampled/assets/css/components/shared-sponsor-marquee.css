@@ -1,0 +1,129 @@
+.sponsor-marquee {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+}
+
+.sponsor-marquee__viewport {
+  mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%);
+}
+
+.sponsor-marquee__track {
+  animation: sponsor-marquee-scroll 32s linear infinite;
+  will-change: transform;
+}
+
+.sponsor-marquee__viewport:hover .sponsor-marquee__track {
+  animation-play-state: paused;
+}
+
+.sponsor-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: clamp(13.5rem, 25vw, 19rem);
+  height: clamp(6.25rem, 9.5vw, 9.25rem);
+}
+
+.sponsor-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.7;
+  filter: grayscale(1);
+  transition: opacity 0.24s ease, filter 0.24s ease, transform 0.24s ease;
+}
+
+.group:hover .sponsor-logo,
+.group:focus-visible .sponsor-logo {
+  opacity: 1;
+  filter:
+    grayscale(0)
+    brightness(1.08)
+    drop-shadow(0 0 7px rgba(255, 255, 255, 0.34))
+    drop-shadow(0 0 16px rgba(161, 234, 251, 0.18));
+  transform: translateY(-1px) scale(1.02);
+}
+
+.sponsor-marquee__fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  width: min(7rem, 18vw);
+  pointer-events: none;
+}
+
+.sponsor-marquee__fade--left {
+  left: 0;
+  background: linear-gradient(90deg, #080C16 0%, rgba(8, 12, 22, 0.72) 42%, rgba(8, 12, 22, 0) 100%);
+}
+
+.sponsor-marquee__fade--right {
+  right: 0;
+  background: linear-gradient(270deg, #080C16 0%, rgba(8, 12, 22, 0.72) 42%, rgba(8, 12, 22, 0) 100%);
+}
+
+@keyframes sponsor-marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.sponsor-card--domec {
+  position: relative;
+  isolation: isolate;
+}
+
+.sponsor-card--domec::before {
+  position: absolute;
+  z-index: 0;
+  inset: 18% 10%;
+  border-radius: 999px;
+  background: rgba(161, 234, 251, 0.18);
+  content: "";
+  filter: blur(18px);
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.86);
+  transition: opacity 0.24s ease, transform 0.24s ease;
+}
+
+.sponsor-card--domec:hover::before,
+.sponsor-card--domec:focus-visible::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.sponsor-logo--domec {
+  position: relative;
+  z-index: 1;
+  width: 88%;
+  height: 88%;
+  object-fit: contain;
+  opacity: 0.7;
+  filter:
+    grayscale(1)
+    brightness(1.65)
+    contrast(0.92);
+}
+
+.group:hover .sponsor-logo--domec,
+.group:focus-visible .sponsor-logo--domec {
+  opacity: 1;
+  filter:
+    grayscale(0)
+    brightness(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sponsor-marquee__track {
+    animation: none;
+  }
+}
