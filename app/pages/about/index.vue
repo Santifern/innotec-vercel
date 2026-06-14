@@ -83,7 +83,7 @@ useSeoMeta({
           class="acerca-ejes-header"
         >
           <h3 class="acerca-ejes-title">
-            Éjes Temáticos
+            Ejes Temáticos
           </h3>
         </Motion>
 

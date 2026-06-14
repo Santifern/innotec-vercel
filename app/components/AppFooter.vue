@@ -2,7 +2,7 @@
 const currentYear = new Date().getFullYear()
 
 const leftNavLinks = [
-  { label: 'Inicio', to: '/#inicio' },
+  { label: 'Inicio', to: '/' },
   { label: 'Acerca', to: '/about' },
   { label: 'Actividades', to: '/activities' },
   { label: 'Programa', to: '/schedule' }

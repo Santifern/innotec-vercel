@@ -3,7 +3,7 @@
 const items = computed(() => [
   {
     label: 'Inicio',
-    to: '/hackathon#inicio',
+    to: '/hackathon',
     exactHash: true
   },
   {

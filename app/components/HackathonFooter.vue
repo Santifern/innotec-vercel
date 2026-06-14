@@ -2,7 +2,7 @@
 const currentYear = new Date().getFullYear()
 
 const leftNavLinks = [
-  { label: 'Inicio', to: '/hackathon#inicio' },
+  { label: 'Inicio', to: '/hackathon' },
   { label: 'Acerca de', to: '/hackathon/about' },
   { label: 'Ponencias y Tracks', to: '/hackathon#tracks' },
   { label: 'Cronograma', to: '/hackathon/schedule' }
