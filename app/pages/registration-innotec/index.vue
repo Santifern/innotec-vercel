@@ -8,7 +8,7 @@ useSeoMeta({
   description: 'Inscribite al congreso de tecnología e innovación más importante del Paraguay estudiantil.'
 })
 
-const earlyBirdFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfcAqeGV_Qt8gDWGpR1FqtvppW85g5nooPfGY5xV6HoMxII5Q/viewform'
+const tierOneFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLScvL2SqH4Y_gIiR2sm_tX2yjRF1QVClD-agKyHfIVfMXj-CDw/viewform'
 const smoothEase = [0.22, 1, 0.36, 1] as [number, number, number, number]
 
 const checklist = [
@@ -22,20 +22,20 @@ const checklist = [
 const ticketTiers = [
   {
     name: 'Early Birds',
-    status: 'Disponible ahora',
+    status: 'Sold out',
     note: 'Cupos limitados',
-    enabled: true,
-    href: earlyBirdFormUrl,
-    actionLabel: 'Ir al formulario Early Birds'
+    enabled: false,
+    href: null,
+    actionLabel: 'Agotado'
   },
   {
     name: 'Tier',
     number: '1',
-    status: 'Próximamente',
+    status: 'Disponible ahora',
     note: 'Cupos limitados',
-    enabled: false,
-    href: null,
-    actionLabel: 'Próximamente'
+    enabled: true,
+    href: tierOneFormUrl,
+    actionLabel: 'Ir al formulario Tier 1'
   },
   {
     name: 'Tier',
@@ -240,7 +240,7 @@ function resetHover(event: PointerEvent) {
               Entradas disponibles
             </h2>
             <p class="reg-section-desc">
-              Por ahora solo Early Birds está habilitado. Los demás tiers se activarán más adelante.
+              Early Birds está agotado. Tier 1 ya está habilitado; los demás tiers se activarán más adelante.
             </p>
           </div>
         </Motion>

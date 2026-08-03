@@ -57,48 +57,10 @@ const faqItems: FaqItem[] = [
 
 const openIndex = ref<number | null>(null)
 const visibleFaqItems = ref<boolean[]>(faqItems.map(() => false))
-const faqRevealElements = ref<HTMLElement[]>([])
-let faqRevealObserver: IntersectionObserver | null = null
-
-function revealFaqItem(index: number) {
-  visibleFaqItems.value = visibleFaqItems.value.map((visible, itemIndex) => visible || itemIndex === index)
-}
 
 onMounted(async () => {
   await nextTick()
-
-  if (!('IntersectionObserver' in window)) {
-    visibleFaqItems.value = faqItems.map(() => true)
-    return
-  }
-
-  faqRevealObserver = new IntersectionObserver((entries) => {
-    for (const entry of entries) {
-      if (!entry.isIntersecting) {
-        continue
-      }
-
-      const index = Number((entry.target as HTMLElement).dataset.faqIndex)
-
-      if (Number.isInteger(index)) {
-        revealFaqItem(index)
-        faqRevealObserver?.unobserve(entry.target)
-      }
-    }
-  }, {
-    threshold: 0.32,
-    rootMargin: '0px 0px -24% 0px'
-  })
-
-  faqRevealElements.value.forEach((element, index) => {
-    element.dataset.faqIndex = String(index)
-    faqRevealObserver?.observe(element)
-  })
-})
-
-onBeforeUnmount(() => {
-  faqRevealObserver?.disconnect()
-  faqRevealObserver = null
+  visibleFaqItems.value = faqItems.map(() => true)
 })
 
 function toggle(index: number) {
@@ -128,10 +90,9 @@ function toggle(index: number) {
         <div
           v-for="(item, index) in faqItems"
           :key="item.question"
-          ref="faqRevealElements"
           class="faq-motion-item"
           :class="{ 'faq-motion-item--visible': visibleFaqItems[index] }"
-          :style="{ '--faq-reveal-delay': `${Math.min(index, 3) * 0.05}s` }"
+          :style="{ '--faq-reveal-delay': `${index * 0.055}s` }"
         >
           <div
             class="faq-item"
