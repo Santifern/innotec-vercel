@@ -12,7 +12,7 @@ useSeoMeta({
   ogDescription: 'Completá el formulario único para participar del Hackathon 2026.'
 })
 
-const tierOneFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeddBObDTw3k1lPRnewW-fi4XjT13WnXZuYT41GW_YELEodAw/viewform'
+const tierTwoFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfKe5VOFzTHJnBhYfFwyxo6B2TFxwYOOezQ6MQwh8OJ17N4JA/viewform?usp=dialog'
 
 const smoothEase = [0.22, 1, 0.36, 1] as [number, number, number, number]
 
@@ -28,20 +28,20 @@ const ticketTiers = [
   {
     name: 'Tier',
     number: '1',
-    status: 'Disponible ahora',
+    status: 'Sold out',
     note: 'Cupos limitados',
-    enabled: true,
-    href: tierOneFormUrl,
-    actionLabel: 'Ir al formulario Tier 1'
+    enabled: false,
+    href: null,
+    actionLabel: 'Agotado'
   },
   {
     name: 'Tier',
     number: '2',
-    status: 'Próximamente',
+    status: 'Disponible ahora',
     note: 'Cupos limitados',
-    enabled: false,
-    href: null,
-    actionLabel: 'Próximamente'
+    enabled: true,
+    href: tierTwoFormUrl,
+    actionLabel: 'Ir al formulario Tier 2'
   },
   {
     name: 'Tier',
@@ -216,7 +216,7 @@ function resetHover(event: PointerEvent) {
               Entradas disponibles
             </h2>
             <p>
-              Por ahora solo Tier 1 está habilitado. Tier 2 y Tier 3 se activarán más adelante.
+              Tier 1 está agotado. Tier 2 ya está habilitado; Tier 3 se activará más adelante.
             </p>
           </div>
         </Motion>

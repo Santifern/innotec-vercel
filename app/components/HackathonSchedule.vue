@@ -22,10 +22,10 @@ const scheduleByDay: Record<DayId, ScheduleEntry[]> = {
   'day-1': [
     { time: '8:00', kind: 'Acreditación', isBreak: true, span: true },
     { time: '8:30', kind: 'Proceso de Design Thinking' },
+    { time: '10:00', kind: 'Figma' },
     { time: '12:30', kind: 'Almuerzo', isBreak: true, span: true },
-    { time: '14:00', kind: 'Acreditación', isBreak: true, span: true },
-    { time: '14:15', kind: 'Figma' },
-    { time: '15:00', kind: 'Trabajo en Grupos' },
+    { time: '13:45', kind: 'Acreditación', isBreak: true, span: true },
+    { time: '14:00', kind: 'Trabajo en Grupos' },
     { time: '20:00', kind: 'Cierre Día 1', isBreak: true, span: true }
   ],
   'day-2': [
@@ -98,9 +98,9 @@ function scheduleMotion(index: number, side: EntrySide = 'right') {
         v-bind="scheduleMotion(0)"
         class="program-header"
       >
-        <h2 class="section-title">
+        <h1 class="section-title">
           Cronograma
-        </h2>
+        </h1>
         <p class="section-description">
           Dos días de innovación, trabajo en equipo y aprendizaje intensivo.
         </p>

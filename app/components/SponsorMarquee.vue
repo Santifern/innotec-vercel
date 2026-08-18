@@ -87,10 +87,10 @@ const sponsorLogos = [
   {
     name: 'COPEL S.A.',
     slug: 'copel',
-    src: '/logos/copel.svg',
+    src: '/logos/copel-completo.svg',
     href: 'https://www.copel.com.py/',
-    width: 320,
-    height: 120
+    width: 466,
+    height: 262
   },
   {
     name: 'PARESA S.A.',

@@ -122,6 +122,32 @@
     brightness(1.08);
 }
 
+.sponsor-card--copel {
+  background: transparent;
+}
+
+.sponsor-logo--copel {
+  width: 82%;
+  height: 82%;
+  opacity: 0.92;
+  filter:
+    grayscale(1)
+    brightness(1.8)
+    saturate(1.25)
+    drop-shadow(0 0 1px rgba(255, 255, 255, 0.76))
+    drop-shadow(0 0 9px rgba(255, 255, 255, 0.18));
+}
+
+.group:hover .sponsor-logo--copel,
+.group:focus-visible .sponsor-logo--copel {
+  opacity: 1;
+  filter:
+    brightness(2)
+    saturate(1.35)
+    drop-shadow(0 0 1px rgba(255, 255, 255, 0.72))
+    drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+}
+
 @media (prefers-reduced-motion: reduce) {
   .sponsor-marquee__track {
     animation: none;
